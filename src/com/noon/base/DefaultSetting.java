@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Panel05Order07Save extends JPanel {
+public class DefaultSetting extends JPanel {
 	
 	private JLabel lblNewLabel_01;
 	private JLabel lblBtnTabOrder;
@@ -32,7 +32,7 @@ public class Panel05Order07Save extends JPanel {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_3;
 
-	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
+	// 바탕화면 그라데이션 ---------------------------------------------------------------------------------------------
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -42,18 +42,18 @@ public class Panel05Order07Save extends JPanel {
 		g2.fillRoundRect(0, 0, getWidth(), getHeight(), 0, 0);
 		super.paintChildren(g);
 	}
-	// ----------------------------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------------------------------------
 	
 	/**
 	 * Create the panel.
 	 */
-	public Panel05Order07Save() {
+	public DefaultSetting() {
+		// DefaultSetting ---------
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
 		add(getLblBtnSidebar());
 		add(getLblBtnBack());
-		
 		add(getLblNewLabel_01());
 		add(getLblProfilePhoto());
 		add(getLblBtnTabHome());
@@ -61,6 +61,8 @@ public class Panel05Order07Save extends JPanel {
 		add(getLblBtnTabGift());
 		add(getLblBtnTabMypage());
 		add(getLblHomeIndicator());
+		// -------------------------
+
 		add(getLblNewLabel());
 		add(getLblNewLabel_2());
 		add(getTfPhone());
@@ -178,8 +180,6 @@ public class Panel05Order07Save extends JPanel {
 		return lblHomeIndicator;
 	}
 	// ==================================================================================================================
-
-	
 	
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -224,4 +224,9 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblNewLabel_3;
 	}
+	
+	
+	
+	
+	
 } // End

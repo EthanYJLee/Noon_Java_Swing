@@ -109,6 +109,13 @@ public class Panel05Order06Pay extends JPanel {
 	private JLabel getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
 			lblBtnTabHome = new JLabel("");
+			lblBtnTabHome.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel03Home());
+				}
+			});
 			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
 			lblBtnTabHome.setBounds(1, 729, 94, 50);
 		}
@@ -117,6 +124,13 @@ public class Panel05Order06Pay extends JPanel {
 	private JLabel getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
 			lblBtnTabOrder = new JLabel("");
+			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel05Order01Shop());
+				}
+			});
 			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
 			lblBtnTabOrder.setBounds(95, 729, 94, 50);
 		}
@@ -125,6 +139,13 @@ public class Panel05Order06Pay extends JPanel {
 	private JLabel getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
 			lblBtnTabGift = new JLabel("");
+			lblBtnTabGift.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel06Gift());
+				}
+			});
 			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
 			lblBtnTabGift.setBounds(187, 729, 94, 50);
 		}
@@ -133,6 +154,13 @@ public class Panel05Order06Pay extends JPanel {
 	private JLabel getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
 			lblBtnTabMypage = new JLabel("");
+			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel04MyPage());
+				}
+			});
 			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
 			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
@@ -146,6 +174,8 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblHomeIndicator;
 	}
+	// ==================================================================================================================
+
 	private JPanel getPnPayComplete() {
 		if (pnPayComplete == null) {
 			pnPayComplete = new JPanel() {

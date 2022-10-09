@@ -48,7 +48,6 @@ public class Panel01Login extends JPanel {
 		setOpaque(true);
 		setLayout(null);
 		
-		
 		add(getLblLogo());
 		add(getLblNewLabel());
 		add(getTfID());

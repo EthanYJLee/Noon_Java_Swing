@@ -46,12 +46,13 @@ public class Main {
 //		frame.setShape(new RoundRectangle2D.Double(0, 0, 375, 812, 80, 80)); // 2.프레임 모서리에 라운드 주기
 //		frame.setVisible(true); // 3.필수
 //		// -----------------------------------------------------------------------------------------
-		frame.setBackground(new Color(243, 209, 200));
-//		frame.setBackground(Color.decode("#F4D2C9"));
+		frame.setBackground(Color.decode("#F4D2C9"));
 		frame.setBounds(700, 150, 375, 812);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(false);
 		frame.add(new Panel01Login());
+		
+//		frame.add(new Panel04MyPage());
 		
 		
 	}

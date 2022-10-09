@@ -25,7 +25,7 @@ public class Panel05Order02Time extends JPanel {
 	private JLabel lblBtnSelect;
 	private JLabel lblBtnTabOrder;
 	private JLabel lblBtnTabMypage;
-	private JLabel lblNewLabel_5;
+	private JLabel lblHomeIndicator;
 	private JLabel lblBtnTabHome;
 	private JLabel lblBtnTabGift;
 	private JLabel lblBtnSidebar;
@@ -38,7 +38,6 @@ public class Panel05Order02Time extends JPanel {
 	private JLabel lblNewLabel_03_1;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	private JButton btnNewButton;
 
 	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
 	@Override
@@ -65,7 +64,7 @@ public class Panel05Order02Time extends JPanel {
 		add(getLblNewLabel_03());
 		add(getLblLeftQuentity());
 		add(getLblNewLabel_06_2());
-		add(getLblNewLabel_5());
+		add(getLblHomeIndicator());
 		add(getLblBtnSelect());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
@@ -79,7 +78,6 @@ public class Panel05Order02Time extends JPanel {
 		add(getLblNewLabel_03_1());
 		add(getLblNewLabel());
 		add(getLblNewLabel_1());
-		add(getBtnNewButton());
 	}
 	
 	// 상단바 =============================================================================================================
@@ -184,6 +182,13 @@ public class Panel05Order02Time extends JPanel {
 	private JLabel getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
 			lblBtnTabHome = new JLabel("");
+			lblBtnTabHome.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel03Home());
+				}
+			});
 			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
 			lblBtnTabHome.setBounds(1, 729, 94, 50);
 		}
@@ -192,6 +197,13 @@ public class Panel05Order02Time extends JPanel {
 	private JLabel getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
 			lblBtnTabOrder = new JLabel("");
+			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel05Order01Shop());
+				}
+			});
 			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
 			lblBtnTabOrder.setBounds(95, 729, 94, 50);
 		}
@@ -200,6 +212,13 @@ public class Panel05Order02Time extends JPanel {
 	private JLabel getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
 			lblBtnTabGift = new JLabel("");
+			lblBtnTabGift.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel06Gift());
+				}
+			});
 			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
 			lblBtnTabGift.setBounds(187, 729, 94, 50);
 		}
@@ -208,21 +227,27 @@ public class Panel05Order02Time extends JPanel {
 	private JLabel getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
 			lblBtnTabMypage = new JLabel("");
+			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel04MyPage());
+				}
+			});
 			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
 			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
 		return lblBtnTabMypage;
 	}
-	private JLabel getLblNewLabel_5() {
-		if (lblNewLabel_5 == null) {
-			lblNewLabel_5 = new JLabel("");
-			lblNewLabel_5.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
-			lblNewLabel_5.setBounds(1, 778, 375, 34);
+	private JLabel getLblHomeIndicator() {
+		if (lblHomeIndicator == null) {
+			lblHomeIndicator = new JLabel("");
+			lblHomeIndicator.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
+			lblHomeIndicator.setBounds(1, 778, 375, 34);
 		}
-		return lblNewLabel_5;
+		return lblHomeIndicator;
 	}
 	// ==================================================================================================================
-	
 	
 	private JLabel getLblLeftQuentity() {
 		if (lblLeftQuentity == null) {
@@ -270,12 +295,5 @@ public class Panel05Order02Time extends JPanel {
 			lblNewLabel_1.setBounds(15, 455, 345, 34);
 		}
 		return lblNewLabel_1;
-	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("New button");
-			btnNewButton.setBounds(15, 644, 345, 61);
-		}
-		return btnNewButton;
 	}
 } // End
