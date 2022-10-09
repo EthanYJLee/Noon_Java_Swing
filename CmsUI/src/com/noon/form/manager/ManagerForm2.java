@@ -31,8 +31,8 @@ public class ManagerForm2 extends JPanel {
      * Create the panel.
      */
     public ManagerForm2() {
-        setLayout(null);
         setOpaque(false);
+        setLayout(null);
         add(getLblNewLabel());
         add(getLblId());
         add(getLblNewLabel_2());
@@ -51,8 +51,8 @@ public class ManagerForm2 extends JPanel {
     private JLabel getLblNewLabel() {
         if (lblNewLabel == null) {
             lblNewLabel = new JLabel("알바 등록");
-            lblNewLabel.setFont(new Font("Arial", Font.BOLD, 19));
             lblNewLabel.setBounds(58, 48, 83, 53);
+            lblNewLabel.setFont(new Font("Arial", Font.BOLD, 19));
         }
         return lblNewLabel;
     }
@@ -60,8 +60,8 @@ public class ManagerForm2 extends JPanel {
     private JLabel getLblId() {
         if (lblId == null) {
             lblId = new JLabel("ID");
-            lblId.setFont(new Font("Arial", Font.BOLD, 13));
             lblId.setBounds(73, 160, 61, 16);
+            lblId.setFont(new Font("Arial", Font.BOLD, 13));
         }
         return lblId;
     }
@@ -69,8 +69,8 @@ public class ManagerForm2 extends JPanel {
     private JLabel getLblNewLabel_2() {
         if (lblNewLabel_2 == null) {
             lblNewLabel_2 = new JLabel("이름");
-            lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
             lblNewLabel_2.setBounds(73, 212, 61, 16);
+            lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
         }
         return lblNewLabel_2;
     }
@@ -78,8 +78,8 @@ public class ManagerForm2 extends JPanel {
     private JLabel getLblNewLabel_3() {
         if (lblNewLabel_3 == null) {
             lblNewLabel_3 = new JLabel("전화 번호");
-            lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 13));
             lblNewLabel_3.setBounds(73, 270, 61, 16);
+            lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 13));
         }
         return lblNewLabel_3;
     }
@@ -96,8 +96,8 @@ public class ManagerForm2 extends JPanel {
     private JTextField getTextField_1() {
         if (textField_1 == null) {
             textField_1 = new JTextField();
-            textField_1.setColumns(10);
             textField_1.setBounds(156, 206, 272, 26);
+            textField_1.setColumns(10);
         }
         return textField_1;
     }
@@ -105,8 +105,8 @@ public class ManagerForm2 extends JPanel {
     private JTextField getTextField_2() {
         if (textField_2 == null) {
             textField_2 = new JTextField();
-            textField_2.setColumns(10);
             textField_2.setBounds(156, 264, 272, 26);
+            textField_2.setColumns(10);
         }
         return textField_2;
     }
@@ -114,8 +114,8 @@ public class ManagerForm2 extends JPanel {
     private JButton getBtnNewButton() {
         if (btnNewButton == null) {
             btnNewButton = new JButton("");
-            btnNewButton.setIcon(new ImageIcon("/Users/bigdata/Downloads/Frame 7.png"));
             btnNewButton.setBounds(280, 448, 116, 36);
+            btnNewButton.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 7.png"));
         }
         return btnNewButton;
     }
@@ -123,8 +123,8 @@ public class ManagerForm2 extends JPanel {
     private JLabel getLblNewLabel_3_1() {
         if (lblNewLabel_3_1 == null) {
             lblNewLabel_3_1 = new JLabel("계좌 번호");
-            lblNewLabel_3_1.setFont(new Font("Arial", Font.BOLD, 13));
             lblNewLabel_3_1.setBounds(73, 325, 61, 16);
+            lblNewLabel_3_1.setFont(new Font("Arial", Font.BOLD, 13));
         }
         return lblNewLabel_3_1;
     }
@@ -132,8 +132,8 @@ public class ManagerForm2 extends JPanel {
     private JTextField getTextField_3() {
         if (textField_3 == null) {
             textField_3 = new JTextField();
-            textField_3.setColumns(10);
             textField_3.setBounds(156, 319, 272, 26);
+            textField_3.setColumns(10);
         }
         return textField_3;
     }
