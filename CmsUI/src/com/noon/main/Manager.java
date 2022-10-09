@@ -1,11 +1,7 @@
 
 package com.noon.main;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.noon.component.Header;
@@ -49,7 +45,7 @@ public class Manager extends javax.swing.JFrame {
 			}
 		});
 	}
-
+	
 	private void setManagerForm(JComponent com) {
 		mainPanel.removeAll();
 		mainPanel.add(com);
