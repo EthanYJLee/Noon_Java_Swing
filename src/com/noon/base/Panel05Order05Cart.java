@@ -32,8 +32,8 @@ public class Panel05Order05Cart extends JPanel {
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
 	private JLabel lblProfilePhoto;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
+	private JLabel btnOrderMore;
+	private JLabel btnUseCoupon;
 	private JLabel lblBtnPutIn;
 	
 	// -- Table Definition
@@ -90,8 +90,8 @@ public class Panel05Order05Cart extends JPanel {
 		add(getLblBtnTabGift());
 		add(getLblHomeIndicator());
 		add(getLblBtnTabMypage());
-		add(getLblNewLabel_4());
-		add(getLblNewLabel_5());
+		add(getBtnOrderMore());
+		add(getBtnUseCoupon());
 		add(getLblBtnPutIn());
 		add(getScrollPane());
 		add(getLblNewLabel());
@@ -211,21 +211,49 @@ public class Panel05Order05Cart extends JPanel {
 	// ==================================================================================================================
 
 	
-	private JLabel getLblNewLabel_4() {
-		if (lblNewLabel_4 == null) {
-			lblNewLabel_4 = new JLabel("");
-			lblNewLabel_4.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_option_cancel_all.png"));
-			lblNewLabel_4.setBounds(15, 580, 166, 45);
+	private JLabel getBtnOrderMore() {
+		if (btnOrderMore == null) {
+			btnOrderMore = new JLabel("");
+			btnOrderMore.setHorizontalAlignment(SwingConstants.CENTER);
+			btnOrderMore.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					btnOrderMore.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_order_more_C.png"));
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					btnOrderMore.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_order_more.png"));
+				}
+			});
+			btnOrderMore.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_order_more.png"));
+			btnOrderMore.setBounds(15, 580, 167, 45);
 		}
-		return lblNewLabel_4;
+		return btnOrderMore;
 	}
-	private JLabel getLblNewLabel_5() {
-		if (lblNewLabel_5 == null) {
-			lblNewLabel_5 = new JLabel("");
-			lblNewLabel_5.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_use_coupon.png"));
-			lblNewLabel_5.setBounds(193, 580, 167, 45);
+	private JLabel getBtnUseCoupon() {
+		if (btnUseCoupon == null) {
+			btnUseCoupon = new JLabel("");
+			btnUseCoupon.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					//
+				}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					btnUseCoupon.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_use_coupon_C.png"));
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					btnUseCoupon.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_use_coupon.png"));
+				}
+			});
+			btnUseCoupon.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_use_coupon.png"));
+			btnUseCoupon.setBounds(193, 580, 167, 45);
 		}
-		return lblNewLabel_5;
+		return btnUseCoupon;
 	}
 	private JLabel getLblBtnPutIn() {
 		if (lblBtnPutIn == null) {
@@ -235,6 +263,14 @@ public class Panel05Order05Cart extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order06Pay());
+				}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_pay_C.png"));
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_pay.png"));
 				}
 			});
 			lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_pay.png"));

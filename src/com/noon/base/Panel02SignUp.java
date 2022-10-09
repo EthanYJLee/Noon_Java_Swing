@@ -190,7 +190,15 @@ public class Panel02SignUp extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
-					Main.frame.getContentPane().add(new Panel05Order01Shop());
+					Main.frame.getContentPane().add(new Panel03Home());
+					}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblBtnSingup.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_signup2_C.png"));
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblBtnSingup.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_signup2.png"));
 				}
 			});
 			lblBtnSingup.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_signup2.png"));

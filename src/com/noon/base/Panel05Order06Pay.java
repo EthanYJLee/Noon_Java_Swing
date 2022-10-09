@@ -178,23 +178,8 @@ public class Panel05Order06Pay extends JPanel {
 
 	private JPanel getPnPayComplete() {
 		if (pnPayComplete == null) {
-			pnPayComplete = new JPanel() {
-				
-			// 판넬 모서리 둥글게 하기 ----------------------------------------------------------------------------------------
-				@Override
-				protected void paintComponent(Graphics g) {
-					Graphics2D g2 = (Graphics2D) g;
-					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-					g2.setColor(getBackground()); 							  // paint background
-					g2.fillRoundRect(0, 0, getWidth() , getHeight(), 40, 40); // paint background
-//					g2.setColor(getForeground());													  // paint border
-//					g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, arcs.width, arcs.height); // paint border
-					super.paintComponent(g); 
-				}
-			};
-			pnPayComplete.setOpaque(false);
-			// -----------------------------------------------------------------------------------------------------------
-
+			pnPayComplete = new JPanel();
+			pnPayComplete.setBackground(new Color(255, 0, 0, 0));
 			pnPayComplete.setBounds(15, 270, 345, 208);
 			pnPayComplete.setLayout(null);
 			pnPayComplete.add(getLblPayResult());
@@ -209,6 +194,7 @@ public class Panel05Order06Pay extends JPanel {
 			lblPn1Background.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPn1Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_paycomplete_background.png"));
 			lblPn1Background.setBounds(0, 0, 345, 208);
+			lblPn1Background.setBackground(new Color(255, 0, 0, 0));
 		}
 		return lblPn1Background;
 	}
@@ -228,34 +214,27 @@ public class Panel05Order06Pay extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
-					
+					Main.frame.getContentPane().add(new Panel05Order07Save());
+				}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblBtnSaveGo.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_go_C.png"));
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblBtnSaveGo.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_go.png"));
 				}
 			});
 			lblBtnSaveGo.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_go.png"));
-			lblBtnSaveGo.setBounds(107, 143, 134, 43);
+			lblBtnSaveGo.setBounds(107, 148, 134, 32);
 		}
 		return lblBtnSaveGo;
 	}
 
 	private JPanel getPnPayFailed() {
 		if (pnPayFailed == null) {
-			pnPayFailed = new JPanel() {
-				
-			// 판넬 모서리 둥글게 하기 ----------------------------------------------------------------------------------------
-				@Override
-				protected void paintComponent(Graphics g) {
-					Graphics2D g2 = (Graphics2D) g;
-					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-					g2.setColor(getBackground()); 							  // paint background
-					g2.fillRoundRect(0, 0, getWidth() , getHeight(), 40, 40); // paint background
-//					g2.setColor(getForeground());													  // paint border
-//					g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, arcs.width, arcs.height); // paint border
-					super.paintComponent(g); 
-				}
-			};
-			pnPayFailed.setOpaque(false);
-			// -----------------------------------------------------------------------------------------------------------
-			
+			pnPayFailed = new JPanel();
+			pnPayFailed.setBackground(new Color(255, 0, 0, 0));
 			pnPayFailed.setBounds(15, 288, 345, 172);
 			pnPayFailed.setLayout(null);
 			pnPayFailed.add(getLblPn2Background());
@@ -270,6 +249,8 @@ public class Panel05Order06Pay extends JPanel {
 			lblPn2Background.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPn2Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_payfailed_background.png"));
 			lblPn2Background.setBounds(0, 0, 345, 172);
+			lblPn2Background.setBackground(new Color(255, 0, 0, 0));
+			lblPn2Background.setVisible(false);
 		}
 		return lblPn2Background;
 	}

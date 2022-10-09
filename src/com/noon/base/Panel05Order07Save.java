@@ -184,6 +184,21 @@ public class Panel05Order07Save extends JPanel {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
+			lblNewLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel03Home());
+				}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_not_C.png"));
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_not.png"));
+				}
+			});
 			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_not.png"));
 			lblNewLabel.setBounds(15, 563, 345, 61);
 		}
@@ -195,7 +210,6 @@ public class Panel05Order07Save extends JPanel {
 			lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/save_comment.png"));
 			lblNewLabel_2.setBounds(15, 289, 345, 77);
-			lblNewLabel_2.setOpaque(false);
 		}
 		return lblNewLabel_2;
 	}
@@ -210,6 +224,21 @@ public class Panel05Order07Save extends JPanel {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel03Home());
+				}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblNewLabel_1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_C.png"));
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblNewLabel_1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save1.png"));
+				}
+			});
 			lblNewLabel_1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save1.png"));
 			lblNewLabel_1.setBounds(15, 644, 345, 61);
 		}

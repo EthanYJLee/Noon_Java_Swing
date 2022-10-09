@@ -15,7 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Panel03Home extends JPanel {
+public class Panel07Coupon extends JPanel {
+
 	
 	private JLabel lblNewLabel_01;
 	private JLabel lblBtnTabOrder;
@@ -26,7 +27,7 @@ public class Panel03Home extends JPanel {
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
 	private JLabel lblProfilePhoto;
-	private JLabel lblNewLabel;
+	private JLabel lblBtnGift;
 
 	// 바탕화면 그라데이션 ---------------------------------------------------------------------------------------------
 	@Override
@@ -43,7 +44,7 @@ public class Panel03Home extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Panel03Home() {
+	public Panel07Coupon() {
 		// DefaultSetting ---------
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
@@ -57,7 +58,7 @@ public class Panel03Home extends JPanel {
 		add(getLblBtnTabGift());
 		add(getLblBtnTabMypage());
 		add(getLblHomeIndicator());
-		add(getLblNewLabel());
+		add(getLblBtnGift());
 	}
 	
 	// 상단바 =============================================================================================================
@@ -81,7 +82,7 @@ public class Panel03Home extends JPanel {
 	}
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
-			lblNewLabel_01 = new JLabel("Home");
+			lblNewLabel_01 = new JLabel("Gift");
 			lblNewLabel_01.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_01.setForeground(new Color(176, 108, 89));
 			lblNewLabel_01.setFont(new Font("Lucida Grande", Font.PLAIN, 28));
@@ -138,7 +139,7 @@ public class Panel03Home extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
-					Main.frame.getContentPane().add(new Panel06Gift());
+					Main.frame.getContentPane().add(new Panel07Coupon());
 				}
 			});
 			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
@@ -169,18 +170,17 @@ public class Panel03Home extends JPanel {
 		}
 		return lblHomeIndicator;
 	}
-	
-	
-	
-	
-	
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("");
-			lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/home_base1.png"));
-			lblNewLabel.setBounds(0, 87, 374, 642);
+	private JLabel getLblBtnGift() {
+		if (lblBtnGift == null) {
+			lblBtnGift = new JLabel("");
+			lblBtnGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_gift.png"));
+			lblBtnGift.setBounds(15, 644, 345, 61);
 		}
-		return lblNewLabel;
+		return lblBtnGift;
 	}
+	
+	
+	
+	
+	
 } // End

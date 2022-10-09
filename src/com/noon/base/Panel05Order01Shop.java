@@ -126,7 +126,78 @@ public class Panel05Order01Shop extends JPanel {
 		return lblProfilePhoto;
 	}
 	// ==================================================================================================================
-
+	
+	// Tabbar ===========================================================================================================
+		private JLabel getLblBtnTabHome() {
+			if (lblBtnTabHome == null) {
+				lblBtnTabHome = new JLabel("");
+				lblBtnTabHome.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						setVisible(false);
+						Main.frame.getContentPane().add(new Panel03Home());
+					}
+				});
+				lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
+				lblBtnTabHome.setBounds(1, 729, 94, 50);
+			}
+			return lblBtnTabHome;
+		}
+		private JLabel getLblBtnTabOrder() {
+			if (lblBtnTabOrder == null) {
+				lblBtnTabOrder = new JLabel("");
+				lblBtnTabOrder.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						setVisible(false);
+						Main.frame.getContentPane().add(new Panel05Order01Shop());
+					}
+				});
+				lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
+				lblBtnTabOrder.setBounds(95, 729, 94, 50);
+			}
+			return lblBtnTabOrder;
+		}
+		private JLabel getLblBtnTabGift() {
+			if (lblBtnTabGift == null) {
+				lblBtnTabGift = new JLabel("");
+				lblBtnTabGift.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						setVisible(false);
+						Main.frame.getContentPane().add(new Panel06Gift());
+					}
+				});
+				lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
+				lblBtnTabGift.setBounds(187, 729, 94, 50);
+			}
+			return lblBtnTabGift;
+		}
+		private JLabel getLblBtnTabMypage() {
+			if (lblBtnTabMypage == null) {
+				lblBtnTabMypage = new JLabel("");
+				lblBtnTabMypage.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						setVisible(false);
+						Main.frame.getContentPane().add(new Panel04MyPage());
+					}
+				});
+				lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
+				lblBtnTabMypage.setBounds(281, 729, 94, 50);
+			}
+			return lblBtnTabMypage;
+		}
+		private JLabel getLblHomeIndicator() {
+			if (lblHomeIndicator == null) {
+				lblHomeIndicator = new JLabel("");
+				lblHomeIndicator.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
+				lblHomeIndicator.setBounds(1, 778, 375, 34);
+			}
+			return lblHomeIndicator;
+		}
+		// ==================================================================================================================
+		
 	private JLabel getLblNewLabel_02() {
 		if (lblNewLabel_02 == null) {
 			lblNewLabel_02 = new JLabel("방문하실 매장을 선택해 주세요 !");
@@ -141,20 +212,8 @@ public class Panel05Order01Shop extends JPanel {
 	// Left Panel =======================================================================================================
 	private JPanel getPnLeft() {
 		if (pnLeft == null) {
-			pnLeft = new JPanel() {
-				
-			// 판넬 모서리 둥글게 하기 ----------------------------------------------------------------------------------------
-				@Override
-				protected void paintComponent(Graphics g) {
-					Graphics2D g2 = (Graphics2D) g;
-					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-					g2.fillRoundRect(0, 0, getWidth() , getHeight(), 30, 30); // paint background
-					super.paintComponent(g); 
-				}
-			};
-			pnLeft.setOpaque(false);
-			// -----------------------------------------------------------------------------------------------------------
-			
+			pnLeft = new JPanel();
+			pnLeft.setBackground(new Color(255, 0, 0, 0));
 			pnLeft.setBackground(Color.WHITE);
 			pnLeft.setBounds(13, 287, 170, 223);
 			pnLeft.setLayout(null);
@@ -262,18 +321,8 @@ public class Panel05Order01Shop extends JPanel {
 	// Right Panel ======================================================================================================
 	private JPanel getPnRight() {
 		if (pnRight == null) {
-			pnRight = new JPanel()  {
-				
-			// 판넬 모서리 둥글게 하기 ----------------------------------------------------------------------------------------
-				@Override
-				protected void paintComponent(Graphics g) {
-					Graphics2D g2 = (Graphics2D) g;
-					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-					g2.setColor(getBackground()); 							  // paint background
-					g2.fillRoundRect(0, 0, getWidth() , getHeight(), 30, 30); // paint background
-					super.paintComponent(g); 
-				}
-			};
+			pnRight = new JPanel();
+			pnRight.setBackground(new Color(255, 0, 0, 0));
 			pnLeft.setOpaque(false);
 			pnRight.setOpaque(false);
 			pnRight.setBackground(Color.WHITE);
@@ -338,6 +387,14 @@ public class Panel05Order01Shop extends JPanel {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order02Time());
 				}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select_C.png"));
+				}
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+				}
 			});
 			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
 			lblBtnSelect.setBounds(15, 644, 345, 61);
@@ -346,78 +403,6 @@ public class Panel05Order01Shop extends JPanel {
 	}
 	// ==================================================================================================================
 
-	// Tabbar ===========================================================================================================
-	private JLabel getLblBtnTabHome() {
-		if (lblBtnTabHome == null) {
-			lblBtnTabHome = new JLabel("");
-			lblBtnTabHome.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					setVisible(false);
-					Main.frame.getContentPane().add(new Panel03Home());
-				}
-			});
-			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
-			lblBtnTabHome.setBounds(1, 729, 94, 50);
-		}
-		return lblBtnTabHome;
-	}
-	private JLabel getLblBtnTabOrder() {
-		if (lblBtnTabOrder == null) {
-			lblBtnTabOrder = new JLabel("");
-			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					setVisible(false);
-					Main.frame.getContentPane().add(new Panel05Order01Shop());
-				}
-			});
-			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
-			lblBtnTabOrder.setBounds(95, 729, 94, 50);
-		}
-		return lblBtnTabOrder;
-	}
-	private JLabel getLblBtnTabGift() {
-		if (lblBtnTabGift == null) {
-			lblBtnTabGift = new JLabel("");
-			lblBtnTabGift.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					setVisible(false);
-					Main.frame.getContentPane().add(new Panel06Gift());
-				}
-			});
-			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
-			lblBtnTabGift.setBounds(187, 729, 94, 50);
-		}
-		return lblBtnTabGift;
-	}
-	private JLabel getLblBtnTabMypage() {
-		if (lblBtnTabMypage == null) {
-			lblBtnTabMypage = new JLabel("");
-			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					setVisible(false);
-					Main.frame.getContentPane().add(new Panel04MyPage());
-				}
-			});
-			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
-			lblBtnTabMypage.setBounds(281, 729, 94, 50);
-		}
-		return lblBtnTabMypage;
-	}
-	private JLabel getLblHomeIndicator() {
-		if (lblHomeIndicator == null) {
-			lblHomeIndicator = new JLabel("");
-			lblHomeIndicator.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
-			lblHomeIndicator.setBounds(1, 778, 375, 34);
-		}
-		return lblHomeIndicator;
-	}
-	// ==================================================================================================================
-	
-	
 	private JLabel getLblPn2Background() {
 		if (lblPn2Background == null) {
 			lblPn2Background = new JLabel("");
