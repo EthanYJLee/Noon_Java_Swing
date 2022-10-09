@@ -1,12 +1,12 @@
 package com.noon.form.manager;
 
+import com.noon.swing.ImageAvatar;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -25,6 +25,7 @@ public class ManagerForm2 extends JPanel {
     private JTextField textField_3;
     private JLabel lblNewLabel_1;
     private JLabel lblNewLabel_4;
+    private ImageAvatar imageAvatar;
 
     /**
      * Create the panel.
@@ -42,7 +43,7 @@ public class ManagerForm2 extends JPanel {
         add(getBtnNewButton());
         add(getLblNewLabel_3_1());
         add(getTextField_3());
-        add(getLblNewLabel_1());
+//        add(getLblNewLabel_1());
         add(getLblNewLabel_4());
 
     }
@@ -137,14 +138,14 @@ public class ManagerForm2 extends JPanel {
         return textField_3;
     }
 
-    private JLabel getLblNewLabel_1() {
-        if (lblNewLabel_1 == null) {
-            lblNewLabel_1 = new JLabel("New label");
-            lblNewLabel_1.setIcon(new ImageIcon("/Users/bigdata/Downloads/free-icon-person-5393061.png"));
-            lblNewLabel_1.setBounds(477, 91, 259, 256);
-        }
-        return lblNewLabel_1;
-    }
+//    private JLabel getLblNewLabel_1() {
+//        if (lblNewLabel_1 == null) {
+//            lblNewLabel_1 = new JLabel("New label");
+//            lblNewLabel_1.setIcon(new ImageIcon("/Users/bigdata/Downloads/free-icon-person-5393061.png"));
+//            lblNewLabel_1.setBounds(477, 91, 259, 256);
+//        }
+//        return lblNewLabel_1;
+//    }
 
     private JLabel getLblNewLabel_4() {
         if (lblNewLabel_4 == null) {
@@ -153,7 +154,15 @@ public class ManagerForm2 extends JPanel {
         }
         return lblNewLabel_4;
     }
-
+    
+     private ImageAvatar getImageAvatar() {
+        if (imageAvatar == null) {
+            imageAvatar = new ImageAvatar();
+            imageAvatar.setIcon(new ImageIcon(getClass().getResource("/com/noon/icon/logo.png")));
+            imageAvatar.setBounds(477, 91, 259, 256);
+        }
+        return imageAvatar;
+    }
     
     @Override
     protected void paintChildren (Graphics g) {
