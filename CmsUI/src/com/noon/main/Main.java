@@ -1,6 +1,13 @@
 
 package com.noon.main;
 
+import java.awt.Color;
+
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import com.noon.component.Header;
+import com.noon.component.SideBar;
 import com.noon.event.EventCategorySelected;
 import com.noon.form.executive.ExecutiveForm1;
 import com.noon.form.manager.ManagerEmpty;
@@ -8,8 +15,7 @@ import com.noon.form.manager.ManagerForm1;
 import com.noon.form.manager.ManagerForm2;
 import com.noon.form.manager.ManagerForm3;
 import com.noon.form.parttime.ParttimeForm1;
-import java.awt.Color;
-import javax.swing.JComponent;
+import com.noon.swing.PanelBorder;
 
 
 public class Main extends javax.swing.JFrame {
@@ -112,11 +118,6 @@ public class Main extends javax.swing.JFrame {
 
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -133,9 +134,6 @@ public class Main extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
@@ -144,9 +142,9 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.noon.component.Header header2;
-    private javax.swing.JPanel mainPanel;
-    private com.noon.swing.PanelBorder panelBorder2;
-    private com.noon.component.SideBar sideBar1;
+    private Header header2;
+    private JPanel mainPanel;
+    private PanelBorder panelBorder2;
+    private SideBar sideBar1;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,8 +5,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.GroupLayout;
+import javax.swing.JPanel;
 
-public class PanelBorder extends javax.swing.JPanel {
+
+public class PanelBorder extends JPanel {
 
 
     public PanelBorder() {
@@ -16,10 +19,8 @@ public class PanelBorder extends javax.swing.JPanel {
 
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -41,7 +42,4 @@ public class PanelBorder extends javax.swing.JPanel {
         super.paintComponent(g); 
     }
 
- 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }
