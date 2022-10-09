@@ -19,7 +19,7 @@ public class CategoryItem extends javax.swing.JPanel {
         this.selected = selected;
         repaint();
     }
-
+    
     @Override
     protected void paintComponent(Graphics g) {
         if (selected) {

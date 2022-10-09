@@ -1,4 +1,4 @@
-package com.noon.component;
+package com.noon.form.executive;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -6,10 +6,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class Executive extends JPanel {
+public class ExecutiveForm1 extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -17,7 +15,7 @@ public class Executive extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Executive() {
+	public ExecutiveForm1() {
 		setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("지점등록");
@@ -57,10 +55,6 @@ public class Executive extends JPanel {
 		
 		JButton btnNewButton = new JButton("등록하기");
 		btnNewButton.setFont(new Font("굴림", Font.PLAIN, 15));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBounds(346, 440, 91, 50);
 		add(btnNewButton);

@@ -1,4 +1,4 @@
-package com.noon.component;
+package com.noon.form.parttime;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -10,13 +10,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class PartTimer extends JPanel {
+public class ParttimeForm1 extends JPanel {
 	private JTable table;
 
 	/**
 	 * Create the panel.
 	 */
-	public PartTimer() {
+	public ParttimeForm1() {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("2022.10.25");

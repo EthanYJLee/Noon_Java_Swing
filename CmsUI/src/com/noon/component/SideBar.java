@@ -1,5 +1,6 @@
 package com.noon.component;
 
+import com.noon.event.EventCategorySelected;
 import com.noon.model.Model_Category;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -12,6 +13,13 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 
 public class SideBar extends javax.swing.JPanel {
+    
+    private EventCategorySelected event;
+    
+    public void addEventCategorySelected(EventCategorySelected event){
+        this.event = event;
+        listCategory1.addEventCategorySelected(event);
+    }
 
     public SideBar() {
         initComponents();

@@ -2,22 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.noon.swing;
+package com.noon.form.manager;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 /**
  *
  * @author kwonsoonhyong
  */
-public class PanelBorder extends javax.swing.JPanel {
+public class ManagerEmpty extends javax.swing.JPanel {
 
     /**
-     * Creates new form PanelBorder
+     * Creates new form ManagerEmpty
      */
-    public PanelBorder() {
+    public ManagerEmpty() {
         initComponents();
         setOpaque(false);
     }
@@ -44,16 +44,13 @@ public class PanelBorder extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintChildren (Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(getBackground());
-        g2.fillRoundRect(0,0, getWidth(), getHeight(), 20, 20);
-        
-        super.paintComponent(g); 
+        g2.setPaint(new Color(255,255,255,100));
+
+        super.paintChildren(g);
     }
 
- 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
