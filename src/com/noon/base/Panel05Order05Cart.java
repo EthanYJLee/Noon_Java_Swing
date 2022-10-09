@@ -6,27 +6,22 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-public class AppPanel05_Order05Cart extends JPanel {
-	
-	private AppPanel05_Order06Pay appPanel05_Order06Pay = new AppPanel05_Order06Pay();
+public class Panel05Order05Cart extends JPanel {
 	
 	private JLabel lblNewLabel_01;
 	private JLabel lblBtnTabOrder;
@@ -68,7 +63,7 @@ public class AppPanel05_Order05Cart extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AppPanel05_Order05Cart() {
+	public Panel05Order05Cart() {
 		
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
@@ -211,7 +206,7 @@ public class AppPanel05_Order05Cart extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
-					AppMain.frame.getContentPane().add(appPanel05_Order06Pay);
+					Main.frame.getContentPane().add(new Panel05Order06Pay());
 				}
 			});
 			lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_pay.png"));

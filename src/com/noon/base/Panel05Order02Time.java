@@ -6,6 +6,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -13,17 +15,14 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JButton;
 
-public class AppPanel05_Order02Time extends JPanel {
-	
-	private AppPanel05_Order03Menu appPanel05_Order03Menu = new AppPanel05_Order03Menu();
-	
+public class Panel05Order02Time extends JPanel {
+
 	private JLabel lblNewLabel_01;
 	private JLabel lblNewLabel_02;
 	private JLabel lblNewLabel_03;
-	private JLabel lblBtnSelect_09;
+	private JLabel lblBtnSelect;
 	private JLabel lblBtnTabOrder;
 	private JLabel lblBtnTabMypage;
 	private JLabel lblNewLabel_5;
@@ -39,6 +38,7 @@ public class AppPanel05_Order02Time extends JPanel {
 	private JLabel lblNewLabel_03_1;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
+	private JButton btnNewButton;
 
 	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
 	@Override
@@ -55,7 +55,7 @@ public class AppPanel05_Order02Time extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AppPanel05_Order02Time() {
+	public Panel05Order02Time() {
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
@@ -66,7 +66,7 @@ public class AppPanel05_Order02Time extends JPanel {
 		add(getLblLeftQuentity());
 		add(getLblNewLabel_06_2());
 		add(getLblNewLabel_5());
-		add(getLblBtnSelect_09());
+		add(getLblBtnSelect());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
 		add(getLblBtnTabGift());
@@ -79,6 +79,7 @@ public class AppPanel05_Order02Time extends JPanel {
 		add(getLblNewLabel_03_1());
 		add(getLblNewLabel());
 		add(getLblNewLabel_1());
+		add(getBtnNewButton());
 	}
 	
 	// 상단바 =============================================================================================================
@@ -162,20 +163,20 @@ public class AppPanel05_Order02Time extends JPanel {
 		}
 		return cbTimeMinute;
 	}
-	private JLabel getLblBtnSelect_09() {
-		if (lblBtnSelect_09 == null) {
-			lblBtnSelect_09 = new JLabel("");
-			lblBtnSelect_09.addMouseListener(new MouseAdapter() {
+	private JLabel getLblBtnSelect() {
+		if (lblBtnSelect == null) {
+			lblBtnSelect = new JLabel("");
+			lblBtnSelect.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
-					AppMain.frame.getContentPane().add(appPanel05_Order03Menu);
+					Main.frame.getContentPane().add(new Panel05Order03Menu());
 				}
 			});
-			lblBtnSelect_09.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
-			lblBtnSelect_09.setBounds(15, 644, 345, 61);
+			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+			lblBtnSelect.setBounds(15, 644, 345, 61);
 		}
-		return lblBtnSelect_09;
+		return lblBtnSelect;
 	}
 	// ==================================================================================================================
 
@@ -269,5 +270,12 @@ public class AppPanel05_Order02Time extends JPanel {
 			lblNewLabel_1.setBounds(15, 455, 345, 34);
 		}
 		return lblNewLabel_1;
+	}
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("New button");
+			btnNewButton.setBounds(15, 644, 345, 61);
+		}
+		return btnNewButton;
 	}
 } // End

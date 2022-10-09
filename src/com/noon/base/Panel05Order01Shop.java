@@ -6,6 +6,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -17,16 +19,16 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class AppPanel04_MyPage extends JPanel {
+public class Panel05Order01Shop extends JPanel {
 	
 	private JLabel lblNewLabel_01;
 	private JLabel lblNewLabel_02;
-	private JPanel pn_01;
+	private JPanel pnLeft;
 	private JLabel lblNewLabel_03;
 	private JLabel lblNewLabel_04;
 	private JLabel lblNewLabel_05;
 	private JLabel lblNewLabel_06;
-	private JLabel lblBtnSelect_09;
+	private JLabel lblBtnSelect;
 	private JLabel lblBtnTabOrder;
 	private JLabel lblBtnTabMypage;
 	private JLabel lblNewLabel_5;
@@ -34,18 +36,20 @@ public class AppPanel04_MyPage extends JPanel {
 	private JLabel lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
-	private JLabel lblNewLabel_10;
+	private JLabel lblProfilePhoto;
 	private JComboBox cbAddrSiDo;
 	private JComboBox cbAddrSiGoonGoo;
-	private JPanel pn_02;
+	private JComboBox cbAddrDong;
+	private JComboBox cbAddrShopName;
+	private JPanel pnRight;
 	private JLabel lblBtnShopSearch;
 	private JLabel lblNewLabel_08;
 	private JTextField tfShopSearch;
-	private JComboBox cbAddrDong;
-	private JComboBox cbAddrShopName;
 	private JScrollPane spShopList;
 	private JTable Inner_Table_ShopList;
 	private JLabel lblNewLabel_07;
+	private JLabel lblPn2Background;
+	private JLabel lblNewLabel;
 
 	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
 	@Override
@@ -58,30 +62,31 @@ public class AppPanel04_MyPage extends JPanel {
 		super.paintChildren(g);
 	}
 	// ----------------------------------------------------------------------------------------------
-	
+
+
 	/**
 	 * Create the panel.
 	 */
-	public AppPanel04_MyPage() {
+	public Panel05Order01Shop() {
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
 		
 		add(getLblNewLabel_01());
 		add(getLblNewLabel_02());
-		add(getPn_01());
-		add(getPn_02());
+		add(getPnLeft());
+		add(getPnRight());
 		add(getLblNewLabel_5());
-		add(getLblBtnSelect_09());
+		add(getLblBtnSelect());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
 		add(getLblBtnTabGift());
 		add(getLblBtnTabMypage());
 		add(getLblBtnSidebar());
 		add(getLblBtnBack());
-		add(getLblNewLabel_10());
+		add(getLblProfilePhoto());
 	}
-	
+
 	// 상단바 =============================================================================================================
 	private JLabel getLblBtnSidebar() {
 		if (lblBtnSidebar == null) {
@@ -111,32 +116,32 @@ public class AppPanel04_MyPage extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
-	private JLabel getLblNewLabel_10() {
-		if (lblNewLabel_10 == null) {
-			lblNewLabel_10 = new JLabel("");
-			lblNewLabel_10.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblNewLabel_10.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/iconProfile.png"));
-			lblNewLabel_10.setBounds(297, 26, 61, 37);
+	private JLabel getLblProfilePhoto() {
+		if (lblProfilePhoto == null) {
+			lblProfilePhoto = new JLabel("");
+			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblProfilePhoto.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/profile_photo.png"));
+			lblProfilePhoto.setBounds(322, 26, 36, 36);
 		}
-		return lblNewLabel_10;
+		return lblProfilePhoto;
 	}
 	// ==================================================================================================================
 
 	private JLabel getLblNewLabel_02() {
 		if (lblNewLabel_02 == null) {
-			lblNewLabel_02 = new JLabel("방문할 매장을 선택하여 주십시오");
+			lblNewLabel_02 = new JLabel("방문하실 매장을 선택해 주세요 !");
 			lblNewLabel_02.setForeground(new Color(176, 108, 89));
-			lblNewLabel_02.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+			lblNewLabel_02.setFont(new Font("SansSerif", Font.BOLD, 18));
 			lblNewLabel_02.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_02.setBounds(1, 249, 374, 16);
+			lblNewLabel_02.setBounds(1, 226, 374, 22);
 		}
 		return lblNewLabel_02;
 	}
 
 	// Left Panel =======================================================================================================
-	private JPanel getPn_01() {
-		if (pn_01 == null) {
-			pn_01 = new JPanel() {
+	private JPanel getPnLeft() {
+		if (pnLeft == null) {
+			pnLeft = new JPanel() {
 				
 			// 판넬 모서리 둥글게 하기 ----------------------------------------------------------------------------------------
 				@Override
@@ -150,23 +155,24 @@ public class AppPanel04_MyPage extends JPanel {
 					super.paintComponent(g); 
 				}
 			};
-			pn_01.setOpaque(false);
+			pnLeft.setOpaque(false);
 			// -----------------------------------------------------------------------------------------------------------
 			
-			pn_01.setBackground(Color.WHITE);
-			pn_01.setBounds(13, 287, 170, 223);
-			pn_01.setLayout(null);
-			pn_01.add(getLblNewLabel_2_1());
-			pn_01.add(getLblNewLabel_2_1_1());
-			pn_01.add(getLblNewLabel_05());
-			pn_01.add(getLblNewLabel_06());
-			pn_01.add(getCbAddrSiDo());
-			pn_01.add(getCbAddrSiGoonGoo());
-			pn_01.add(getCbAddrDong());
-			pn_01.add(getCbAddrShopName());
-			pn_01.add(getLblNewLabel_07());
+			pnLeft.setBackground(Color.WHITE);
+			pnLeft.setBounds(13, 287, 170, 223);
+			pnLeft.setLayout(null);
+			pnLeft.add(getLblNewLabel_2_1());
+			pnLeft.add(getLblNewLabel_2_1_1());
+			pnLeft.add(getLblNewLabel_05());
+			pnLeft.add(getLblNewLabel_06());
+			pnLeft.add(getCbAddrSiDo());
+			pnLeft.add(getCbAddrSiGoonGoo());
+			pnLeft.add(getCbAddrDong());
+			pnLeft.add(getCbAddrShopName());
+			pnLeft.add(getLblNewLabel_07());
+			pnLeft.add(getLblNewLabel());
 		}
-		return pn_01;
+		return pnLeft;
 	}
 	private JLabel getLblNewLabel_2_1() {
 		if (lblNewLabel_03 == null) {
@@ -257,9 +263,9 @@ public class AppPanel04_MyPage extends JPanel {
 	// ==================================================================================================================
 
 	// Right Panel ======================================================================================================
-	private JPanel getPn_02() {
-		if (pn_02 == null) {
-			pn_02 = new JPanel()  {
+	private JPanel getPnRight() {
+		if (pnRight == null) {
+			pnRight = new JPanel()  {
 				
 			// 판넬 모서리 둥글게 하기 ----------------------------------------------------------------------------------------
 				@Override
@@ -271,17 +277,18 @@ public class AppPanel04_MyPage extends JPanel {
 					super.paintComponent(g); 
 				}
 			};
-			pn_01.setOpaque(false);
-			pn_02.setOpaque(false);
-			pn_02.setBackground(Color.WHITE);
-			pn_02.setBounds(193, 287, 170, 223);
-			pn_02.setLayout(null);
-			pn_02.add(getLblBtnShopSearch());
-			pn_02.add(getLblNewLabel_08());
-			pn_02.add(getTfShopSearch());
-			pn_02.add(getSpShopList());
+			pnLeft.setOpaque(false);
+			pnRight.setOpaque(false);
+			pnRight.setBackground(Color.WHITE);
+			pnRight.setBounds(193, 287, 170, 223);
+			pnRight.setLayout(null);
+			pnRight.add(getLblBtnShopSearch());
+			pnRight.add(getLblNewLabel_08());
+			pnRight.add(getTfShopSearch());
+			pnRight.add(getSpShopList());
+			pnRight.add(getLblPn2Background());
 		}
-		return pn_02;
+		return pnRight;
 	}
 	private JLabel getLblNewLabel_08() {
 		if (lblNewLabel_08 == null) {
@@ -313,7 +320,7 @@ public class AppPanel04_MyPage extends JPanel {
 	private JScrollPane getSpShopList() {
 		if (spShopList == null) {
 			spShopList = new JScrollPane();
-			spShopList.setBounds(9, 73, 151, 135);
+			spShopList.setBounds(9, 76, 151, 135);
 			spShopList.setViewportView(getInner_Table_ShopList());
 		}
 		return spShopList;
@@ -325,13 +332,20 @@ public class AppPanel04_MyPage extends JPanel {
 		}
 		return Inner_Table_ShopList;
 	}
-	private JLabel getLblBtnSelect_09() {
-		if (lblBtnSelect_09 == null) {
-			lblBtnSelect_09 = new JLabel("");
-			lblBtnSelect_09.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btnSelect.png"));
-			lblBtnSelect_09.setBounds(13, 656, 345, 50);
+	private JLabel getLblBtnSelect() {
+		if (lblBtnSelect == null) {
+			lblBtnSelect = new JLabel("");
+			lblBtnSelect.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel05Order02Time());
+				}
+			});
+			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+			lblBtnSelect.setBounds(15, 644, 345, 61);
 		}
-		return lblBtnSelect_09;
+		return lblBtnSelect;
 	}
 	// ==================================================================================================================
 
@@ -379,4 +393,20 @@ public class AppPanel04_MyPage extends JPanel {
 	// ==================================================================================================================
 	
 	
+	private JLabel getLblPn2Background() {
+		if (lblPn2Background == null) {
+			lblPn2Background = new JLabel("");
+			lblPn2Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_shop_background.png"));
+			lblPn2Background.setBounds(0, 0, 170, 223);
+		}
+		return lblPn2Background;
+	}
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("");
+			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_shop_background.png"));
+			lblNewLabel.setBounds(0, 0, 170, 223);
+		}
+		return lblNewLabel;
+	}
 } // End

@@ -6,17 +6,16 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JTextField;
 
-public class AppPanel05_Order07Save extends JPanel {
-	
+public class Panel05Order06Pay extends JPanel {
+
 	private JLabel lblNewLabel_01;
 	private JLabel lblBtnTabOrder;
 	private JLabel lblBtnTabMypage;
@@ -26,11 +25,12 @@ public class AppPanel05_Order07Save extends JPanel {
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
 	private JLabel lblProfilePhoto;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_2;
-	private JTextField tfPhone;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_3;
+	private JPanel pnPayComplete;
+	private JLabel lblPn1Background;
+	private JLabel lblPayResult;
+	private JPanel pnPayFailed;
+	private JLabel lblPn2Background;
+	private JLabel lblBtnSaveGo;
 
 	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
 	@Override
@@ -47,7 +47,7 @@ public class AppPanel05_Order07Save extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AppPanel05_Order07Save() {
+	public Panel05Order06Pay() {
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
@@ -61,11 +61,8 @@ public class AppPanel05_Order07Save extends JPanel {
 		add(getLblBtnTabGift());
 		add(getLblBtnTabMypage());
 		add(getLblHomeIndicator());
-		add(getLblNewLabel());
-		add(getLblNewLabel_2());
-		add(getTfPhone());
-		add(getLblNewLabel_1());
-		add(getLblNewLabel_3());
+		add(getPnPayComplete());
+		add(getPnPayFailed());
 	}
 	
 	// 상단바 =============================================================================================================
@@ -149,50 +146,104 @@ public class AppPanel05_Order07Save extends JPanel {
 		}
 		return lblHomeIndicator;
 	}
+	private JPanel getPnPayComplete() {
+		if (pnPayComplete == null) {
+			pnPayComplete = new JPanel() {
+				
+			// 판넬 모서리 둥글게 하기 ----------------------------------------------------------------------------------------
+				@Override
+				protected void paintComponent(Graphics g) {
+					Graphics2D g2 = (Graphics2D) g;
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(getBackground()); 							  // paint background
+					g2.fillRoundRect(0, 0, getWidth() , getHeight(), 40, 40); // paint background
+//					g2.setColor(getForeground());													  // paint border
+//					g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, arcs.width, arcs.height); // paint border
+					super.paintComponent(g); 
+				}
+			};
+			pnPayComplete.setOpaque(false);
+			// -----------------------------------------------------------------------------------------------------------
+
+			pnPayComplete.setBounds(15, 270, 345, 208);
+			pnPayComplete.setLayout(null);
+			pnPayComplete.add(getLblPayResult());
+			pnPayComplete.add(getLblBtnSaveGo());
+			pnPayComplete.add(getLblPn1Background());
+		}
+		return pnPayComplete;
+	}
+	private JLabel getLblPn1Background() {
+		if (lblPn1Background == null) {
+			lblPn1Background = new JLabel("");
+			lblPn1Background.setHorizontalAlignment(SwingConstants.CENTER);
+			lblPn1Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_paycomplete_background.png"));
+			lblPn1Background.setBounds(0, 0, 345, 208);
+		}
+		return lblPn1Background;
+	}
+	private JLabel getLblPayResult() {
+		if (lblPayResult == null) {
+			lblPayResult = new JLabel("");
+			lblPayResult.setFont(new Font("SansSerif", Font.PLAIN, 17));
+			lblPayResult.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblPayResult.setBounds(155, 87, 67, 31);
+		}
+		return lblPayResult;
+	}
+	private JLabel getLblBtnSaveGo() {
+		if (lblBtnSaveGo == null) {
+			lblBtnSaveGo = new JLabel("");
+			lblBtnSaveGo.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					
+				}
+			});
+			lblBtnSaveGo.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_go.png"));
+			lblBtnSaveGo.setBounds(107, 143, 134, 43);
+		}
+		return lblBtnSaveGo;
+	}
+
+	private JPanel getPnPayFailed() {
+		if (pnPayFailed == null) {
+			pnPayFailed = new JPanel() {
+				
+			// 판넬 모서리 둥글게 하기 ----------------------------------------------------------------------------------------
+				@Override
+				protected void paintComponent(Graphics g) {
+					Graphics2D g2 = (Graphics2D) g;
+					g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+					g2.setColor(getBackground()); 							  // paint background
+					g2.fillRoundRect(0, 0, getWidth() , getHeight(), 40, 40); // paint background
+//					g2.setColor(getForeground());													  // paint border
+//					g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, arcs.width, arcs.height); // paint border
+					super.paintComponent(g); 
+				}
+			};
+			pnPayFailed.setOpaque(false);
+			// -----------------------------------------------------------------------------------------------------------
+			
+			pnPayFailed.setBounds(15, 288, 345, 172);
+			pnPayFailed.setLayout(null);
+			pnPayFailed.add(getLblPn2Background());
+			pnPayFailed.setVisible(false);
+			
+		}
+		return pnPayFailed;
+	}
+	private JLabel getLblPn2Background() {
+		if (lblPn2Background == null) {
+			lblPn2Background = new JLabel("");
+			lblPn2Background.setHorizontalAlignment(SwingConstants.CENTER);
+			lblPn2Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_payfailed_background.png"));
+			lblPn2Background.setBounds(0, 0, 345, 172);
+		}
+		return lblPn2Background;
+	}
 	
 	
 	
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("");
-			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save_not.png"));
-			lblNewLabel.setBounds(15, 563, 345, 61);
-		}
-		return lblNewLabel;
-	}
-	private JLabel getLblNewLabel_2() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("");
-			lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/save_comment.png"));
-			lblNewLabel_2.setBounds(15, 289, 345, 77);
-			lblNewLabel_2.setOpaque(false);
-		}
-		return lblNewLabel_2;
-	}
-	private JTextField getTfPhone() {
-		if (tfPhone == null) {
-			tfPhone = new JTextField();
-			tfPhone.setBounds(107, 386, 251, 39);
-			tfPhone.setColumns(10);
-		}
-		return tfPhone;
-	}
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_save1.png"));
-			lblNewLabel_1.setBounds(15, 644, 345, 61);
-		}
-		return lblNewLabel_1;
-	}
-	private JLabel getLblNewLabel_3() {
-		if (lblNewLabel_3 == null) {
-			lblNewLabel_3 = new JLabel("전화번호  :");
-			lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_3.setFont(new Font("SansSerif", Font.PLAIN, 16));
-			lblNewLabel_3.setBounds(13, 388, 89, 37);
-		}
-		return lblNewLabel_3;
-	}
 } // End

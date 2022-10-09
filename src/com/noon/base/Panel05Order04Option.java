@@ -6,17 +6,15 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-public class AppPanel05_Order04Option extends JPanel {
-	
-	private AppPanel05_Order05Cart appPanel05_Order05Cart = new AppPanel05_Order05Cart();
+public class Panel05Order04Option extends JPanel {
 	
 	private JLabel lblNewLabel_01;
 	private JLabel lblBtnTabOrder;
@@ -74,7 +72,7 @@ public class AppPanel05_Order04Option extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AppPanel05_Order04Option() {
+	public Panel05Order04Option() {
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
@@ -393,7 +391,6 @@ public class AppPanel05_Order04Option extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
-					AppMain.frame.getContentPane().add(appPanel05_Order05Cart);
 				}
 			});
 			lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_put_in.png"));

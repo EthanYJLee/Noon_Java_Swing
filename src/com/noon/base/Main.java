@@ -2,24 +2,13 @@ package com.noon.base;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Toolkit;
 
-public class AppMain {
+public class Main {
 
 	public static JFrame frame;
 	
-//	private AppPanel00_Logo appPanel00_Logo = new AppPanel00_Logo();
-	public AppPanel03_Home appPanel03_Home = new AppPanel03_Home();
-	public AppPanel05_Order01Shop appPanel05_Order01Shop = new AppPanel05_Order01Shop();
-
 	/**
 	 * Launch the application.
 	 */
@@ -27,7 +16,7 @@ public class AppMain {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AppMain window = new AppMain();
+					Main window = new Main();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,10 +28,8 @@ public class AppMain {
 	/**
 	 * Create the application.
 	 */
-	public AppMain() {
+	public Main() {
 		initialize();
-		
-		
 	}
 
 	/**
@@ -50,6 +37,9 @@ public class AppMain {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 //		// 앱화면 세팅 --------------------------------------------------------------------------------
 		frame.setUndecorated(true); // 1.프레임 창 없애기
@@ -61,11 +51,9 @@ public class AppMain {
 		frame.setBounds(700, 150, 375, 812);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(false);
-//		frame.add(appPanel03_Home);
-		frame.add(appPanel05_Order01Shop);
-//		frame.add(appPanel00_Logo);
+		frame.add(new Panel01Login());
+		
 		
 	}
-	
-} // End
 
+}

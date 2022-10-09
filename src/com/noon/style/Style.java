@@ -1,6 +1,11 @@
 package com.noon.style;
 
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -8,8 +13,7 @@ import javax.swing.JLabel;
 public class Style {
 
 	// Fields
-	
-	
+
 	
 	// Constructor
 	public Style() {
@@ -27,7 +31,6 @@ public class Style {
 		ImageIcon changeIcon = new ImageIcon(changeImg); // 이미지에서 이미지아이콘으로 다시 변환
 		return changeIcon;
 	}
-	
 	
 	
 } // end
