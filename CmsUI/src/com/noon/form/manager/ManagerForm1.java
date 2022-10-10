@@ -1,19 +1,24 @@
 package com.noon.form.manager;
 
 import java.awt.Color;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JComboBox;
-import javax.swing.JTextPane;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.ImageIcon;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class ManagerForm1 extends JPanel {
 
@@ -21,22 +26,45 @@ public class ManagerForm1 extends JPanel {
     private JComboBox comboBox;
     private JTextPane textPane;
     private JButton btnNewButton;
-    private JScrollPane scrollPane;
-    private JButton btnNewButton_1;
-    private JTable table;
+    
+//    -- Table Definition
+	private final DefaultTableModel Outer_Table = new DefaultTableModel(); //********  중요 ********
+	private JTable table_1;  // 이너테이블 
 
     /**
      * Create the panel.
      */
     public ManagerForm1() {
+    	addAncestorListener(new AncestorListener() {
+    		public void ancestorAdded(AncestorEvent event) {
+    			tableInit();
+    		}
+    		public void ancestorMoved(AncestorEvent event) {
+    		}
+    		public void ancestorRemoved(AncestorEvent event) {
+    		}
+    	});
         setLayout(null);
         setOpaque(false);
         add(getLblNewLabel());
         add(getComboBox());
         add(getTextPane());
         add(getBtnNewButton());
-        add(getScrollPane());
-        add(getBtnNewButton_1());
+        
+        // 스크롤
+        JScrollPane scrollPane_1 = new JScrollPane(); // 스크롤
+        scrollPane_1.setBounds(33, 101, 698, 322);
+        add(scrollPane_1);
+        
+        table_1 = new JTable();
+        table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table_1.setModel(Outer_Table); // 이너테이블과 아우터테이블 연결 
+        scrollPane_1.setViewportView(table_1); // 스크롤에 이너테이블 연결
+        
+        JLabel lblNewLabel_1 = new JLabel("");
+        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\icon (1)\\Kiosk213213 (Community) (1)\\Frame 8.png"));
+        lblNewLabel_1.setBounds(557, 457, 175, 40);
+        add(lblNewLabel_1);
 
     }
 
@@ -68,38 +96,66 @@ public class ManagerForm1 extends JPanel {
 
     private JButton getBtnNewButton() {
         if (btnNewButton == null) {
-            btnNewButton = new JButton("");
+            btnNewButton = new JButton("검색");
             btnNewButton.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 6.png"));
             btnNewButton.setBounds(620, 38, 111, 24);
         }
         return btnNewButton;
     }
+    
+    // Init the table
+	private void tableInit() {
+		// 테이블의 컬럼 
+		Outer_Table.addColumn("ID");
+		Outer_Table.addColumn("이름");
+		Outer_Table.addColumn("전화번호");
+		Outer_Table.addColumn("주문처리 건수");
+		Outer_Table.addColumn("인센티브 비율");
+		Outer_Table.addColumn("이번달 급여");
 
-    private JScrollPane getScrollPane() {
-        if (scrollPane == null) {
-            scrollPane = new JScrollPane();
-            scrollPane.setBounds(38, 74, 693, 354);
-            scrollPane.setColumnHeaderView(getTable());
-        }
-        return scrollPane;
-    }
+		Outer_Table.setColumnCount(6);
 
-    private JButton getBtnNewButton_1() {
-        if (btnNewButton_1 == null) {
-            btnNewButton_1 = new JButton("");
-            btnNewButton_1.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 7-2.png"));
-            btnNewButton_1.setBounds(614, 440, 117, 29);
-        }
-        return btnNewButton_1;
-    }
+		// table에 있는 데이터 지우기
+		int a = Outer_Table.getRowCount();
+		for (int i = 0; i < a; i++) {
+			Outer_Table.removeRow(0); // 열이 하나씩 당겨지기 때문에
+		}
 
-    private JTable getTable() {
-        if (table == null) {
-            table = new JTable();
-            table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        }
-        return table;
-    }
+		// 이너 테이블의 사이즈 
+		table_1.setAutoResizeMode(table_1.AUTO_RESIZE_OFF);
+		
+		// ID column
+		int vColIndex = 0;
+		TableColumn col = table_1.getColumnModel().getColumn(vColIndex);
+		int width = 80;
+		col.setPreferredWidth(width);
+		// 이름 column
+		vColIndex = 1;
+		col = table_1.getColumnModel().getColumn(vColIndex);
+		width = 100;
+		col.setPreferredWidth(width);
+		// 전화번호 column
+		vColIndex = 2;
+		col = table_1.getColumnModel().getColumn(vColIndex);
+		width = 150;
+		col.setPreferredWidth(width);
+		// 주문처리 건수 column
+		vColIndex = 3;
+		col = table_1.getColumnModel().getColumn(vColIndex);
+		width = 100;
+		col.setPreferredWidth(width);
+		// 인센티브 비율 column
+		vColIndex = 4;
+		col = table_1.getColumnModel().getColumn(vColIndex);
+		width = 100;
+		col.setPreferredWidth(width);
+		// 이번달 급여 column
+		vColIndex = 5;
+		col = table_1.getColumnModel().getColumn(vColIndex);
+		width = 300;
+		col.setPreferredWidth(width);
+	}
+
 
     @Override
     protected void paintChildren (Graphics g) {
