@@ -33,7 +33,7 @@ public class ManagerForm1 extends JPanel {
     
 //    -- Table Definition
 	private final DefaultTableModel Outer_Table = new DefaultTableModel(); //********  중요 ********
-	private JTable table_1;
+	private JTable table_1;  // 이너테이블 
 
     /**
      * Create the panel.
@@ -55,6 +55,7 @@ public class ManagerForm1 extends JPanel {
         add(getTextPane());
         add(getBtnNewButton());
         
+        // 스크롤
         JScrollPane scrollPane_1 = new JScrollPane(); // 스크롤
         scrollPane_1.setBounds(33, 101, 698, 322);
         add(scrollPane_1);

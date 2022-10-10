@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -16,14 +17,11 @@ import javax.swing.table.TableColumn;
 import javax.swing.event.AncestorEvent;
 
 public class ParttimeForm1 extends JPanel {
-	private JTable Inner_table;
-	private JScrollPane scrollPane;
+	private JTable Inner_table; // 이너테이블 
 	
 	// -- Table Definition
+	// 아우터 테이블
 	private final DefaultTableModel Outer_Table = new DefaultTableModel(); //********  중요 ********
-	private JButton btnInsert;
-	private JScrollPane scrollPane_1;
-	private JTable table;
 
 	/**
 	 * Create the panel.
@@ -39,6 +37,7 @@ public class ParttimeForm1 extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
+				tableInit();
 			}
 			public void ancestorMoved(AncestorEvent event) {
 			}
@@ -48,9 +47,11 @@ public class ParttimeForm1 extends JPanel {
 		scrollPane.setBounds(30, 100, 418, 321);
 		add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		tableInit();
+		Inner_table = new JTable();
+		Inner_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		Inner_table.setModel(Outer_Table);
+		scrollPane.setViewportView(Inner_table);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("미완료 건수 : ");
 		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 20));
@@ -152,12 +153,14 @@ public class ParttimeForm1 extends JPanel {
 	
 	// Init the table
 			private void tableInit() {
-				Outer_Table.addColumn("순서");
-				Outer_Table.addColumn("이름");
-				Outer_Table.addColumn("전화번호");
-				Outer_Table.addColumn("관계");
+				Outer_Table.addColumn("번호");
+				Outer_Table.addColumn("주문번호 ");
+				Outer_Table.addColumn("음료명");
+				Outer_Table.addColumn("주문수량");
+				Outer_Table.addColumn("주문시각");
+				Outer_Table.addColumn("처리상태");
 
-				Outer_Table.setColumnCount(4);
+				Outer_Table.setColumnCount(6);
 
 				// table에 있는 데이터 지우기
 				int a = Outer_Table.getRowCount();
@@ -166,25 +169,36 @@ public class ParttimeForm1 extends JPanel {
 				}
 
 				Inner_table.setAutoResizeMode(Inner_table.AUTO_RESIZE_OFF);
-				// 순서 column
+				// 번호 column
 				int vColIndex = 0;
 				TableColumn col = Inner_table.getColumnModel().getColumn(vColIndex);
 				int width = 50;
 				col.setPreferredWidth(width);
-				// 이름 column
+				// 주문번호 column
 				vColIndex = 1;
 				col = Inner_table.getColumnModel().getColumn(vColIndex);
 				width = 100;
 				col.setPreferredWidth(width);
-				// 전화번호 column
+				// 음료명 column
 				vColIndex = 2;
+				col = Inner_table.getColumnModel().getColumn(vColIndex);
+				width =180;
+				col.setPreferredWidth(width);
+				// 주문수량  column
+				vColIndex = 3;
+				col = Inner_table.getColumnModel().getColumn(vColIndex);
+				width = 80;
+				col.setPreferredWidth(width);
+				// 주문시각 column
+				vColIndex = 4;
 				col = Inner_table.getColumnModel().getColumn(vColIndex);
 				width = 150;
 				col.setPreferredWidth(width);
-				// 관계 column
-				vColIndex = 3;
+				// 처리상태 column
+				vColIndex = 5;
 				col = Inner_table.getColumnModel().getColumn(vColIndex);
-				width = 120;
+				width = 100;
 				col.setPreferredWidth(width);
+				
 			}
 }
