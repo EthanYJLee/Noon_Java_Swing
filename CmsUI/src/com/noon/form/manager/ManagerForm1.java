@@ -30,7 +30,6 @@ public class ManagerForm1 extends JPanel {
     private JComboBox comboBox;
     private JTextPane textPane;
     private JButton btnNewButton;
-    private JButton btnNewButton_1;
     
 //    -- Table Definition
 	private final DefaultTableModel Outer_Table = new DefaultTableModel(); //********  중요 ********
@@ -55,7 +54,6 @@ public class ManagerForm1 extends JPanel {
         add(getComboBox());
         add(getTextPane());
         add(getBtnNewButton());
-        add(getBtnNewButton_1());
         
         JScrollPane scrollPane_1 = new JScrollPane(); // 스크롤
         scrollPane_1.setBounds(33, 101, 698, 322);
@@ -65,6 +63,11 @@ public class ManagerForm1 extends JPanel {
         table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_1.setModel(Outer_Table); // 이너테이블과 아우터테이블 연결 
         scrollPane_1.setViewportView(table_1); // 스크롤에 이너테이블 연결
+        
+        JLabel lblNewLabel_1 = new JLabel("");
+        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\icon (1)\\Kiosk213213 (Community) (1)\\Frame 8.png"));
+        lblNewLabel_1.setBounds(557, 457, 175, 40);
+        add(lblNewLabel_1);
 
     }
 
@@ -155,15 +158,6 @@ public class ManagerForm1 extends JPanel {
 		width = 300;
 		col.setPreferredWidth(width);
 	}
-
-    private JButton getBtnNewButton_1() {
-        if (btnNewButton_1 == null) {
-            btnNewButton_1 = new JButton("급여 입금하기");
-            btnNewButton_1.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 7-2.png"));
-            btnNewButton_1.setBounds(614, 440, 117, 29);
-        }
-        return btnNewButton_1;
-    }
 
 
     @Override

@@ -130,12 +130,12 @@ public class ParttimeForm1 extends JPanel {
 		add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("New label");
-		lblNewLabel_2_1.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\선택버튼.png"));
+		lblNewLabel_2_1.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\icon (1)\\Kiosk213213 (Community) (1)\\Frame 9.png"));
 		lblNewLabel_2_1.setBounds(337, 492, 115, 50);
 		add(lblNewLabel_2_1);
 		
 		JLabel lblNewLabel_2_2 = new JLabel("New label");
-		lblNewLabel_2_2.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\취소버튼.png"));
+		lblNewLabel_2_2.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\icon (1)\\Kiosk213213 (Community) (1)\\Frame 10.png"));
 		lblNewLabel_2_2.setBounds(207, 492, 115, 50);
 		add(lblNewLabel_2_2);
 		
