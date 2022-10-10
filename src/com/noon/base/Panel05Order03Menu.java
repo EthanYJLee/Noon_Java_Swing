@@ -18,6 +18,7 @@ import javax.swing.JLayeredPane;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JSplitPane;
+import javax.swing.JButton;
 
 public class Panel05Order03Menu extends JPanel {
 
@@ -106,6 +107,7 @@ public class Panel05Order03Menu extends JPanel {
 	private JLabel lblTotalPrice;
 	private JLabel lblBtnGoCart;
 	private JLabel lblNewLabel;
+	private JButton btnNewButton;
 
 	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
 	@Override
@@ -144,6 +146,7 @@ public class Panel05Order03Menu extends JPanel {
 		add(getLblBtnSelect());
 		add(getPanel());
 		add(getLblTotalPrice());
+		add(getBtnNewButton());
 	}
 	
 	// 상단바 =============================================================================================================
@@ -262,7 +265,7 @@ public class Panel05Order03Menu extends JPanel {
 			lblCategoryCoffee = new JLabel("");
 			lblCategoryCoffee.setVerticalAlignment(SwingConstants.TOP);
 			lblCategoryCoffee.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/category_coffee.png"));
-			lblCategoryCoffee.setBounds(20, 78, 63, 81);
+			lblCategoryCoffee.setBounds(23, 78, 63, 81);
 		}
 		return lblCategoryCoffee;
 	}
@@ -986,5 +989,13 @@ public class Panel05Order03Menu extends JPanel {
 			lblNewLabel.setBounds(0, 0, 345, 448);
 		}
 		return lblNewLabel;
+	}
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("");
+			btnNewButton.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/category_coffee.png"));
+			btnNewButton.setBounds(244, 6, 74, 86);
+		}
+		return btnNewButton;
 	}
 } // End

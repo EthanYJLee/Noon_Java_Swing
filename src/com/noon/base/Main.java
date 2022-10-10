@@ -37,18 +37,15 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(700, 150, 375, 812);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
 //		// 앱화면 세팅 --------------------------------------------------------------------------------
-		frame.setUndecorated(true); // 1.프레임 창 없애기
+//		frame.setUndecorated(true); // 1.프레임 창 없애기 // 나중에 다시 키기
 //		frame.setShape(new RoundRectangle2D.Double(0, 0, 375, 812, 80, 80)); // 2.프레임 모서리에 라운드 주기
 //		frame.setVisible(true); // 3.필수
 //		// -----------------------------------------------------------------------------------------
 		frame.setBackground(Color.decode("#F4D2C9"));
-		frame.setBounds(700, 150, 375, 812);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(false);
 		frame.add(new Panel01Login());
 		
