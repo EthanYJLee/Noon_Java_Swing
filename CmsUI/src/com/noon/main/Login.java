@@ -88,7 +88,8 @@ public class Login {
 				super.paintChildren(g);
 			}
 		};
-
+		
+		
 		panel.add(panel2);
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panel);
@@ -188,6 +189,14 @@ public class Login {
 		panel2.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("회원가입");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				SignUp signup = new SignUp();
+				signup.setVisible(true);
+				signup.setLocationRelativeTo(null);
+			}
+		});
 		btnNewButton_1.setBounds(194, 324, 117, 30);
 		panel2.add(btnNewButton_1);
 		panel.setLayout(panelBorder2Layout);

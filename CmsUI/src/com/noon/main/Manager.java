@@ -14,6 +14,10 @@ import com.noon.form.manager.ManagerForm2;
 import com.noon.form.manager.ManagerForm3;
 import com.noon.form.parttime.ParttimeForm1;
 import com.noon.swing.PanelBorder;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
 
 public class Manager extends javax.swing.JFrame {
 
@@ -27,7 +31,6 @@ public class Manager extends javax.swing.JFrame {
 
 	public Manager() {
 		initComponents();
-
 		sideBar1.initMoving(this);
 		sideBar1.addEventCategorySelected(new EventCategorySelected() {
 			@Override
@@ -46,7 +49,7 @@ public class Manager extends javax.swing.JFrame {
 		});
 	}
 	
-	private void setManagerForm(JComponent com) {
+	public static void setManagerForm(JComponent com) {
 		mainPanel.removeAll();
 		mainPanel.add(com);
 		mainPanel.repaint();
@@ -64,39 +67,37 @@ public class Manager extends javax.swing.JFrame {
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 
-		panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
+		panelBorder2.setBackground(new Color(255, 255, 255));
 
 		header2.setBackground(new java.awt.Color(255, 255, 255));
 		header2.setForeground(new java.awt.Color(255, 255, 255));
-
-		mainPanel.setBackground(new java.awt.Color(255, 255, 255));
-		mainPanel.setOpaque(false);
+		mainPanel.setBackground(new Color(255, 248, 229));
 		mainPanel.setLayout(new java.awt.BorderLayout());
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
-		panelBorder2.setLayout(panelBorder2Layout);
-		panelBorder2Layout.setHorizontalGroup(panelBorder2Layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		panelBorder2Layout.setHorizontalGroup(
+			panelBorder2Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(panelBorder2Layout.createSequentialGroup()
-						.addComponent(sideBar1, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(0, 0, 0)
-						.addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
-								.addGroup(panelBorder2Layout.createSequentialGroup().addGap(6, 6, 6)
-										.addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addContainerGap()))));
-		panelBorder2Layout
-				.setVerticalGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(sideBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+					.addComponent(sideBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(panelBorder2Layout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(panelBorder2Layout.createSequentialGroup()
-								.addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addContainerGap()));
+							.addGap(0)
+							.addComponent(header2, GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE))
+						.addGroup(panelBorder2Layout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
+							.addGap(6))))
+		);
+		panelBorder2Layout.setVerticalGroup(
+			panelBorder2Layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(sideBar1, GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+				.addGroup(panelBorder2Layout.createSequentialGroup()
+					.addComponent(header2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		panelBorder2.setLayout(panelBorder2Layout);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
@@ -112,7 +113,7 @@ public class Manager extends javax.swing.JFrame {
 	}
 
 	private Header header2;
-	private JPanel mainPanel;
+	public static JPanel mainPanel;
 	private PanelBorder panelBorder2;
 	private SideBar sideBar1;
 }
