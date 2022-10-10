@@ -19,6 +19,11 @@ import com.noon.form.manager.ManagerForm2;
 import com.noon.form.manager.ManagerForm3;
 import com.noon.form.parttime.ParttimeForm1;
 import com.noon.swing.PanelBorder;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 
 public class Parttime extends javax.swing.JFrame {
 
@@ -53,6 +58,14 @@ public class Parttime extends javax.swing.JFrame {
 		sideBar1 = new com.noon.component.SideBarParttime();
 		header2 = new com.noon.component.Header();
 		mainPanel = new javax.swing.JPanel();
+		mainPanel.addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+		});
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setUndecorated(true);
@@ -68,29 +81,28 @@ public class Parttime extends javax.swing.JFrame {
 		mainPanel.setLayout(new java.awt.BorderLayout());
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
-		panelBorder2.setLayout(panelBorder2Layout);
-		panelBorder2Layout.setHorizontalGroup(panelBorder2Layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		panelBorder2Layout.setHorizontalGroup(
+			panelBorder2Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(panelBorder2Layout.createSequentialGroup()
-						.addComponent(sideBar1, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(0, 0, 0)
-						.addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
-								.addGroup(panelBorder2Layout.createSequentialGroup().addGap(6, 6, 6)
-										.addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addContainerGap()))));
-		panelBorder2Layout
-				.setVerticalGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(sideBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+					.addComponent(sideBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(0)
+					.addGroup(panelBorder2Layout.createParallelGroup(Alignment.LEADING)
 						.addGroup(panelBorder2Layout.createSequentialGroup()
-								.addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addContainerGap()));
+							.addGap(6)
+							.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+							.addGap(12))
+						.addComponent(header2, GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)))
+		);
+		panelBorder2Layout.setVerticalGroup(
+			panelBorder2Layout.createParallelGroup(Alignment.LEADING)
+				.addComponent(sideBar1, GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+				.addGroup(panelBorder2Layout.createSequentialGroup()
+					.addComponent(header2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(mainPanel, GroupLayout.PREFERRED_SIZE, 576, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelBorder2.setLayout(panelBorder2Layout);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		layout.setHorizontalGroup(

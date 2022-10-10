@@ -3,68 +3,40 @@ package com.noon.form.manager;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
 
-public class ManagerForm1 extends JPanel {
+public class ManagerFormone extends JPanel {
 
     private JLabel lblNewLabel;
     private JComboBox comboBox;
     private JTextPane textPane;
     private JButton btnNewButton;
+    private JScrollPane scrollPane;
     private JButton btnNewButton_1;
-    
-//    -- Table Definition
-	private final DefaultTableModel Outer_Table = new DefaultTableModel(); //********  중요 ********
-	private JTable table_1;
+    private JTable table;
 
     /**
      * Create the panel.
      */
-    public ManagerForm1() {
-    	addAncestorListener(new AncestorListener() {
-    		public void ancestorAdded(AncestorEvent event) {
-    			tableInit();
-    		}
-    		public void ancestorMoved(AncestorEvent event) {
-    		}
-    		public void ancestorRemoved(AncestorEvent event) {
-    		}
-    	});
+    public ManagerFormone() {
         setLayout(null);
         setOpaque(false);
         add(getLblNewLabel());
         add(getComboBox());
         add(getTextPane());
         add(getBtnNewButton());
+        add(getScrollPane());
         add(getBtnNewButton_1());
-        
-        JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(33, 101, 698, 322);
-        add(scrollPane_1);
-        
-        table_1 = new JTable();
-        table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table_1.setModel(Outer_Table);
-        scrollPane_1.setViewportView(table_1);
 
     }
 
@@ -96,63 +68,38 @@ public class ManagerForm1 extends JPanel {
 
     private JButton getBtnNewButton() {
         if (btnNewButton == null) {
-            btnNewButton = new JButton("검색");
+            btnNewButton = new JButton("");
             btnNewButton.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 6.png"));
             btnNewButton.setBounds(620, 38, 111, 24);
         }
         return btnNewButton;
     }
-    
-    // Init the table
-	private void tableInit() {
-		// 테이블의 컬럼 
-		Outer_Table.addColumn("순서");
-		Outer_Table.addColumn("이름");
-		Outer_Table.addColumn("전화번호");
-		Outer_Table.addColumn("관계");
 
-		Outer_Table.setColumnCount(4);
-
-		// table에 있는 데이터 지우기
-		int a = Outer_Table.getRowCount();
-		for (int i = 0; i < a; i++) {
-			Outer_Table.removeRow(0); // 열이 하나씩 당겨지기 때문에
-		}
-
-		// 이너 테이블의 사이즈 
-		table_1.setAutoResizeMode(table_1.AUTO_RESIZE_OFF);
-		
-		// 순서 column
-		int vColIndex = 0;
-		TableColumn col = table_1.getColumnModel().getColumn(vColIndex);
-		int width = 150;
-		col.setPreferredWidth(width);
-		// 이름 column
-		vColIndex = 1;
-		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 150;
-		col.setPreferredWidth(width);
-		// 전화번호 column
-		vColIndex = 2;
-		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 200;
-		col.setPreferredWidth(width);
-		// 관계 column
-		vColIndex = 3;
-		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 200;
-		col.setPreferredWidth(width);
-	}
+    private JScrollPane getScrollPane() {
+        if (scrollPane == null) {
+            scrollPane = new JScrollPane();
+            scrollPane.setBounds(38, 74, 693, 354);
+            scrollPane.setColumnHeaderView(getTable());
+        }
+        return scrollPane;
+    }
 
     private JButton getBtnNewButton_1() {
         if (btnNewButton_1 == null) {
-            btnNewButton_1 = new JButton("급여 입금하기");
+            btnNewButton_1 = new JButton("");
             btnNewButton_1.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 7-2.png"));
             btnNewButton_1.setBounds(614, 440, 117, 29);
         }
         return btnNewButton_1;
     }
 
+    private JTable getTable() {
+        if (table == null) {
+            table = new JTable();
+            table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        }
+        return table;
+    }
 
     @Override
     protected void paintChildren (Graphics g) {
