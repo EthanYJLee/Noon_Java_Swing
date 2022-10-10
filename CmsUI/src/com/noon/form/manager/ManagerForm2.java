@@ -7,9 +7,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ManagerForm2 extends JPanel {
 
@@ -26,6 +30,7 @@ public class ManagerForm2 extends JPanel {
     private JLabel lblNewLabel_1;
     private JLabel lblNewLabel_4;
     private ImageAvatar imageAvatar;
+    private JLabel lblNewLabel_5;
 
     /**
      * Create the panel.
@@ -35,8 +40,8 @@ public class ManagerForm2 extends JPanel {
         setLayout(null);
         add(getLblNewLabel());
         add(getLblId());
-        add(getLblNewLabel_2());
         add(getLblNewLabel_3());
+        add(getLblNewLabel_2());
         add(getTextField());
         add(getTextField_1());
         add(getTextField_2());
@@ -45,6 +50,7 @@ public class ManagerForm2 extends JPanel {
         add(getTextField_3());
 //        add(getLblNewLabel_1());
         add(getLblNewLabel_4());
+   
 
     }
 
@@ -146,6 +152,7 @@ public class ManagerForm2 extends JPanel {
 //        }
 //        return lblNewLabel_1;
 //    }
+    
 
     private JLabel getLblNewLabel_4() {
         if (lblNewLabel_4 == null) {
@@ -171,4 +178,10 @@ public class ManagerForm2 extends JPanel {
 
         super.paintChildren(g);
     }
-}
+	
+			
+			
+		
+	
+	}
+

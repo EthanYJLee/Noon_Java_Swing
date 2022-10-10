@@ -1,5 +1,7 @@
 package com.noon.form.manager;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +21,12 @@ public class ManagerForm4 extends JPanel {
 	 */
 	public ManagerForm4() {
 		setLayout(null);
-		
+		JLabel label = new JLabel() {
+			public void paintComponents(Graphics g) {
+				Graphics2D g2 = (Graphics2D) g;
+	            g.fillOval(10, 70, 50, 50);
+			}
+		};
 		JLabel lblNewLabel = new JLabel("음료명");
 		lblNewLabel.setBounds(58, 97, 61, 16);
 		add(lblNewLabel);
@@ -54,7 +61,7 @@ public class ManagerForm4 extends JPanel {
 		add(btnNewButton_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("대충 카페모카사진");
-		lblNewLabel_2.setBounds(449, 136, 202, 169);
+		lblNewLabel_2.setBounds(441, 97, 202, 169);
 		add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("이미지변경");
@@ -82,6 +89,7 @@ public class ManagerForm4 extends JPanel {
 		add(textField_1);
 
 	}
+	
 	}
 
 
