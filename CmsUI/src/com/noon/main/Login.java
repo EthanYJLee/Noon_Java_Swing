@@ -88,7 +88,8 @@ public class Login {
 				super.paintChildren(g);
 			}
 		};
-
+		
+		
 		panel.add(panel2);
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panel);

@@ -1,19 +1,20 @@
 package com.noon.form.manager;
 
 import java.awt.Color;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JComboBox;
-import javax.swing.JTextPane;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.ImageIcon;
-import javax.swing.DefaultComboBoxModel;
 
 public class ManagerForm1 extends JPanel {
 
