@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.noon.component.Menu;
+import com.noon.main.Manager;
 
 public class ManagerForm3 extends JPanel {
 
@@ -33,15 +34,14 @@ public class ManagerForm3 extends JPanel {
 	public ManagerForm3() {
 		setBackground(Color.WHITE);
 		setLayout(null);
-
+		setOpaque(false);
+		
 		JButton btnMenuInsert = new JButton("메뉴 추가");
 		btnMenuInsert.setBackground(Color.RED);
 		btnMenuInsert.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				ManagerForm5 form5 = new ManagerForm5();
-				form5.setVisible(true);
+				Manager.setManagerForm(new ManagerForm5());
 			}
 		});
 		btnMenuInsert.setBounds(610, 32, 123, 54);
@@ -82,9 +82,7 @@ public class ManagerForm3 extends JPanel {
 					menuList.get(i*7 + j).addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						setVisible(false);
-						ManagerForm4 form4 = new ManagerForm4();
-						form4.setVisible(true);
+						Manager.setManagerForm(new ManagerForm4());
 					}
 				});
 				} else {
@@ -94,7 +92,9 @@ public class ManagerForm3 extends JPanel {
 		}
 
 	}
-
+	
+	
+	
 	public void make(JComponent c, int x, int y, int w, int h) {
 		gbc.gridx = x;
 		gbc.gridy = y;

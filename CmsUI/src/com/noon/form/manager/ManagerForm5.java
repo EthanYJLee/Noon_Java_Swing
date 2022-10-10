@@ -41,7 +41,6 @@ public class ManagerForm5 extends JPanel {
 		textField.setColumns(10);
 		
 		JButton btn6plus = new JButton("");
-		btn6plus.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 8-4.png"));
 		btn6plus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpanel5.add(new ManagerForm3());

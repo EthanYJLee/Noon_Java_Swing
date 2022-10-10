@@ -17,6 +17,7 @@ import com.noon.swing.PanelBorder;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
 
 public class Manager extends javax.swing.JFrame {
 
@@ -48,7 +49,7 @@ public class Manager extends javax.swing.JFrame {
 		});
 	}
 	
-	private void setManagerForm(JComponent com) {
+	public static void setManagerForm(JComponent com) {
 		mainPanel.removeAll();
 		mainPanel.add(com);
 		mainPanel.repaint();
@@ -66,13 +67,11 @@ public class Manager extends javax.swing.JFrame {
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 
-		panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
+		panelBorder2.setBackground(new Color(255, 255, 255));
 
 		header2.setBackground(new java.awt.Color(255, 255, 255));
 		header2.setForeground(new java.awt.Color(255, 255, 255));
-
-		mainPanel.setBackground(new java.awt.Color(255, 255, 255));
-		mainPanel.setOpaque(false);
+		mainPanel.setBackground(new Color(255, 248, 229));
 		mainPanel.setLayout(new java.awt.BorderLayout());
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
@@ -114,7 +113,7 @@ public class Manager extends javax.swing.JFrame {
 	}
 
 	private Header header2;
-	private JPanel mainPanel;
+	public static JPanel mainPanel;
 	private PanelBorder panelBorder2;
 	private SideBar sideBar1;
 }

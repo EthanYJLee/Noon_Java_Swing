@@ -24,7 +24,7 @@ public class SignUp extends JFrame {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
 	private JTextField textField_3;
-
+	
 	
 	public SignUp() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
