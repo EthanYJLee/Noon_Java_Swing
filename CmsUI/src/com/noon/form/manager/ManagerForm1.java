@@ -57,14 +57,14 @@ public class ManagerForm1 extends JPanel {
         add(getBtnNewButton());
         add(getBtnNewButton_1());
         
-        JScrollPane scrollPane_1 = new JScrollPane();
+        JScrollPane scrollPane_1 = new JScrollPane(); // 스크롤
         scrollPane_1.setBounds(33, 101, 698, 322);
         add(scrollPane_1);
         
         table_1 = new JTable();
         table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table_1.setModel(Outer_Table);
-        scrollPane_1.setViewportView(table_1);
+		table_1.setModel(Outer_Table); // 이너테이블과 아우터테이블 연결 
+        scrollPane_1.setViewportView(table_1); // 스크롤에 이너테이블 연결
 
     }
 
@@ -106,12 +106,14 @@ public class ManagerForm1 extends JPanel {
     // Init the table
 	private void tableInit() {
 		// 테이블의 컬럼 
-		Outer_Table.addColumn("순서");
+		Outer_Table.addColumn("ID");
 		Outer_Table.addColumn("이름");
 		Outer_Table.addColumn("전화번호");
-		Outer_Table.addColumn("관계");
+		Outer_Table.addColumn("주문처리 건수");
+		Outer_Table.addColumn("인센티브 비율");
+		Outer_Table.addColumn("이번달 급여");
 
-		Outer_Table.setColumnCount(4);
+		Outer_Table.setColumnCount(6);
 
 		// table에 있는 데이터 지우기
 		int a = Outer_Table.getRowCount();
@@ -122,25 +124,35 @@ public class ManagerForm1 extends JPanel {
 		// 이너 테이블의 사이즈 
 		table_1.setAutoResizeMode(table_1.AUTO_RESIZE_OFF);
 		
-		// 순서 column
+		// ID column
 		int vColIndex = 0;
 		TableColumn col = table_1.getColumnModel().getColumn(vColIndex);
-		int width = 150;
+		int width = 80;
 		col.setPreferredWidth(width);
 		// 이름 column
 		vColIndex = 1;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 150;
+		width = 100;
 		col.setPreferredWidth(width);
 		// 전화번호 column
 		vColIndex = 2;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 200;
+		width = 150;
 		col.setPreferredWidth(width);
-		// 관계 column
+		// 주문처리 건수 column
 		vColIndex = 3;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 200;
+		width = 100;
+		col.setPreferredWidth(width);
+		// 인센티브 비율 column
+		vColIndex = 4;
+		col = table_1.getColumnModel().getColumn(vColIndex);
+		width = 100;
+		col.setPreferredWidth(width);
+		// 이번달 급여 column
+		vColIndex = 5;
+		col = table_1.getColumnModel().getColumn(vColIndex);
+		width = 300;
 		col.setPreferredWidth(width);
 	}
 
