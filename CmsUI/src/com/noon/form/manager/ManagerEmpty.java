@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
  */
 public class ManagerEmpty extends javax.swing.JPanel {
 
+	
+	public static ManagerEmpty manager;
     /**
      * Creates new form ManagerEmpty
      */

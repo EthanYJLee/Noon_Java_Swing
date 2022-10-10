@@ -69,7 +69,7 @@ public class ManagerForm1 extends JPanel {
     private JButton getBtnNewButton() {
         if (btnNewButton == null) {
             btnNewButton = new JButton("");
-            btnNewButton.setIcon(new ImageIcon("/Users/bigdata/Downloads/검색검색하기.png"));
+            btnNewButton.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 6.png"));
             btnNewButton.setBounds(620, 38, 111, 24);
         }
         return btnNewButton;
@@ -87,7 +87,7 @@ public class ManagerForm1 extends JPanel {
     private JButton getBtnNewButton_1() {
         if (btnNewButton_1 == null) {
             btnNewButton_1 = new JButton("");
-            btnNewButton_1.setIcon(new ImageIcon("/Users/bigdata/Downloads/Frame 7 (1).png"));
+            btnNewButton_1.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 7-2.png"));
             btnNewButton_1.setBounds(614, 440, 117, 29);
         }
         return btnNewButton_1;
