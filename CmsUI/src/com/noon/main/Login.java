@@ -26,7 +26,7 @@ import javax.swing.event.ChangeEvent;
 
 public class Login {
 
-	JFrame frame;
+	public JFrame frame;
 	private JPanel panel;
 	private JPanel panel2;
 	private JLabel lblNewLabel_1;

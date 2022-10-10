@@ -28,7 +28,7 @@ public class ParttimeForm1 extends JPanel {
 	 */
 	public ParttimeForm1() {
 		setLayout(null);
-		
+		setOpaque(false);
 		JLabel lblNewLabel = new JLabel("2022.10.25");
 		lblNewLabel.setFont(new Font("굴림", Font.BOLD, 15));
 		lblNewLabel.setBounds(600, 46, 139, 39);
@@ -125,31 +125,24 @@ public class ParttimeForm1 extends JPanel {
 		lblNewLabel_1_2_4_1_2_1.setBounds(590, 442, 91, 39);
 		add(lblNewLabel_1_2_4_1_2_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\완료버튼.png"));
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(getClass().getResource("/com/noon/icon/완료버튼.png")));
 		lblNewLabel_2.setBounds(653, 492, 115, 50);
 		add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("New label");
-		lblNewLabel_2_1.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\icon (1)\\Kiosk213213 (Community) (1)\\Frame 9.png"));
+		JLabel lblNewLabel_2_1 = new JLabel("");
+		lblNewLabel_2_1.setIcon(new ImageIcon(getClass().getResource("/com/noon/icon/선택버튼.png")));
 		lblNewLabel_2_1.setBounds(337, 492, 115, 50);
 		add(lblNewLabel_2_1);
 		
-		JLabel lblNewLabel_2_2 = new JLabel("New label");
-		lblNewLabel_2_2.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\icon (1)\\Kiosk213213 (Community) (1)\\Frame 10.png"));
+		JLabel lblNewLabel_2_2 = new JLabel("");
+		lblNewLabel_2_2.setIcon(new ImageIcon(getClass().getResource("/com/noon/icon/취소버튼.png")));
 		lblNewLabel_2_2.setBounds(207, 492, 115, 50);
 		add(lblNewLabel_2_2);
 		
-		JLabel lblNewLabel_2_3 = new JLabel("New label");
-		lblNewLabel_2_3.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\정보수정 버튼.png"));
-		lblNewLabel_2_3.setBounds(30, 491, 115, 50);
-		add(lblNewLabel_2_3);
+
 
 	}
-	
-	// Method
-	
-	
 	
 	// Init the table
 			private void tableInit() {

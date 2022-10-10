@@ -1,33 +1,35 @@
-
 package com.noon.main;
 
+import java.awt.Color;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.noon.component.Header;
 import com.noon.component.SideBar;
 import com.noon.event.EventCategorySelected;
-import com.noon.form.executive.ExecutiveForm1;
 import com.noon.form.manager.ManagerEmpty;
 import com.noon.form.manager.ManagerForm1;
 import com.noon.form.manager.ManagerForm2;
 import com.noon.form.manager.ManagerForm3;
-import com.noon.form.parttime.ParttimeForm1;
 import com.noon.swing.PanelBorder;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Color;
 
 public class Manager extends javax.swing.JFrame {
+
+	public static JPanel mainPanel;
+	
+	private Header header2;
+	private PanelBorder panelBorder2;
+	private SideBar sideBar1;
 
 	ManagerForm1 mform1;
 	ManagerForm2 mform2;
 	ManagerForm3 mform3;
 
-	ExecutiveForm1 eform1;
-
-	ParttimeForm1 pform1;
 
 	public Manager() {
 		initComponents();
@@ -112,8 +114,5 @@ public class Manager extends javax.swing.JFrame {
 
 	}
 
-	private Header header2;
-	public static JPanel mainPanel;
-	private PanelBorder panelBorder2;
-	private SideBar sideBar1;
+
 }

@@ -1,6 +1,8 @@
 
 package com.noon.main;
 
+import java.awt.Color;
+
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
@@ -8,6 +10,7 @@ import com.noon.component.Header;
 import com.noon.component.SideBarExecutive;
 import com.noon.event.EventCategorySelected;
 import com.noon.form.executive.ExecutiveForm1;
+import com.noon.form.manager.ManagerEmpty;
 import com.noon.form.parttime.ParttimeForm1;
 import com.noon.swing.PanelBorder;
 
@@ -30,8 +33,10 @@ public class Executive extends javax.swing.JFrame {
 		sideBar1.addEventCategorySelected(new EventCategorySelected() {
 			@Override
 			public void selected(int index) {
-				if (index == 0 || index == 1) {
+				if (index == 2) {
 					setManagerForm(new ExecutiveForm1());
+				}else {
+					setManagerForm(new ManagerEmpty());
 				}
 
 			}
@@ -61,8 +66,7 @@ public class Executive extends javax.swing.JFrame {
 		header2.setBackground(new java.awt.Color(255, 255, 255));
 		header2.setForeground(new java.awt.Color(255, 255, 255));
 
-		mainPanel.setBackground(new java.awt.Color(255, 255, 255));
-		mainPanel.setOpaque(false);
+		mainPanel.setBackground(new Color(255, 248, 229));
 		mainPanel.setLayout(new java.awt.BorderLayout());
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
@@ -101,31 +105,7 @@ public class Executive extends javax.swing.JFrame {
 		pack();
 		getContentPane().setLayout(layout);
 
-	}// </editor-fold>//GEN-END:initComponents
-
-//    public static void main(String args[]) {
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Main().setVisible(true);
-//            }
-//        });
-//    }
+	}
 
 
 }

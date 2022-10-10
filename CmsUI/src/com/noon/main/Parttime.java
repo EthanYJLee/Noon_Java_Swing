@@ -1,32 +1,20 @@
 
 package com.noon.main;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.noon.component.Header;
-import com.noon.component.SideBar;
 import com.noon.component.SideBarParttime;
 import com.noon.event.EventCategorySelected;
-import com.noon.form.executive.ExecutiveForm1;
-import com.noon.form.manager.ManagerEmpty;
-import com.noon.form.manager.ManagerForm1;
-import com.noon.form.manager.ManagerForm2;
-import com.noon.form.manager.ManagerForm3;
 import com.noon.form.parttime.ParttimeForm1;
+import com.noon.form.parttime.ParttimeForm2;
 import com.noon.swing.PanelBorder;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.AncestorEvent;
 
 public class Parttime extends javax.swing.JFrame {
-
 
 	ParttimeForm1 pform1;
 
@@ -39,10 +27,13 @@ public class Parttime extends javax.swing.JFrame {
 			public void selected(int index) {
 				if (index == 0 || index == 1) {
 					setManagerForm(new ParttimeForm1());
+				} else if (index == 2) {
+					setManagerForm(new ParttimeForm2());
 				}
-
 			}
+
 		});
+
 	}
 
 	private void setManagerForm(JComponent com) {
@@ -58,15 +49,6 @@ public class Parttime extends javax.swing.JFrame {
 		sideBar1 = new com.noon.component.SideBarParttime();
 		header2 = new com.noon.component.Header();
 		mainPanel = new javax.swing.JPanel();
-		mainPanel.addAncestorListener(new AncestorListener() {
-			public void ancestorAdded(AncestorEvent event) {
-			}
-			public void ancestorMoved(AncestorEvent event) {
-			}
-			public void ancestorRemoved(AncestorEvent event) {
-			}
-		});
-
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setUndecorated(true);
 		setLocationRelativeTo(null);
@@ -76,32 +58,32 @@ public class Parttime extends javax.swing.JFrame {
 		header2.setBackground(new java.awt.Color(255, 255, 255));
 		header2.setForeground(new java.awt.Color(255, 255, 255));
 
-		mainPanel.setBackground(new java.awt.Color(255, 255, 255));
-		mainPanel.setOpaque(false);
+		mainPanel.setBackground(new java.awt.Color(255, 248, 229));
 		mainPanel.setLayout(new java.awt.BorderLayout());
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
-		panelBorder2Layout.setHorizontalGroup(
-			panelBorder2Layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(panelBorder2Layout.createSequentialGroup()
-					.addComponent(sideBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(0)
-					.addGroup(panelBorder2Layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(panelBorder2Layout.createSequentialGroup()
-							.addGap(6)
-							.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
-							.addGap(12))
-						.addComponent(header2, GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)))
-		);
-		panelBorder2Layout.setVerticalGroup(
-			panelBorder2Layout.createParallelGroup(Alignment.LEADING)
+		panelBorder2Layout
+				.setHorizontalGroup(
+						panelBorder2Layout.createParallelGroup(Alignment.LEADING)
+								.addGroup(panelBorder2Layout.createSequentialGroup()
+										.addComponent(sideBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(0)
+										.addGroup(panelBorder2Layout.createParallelGroup(Alignment.LEADING)
+												.addGroup(panelBorder2Layout.createSequentialGroup().addGap(6)
+														.addComponent(mainPanel, GroupLayout.DEFAULT_SIZE, 791,
+																Short.MAX_VALUE)
+														.addGap(12))
+												.addComponent(header2, GroupLayout.DEFAULT_SIZE, 809,
+														Short.MAX_VALUE))));
+		panelBorder2Layout.setVerticalGroup(panelBorder2Layout.createParallelGroup(Alignment.LEADING)
 				.addComponent(sideBar1, GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
 				.addGroup(panelBorder2Layout.createSequentialGroup()
-					.addComponent(header2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(mainPanel, GroupLayout.PREFERRED_SIZE, 576, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+						.addComponent(header2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(mainPanel, GroupLayout.PREFERRED_SIZE, 576, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panelBorder2.setLayout(panelBorder2Layout);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

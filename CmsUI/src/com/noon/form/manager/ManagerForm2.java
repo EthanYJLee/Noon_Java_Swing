@@ -101,7 +101,7 @@ public class ManagerForm2 extends JPanel {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblNewLabel_4.setFont(font.deriveFont(attributes));
         lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_4.setBounds(541, 355, 113, 16);
+        lblNewLabel_4.setBounds(550, 355, 113, 16);
         add(lblNewLabel_4);
     }
     
@@ -110,8 +110,8 @@ public class ManagerForm2 extends JPanel {
      private ImageAvatar getImageAvatar() {
         if (imageAvatar == null) {
             imageAvatar = new ImageAvatar();
-            imageAvatar.setIcon(new ImageIcon(getClass().getResource("/com/noon/icon/logo.png")));
-            imageAvatar.setBounds(476, 87, 259, 256);
+            imageAvatar.setIcon(new ImageIcon(getClass().getResource("/com/noon/icon/bigperson.png")));
+            imageAvatar.setBounds(476, 87, 256, 256);
         }
         return imageAvatar;
     }

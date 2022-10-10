@@ -3,6 +3,7 @@ package com.noon.component;
 import com.noon.event.EventCategorySelected;
 import com.noon.model.Model_Category;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -30,11 +31,25 @@ public class SideBarExecutive extends javax.swing.JPanel {
 
     private void init() {
         listCategory1.addItem(new Model_Category("1", "지점 관리", Model_Category.CategoryType.CATEGORY));
-        listCategory1.addItem(new Model_Category("", "급여 관리", Model_Category.CategoryType.SUBCATEGORY));
-        listCategory1.addItem(new Model_Category("", "등록", Model_Category.CategoryType.SUBCATEGORY));
-        listCategory1.addItem(new Model_Category("", "근태 관리", Model_Category.CategoryType.SUBCATEGORY));
-
+        listCategory1.addItem(new Model_Category("", "지점 급여 관리", Model_Category.CategoryType.SUBCATEGORY));
+        listCategory1.addItem(new Model_Category("", "지점 등록", Model_Category.CategoryType.SUBCATEGORY));
+        
         listCategory1.addItem(new Model_Category("", "", Model_Category.CategoryType.EMPTY));
+        
+        listCategory1.addItem(new Model_Category("2", "메뉴 추가/수정", Model_Category.CategoryType.CATEGORY));
+        
+        listCategory1.addItem(new Model_Category("", "", Model_Category.CategoryType.EMPTY));
+        
+        listCategory1.addItem(new Model_Category("3", "전체 가계 현황", Model_Category.CategoryType.CATEGORY));
+        listCategory1.addItem(new Model_Category("", "판매/처리 통계", Model_Category.CategoryType.SUBCATEGORY));
+        
+        listCategory1.addItem(new Model_Category("", "", Model_Category.CategoryType.EMPTY));
+        
+        listCategory1.addItem(new Model_Category("4", "게시판", Model_Category.CategoryType.CATEGORY));
+        listCategory1.addItem(new Model_Category("", "공지사항", Model_Category.CategoryType.SUBCATEGORY));
+        listCategory1.addItem(new Model_Category("", "클레임 게시판", Model_Category.CategoryType.SUBCATEGORY));
+        listCategory1.addItem(new Model_Category("", "인센티브 게시판", Model_Category.CategoryType.SUBCATEGORY));
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +61,13 @@ public class SideBarExecutive extends javax.swing.JPanel {
         listCategory1 = new com.noon.swing.ListCategory<>();
         panelLogout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		System.exit(0);
+        	}
+        });
 
         setPreferredSize(new java.awt.Dimension(190, 618));
 
