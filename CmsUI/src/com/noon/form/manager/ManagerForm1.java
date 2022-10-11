@@ -102,7 +102,7 @@ public class ManagerForm1 extends JPanel {
     private JButton getBtnNewButton() {
         if (btnNewButton == null) {
             btnNewButton = new JButton("검색");
-            btnNewButton.setIcon(new ImageIcon("/Users/bagtaegwon/Downloads/Frame 6.png"));
+            btnNewButton.setIcon(new ImageIcon(ManagerForm1.class.getResource("/com/noon/icon/검색버튼.png")));
             btnNewButton.setBounds(620, 38, 111, 24);
         }
         return btnNewButton;

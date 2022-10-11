@@ -12,6 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -22,6 +23,10 @@ import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
+
+import com.noon.dao.DaoLogin;
+import com.noon.form.manager.ManagerForm1;
+
 import javax.swing.event.ChangeEvent;
 
 public class Login {
@@ -35,7 +40,8 @@ public class Login {
 	private JPasswordField passwordField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
-	private String type = "";
+	public static String type = "";
+	public static String id = "";
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -88,8 +94,7 @@ public class Login {
 				super.paintChildren(g);
 			}
 		};
-		
-		
+
 		panel.add(panel2);
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panel);
@@ -128,8 +133,8 @@ public class Login {
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("임원");
 		rdbtnNewRadioButton.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if(rdbtnNewRadioButton.isSelected()) {
-					type = "executive";					
+				if (rdbtnNewRadioButton.isSelected()) {
+					type = "executive";
 				}
 			}
 		});
@@ -140,8 +145,8 @@ public class Login {
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("관리자");
 		rdbtnNewRadioButton_1.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if(rdbtnNewRadioButton_1.isSelected()) {
-					type = "manager";					
+				if (rdbtnNewRadioButton_1.isSelected()) {
+					type = "manager";
 				}
 			}
 		});
@@ -152,8 +157,8 @@ public class Login {
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("아르바이트");
 		rdbtnNewRadioButton_2.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if(rdbtnNewRadioButton_2.isSelected()) {
-					type = "parttime";					
+				if (rdbtnNewRadioButton_2.isSelected()) {
+					type = "staff";
 				}
 			}
 		});
@@ -164,25 +169,41 @@ public class Login {
 		JButton btnNewButton = new JButton("로그인");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (type.equals("manager")) {
-					frame.setVisible(false);
-					Manager main = new Manager();
-					main.setVisible(true);
-					main.setBackground(new Color(0, 0, 0, 0));
-					main.setLocationRelativeTo(null);
-				} else if (type.equals("executive")) {
-					frame.setVisible(false);
-					Executive main = new Executive();
-					main.setVisible(true);
-					main.setBackground(new Color(0, 0, 0, 0));
-					main.setLocationRelativeTo(null);
-				} else if (type.equals("parttime")) {
-					frame.setVisible(false);
-					Parttime main = new Parttime();
-					main.setVisible(true);
-					main.setBackground(new Color(0, 0, 0, 0));
-					main.setLocationRelativeTo(null);
+				if(loginAction() == 1) {
+					if (type.equals("manager")) {
+						frame.setVisible(false);
+						Manager main = new Manager();
+						main.setVisible(true);
+						main.setBackground(new Color(0, 0, 0, 0));
+						main.setLocationRelativeTo(null);
+						loginAction();
+					} else if (type.equals("executive")) {
+						frame.setVisible(false);
+						Executive main = new Executive();
+						main.setVisible(true);
+						main.setBackground(new Color(0, 0, 0, 0));
+						main.setLocationRelativeTo(null);
+					} else if (type.equals("staff")) {
+						frame.setVisible(false);
+						Parttime main = new Parttime();
+						main.setVisible(true);
+						main.setBackground(new Color(0, 0, 0, 0));
+						main.setLocationRelativeTo(null);
+						loginAction();
+					}
+				}else if(loginAction() == 0) {
+					if (type.equals("manager")) {
+						frame.setVisible(true);
+						JOptionPane.showConfirmDialog(null, "존재하지 않는 회원입니다");
+					} else if (type.equals("executive")) {
+						frame.setVisible(true);
+						JOptionPane.showConfirmDialog(null, "존재하지 않는 회원입니다");
+					} else if (type.equals("staff")) {
+						frame.setVisible(true);
+						JOptionPane.showConfirmDialog(null, "존재하지 않는 회원입니다");
+					}
 				}
+				
 			}
 		});
 		btnNewButton.setBounds(65, 323, 117, 30);
@@ -212,5 +233,19 @@ public class Login {
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		frame.getContentPane().setLayout(groupLayout);
 
+	}
+
+	private void clearColumn() {
+		textField.setText("");
+		passwordField.setText("");
+
+	}
+
+	public int loginAction() {
+		DaoLogin dao = new DaoLogin(textField.getText().trim(), passwordField.getText().trim());
+		int num = dao.loginAction();
+		
+		
+		return num;
 	}
 }
