@@ -11,21 +11,28 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.noon.dao.DaoMember;
+import javax.swing.JPasswordField;
 
 public class Panel01Login extends JPanel {
 	
 	private JLabel lblLogo;
 	private JLabel lblNewLabel;
-	private JTextField tfID;
+	private JTextField tfId;
 	private JLabel lblNewLabel2;
-	private JTextField tfPassword;
 	private JLabel lblBtnLogin;
 	private JLabel lblBtnSignup;
 	private JLabel lblBtnIDSearch;
 	private JLabel lblBtnPasswordSearch;
+	
+	// 선언부
+	public static String id;
+	private JPasswordField pfPw;
 	
 	
 	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
@@ -50,13 +57,13 @@ public class Panel01Login extends JPanel {
 		
 		add(getLblLogo());
 		add(getLblNewLabel());
-		add(getTfID());
+		add(getTfId());
 		add(getLblNewLabel2());
-		add(getTfPassword());
 		add(getLblBtnLogin());
 		add(getLblBtnSignup());
 		add(getLblBtnIDSearch());
 		add(getLblBtnPasswordSearch());
+		add(getPfPw());
 
 	}
 
@@ -78,14 +85,14 @@ public class Panel01Login extends JPanel {
 		}
 		return lblNewLabel;
 	}
-	private JTextField getTfID() {
-		if (tfID == null) {
-			tfID = new JTextField();
-			tfID.setBackground(new Color(176, 108, 89));
-			tfID.setBounds(141, 359, 146, 36);
-			tfID.setColumns(10);
+	private JTextField getTfId() {
+		if (tfId == null) {
+			tfId = new JTextField();
+			tfId.setBackground(new Color(176, 108, 89));
+			tfId.setBounds(141, 359, 146, 36);
+			tfId.setColumns(10);
 		}
-		return tfID;
+		return tfId;
 	}
 	private JLabel getLblNewLabel2() {
 		if (lblNewLabel2 == null) {
@@ -97,23 +104,13 @@ public class Panel01Login extends JPanel {
 		}
 		return lblNewLabel2;
 	}
-	private JTextField getTfPassword() {
-		if (tfPassword == null) {
-			tfPassword = new JTextField();
-			tfPassword.setColumns(10);
-			tfPassword.setBackground(new Color(176, 108, 89));
-			tfPassword.setBounds(141, 418, 203, 36);
-		}
-		return tfPassword;
-	}
 	private JLabel getLblBtnLogin() {
 		if (lblBtnLogin == null) {
 			lblBtnLogin = new JLabel("");
 			lblBtnLogin.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					setVisible(false);
-					Main.frame.getContentPane().add(new Panel03Home());
+					loginAction();
 				}
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -172,4 +169,32 @@ public class Panel01Login extends JPanel {
 		}
 		return lblBtnPasswordSearch;
 	}
-}
+	
+	// Function
+	
+	private void loginAction(){
+		
+		char[] pw = pfPw.getPassword();
+		String pw1String = new String(pw); // char[] -> String 변환
+		pw1String = pw1String.replaceAll(" ", "");
+		
+		DaoMember daoMember = new DaoMember(tfId.getText().trim(), pw1String.trim());
+		if(daoMember.checkId() == 1) {
+			id = tfId.getText().trim();
+			setVisible(false);
+			Main.frame.getContentPane().add(new Panel03Home());
+		}else {
+			JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "로그인 안내", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	
+	private JPasswordField getPfPw() {
+		if (pfPw == null) {
+			pfPw = new JPasswordField();
+			pfPw.setBackground(new Color(176, 107, 89));
+			pfPw.setBounds(141, 418, 203, 36);
+		}
+		return pfPw;
+	}
+} // End

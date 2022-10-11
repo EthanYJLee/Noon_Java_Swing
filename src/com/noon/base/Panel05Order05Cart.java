@@ -325,14 +325,14 @@ public class Panel05Order05Cart extends JPanel {
 			      }
 			};
 			InnerTable.setBackground(Color.decode("#F4F4F4"));
-			InnerTable.getTableHeader().setFont(new Font("San serif", Font.PLAIN, 16));
+//			InnerTable.getTableHeader().setFont(new Font("San serif", Font.PLAIN, 16));
 			InnerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			InnerTable.setRowHeight(80); 		// <--***************************************************
 			InnerTable.setModel(OuterTable); 	// <--***************************************************
 
 			cellAlignCenter.setHorizontalAlignment(JLabel.CENTER); // Center 정렬
 			InnerTable.getTableHeader().setDefaultRenderer(cellAlignCenter); // Center 정렬
-//			InnerTable.getColumn("상품명").setCellRenderer(cellAlignCenter); // 에러남 / 삭제예
+//			InnerTable.getColumn("상품명").setCellRenderer(cellAlignCenter); // 에러남 / 삭제예정
 			
 		}
 		return InnerTable;
@@ -373,12 +373,10 @@ public class Panel05Order05Cart extends JPanel {
 		width = 50;
 		col.setPreferredWidth(width);
 		
-		
 		vColIndex = 3;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
 		width = 40;
 		col.setPreferredWidth(width);
-	
 	
 		vColIndex = 4;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
@@ -389,17 +387,13 @@ public class Panel05Order05Cart extends JPanel {
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
 		width = 50;
 		col.setPreferredWidth(width);
-//		
-//		vColIndex = 5;
-//		col = InnerTable.getColumnModel().getColumn(vColIndex);
-//		width = 50;
-//		col.setPreferredWidth(width);
+
 	}
 
 	
 	
 	private void makeTableData() {
-		String[] images = {"cafelatte.png", "cafelatte2.png", "cow.png", "dog.png", "fox.png", "monkey.png", "pig.png", "wolf.png"};
+		String[] images = {"cafelatte.png", "cafelatte.png", "cow.png", "dog.png", "fox.png", "monkey.png", "pig.png", "wolf.png"};
 		String[] names = {"Americano", "카페라떼", "카페모카", "카라멜 마끼아또", "", "", "", ""};
 		String[] price = {"5500", "4500", "25000", "3000", "", "", "", ""};
 		String[] option = {"1500", "4500", "2500", "카라멜 마끼아또", "Fox", "Monkey", "Pig", "Wolf"};

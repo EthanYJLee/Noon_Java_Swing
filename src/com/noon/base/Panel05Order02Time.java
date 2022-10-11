@@ -167,6 +167,8 @@ public class Panel05Order02Time extends JPanel {
 			lblBtnSelect.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					String ordertime = cbTimeHour.getSelectedItem().toString() + ":" + cbTimeMinute.getSelectedItem();
+					insertTime();
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order03Menu());
 				}
@@ -304,4 +306,17 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblNewLabel_1;
 	}
+	
+	// Function
+	private void insertTime() {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 } // End

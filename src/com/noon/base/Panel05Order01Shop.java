@@ -8,16 +8,26 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
+import com.noon.dao.DaoShop;
+import com.noon.dto.DtoShop;
 
 public class Panel05Order01Shop extends JPanel {
 	
@@ -43,13 +53,21 @@ public class Panel05Order01Shop extends JPanel {
 	private JComboBox cbAddrShopName;
 	private JPanel pnRight;
 	private JLabel lblBtnShopSearch;
-	private JLabel lblNewLabel_08;
 	private JTextField tfShopSearch;
 	private JScrollPane spShopList;
-	private JTable Inner_Table_ShopList;
+	private JTable InnerTableShopList;
 	private JLabel lblNewLabel_07;
 	private JLabel lblPn2Background;
 	private JLabel lblNewLabel;
+	
+	// static 선언자
+	public static int shopcode = 0;
+	
+	
+	// -- Table Definition
+	private final DefaultTableModel OuterTable = new DefaultTableModel(); // ******* 테이블 세팅(1/2)
+	private JComboBox cbConditionQuery;
+
 
 	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
 	@Override
@@ -68,6 +86,18 @@ public class Panel05Order01Shop extends JPanel {
 	 * Create the panel.
 	 */
 	public Panel05Order01Shop() {
+		
+		addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+				tableInit(); 			// <--***************************************************
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+		});
+		
+		
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
@@ -204,7 +234,7 @@ public class Panel05Order01Shop extends JPanel {
 			lblNewLabel_02.setForeground(new Color(176, 108, 89));
 			lblNewLabel_02.setFont(new Font("SansSerif", Font.BOLD, 18));
 			lblNewLabel_02.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_02.setBounds(1, 226, 374, 22);
+			lblNewLabel_02.setBounds(1, 102, 374, 22);
 		}
 		return lblNewLabel_02;
 	}
@@ -215,7 +245,7 @@ public class Panel05Order01Shop extends JPanel {
 			pnLeft = new JPanel();
 			pnLeft.setBackground(new Color(255, 0, 0, 0));
 			pnLeft.setBackground(Color.WHITE);
-			pnLeft.setBounds(13, 287, 170, 223);
+			pnLeft.setBounds(16, 148, 344, 233);
 			pnLeft.setLayout(null);
 			pnLeft.add(getLblNewLabel_2_1());
 			pnLeft.add(getLblNewLabel_2_1_1());
@@ -235,7 +265,7 @@ public class Panel05Order01Shop extends JPanel {
 			lblNewLabel_03 = new JLabel("시/도");
 			lblNewLabel_03.setForeground(new Color(176, 108, 89));
 			lblNewLabel_03.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-			lblNewLabel_03.setBounds(6, 44, 33, 16);
+			lblNewLabel_03.setBounds(76, 46, 33, 16);
 		}
 		return lblNewLabel_03;
 	}
@@ -244,7 +274,7 @@ public class Panel05Order01Shop extends JPanel {
 			lblNewLabel_04 = new JLabel("시/군/구");
 			lblNewLabel_04.setForeground(new Color(176, 108, 89));
 			lblNewLabel_04.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-			lblNewLabel_04.setBounds(6, 94, 50, 16);
+			lblNewLabel_04.setBounds(76, 96, 50, 16);
 		}
 		return lblNewLabel_04;
 	}
@@ -253,17 +283,17 @@ public class Panel05Order01Shop extends JPanel {
 			lblNewLabel_05 = new JLabel("동");
 			lblNewLabel_05.setForeground(new Color(176, 108, 89));
 			lblNewLabel_05.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-			lblNewLabel_05.setBounds(6, 144, 12, 16);
+			lblNewLabel_05.setBounds(76, 146, 12, 16);
 		}
 		return lblNewLabel_05;
 	}
 	private JLabel getLblNewLabel_07() {
 		if (lblNewLabel_07 == null) {
-			lblNewLabel_07 = new JLabel("지역으로 검색하기");
-			lblNewLabel_07.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblNewLabel_07 = new JLabel("- 지역으로 검색하기 -");
+			lblNewLabel_07.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_07.setForeground(new Color(176, 108, 89));
 			lblNewLabel_07.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-			lblNewLabel_07.setBounds(55, 14, 106, 16);
+			lblNewLabel_07.setBounds(0, 16, 344, 16);
 		}
 		return lblNewLabel_07;
 	}
@@ -272,7 +302,7 @@ public class Panel05Order01Shop extends JPanel {
 			lblNewLabel_06 = new JLabel("지점명");
 			lblNewLabel_06.setForeground(new Color(176, 108, 89));
 			lblNewLabel_06.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-			lblNewLabel_06.setBounds(6, 189, 42, 16);
+			lblNewLabel_06.setBounds(76, 191, 42, 16);
 		}
 		return lblNewLabel_06;
 	}
@@ -280,7 +310,7 @@ public class Panel05Order01Shop extends JPanel {
 		if (cbAddrSiDo == null) {
 			cbAddrSiDo = new JComboBox();
 			cbAddrSiDo.setModel(new DefaultComboBoxModel(new String[] {"선택", "서울시", "경기도", "강원도", "충청북도", "충청남도", "경상북도", "경상남도", "전라북도", "전라남도", "울산시", "여주시"}));
-			cbAddrSiDo.setBounds(55, 38, 113, 32);
+			cbAddrSiDo.setBounds(156, 40, 139, 32);
 			cbAddrSiDo.setForeground(Color.decode("#B06C5A"));
 			cbAddrSiDo.setBackground(Color.decode("#FFEAEA"));
 		}
@@ -290,7 +320,7 @@ public class Panel05Order01Shop extends JPanel {
 		if (cbAddrSiGoonGoo == null) {
 			cbAddrSiGoonGoo = new JComboBox();
 			cbAddrSiGoonGoo.setModel(new DefaultComboBoxModel(new String[] {"선택", "강북구", "강서구"}));
-			cbAddrSiGoonGoo.setBounds(55, 82, 113, 44);
+			cbAddrSiGoonGoo.setBounds(156, 84, 139, 44);
 			cbAddrSiGoonGoo.setForeground(Color.decode("#B06C5A"));
 			cbAddrSiGoonGoo.setBackground(Color.decode("#FFEAEA"));
 		}
@@ -300,7 +330,7 @@ public class Panel05Order01Shop extends JPanel {
 		if (cbAddrDong == null) {
 			cbAddrDong = new JComboBox();
 			cbAddrDong.setModel(new DefaultComboBoxModel(new String[] {"선택", "논현동"}));
-			cbAddrDong.setBounds(55, 133, 113, 44);
+			cbAddrDong.setBounds(156, 135, 139, 44);
 			cbAddrDong.setForeground(Color.decode("#B06C5A"));
 			cbAddrDong.setBackground(Color.decode("#FFEAEA"));
 		}
@@ -310,7 +340,7 @@ public class Panel05Order01Shop extends JPanel {
 		if (cbAddrShopName == null) {
 			cbAddrShopName = new JComboBox();
 			cbAddrShopName.setModel(new DefaultComboBoxModel(new String[] {"선택"}));
-			cbAddrShopName.setBounds(55, 177, 113, 44);
+			cbAddrShopName.setBounds(156, 179, 139, 44);
 			cbAddrShopName.setForeground(Color.decode("#B06C5A"));
 			cbAddrShopName.setBackground(Color.decode("#FFEAEA"));
 		}
@@ -326,30 +356,30 @@ public class Panel05Order01Shop extends JPanel {
 			pnLeft.setOpaque(false);
 			pnRight.setOpaque(false);
 			pnRight.setBackground(Color.WHITE);
-			pnRight.setBounds(193, 287, 170, 223);
+			pnRight.setBounds(16, 395, 344, 223);
 			pnRight.setLayout(null);
+			pnRight.add(getCbConditionQuery());
 			pnRight.add(getLblBtnShopSearch());
-			pnRight.add(getLblNewLabel_08());
 			pnRight.add(getTfShopSearch());
 			pnRight.add(getSpShopList());
 			pnRight.add(getLblPn2Background());
 		}
 		return pnRight;
 	}
-	private JLabel getLblNewLabel_08() {
-		if (lblNewLabel_08 == null) {
-			lblNewLabel_08 = new JLabel("매장명으로 검색하기");
-			lblNewLabel_08.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblNewLabel_08.setBounds(47, 14, 112, 16);
-			lblNewLabel_08.setForeground(new Color(172, 108, 89));
-			lblNewLabel_08.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+	private JComboBox getCbConditionQuery() {
+		if (cbConditionQuery == null) {
+			cbConditionQuery = new JComboBox();
+			cbConditionQuery.setModel(new DefaultComboBoxModel(new String[] {"지점명", "도/광역시", "시/군/구", "동"}));
+			cbConditionQuery.setForeground(new Color(176, 108, 90));
+			cbConditionQuery.setBackground(new Color(255, 234, 234));
+			cbConditionQuery.setBounds(9, 9, 151, 32);
 		}
-		return lblNewLabel_08;
+		return cbConditionQuery;
 	}
 	private JTextField getTfShopSearch() {
 		if (tfShopSearch == null) {
 			tfShopSearch = new JTextField();
-			tfShopSearch.setBounds(7, 38, 156, 34);
+			tfShopSearch.setBounds(160, 8, 178, 34);
 			tfShopSearch.setColumns(10);
 			tfShopSearch.setBackground(new Color(255, 242, 238));
 		}
@@ -358,7 +388,14 @@ public class Panel05Order01Shop extends JPanel {
 	private JLabel getLblBtnShopSearch() {
 		if (lblBtnShopSearch == null) {
 			lblBtnShopSearch = new JLabel("");
-			lblBtnShopSearch.setBounds(136, 43, 28, 28);
+			lblBtnShopSearch.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					conditionQuery();
+				}
+			});
+			lblBtnShopSearch.setHorizontalAlignment(SwingConstants.CENTER);
+			lblBtnShopSearch.setBounds(300, 2, 38, 47);
 			lblBtnShopSearch.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/icon_search.png"));
 		}
 		return lblBtnShopSearch;
@@ -366,17 +403,28 @@ public class Panel05Order01Shop extends JPanel {
 	private JScrollPane getSpShopList() {
 		if (spShopList == null) {
 			spShopList = new JScrollPane();
-			spShopList.setBounds(9, 76, 151, 135);
-			spShopList.setViewportView(getInner_Table_ShopList());
+			spShopList.setBounds(9, 46, 326, 166);
+			spShopList.setViewportView(getInnerTableShopList());
 		}
 		return spShopList;
 	}
-	private JTable getInner_Table_ShopList() {
-		if (Inner_Table_ShopList == null) {
-			Inner_Table_ShopList = new JTable();
-			Inner_Table_ShopList.setBackground(new Color(255, 242, 238));
+	private JTable getInnerTableShopList() {
+		if (InnerTableShopList == null) {
+			InnerTableShopList = new JTable();
+			InnerTableShopList.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(e.getButton() == 1) { //					좌측마우스 클릭 -> 1
+						tableClick();
+					}
+				}
+			});
+			InnerTableShopList.setBackground(new Color(255, 242, 238));
+			InnerTableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			InnerTableShopList.setModel(OuterTable); // 								테이블 세팅(2/2) **********
+
 		}
-		return Inner_Table_ShopList;
+		return InnerTableShopList;
 	}
 	private JLabel getLblBtnSelect() {
 		if (lblBtnSelect == null) {
@@ -384,8 +432,12 @@ public class Panel05Order01Shop extends JPanel {
 			lblBtnSelect.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					setVisible(false);
-					Main.frame.getContentPane().add(new Panel05Order02Time());
+					if(shopcode == 0) {
+						JOptionPane.showMessageDialog(null, "지점을 선택해주세요.", "< 안 내 >", JOptionPane.ERROR_MESSAGE);
+					}else {
+						setVisible(false);
+						Main.frame.getContentPane().add(new Panel05Order02Time());
+					}
 				}
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -406,17 +458,116 @@ public class Panel05Order01Shop extends JPanel {
 	private JLabel getLblPn2Background() {
 		if (lblPn2Background == null) {
 			lblPn2Background = new JLabel("");
-			lblPn2Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_shop_background.png"));
-			lblPn2Background.setBounds(0, 0, 170, 223);
+			lblPn2Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn2_back2.png"));
+			lblPn2Background.setBounds(0, 0, 344, 223);
 		}
 		return lblPn2Background;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
-			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_shop_background.png"));
-			lblNewLabel.setBounds(0, 0, 170, 223);
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_shop_background2.png"));
+			lblNewLabel.setBounds(0, 0, 344, 233);
 		}
 		return lblNewLabel;
 	}
+	
+	// Function
+	
+	// Init_Table / 테이블 세팅 및 정리
+	private void tableInit() {
+		OuterTable.addColumn("지점명"); // 1234
+		OuterTable.addColumn("매장주소"); // 1234
+		OuterTable.addColumn("전화번호");
+		OuterTable.addColumn("오픈");
+		OuterTable.addColumn("마감");
+	
+		OuterTable.setColumnCount(5); // 		***************
+	
+		int i = OuterTable.getRowCount();
+		for (int j = 0; j < i; j++) {
+			OuterTable.removeRow(0);
+		}
+	
+		InnerTableShopList.setAutoResizeMode(InnerTableShopList.AUTO_RESIZE_OFF); // 리사이즈 못하게 정의
+	
+		int vColIndex = 0;
+		TableColumn col = InnerTableShopList.getColumnModel().getColumn(vColIndex); // 0번부터
+		int width = 55;
+		col.setPreferredWidth(width);
+	
+		vColIndex = 1;
+		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
+		width = 100;
+		col.setPreferredWidth(width);
+	
+		vColIndex = 2;
+		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
+		width = 90;
+		col.setPreferredWidth(width);
+	
+		vColIndex = 3;
+		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
+		width = 40;
+		col.setPreferredWidth(width);
+	
+		vColIndex = 4;
+		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
+		width = 40;
+		col.setPreferredWidth(width);
+	}
+
+
+
+	// 테이블클릭할때 작동 / 현 프로젝트에서는 클릭시 각각의 Tf에 해당 정보를 가져옴
+	private void tableClick() {
+		int i = InnerTableShopList.getSelectedRow();
+		String wkName = (String)InnerTableShopList.getValueAt(i, 0); // 		String type으로 바꿔준다
+		DaoShop daoShop = new DaoShop(wkName);
+
+		shopcode = daoShop.tableClick();
+	}
+
+	// 검색조건
+	private void conditionQuery() {
+		int i = cbConditionQuery.getSelectedIndex();
+		String conditionQueryColumn = "";
+		switch(i) {
+		case 0:
+			conditionQueryColumn = "name";
+			break;
+		case 1:
+			conditionQueryColumn = "province";
+			break;
+		case 2:
+			conditionQueryColumn = "city";
+			break;
+		case 3:
+			conditionQueryColumn = "town";
+			break;
+		default:
+			break;
+		}
+		tableInit();
+		conditionQueryAction(conditionQueryColumn);
+	}
+
+	// 검색조건과 검색명으로 검색실행 > DB에서 내용을 가져와서 테이블에 보여줌
+	private void conditionQueryAction(String conditionQueryColumn) {
+		
+		DaoShop daoShop = new DaoShop(conditionQueryColumn, tfShopSearch.getText());
+		ArrayList<DtoShop> dtoShopList = daoShop.conditionList();
+		
+		int listCount = dtoShopList.size();
+		
+		for(int index=0; index < listCount; index++) {
+			String[] qTxt = {dtoShopList.get(index).getName(), dtoShopList.get(index).getProvince() + dtoShopList.get(index).getCity()
+					+ dtoShopList.get(index).getTown(), dtoShopList.get(index).getPhone(), 
+					dtoShopList.get(index).getOpentime().toString().replaceAll(":00:00", "시").replaceAll(":00", ""), 
+					dtoShopList.get(index).getClosetime().toString().replaceAll(":00:00", "시").replaceAll(":00", "")};
+			OuterTable.addRow(qTxt);
+		}		
+	}
+
 } // End
