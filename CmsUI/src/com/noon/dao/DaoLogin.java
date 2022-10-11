@@ -35,12 +35,13 @@ public class DaoLogin {
 	
 	
 	public int loginAction() {
+		int i = 2;
 		if(Login.type.equals("")) {
 			JOptionPane.showConfirmDialog(null, "너 위에꺼 선택해");
-		}
+		}else {
+			
 		
 		String whereStatement = "select count(id and pw) from " + Login.type + " where id = '" + id + "' and pw = '" + pw + "'";
-		int i = 0;
 		String loginId = "";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
@@ -60,6 +61,7 @@ public class DaoLogin {
 			
 		} catch (Exception e) {
 			e.printStackTrace(); 
+		}
 		}
 		return i;
 	}
