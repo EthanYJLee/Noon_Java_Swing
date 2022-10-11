@@ -5,12 +5,12 @@ import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.noon.component.Header;
 import com.noon.component.SideBar;
+import com.noon.dao.DaoHeader;
 import com.noon.event.EventCategorySelected;
 import com.noon.form.manager.ManagerEmpty;
 import com.noon.form.manager.ManagerForm1;
@@ -29,7 +29,6 @@ public class Manager extends javax.swing.JFrame {
 	ManagerForm1 mform1;
 	ManagerForm2 mform2;
 	ManagerForm3 mform3;
-
 
 	public Manager() {
 		initComponents();
@@ -75,6 +74,8 @@ public class Manager extends javax.swing.JFrame {
 		header2.setForeground(new java.awt.Color(255, 255, 255));
 		mainPanel.setBackground(new Color(255, 248, 229));
 		mainPanel.setLayout(new java.awt.BorderLayout());
+		
+		setStatus();
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
 		panelBorder2Layout.setHorizontalGroup(
@@ -112,6 +113,13 @@ public class Manager extends javax.swing.JFrame {
 		pack();
 		getContentPane().setLayout(layout);
 
+	}
+	
+	public void setStatus() {
+		DaoHeader dao = new DaoHeader();
+		header2.getLblName().setText(dao.getName()); 
+		header2.getLblShopName().setText(dao.getManagerShopName());
+//		header2.getImageAvatar2().setIcon(ImageIcon 불러오는 메소드 작성해야됨); 이거 이따 하자 시간 너무 뺏길듯
 	}
 
 

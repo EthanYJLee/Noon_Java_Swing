@@ -159,6 +159,7 @@ public class Login {
 			public void stateChanged(ChangeEvent e) {
 				if (rdbtnNewRadioButton_2.isSelected()) {
 					type = "staff";
+				
 				}
 			}
 		});
@@ -170,13 +171,13 @@ public class Login {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(loginAction() == 1) {
+					id = textField.getText().trim();
 					if (type.equals("manager")) {
 						frame.setVisible(false);
 						Manager main = new Manager();
 						main.setVisible(true);
 						main.setBackground(new Color(0, 0, 0, 0));
 						main.setLocationRelativeTo(null);
-						loginAction();
 					} else if (type.equals("executive")) {
 						frame.setVisible(false);
 						Executive main = new Executive();
@@ -189,21 +190,10 @@ public class Login {
 						main.setVisible(true);
 						main.setBackground(new Color(0, 0, 0, 0));
 						main.setLocationRelativeTo(null);
-						loginAction();
-					}
-				}else if(loginAction() == 0) {
-					if (type.equals("manager")) {
-						frame.setVisible(true);
-						JOptionPane.showConfirmDialog(null, "존재하지 않는 회원입니다");
-					} else if (type.equals("executive")) {
-						frame.setVisible(true);
-						JOptionPane.showConfirmDialog(null, "존재하지 않는 회원입니다");
-					} else if (type.equals("staff")) {
-						frame.setVisible(true);
-						JOptionPane.showConfirmDialog(null, "존재하지 않는 회원입니다");
-					}
+ 					}
+				}else {
+					JOptionPane.showConfirmDialog(null, "존재하지 않는 회원입니다");
 				}
-				
 			}
 		});
 		btnNewButton.setBounds(65, 323, 117, 30);
@@ -244,8 +234,7 @@ public class Login {
 	public int loginAction() {
 		DaoLogin dao = new DaoLogin(textField.getText().trim(), passwordField.getText().trim());
 		int num = dao.loginAction();
-		
-		
+
 		return num;
 	}
 }

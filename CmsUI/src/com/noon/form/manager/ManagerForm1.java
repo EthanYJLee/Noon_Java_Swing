@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -13,23 +14,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.noon.dao.DaoStaff;
+import com.noon.dto.DtoStaff;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class ManagerForm1 extends JPanel {
 
     private JLabel lblNewLabel;
     private JComboBox comboBox;
-    private JTextPane textPane;
     private JButton btnNewButton;
     
 //    -- Table Definition
 	private final DefaultTableModel Outer_Table = new DefaultTableModel(); //********  중요 ********
 	private JTable table_1;  // 이너테이블 
+	private JTextField tfSelection;
 
     /**
      * Create the panel.
@@ -38,6 +44,7 @@ public class ManagerForm1 extends JPanel {
     	addAncestorListener(new AncestorListener() {
     		public void ancestorAdded(AncestorEvent event) {
     			tableInit();
+    			searchAction();
     		}
     		public void ancestorMoved(AncestorEvent event) {
     		}
@@ -48,7 +55,6 @@ public class ManagerForm1 extends JPanel {
         setOpaque(false);
         add(getLblNewLabel());
         add(getComboBox());
-        add(getTextPane());
         add(getBtnNewButton());
         
         JLabel lblNewLabel_1 = new JLabel("");
@@ -70,6 +76,11 @@ public class ManagerForm1 extends JPanel {
         table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table_1.setModel(Outer_Table); // 이너테이블과 아우터테이블 연결 
         scrollPane_1.setViewportView(table_1); // 스크롤에 이너테이블 연결
+        
+        tfSelection = new JTextField();
+        tfSelection.setBounds(357, 40, 260, 27);
+        add(tfSelection);
+        tfSelection.setColumns(10);
 
     }
 
@@ -85,24 +96,21 @@ public class ManagerForm1 extends JPanel {
     private JComboBox getComboBox() {
         if (comboBox == null) {
             comboBox = new JComboBox();
-            comboBox.setModel(new DefaultComboBoxModel(new String[]{"이름", "전화번호"}));
+            comboBox.setModel(new DefaultComboBoxModel(new String[] {"이름", "ID"}));
             comboBox.setBounds(227, 41, 118, 27);
         }
         return comboBox;
-    }
-
-    private JTextPane getTextPane() {
-        if (textPane == null) {
-            textPane = new JTextPane();
-            textPane.setBounds(350, 46, 252, 16);
-        }
-        return textPane;
     }
 
     private JButton getBtnNewButton() {
         if (btnNewButton == null) {
             btnNewButton = new JButton("검색");
             btnNewButton.setIcon(new ImageIcon(ManagerForm1.class.getResource("/com/noon/icon/검색버튼.png")));
+            btnNewButton.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		conditionQuery();
+            	}
+            });
             btnNewButton.setBounds(620, 38, 111, 24);
         }
         return btnNewButton;
@@ -160,7 +168,54 @@ public class ManagerForm1 extends JPanel {
 		width = 300;
 		col.setPreferredWidth(width);
 	}
+	
+	private void searchAction() {
+		DaoStaff dao = new DaoStaff();
+		ArrayList<DtoStaff> dtoList = dao.searchAction();
 
+		int listCount = dtoList.size();
+
+		for (int index = 0; index < listCount; index++) {
+			String temp = Integer.toString(dtoList.get(index).getCount());
+			String[] qTxt = { dtoList.get(index).getId(), dtoList.get(index).getName(),
+					dtoList.get(index).getPhone() , temp };
+			Outer_Table.addRow(qTxt);
+
+		}
+	}
+	
+	private void conditionQuery() {
+		int i = comboBox.getSelectedIndex();
+		String conditionQueryColumn = "";
+		switch (i) {
+		case 0:
+			conditionQueryColumn = "name";
+			break;
+		case 1:
+			conditionQueryColumn = "id";
+			break;
+		default:
+			break;
+		}
+		tableInit();
+		conditionQueryAction(conditionQueryColumn);
+	}
+	
+	private void conditionQueryAction(String conditionQueryColumn) {
+
+		DaoStaff dao = new DaoStaff(conditionQueryColumn, tfSelection.getText().trim());
+		ArrayList<DtoStaff> dtoList = dao.conditionList();
+
+		int listCount = dtoList.size();
+
+		for (int index = 0; index < listCount; index++) {
+			String temp = Integer.toString(dtoList.get(index).getCount());
+			String[] qTxt = { dtoList.get(index).getId(), dtoList.get(index).getName(),
+					dtoList.get(index).getPhone() , temp };
+			Outer_Table.addRow(qTxt);
+
+		}
+	}
 
     @Override
     protected void paintChildren (Graphics g) {

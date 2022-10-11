@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -22,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.noon.component.Menu;
+import com.noon.dao.DaoMenu;
 import com.noon.main.Manager;
 
 public class ManagerForm3 extends JPanel {
@@ -31,7 +31,9 @@ public class ManagerForm3 extends JPanel {
 
 	GridBagLayout grid = new GridBagLayout();
 	GridBagConstraints gbc = new GridBagConstraints();
-
+	
+	JPanel panel;
+	
 	public ManagerForm3() {
 		setBackground(Color.WHITE);
 		setLayout(null);
@@ -53,7 +55,7 @@ public class ManagerForm3 extends JPanel {
 		lblNewLabel.setBounds(37, 32, 265, 54);
 		add(lblNewLabel);
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		JPanel mainpanel = new JPanel(new BorderLayout());
 		panel.setBounds(37, 118, 700, 400);
 		mainpanel.setBounds(37, 118, 700, 400);
@@ -72,11 +74,32 @@ public class ManagerForm3 extends JPanel {
 		grid.setConstraints(scroller, gbc);
 		mainpanel.add(scroller);
 		// menulist menu panel 추가시키기
-		for (int i = 0; i < 41; i++) {
-			menuList.add(new Menu(new ImageIcon(getClass().getResource("/com/noon/icon/1.png"))));
-		}
 		
 		// girdbaglayout에 담기
+		makeGridMenuList();
+
+	}
+
+	public void make(JComponent c, int x, int y, int w, int h) {
+		gbc.gridx = x;
+		gbc.gridy = y;
+		gbc.gridwidth = w;
+		gbc.gridheight = h;
+		grid.setConstraints(c, gbc);
+	}
+	
+//	private void addMenuList() {
+//		for (int i = 0; i < 41; i++) {
+//			// 여기에서 menulist에 데이터베이스에 있는 메뉴들을 넣는 메소드를 만들면 된다.
+//			menuList.add(new Menu(new ImageIcon(getClass().getResource("/com/noon/icon/1.png"))));
+//		}
+//	}
+	
+	
+	
+	private void makeGridMenuList() {
+		DaoMenu dao = new DaoMenu();
+		menuList = dao.showMenu();
 		for (int i = 0; i < menuList.size() / 5 + 1; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (!(i == menuList.size() / 5 && j == menuList.size() % 5)) {
@@ -88,23 +111,16 @@ public class ManagerForm3 extends JPanel {
 						public void mouseClicked(MouseEvent e) {
 							Manager.setManagerForm(new ManagerForm4());
 						}
+						
 					});
 				} else {
 					break;
 				}
 			}
 		}
-
 	}
-
-	public void make(JComponent c, int x, int y, int w, int h) {
-		gbc.gridx = x;
-		gbc.gridy = y;
-		gbc.gridwidth = w;
-		gbc.gridheight = h;
-		grid.setConstraints(c, gbc);
-	}
-
+	
+	
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
