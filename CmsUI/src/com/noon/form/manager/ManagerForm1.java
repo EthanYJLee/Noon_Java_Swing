@@ -51,20 +51,25 @@ public class ManagerForm1 extends JPanel {
         add(getTextPane());
         add(getBtnNewButton());
         
-        // 스크롤
-        JScrollPane scrollPane_1 = new JScrollPane(); // 스크롤
-        scrollPane_1.setBounds(33, 101, 698, 322);
-        add(scrollPane_1);
-        
-        table_1 = new JTable();
-        table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table_1.setModel(Outer_Table); // 이너테이블과 아우터테이블 연결 
-        scrollPane_1.setViewportView(table_1); // 스크롤에 이너테이블 연결
-        
         JLabel lblNewLabel_1 = new JLabel("");
         lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\icon (1)\\Kiosk213213 (Community) (1)\\Frame 8.png"));
         lblNewLabel_1.setBounds(557, 457, 175, 40);
         add(lblNewLabel_1);
+        
+        JPanel panel = new JPanel();
+        panel.setBounds(28, 83, 728, 414);
+        add(panel);
+        panel.setLayout(null);
+        
+        // 스크롤
+        JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(0, 0, 728, 414);
+        panel.add(scrollPane_1);
+        
+        table_1 = new JTable();
+        table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table_1.setModel(Outer_Table); // 이너테이블과 아우터테이블 연결 
+        scrollPane_1.setViewportView(table_1); // 스크롤에 이너테이블 연결
 
     }
 

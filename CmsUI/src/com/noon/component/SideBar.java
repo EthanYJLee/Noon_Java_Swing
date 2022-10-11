@@ -1,8 +1,7 @@
 package com.noon.component;
 
-import com.noon.event.EventCategorySelected;
-import com.noon.model.Model_Category;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,7 +9,12 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+
 import javax.swing.JFrame;
+
+import com.noon.event.EventCategorySelected;
+import com.noon.main.Login;
+import com.noon.model.Model_Category;
 
 public class SideBar extends javax.swing.JPanel {
     
@@ -60,6 +64,13 @@ public class SideBar extends javax.swing.JPanel {
         listCategory1 = new com.noon.swing.ListCategory<>();
         panelLogout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		System.exit(0);
+        	}
+        });
 
         setPreferredSize(new java.awt.Dimension(190, 618));
 

@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ManagerForm3 extends JPanel {
 		setBackground(Color.WHITE);
 		setLayout(null);
 		setOpaque(false);
-		
+
 		JButton btnMenuInsert = new JButton("메뉴 추가");
 		btnMenuInsert.setBackground(Color.RED);
 		btnMenuInsert.addMouseListener(new MouseAdapter() {
@@ -59,32 +60,35 @@ public class ManagerForm3 extends JPanel {
 		add(mainpanel);
 
 		panel.setLayout(grid);
-		gbc.fill = GridBagConstraints.BOTH;
+		panel.setBackground(new Color(255, 248, 229));
+		gbc.fill = GridBagConstraints.NONE;
 		gbc.weightx = 1.0;
 		gbc.weighty = 1.0;
+		gbc.insets = new Insets(10,10,10,10);
 
 		JScrollPane scroller = new JScrollPane(panel);
+		scroller.setBorder(null);
 		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		grid.setConstraints(scroller, gbc);
 		mainpanel.add(scroller);
 		// menulist menu panel 추가시키기
-		for (int i = 0; i < 40; i++) {
+		for (int i = 0; i < 41; i++) {
 			menuList.add(new Menu(new ImageIcon(getClass().getResource("/com/noon/icon/1.png"))));
 		}
-
-		// girdbaglayout에 담기 
-		for (int i = 0; i < menuList.size() / 7 + 1; i++) {
-			for (int j = 0; j < 7; j++) {
-				if (!(i == menuList.size() / 7 && j == menuList.size() % 7)) {
-					make(menuList.get(i * 7 + j), j, i, 1, 1);
-					menuList.get(i * 7 + j).setPreferredSize(new Dimension(90, 90));
-					panel.add(menuList.get(i * 7 + j));
-					menuList.get(i*7 + j).addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						Manager.setManagerForm(new ManagerForm4());
-					}
-				});
+		
+		// girdbaglayout에 담기
+		for (int i = 0; i < menuList.size() / 5 + 1; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (!(i == menuList.size() / 5 && j == menuList.size() % 5)) {
+					make(menuList.get(i * 5 + j), j, i, 1, 1);
+					menuList.get(i * 5 + j).setPreferredSize(new Dimension(110, 110));
+					panel.add(menuList.get(i * 5 + j));
+					menuList.get(i * 5 + j).addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							Manager.setManagerForm(new ManagerForm4());
+						}
+					});
 				} else {
 					break;
 				}
@@ -92,9 +96,7 @@ public class ManagerForm3 extends JPanel {
 		}
 
 	}
-	
-	
-	
+
 	public void make(JComponent c, int x, int y, int w, int h) {
 		gbc.gridx = x;
 		gbc.gridy = y;
