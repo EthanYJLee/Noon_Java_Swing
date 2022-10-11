@@ -170,7 +170,8 @@ public class Login {
 		JButton btnNewButton = new JButton("로그인");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(loginAction() == 1) {
+				int a = loginAction();
+				if(a == 1) {
 					id = textField.getText().trim();
 					if (type.equals("manager")) {
 						frame.setVisible(false);
@@ -191,7 +192,7 @@ public class Login {
 						main.setBackground(new Color(0, 0, 0, 0));
 						main.setLocationRelativeTo(null);
  					}
-				}else {
+				}else if(a == 0){
 					JOptionPane.showConfirmDialog(null, "존재하지 않는 회원입니다");
 				}
 			}
