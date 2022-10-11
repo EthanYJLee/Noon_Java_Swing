@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ManagerForm4 extends JPanel {
 	private JTextField textField;
@@ -62,6 +64,12 @@ public class ManagerForm4 extends JPanel {
 		add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 판매종료일을 nowdate()로 업데이트 하면 된다. 그럼 끝 
+			}
+		});
 		ImageIcon icon1 = new ImageIcon((ManagerForm4.class.getResource("/com/noon/icon/delete.png")));
 		Image img1 = icon1.getImage();
 		Image changeImg1 = img1.getScaledInstance(118, 45, Image.SCALE_SMOOTH);
@@ -71,6 +79,12 @@ public class ManagerForm4 extends JPanel {
 		add(lblNewLabel_3);
 
 		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 수정한 값을 다해서 넣으면 된다. 
+			}
+		});
 		ImageIcon icon = new ImageIcon((ManagerForm4.class.getResource("/com/noon/icon/update.png")));
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(118, 45, Image.SCALE_SMOOTH);

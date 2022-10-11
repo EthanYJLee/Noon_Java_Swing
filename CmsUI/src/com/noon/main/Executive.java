@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import com.noon.component.Header;
 import com.noon.component.SideBarExecutive;
+import com.noon.dao.DaoHeader;
 import com.noon.event.EventCategorySelected;
 import com.noon.form.executive.ExecutiveForm1;
 import com.noon.form.manager.ManagerEmpty;
@@ -106,6 +107,11 @@ public class Executive extends javax.swing.JFrame {
 		getContentPane().setLayout(layout);
 
 	}
-
+	
+	public void setStatus() {
+		DaoHeader dao = new DaoHeader();
+		header2.getLblName().setText(dao.getName()); 
+		header2.getLblShopName().setText("본사");
+	}
 
 }

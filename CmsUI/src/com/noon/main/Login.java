@@ -35,7 +35,9 @@ public class Login {
 	private JPasswordField passwordField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
-	private String type = "";
+	public static String type = "";
+	
+	public static String id = "";
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -153,7 +155,7 @@ public class Login {
 		rdbtnNewRadioButton_2.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				if(rdbtnNewRadioButton_2.isSelected()) {
-					type = "parttime";					
+					type = "staff";					
 				}
 			}
 		});
@@ -164,6 +166,8 @@ public class Login {
 		JButton btnNewButton = new JButton("로그인");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				id = textField.getText().trim();
+				System.out.println(id);
 				if (type.equals("manager")) {
 					frame.setVisible(false);
 					Manager main = new Manager();
@@ -176,7 +180,7 @@ public class Login {
 					main.setVisible(true);
 					main.setBackground(new Color(0, 0, 0, 0));
 					main.setLocationRelativeTo(null);
-				} else if (type.equals("parttime")) {
+				} else if (type.equals("staff")) {
 					frame.setVisible(false);
 					Parttime main = new Parttime();
 					main.setVisible(true);

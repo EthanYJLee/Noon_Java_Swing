@@ -9,12 +9,18 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.noon.component.Header;
 import com.noon.component.SideBarParttime;
+import com.noon.dao.DaoHeader;
 import com.noon.event.EventCategorySelected;
 import com.noon.form.parttime.ParttimeForm1;
 import com.noon.form.parttime.ParttimeForm2;
 import com.noon.swing.PanelBorder;
 
 public class Parttime extends javax.swing.JFrame {
+	
+	private Header header2;
+	private JPanel mainPanel;
+	private PanelBorder panelBorder2;
+	private SideBarParttime sideBar1;
 
 	ParttimeForm1 pform1;
 
@@ -98,9 +104,12 @@ public class Parttime extends javax.swing.JFrame {
 		getContentPane().setLayout(layout);
 
 	}
+	
+	public void setStatus() {
+		DaoHeader dao = new DaoHeader();
+		header2.getLblName().setText(dao.getName()); 
+		header2.getLblShopName().setText(dao.getParttimeShopName());
+	}
 
-	private Header header2;
-	private JPanel mainPanel;
-	private PanelBorder panelBorder2;
-	private SideBarParttime sideBar1;
+	
 }
