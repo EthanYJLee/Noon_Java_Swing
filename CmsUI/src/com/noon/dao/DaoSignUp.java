@@ -77,7 +77,7 @@ public class DaoSignUp extends JPanel {
 		
 		// 2번 메소드
 		public boolean overlapCheck() {
-			String whereStatement = "select count(id) from guest where id = '" + tfID + "'";
+			String whereStatement = "select count(id) from manager where id = '" + tfID + "'";
 			boolean result = false;
 			int i = 0;
 			try {
