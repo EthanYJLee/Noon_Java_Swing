@@ -123,7 +123,7 @@ public class Panel02SignUp extends JPanel {
 	private JLabel getLblLogo() {
 		if (lblLogo == null) {
 			lblLogo = new JLabel("");
-			lblLogo.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/logo.png"));
+			lblLogo.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/logo.png"));
 			lblLogo.setBounds(101, 126, 172, 172);
 		}
 		return lblLogo;
@@ -159,7 +159,7 @@ public class Panel02SignUp extends JPanel {
 					checkIdOverlap();
 				}
 			});
-			lblNewLabel_2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_ID_overlap.png"));
+			lblNewLabel_2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_ID_overlap.png"));
 			lblNewLabel_2.setBounds(280, 410, 66, 25);
 		}
 		return lblNewLabel_2;
@@ -202,16 +202,16 @@ public class Panel02SignUp extends JPanel {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblBtnSingup.setIcon(
-							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_signup2_C.png"));
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_signup2_C.png"));
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblBtnSingup
-							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_signup2.png"));
+							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_signup2.png"));
 				}
 			});
-			lblBtnSingup.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_signup2.png"));
+			lblBtnSingup.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_signup2.png"));
 			lblBtnSingup.setBounds(100, 662, 174, 49);
 		}
 		return lblBtnSingup;

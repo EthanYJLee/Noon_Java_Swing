@@ -8,20 +8,26 @@ public class DtoOrder {
 	String refundtime;
 	int hotice;
 	int quantity;
-	int forheretogo;
+	String forheretogo;
 	int shot;
 	int syrup;
-	String water;
+	int size;
 	int indiprice;
 	int customerno;
+	String member_id;
+	int set_setno;
+	String set_menu_name;
+	int shop_shopcode;
+	String staff_id;
 	
 	// Constructor
 	public DtoOrder() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DtoOrder(int orderno, String ordertime, String refundtime, int hotice, int quantity, int forheretogo,
-			int shot, int syrup, String water, int indiprice, int customerno) {
+	public DtoOrder(int orderno, String ordertime, String refundtime, int hotice, int quantity, String forheretogo,
+			int shot, int syrup, int size, int indiprice, int customerno, String member_id, int set_setno,
+			String set_menu_name, int shop_shopcode, String staff_id) {
 		super();
 		this.orderno = orderno;
 		this.ordertime = ordertime;
@@ -31,12 +37,16 @@ public class DtoOrder {
 		this.forheretogo = forheretogo;
 		this.shot = shot;
 		this.syrup = syrup;
-		this.water = water;
+		this.size = size;
 		this.indiprice = indiprice;
 		this.customerno = customerno;
+		this.member_id = member_id;
+		this.set_setno = set_setno;
+		this.set_menu_name = set_menu_name;
+		this.shop_shopcode = shop_shopcode;
+		this.staff_id = staff_id;
 	}
 
-	// Method
 	public int getOrderno() {
 		return orderno;
 	}
@@ -77,11 +87,11 @@ public class DtoOrder {
 		this.quantity = quantity;
 	}
 
-	public int getForheretogo() {
+	public String getForheretogo() {
 		return forheretogo;
 	}
 
-	public void setForheretogo(int forheretogo) {
+	public void setForheretogo(String forheretogo) {
 		this.forheretogo = forheretogo;
 	}
 
@@ -101,12 +111,12 @@ public class DtoOrder {
 		this.syrup = syrup;
 	}
 
-	public String getWater() {
-		return water;
+	public int getSize() {
+		return size;
 	}
 
-	public void setWater(String water) {
-		this.water = water;
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	public int getIndiprice() {
@@ -124,7 +134,46 @@ public class DtoOrder {
 	public void setCustomerno(int customerno) {
 		this.customerno = customerno;
 	}
-	
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
+	public int getSet_setno() {
+		return set_setno;
+	}
+
+	public void setSet_setno(int set_setno) {
+		this.set_setno = set_setno;
+	}
+
+	public String getSet_menu_name() {
+		return set_menu_name;
+	}
+
+	public void setSet_menu_name(String set_menu_name) {
+		this.set_menu_name = set_menu_name;
+	}
+
+	public int getShop_shopcode() {
+		return shop_shopcode;
+	}
+
+	public void setShop_shopcode(int shop_shopcode) {
+		this.shop_shopcode = shop_shopcode;
+	}
+
+	public String getStaff_id() {
+		return staff_id;
+	}
+
+	public void setStaff_id(String staff_id) {
+		this.staff_id = staff_id;
+	}
 	
 	
 }
