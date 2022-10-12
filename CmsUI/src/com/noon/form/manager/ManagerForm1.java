@@ -57,10 +57,6 @@ public class ManagerForm1 extends JPanel {
         add(getComboBox());
         add(getBtnNewButton());
         
-        JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\heeya\\OneDrive\\바탕 화면\\noonProject\\icon\\icon (1)\\Kiosk213213 (Community) (1)\\Frame 8.png"));
-        lblNewLabel_1.setBounds(557, 457, 175, 40);
-        add(lblNewLabel_1);
         
         JPanel panel = new JPanel();
         panel.setBounds(28, 83, 728, 414);

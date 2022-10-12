@@ -1,20 +1,28 @@
 package com.noon.component;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class Menu extends JPanel {
 
 	private JLabel lblMenuImage;
 	private JLabel lblMenuName;
+	private int numOfOne;
+
+	public int getNumOfOne() {
+		return numOfOne;
+	}
+
+	public void setNumOfOne(int numOfOne) {
+		this.numOfOne = numOfOne;
+	}
 
 	public JLabel getLblMenuImage() {
 		return lblMenuImage;
@@ -32,7 +40,7 @@ public class Menu extends JPanel {
 		this.lblMenuName = lblMenuName;
 	}
 
-	public Menu(ImageIcon icon, String str) {
+	public Menu() {
 		setBackground(Color.WHITE);
 		setBorder(new LineBorder(Color.DARK_GRAY));
 		setLayout(null);
@@ -43,11 +51,8 @@ public class Menu extends JPanel {
 		lblMenuImage.setBounds(10, 0, 90, 90);
 		add(lblMenuImage);
 
-		lblMenuImage.setIcon(icon);
-
 		lblMenuName = new JLabel("Menu name");
 		lblMenuName.setBounds(10, 90, 90, 20);
-		lblMenuName.setText(str);
 		add(lblMenuName);
 	}
 

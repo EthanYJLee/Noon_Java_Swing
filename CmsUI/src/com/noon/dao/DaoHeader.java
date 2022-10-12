@@ -86,4 +86,5 @@ public class DaoHeader {
 		return shopName;
 	}
 	
+	
 }

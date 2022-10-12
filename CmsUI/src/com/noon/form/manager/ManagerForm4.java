@@ -4,109 +4,192 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.noon.dao.DaoMenu;
+import com.noon.dao.DaoSetting;
+import com.noon.dto.DtoSetting;
 
 public class ManagerForm4 extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tfMenuname;
+	private JTextField tfPrice;
+	private JComboBox cbCategory;
+	private JLabel lblPhoto;
+	private JLabel lblChangePhoto;
+	
+	private String filepath;
 
 	/**
 	 * Create the panel.
 	 */
 	public ManagerForm4() {
+		addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+				setTf();
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+		});
 		setLayout(null);
 		setOpaque(false);
+		
+		JLabel lblMenuname = new JLabel("메뉴명");
+		lblMenuname.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblMenuname.setBounds(57, 70, 42, 32);
+		add(lblMenuname);
 
-		JLabel lblNewLabel = new JLabel("음료명");
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblNewLabel.setBounds(57, 70, 42, 32);
-		add(lblNewLabel);
+		tfMenuname = new JTextField();
+		tfMenuname.setEditable(false);
+		tfMenuname.setBounds(57, 100, 375, 45);
+		add(tfMenuname);
+		tfMenuname.setColumns(10);
 
-		textField = new JTextField();
-		textField.setBounds(57, 100, 375, 45);
-		add(textField);
-		textField.setColumns(10);
+		JLabel lblPrice = new JLabel("가격");
+		lblPrice.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPrice.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblPrice.setBounds(57, 165, 42, 32);
+		add(lblPrice);
 
-		JLabel lblNewLabel_1 = new JLabel("가격");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(57, 165, 42, 32);
-		add(lblNewLabel_1);
+		tfPrice = new JTextField();
+		tfPrice.setColumns(10);
+		tfPrice.setBounds(57, 190, 375, 45);
+		add(tfPrice);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(57, 190, 375, 45);
-		add(textField_1);
+		JLabel lblCategory = new JLabel("카테고리");
+		lblCategory.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCategory.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblCategory.setBounds(57, 265, 88, 32);
+		add(lblCategory);
 
-		JLabel lblNewLabel_1_1 = new JLabel("카테고리");
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblNewLabel_1_1.setBounds(57, 265, 88, 32);
-		add(lblNewLabel_1_1);
+		lblPhoto = new JLabel("");
+		lblPhoto.setBorder(new BevelBorder(BevelBorder.RAISED));
+		lblPhoto.setBackground(new Color(255, 255, 255));
+		lblPhoto.setBounds(498, 97, 200, 200);
+		add(lblPhoto);
 
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(ManagerForm4.class.getResource("/com/noon/icon/biglogo.png")));
-		lblNewLabel_2.setBorder(new BevelBorder(BevelBorder.RAISED));
-		lblNewLabel_2.setBackground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(498, 97, 200, 200);
-		add(lblNewLabel_2);
-
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+		JLabel lblDelete = new JLabel("");
+		lblDelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// 판매종료일을 nowdate()로 업데이트 하면 된다. 그럼 끝 
+				deleteMenu();
 			}
 		});
 		ImageIcon icon1 = new ImageIcon((ManagerForm4.class.getResource("/com/noon/icon/delete.png")));
 		Image img1 = icon1.getImage();
 		Image changeImg1 = img1.getScaledInstance(118, 45, Image.SCALE_SMOOTH);
-		lblNewLabel_3.setIcon(new ImageIcon(changeImg1));
-		lblNewLabel_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_3.setBounds(184, 430, 118, 45);
-		add(lblNewLabel_3);
+		lblDelete.setIcon(new ImageIcon(changeImg1));
+		lblDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblDelete.setBounds(184, 430, 118, 45);
+		add(lblDelete);
 
-		JLabel lblNewLabel_3_1 = new JLabel("");
-		lblNewLabel_3_1.addMouseListener(new MouseAdapter() {
+		JLabel lblUpdate = new JLabel("");
+		lblUpdate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// 수정한 값을 다해서 넣으면 된다. 
+				updateMenu();
 			}
 		});
 		ImageIcon icon = new ImageIcon((ManagerForm4.class.getResource("/com/noon/icon/update.png")));
 		Image img = icon.getImage();
 		Image changeImg = img.getScaledInstance(118, 45, Image.SCALE_SMOOTH);
-		lblNewLabel_3_1.setIcon(new ImageIcon(changeImg));
-		lblNewLabel_3_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_3_1.setBounds(314, 430, 118, 45);
-		add(lblNewLabel_3_1);
+		lblUpdate.setIcon(new ImageIcon(changeImg));
+		lblUpdate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblUpdate.setBounds(314, 430, 118, 45);
+		add(lblUpdate);
 
-		JLabel lblNewLabel_4 = new JLabel("이미지 변경하기");
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Font font2 = lblNewLabel_4.getFont();
+		JLabel lblChangePhoto = new JLabel("이미지 변경하기");
+		lblChangePhoto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FilePath();
+			}
+		});
+		lblChangePhoto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChangePhoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Font font2 = lblChangePhoto.getFont();
         Map attributes2 = font2.getAttributes();
         attributes2.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        lblNewLabel_4.setFont(font2.deriveFont(attributes2));
-        lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setBounds(542, 309, 118, 16);
-		add(lblNewLabel_4);
+        lblChangePhoto.setFont(font2.deriveFont(attributes2));
+        lblChangePhoto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChangePhoto.setBounds(542, 309, 118, 16);
+		add(lblChangePhoto);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"coffee", "beverage", "tea"}));
-		comboBox.setBounds(128, 261, 149, 45);
-		add(comboBox);
+		cbCategory = new JComboBox();
+		cbCategory.setModel(new DefaultComboBoxModel(new String[] {"coffee", "beverage", "tea"}));
+		cbCategory.setBounds(128, 261, 149, 45);
+		add(cbCategory);
+	}
+	
+	private void setTf() {
+		DaoSetting dao = new DaoSetting();
+		DtoSetting dto = dao.setTf();
+		
+		tfPrice.setText(Integer.toString(dto.getPricenow()));
+		tfMenuname.setText(dto.getMenu_name());
+		cbCategory.setName(dto.getCategorynow());
+		String filePath2 = "./" + dto.getMenu_name();
+		
+		for(int i=1;i<=ManagerForm3.numOfOne;i++) {
+			filePath2 += 1;
+		}
+		
+		lblPhoto.setIcon(new ImageIcon(filePath2));
+		lblPhoto.setHorizontalAlignment(SwingConstants.CENTER);
+	}
+	
+	private void deleteMenu() {
+		DaoMenu dao = new DaoMenu(tfMenuname.getText().trim());
+		dao.deleteMenu();
+	}
+	
+	private void updateMenu() {
+		FileInputStream input = null;
+		File file = new File(filepath);
+		try {
+			System.out.println(filepath);
+			input = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DaoMenu dao = new DaoMenu(tfPrice.getText().trim(),input,tfMenuname.getText().trim(),(String)cbCategory.getSelectedItem());
+		dao.updateMenu();
+	}
+	
+	private void FilePath() {
+		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, BMP", "jpg", "png", "bmp");
+		chooser.setFileFilter(filter);
+
+		int ret = chooser.showOpenDialog(null);
+		if (ret != JFileChooser.APPROVE_OPTION) {
+			JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다!", "경고", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		filepath = chooser.getSelectedFile().getPath();
+		lblPhoto.setIcon(new ImageIcon(filepath));
+		lblPhoto.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 }

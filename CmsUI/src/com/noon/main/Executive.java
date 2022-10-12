@@ -29,7 +29,6 @@ public class Executive extends javax.swing.JFrame {
 
 	public Executive() {
 		initComponents();
-
 		sideBar1.initMoving(this);
 		sideBar1.addEventCategorySelected(new EventCategorySelected() {
 			@Override
@@ -69,6 +68,8 @@ public class Executive extends javax.swing.JFrame {
 
 		mainPanel.setBackground(new Color(255, 248, 229));
 		mainPanel.setLayout(new java.awt.BorderLayout());
+		
+		setStatus();
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
 		panelBorder2.setLayout(panelBorder2Layout);
@@ -102,7 +103,8 @@ public class Executive extends javax.swing.JFrame {
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(panelBorder2,
 						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-
+		
+		
 		pack();
 		getContentPane().setLayout(layout);
 
