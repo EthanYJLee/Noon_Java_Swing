@@ -26,8 +26,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.noon.dao.DaoMenu;
-import com.noon.dto.DtoMenu;
+import com.noon.dao.DaoSetting;
+import com.noon.dao.DtoSetting;
 
 public class Panel05Order03Menu extends JPanel {
 
@@ -52,14 +52,18 @@ public class Panel05Order03Menu extends JPanel {
 
 	public static String selectedMenu;
 	public static String selectedCategory;
-
+	public static int selectedPrice;
+	public static int selectedSetno;
+	public static int selectedPhoto;
+	
+	
 	// -- Table Definition
 	private final DefaultTableModel OuterTable = new DefaultTableModel(); // ******* 테이블 세팅(1/2)
 
 	private DefaultTableCellRenderer cellAlignCenter = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성/ 테이블가운데정렬에 필요
 
 	// -- file 정리
-	ArrayList<DtoMenu> beanList = null;
+	ArrayList<DtoSetting> beanList = null;
 
 	
 
@@ -84,14 +88,14 @@ public class Panel05Order03Menu extends JPanel {
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
 				tableInit(); // <--***************************************************
-				makeTableData2(); // <--***************************************************
+				makeTableData(); // <--***************************************************
 			}
 
 			public void ancestorMoved(AncestorEvent event) {
 			}
 
 			public void ancestorRemoved(AncestorEvent event) {
-				closingAction(); // <--***************************************************
+//				closingAction(); // <--***************************************************
 			}
 		});
 
@@ -143,7 +147,7 @@ public class Panel05Order03Menu extends JPanel {
 
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
-			lblNewLabel_01 = new JLabel("장바구니");
+			lblNewLabel_01 = new JLabel("Menu");
 			lblNewLabel_01.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_01.setForeground(new Color(176, 108, 89));
 			lblNewLabel_01.setFont(new Font("Lucida Grande", Font.PLAIN, 28));
@@ -427,8 +431,8 @@ public class Panel05Order03Menu extends JPanel {
 
 	// Function
 
-	private void makeTableData2() {
-		DaoMenu dbAction = new DaoMenu();
+	private void makeTableData() {
+		DaoSetting dbAction = new DaoSetting();
 		beanList = dbAction.menuList();
 
 		int listCount = beanList.size();
@@ -436,7 +440,7 @@ public class Panel05Order03Menu extends JPanel {
 		for (int index = 0; index < listCount; index++) {
 			ImageIcon icon = new ImageIcon("./" + beanList.get(index).getFilename());
 			System.out.println("./" + beanList.get(index).getFilename());
-			Object[] tempData = { icon, beanList.get(index).getName(), beanList.get(index).getPrice() };
+			Object[] tempData = { icon, beanList.get(index).getMenu_name(), beanList.get(index).getPricenow() };
 			OuterTable.addRow(tempData);
 		}
 	}
@@ -453,7 +457,12 @@ public class Panel05Order03Menu extends JPanel {
 	private void tableClick() {
 		int i = InnerTable.getSelectedRow();
 		selectedMenu = (String) InnerTable.getValueAt(i, 1); // String type으로 바꿔준다
-		System.out.println(selectedMenu);
+		selectedPrice = (int) InnerTable.getValueAt(i, 2); // Int type으로 바꿔준다
+		DaoSetting daoSetting = new DaoSetting();
+		DtoSetting dtoSetting = daoSetting.tableClick();
+		selectedSetno = dtoSetting.getSetno();
+		selectedCategory = dtoSetting.getCategory();
+		selectedPhoto = dtoSetting.getFilename();
 	}
 
 } // End

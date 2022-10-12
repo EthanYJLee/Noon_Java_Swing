@@ -46,6 +46,24 @@ public class DtoOrder {
 		this.shop_shopcode = shop_shopcode;
 		this.staff_id = staff_id;
 	}
+	
+
+	public DtoOrder(String ordertime, int hotice, int quantity, int shot, int syrup, int size, int indiprice,
+			String member_id, int set_setno, String set_menu_name, int shop_shopcode, String staff_id) {
+		super();
+		this.ordertime = ordertime;
+		this.hotice = hotice;
+		this.quantity = quantity;
+		this.shot = shot;
+		this.syrup = syrup;
+		this.size = size;
+		this.indiprice = indiprice;
+		this.member_id = member_id;
+		this.set_setno = set_setno;
+		this.set_menu_name = set_menu_name;
+		this.shop_shopcode = shop_shopcode;
+		this.staff_id = staff_id;
+	}
 
 	public int getOrderno() {
 		return orderno;
