@@ -15,6 +15,7 @@ import com.noon.util.DBConnect;
 public class DaoStaff {
 
 	private String id;
+	private String pw;
 	private String name;
 	private String phone;
 	private String debitno;
@@ -27,9 +28,24 @@ public class DaoStaff {
 
 	}
 
-	public DaoStaff(String conname, String condata) {
-		this.conname = conname;
-		this.condata = condata;
+//	public DaoStaff(String conname, String condata) {
+//		this.conname = conname;
+//		this.condata = condata;
+//	}
+	
+	// 정보 수정
+//	public DaoStaff( String pw, String phone, FileInputStream file) {
+//		super();
+//		this.name = pw;
+//		this.phone = phone;
+//		this.file = file;
+//	}
+	
+	public DaoStaff(String pw, String phone, FileInputStream file) {
+		super();
+		this.pw = pw;
+		this.phone = phone;
+		this.file = file;
 	}
 
 	public DaoStaff(String id, String name, String phone, String debitno, FileInputStream file) {
@@ -148,6 +164,34 @@ public class DaoStaff {
 			ps.setString(3, phone);
 			ps.setString(4, debitno);
 			ps.setBinaryStream(5, file);
+
+			i = ps.executeUpdate();
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+	
+
+	public int updateStaff() {
+		int i = 0;
+		PreparedStatement ps = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			
+			String query = "update staff set pw = ? , phone = ? ,photo = ? where id = ?"; 
+			
+			ps = conn_mysql.prepareStatement(query);
+			ps.setString(1, pw);
+			ps.setString(2, phone);
+			ps.setBinaryStream(3, file);
+			ps.setString(4, Login.id);
 
 			i = ps.executeUpdate();
 

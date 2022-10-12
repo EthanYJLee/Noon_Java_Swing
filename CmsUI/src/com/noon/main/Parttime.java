@@ -66,6 +66,8 @@ public class Parttime extends javax.swing.JFrame {
 
 		mainPanel.setBackground(new java.awt.Color(255, 248, 229));
 		mainPanel.setLayout(new java.awt.BorderLayout());
+		
+		setStatus();
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
 		panelBorder2Layout

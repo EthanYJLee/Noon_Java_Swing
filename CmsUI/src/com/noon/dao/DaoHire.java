@@ -43,6 +43,33 @@ public class DaoHire {
 		return i;
 	}
 	
+	// 알바 정보 수정
+	public int updatetHire() {
+		int i = 0;
+		PreparedStatement ps = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			String query = "insert into hire (shop_shopcode,staff_id,manager_id,registerdate) ";
+			String query1 = "values (?,'gukHwa',?,curdate())";
+
+			ps = conn_mysql.prepareStatement(query + query1);
+			ps.setInt(1, getShopcode());
+			ps.setString(2, id);
+			ps.setString(3, Login.id);
+
+			i = ps.executeUpdate();
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+	
 	public int getShopcode() {
 		int shopcode = 0;
 		String whereStatement = "select shop_shopcode from manage where manager_id = '" + Login.id + "'";
