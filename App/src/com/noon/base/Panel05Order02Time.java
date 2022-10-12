@@ -222,7 +222,7 @@ public class Panel05Order02Time extends JPanel {
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
 			});
-			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
+			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_home.png"));
 			lblBtnTabHome.setBounds(1, 729, 94, 50);
 		}
 		return lblBtnTabHome;
@@ -238,7 +238,7 @@ public class Panel05Order02Time extends JPanel {
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
-			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
+			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
 			lblBtnTabOrder.setBounds(95, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
@@ -289,7 +289,7 @@ public class Panel05Order02Time extends JPanel {
 
 	private JLabel getLblLeftQuentity() {
 		if (lblLeftQuentity == null) {
-			lblLeftQuentity = new JLabel("판매가능 잔수 : " + Integer.toString(showLeftQuentity()) + "잔"); // 남은 잔수 보여주z기
+			lblLeftQuentity = new JLabel(""); // 남은 잔수 보여주z기
 			lblLeftQuentity.setHorizontalAlignment(SwingConstants.CENTER);
 			lblLeftQuentity.setForeground(new Color(176, 108, 89));
 			lblLeftQuentity.setFont(new Font("SansSerif", Font.PLAIN, 16));
@@ -313,7 +313,7 @@ public class Panel05Order02Time extends JPanel {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/time_background.png"));
+			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/time_background.png"));
 			lblNewLabel.setBounds(15, 352, 345, 95);
 		}
 		return lblNewLabel;

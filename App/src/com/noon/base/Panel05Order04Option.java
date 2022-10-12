@@ -12,8 +12,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import com.noon.dao.DaoOrder;
 
 public class Panel05Order04Option extends JPanel {
 
@@ -39,10 +42,10 @@ public class Panel05Order04Option extends JPanel {
 	private JButton btnShot3;
 	private JButton btnSyrupNot;
 	private JButton btnSyrupHazelnut;
-	private JLabel lblNewLabel_4;
+	private JLabel lblOptionReset;
 	private JLabel lblNewLabel_5;
-	private JLabel lblBtnMinus;
-	private JLabel lblBtnPlus;
+	private JLabel btnMinus;
+	private JLabel btnPlus;
 	private JLabel lblOrderQuentity;
 	private JLabel lblBtnPutIn;
 	private JPanel pnCategoryCoffee;
@@ -58,7 +61,7 @@ public class Panel05Order04Option extends JPanel {
 	private JLabel lblOptionInfo;
 
 	//
-	private String hoticeCheck = "핫";
+	private String hoticeCheck = "Hot";
 	private String sizeCheck = "Tall";
 	private String shotCheck = "기본";
 	private String syrupCheck = "없음";
@@ -68,6 +71,7 @@ public class Panel05Order04Option extends JPanel {
 	public static int size;
 	public static int shot;
 	public static int syrup;
+	public static int quantity = 1;
 
 	// 바탕화면 그라데이션
 	// -------------------------------------------------------------------------------
@@ -101,10 +105,10 @@ public class Panel05Order04Option extends JPanel {
 		add(getLblHomeIndicator());
 		add(getLblNewLabel());
 		add(getLblNewLabel_1());
-		add(getLblNewLabel_4());
+		add(getLblOptionReset());
 		add(getLblNewLabel_5());
-		add(getLblBtnMinus());
-		add(getLblBtnPlus());
+		add(getBtnMinus());
+		add(getBtnPlus());
 		add(getLblOrderQuentity());
 		add(getLblBtnPutIn());
 		add(getPnCategoryCoffee());
@@ -237,24 +241,25 @@ public class Panel05Order04Option extends JPanel {
 	}
 	// ==================================================================================================================
 
+	private JLabel getLblNewLabel_1() {
+		if (lblNewLabel_1 == null) {
+			lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon("./" + Panel05Order03Menu.selectedPhoto));
+			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel_1.setBounds(138, 100, 100, 100);
+		}
+		return lblNewLabel_1;
+	}
+
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("상품명select");
+			lblNewLabel = new JLabel(Panel05Order03Menu.selectedMenu);
 			lblNewLabel.setForeground(new Color(176, 108, 89));
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
-			lblNewLabel.setBounds(1, 178, 374, 32);
+			lblNewLabel.setBounds(1, 200, 374, 32);
 		}
 		return lblNewLabel;
-	}
-
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("상품사진select");
-			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_1.setBounds(138, 74, 100, 100);
-		}
-		return lblNewLabel_1;
 	}
 
 	// =================================================
@@ -279,9 +284,10 @@ public class Panel05Order04Option extends JPanel {
 			pnCategoryCoffee.add(getLblpn1Background());
 
 			//
-			pnCategoryCoffee.setVisible(false);
 			if (Panel05Order03Menu.selectedCategory == "coffee") {
 				pnCategoryCoffee.setVisible(true);
+			}else {
+				pnCategoryCoffee.setVisible(false);
 			}
 		}
 		return pnCategoryCoffee;
@@ -456,7 +462,7 @@ public class Panel05Order04Option extends JPanel {
 			btnSyrupHazelnut.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					syrupCheck = "헤이즐넛";
+					syrupCheck = "+헤이즐넛시럽";
 					optionInfo();
 				}
 			});
@@ -473,7 +479,7 @@ public class Panel05Order04Option extends JPanel {
 			btnSyrupVanila.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					syrupCheck = "바닐라";
+					syrupCheck = "+바닐라시럽";
 					optionInfo();
 				}
 			});
@@ -486,27 +492,35 @@ public class Panel05Order04Option extends JPanel {
 
 	// =============================
 
-	private JLabel getLblNewLabel_4() {
-		if (lblNewLabel_4 == null) {
-			lblNewLabel_4 = new JLabel("");
-			lblNewLabel_4.addMouseListener(new MouseAdapter() {
+	private JLabel getLblOptionReset() {
+		if (lblOptionReset == null) {
+			lblOptionReset = new JLabel("");
+			lblOptionReset.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					hoticeCheck = "Hot";
+					sizeCheck = "Tall";
+					shotCheck = "";
+					syrupCheck = "";
+					lblOrderQuentity.setText("1");
+					optionInfo();
+				}
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblNewLabel_4.setIcon(new ImageIcon(
+					lblOptionReset.setIcon(new ImageIcon(
 							"/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_option_cancel_all_C.png"));
 				}
-
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblNewLabel_4.setIcon(new ImageIcon(
+					lblOptionReset.setIcon(new ImageIcon(
 							"/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_option_cancel_all.png"));
 				}
 			});
-			lblNewLabel_4.setIcon(
+			lblOptionReset.setIcon(
 					new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_option_cancel_all.png"));
-			lblNewLabel_4.setBounds(15, 580, 166, 45);
+			lblOptionReset.setBounds(15, 580, 166, 45);
 		}
-		return lblNewLabel_4;
+		return lblOptionReset;
 	}
 
 	private JLabel getLblNewLabel_5() {
@@ -519,64 +533,71 @@ public class Panel05Order04Option extends JPanel {
 		return lblNewLabel_5;
 	}
 
-	private JLabel getLblBtnMinus() {
-		if (lblBtnMinus == null) {
-			lblBtnMinus = new JLabel("");
-			lblBtnMinus.addMouseListener(new MouseAdapter() {
+	private JLabel getBtnMinus() {
+		if (btnMinus == null) {
+			btnMinus = new JLabel("");
+			btnMinus.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					if (quantity > 1) {
+						quantity--;
+					}
+					getLblOrderQuentity().setText(Integer.toString(quantity));
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnMinus.setIcon(
+					btnMinus.setIcon(
 							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_minus_C.png"));
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnMinus.setIcon(
+					btnMinus.setIcon(
 							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_minus.png"));
 				}
 			});
-			lblBtnMinus.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnMinus
-					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_minus.png"));
-			lblBtnMinus.setBounds(189, 576, 53, 53);
+			btnMinus.setHorizontalAlignment(SwingConstants.CENTER);
+			btnMinus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_minus.png"));
+			btnMinus.setBounds(189, 576, 53, 53);
 		}
-		return lblBtnMinus;
+		return btnMinus;
 	}
 
-	private JLabel getLblBtnPlus() {
-		if (lblBtnPlus == null) {
-			lblBtnPlus = new JLabel("");
-			lblBtnPlus.addMouseListener(new MouseAdapter() {
+	private JLabel getBtnPlus() {
+		if (btnPlus == null) {
+			btnPlus = new JLabel("");
+			btnPlus.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					if (quantity <= 20) {
+						quantity++;
+					}
+					getLblOrderQuentity().setText(Integer.toString(quantity));
 				}
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnPlus.setIcon(
+					btnPlus.setIcon(
 							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_plus_C.png"));
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnPlus.setIcon(
+					btnPlus.setIcon(
 							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_plus.png"));
 				}
 			});
-			lblBtnPlus.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnPlus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_plus.png"));
-			lblBtnPlus.setBounds(311, 576, 53, 53);
+			btnPlus.setHorizontalAlignment(SwingConstants.CENTER);
+			btnPlus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_plus.png"));
+			btnPlus.setBounds(311, 576, 53, 53);
 		}
-		return lblBtnPlus;
+		return btnPlus;
 	}
 
 	private JLabel getLblOrderQuentity() {
 		if (lblOrderQuentity == null) {
-			lblOrderQuentity = new JLabel("갯수");
+			lblOrderQuentity = new JLabel("1");
 			lblOrderQuentity.setForeground(new Color(176, 108, 89));
 			lblOrderQuentity.setFont(new Font("SansSerif", Font.PLAIN, 18));
 			lblOrderQuentity.setHorizontalAlignment(SwingConstants.CENTER);
@@ -591,9 +612,8 @@ public class Panel05Order04Option extends JPanel {
 			lblBtnPutIn.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					insertAction();
-					setVisible(false);
-					Main.frame.getContentPane().add(new Panel05Order05Cart());
+					selectedOptionCheck();
+					insertActionCart();
 				}
 
 				@Override
@@ -638,9 +658,10 @@ public class Panel05Order04Option extends JPanel {
 			pnCategoryTeaBeverage.add(getBtnSizeGrandePn2());
 			pnCategoryTeaBeverage.add(getLabel_1_1());
 			//
-			pnCategoryTeaBeverage.setVisible(false);
-			if (Panel05Order03Menu.selectedCategory != "coffee") {
+			if (Panel05Order03Menu.selectedCategory != "tea") {
 				pnCategoryTeaBeverage.setVisible(true);
+			}else {
+				pnCategoryTeaBeverage.setVisible(false);
 			}
 		}
 		return pnCategoryTeaBeverage;
@@ -741,7 +762,7 @@ public class Panel05Order04Option extends JPanel {
 
 	private JLabel getLblOptionInfo() {
 		if (lblOptionInfo == null) {
-			lblOptionInfo = new JLabel();
+			lblOptionInfo = new JLabel("Hot / Tall");
 			lblOptionInfo.setFont(new Font("SansSerif", Font.PLAIN, 16));
 			lblOptionInfo.setHorizontalAlignment(SwingConstants.TRAILING);
 			lblOptionInfo.setBounds(30, 533, 321, 32);
@@ -758,9 +779,9 @@ public class Panel05Order04Option extends JPanel {
 		}
 	}
 
-	// Insert
-	private void insertAction() {
-		if (hoticeCheck == "핫") {
+	// 옵션체크
+	private void selectedOptionCheck() {
+		if (hoticeCheck == "Hot") {
 			hotice = 0;
 		} else {
 			hotice = 1;
@@ -786,12 +807,24 @@ public class Panel05Order04Option extends JPanel {
 
 		if (syrupCheck == "") {
 			syrup = 0;
-		} else if (syrupCheck == "헤이즐넛") {
+		} else if (syrupCheck == "+헤이즐넛시럽") {
 			syrup = 1;
 		} else {
 			syrup = 2;
 		}
+	}
 
+	// 담기
+	private void insertActionCart() {
+		DaoOrder daoOrder = new DaoOrder(Panel05Order02Time.ordertime, hotice, quantity, shot, syrup, size,
+				Panel05Order03Menu.selectedPrice, Panel01Login.id, Panel05Order03Menu.selectedSetno,
+				Panel05Order03Menu.selectedMenu, Panel05Order01Shop.shopcode, "none");
+		if (daoOrder.insertActionCart() == 1) {
+			setVisible(false);
+			Main.frame.getContentPane().add(new Panel05Order05Cart());
+		} else {
+			JOptionPane.showMessageDialog(null, "서버점검중입니다. 불편을 끼쳐드려 죄송합니다.");
+		}
 	}
 
 } // End
