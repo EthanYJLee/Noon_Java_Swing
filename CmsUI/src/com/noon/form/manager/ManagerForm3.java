@@ -70,17 +70,19 @@ public class ManagerForm3 extends JPanel {
 		});
 		panel.setBounds(37, 118, 700, 400);
 		mainpanel.setBounds(37, 118, 700, 400);
+		mainpanel.setOpaque(false);
 		add(mainpanel);
 
 		panel.setLayout(grid);
-		panel.setBackground(new Color(255, 248, 229));
+		panel.setOpaque(false);
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.weightx = 1.0;
 		gbc.weighty = 1.0;
 		gbc.insets = new Insets(10, 10, 10, 10);
-
+		
 		JScrollPane scroller = new JScrollPane(panel);
 		scroller.setBorder(null);
+		scroller.setOpaque(false);
 		scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		grid.setConstraints(scroller, gbc);
 		mainpanel.add(scroller);
