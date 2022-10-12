@@ -2,6 +2,8 @@ package com.noon.base;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
@@ -30,6 +32,7 @@ public class Main {
 	 */
 	public Main() {
 		initialize();
+		
 	}
 
 	/**
@@ -47,9 +50,9 @@ public class Main {
 //		// -----------------------------------------------------------------------------------------
 		frame.setBackground(Color.decode("#F4D2C9"));
 		frame.setVisible(false);
-		frame.add(new Panel01Login());
+//		frame.add(new Panel01Login());
 		
-//		frame.add(new Panel04MyPage());
+		frame.add(new Panel05Order03Menu());
 		
 		
 	}

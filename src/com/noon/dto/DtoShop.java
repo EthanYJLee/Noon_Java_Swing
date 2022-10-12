@@ -44,6 +44,15 @@ public class DtoShop {
 		this.opentime = opentime;
 		this.closetime = closetime;
 	}
+	
+	
+	
+
+	public DtoShop(String opentime, String closetime) {
+		super();
+		this.opentime = opentime;
+		this.closetime = closetime;
+	}
 
 	public int getShopcode() {
 		return shopcode;

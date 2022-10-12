@@ -23,6 +23,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -30,7 +31,7 @@ import com.noon.dao.DaoShop;
 import com.noon.dto.DtoShop;
 
 public class Panel05Order01Shop extends JPanel {
-	
+
 	private JLabel lblNewLabel_01;
 	private JLabel lblNewLabel_02;
 	private JPanel pnLeft;
@@ -59,17 +60,18 @@ public class Panel05Order01Shop extends JPanel {
 	private JLabel lblNewLabel_07;
 	private JLabel lblPn2Background;
 	private JLabel lblNewLabel;
-	
-	// static 선언자
-	public static int shopcode = 0;
-	
-	
-	// -- Table Definition
-	private final DefaultTableModel OuterTable = new DefaultTableModel(); // ******* 테이블 세팅(1/2)
 	private JComboBox cbConditionQuery;
 
+	// static 선언자
+	public static int shopcode = 0;
 
-	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
+	// -- Table Definition
+	private final DefaultTableModel OuterTable = new DefaultTableModel(); // ******* 테이블 세팅(1/2)
+	private DefaultTableCellRenderer cellAlignCenter = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성/ 테이블가운데정렬에 필요
+
+
+	// 바탕화면 그라데이션
+	// -------------------------------------------------------------------------------
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -81,27 +83,27 @@ public class Panel05Order01Shop extends JPanel {
 	}
 	// ----------------------------------------------------------------------------------------------
 
-
 	/**
 	 * Create the panel.
 	 */
 	public Panel05Order01Shop() {
-		
+
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
-				tableInit(); 			// <--***************************************************
+				tableInit(); // <--***************************************************
 			}
+
 			public void ancestorMoved(AncestorEvent event) {
 			}
+
 			public void ancestorRemoved(AncestorEvent event) {
 			}
 		});
-		
-		
+
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
-		
+
 		add(getLblNewLabel_01());
 		add(getLblNewLabel_02());
 		add(getPnLeft());
@@ -117,7 +119,8 @@ public class Panel05Order01Shop extends JPanel {
 		add(getLblProfilePhoto());
 	}
 
-	// 상단바 =============================================================================================================
+	// 상단바
+	// =============================================================================================================
 	private JLabel getLblBtnSidebar() {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
@@ -127,6 +130,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblBtnSidebar;
 	}
+
 	private JLabel getLblBtnBack() {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
@@ -136,6 +140,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblBtnBack;
 	}
+
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
 			lblNewLabel_01 = new JLabel("매장 선택");
@@ -146,6 +151,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
+
 	private JLabel getLblProfilePhoto() {
 		if (lblProfilePhoto == null) {
 			lblProfilePhoto = new JLabel("");
@@ -156,78 +162,84 @@ public class Panel05Order01Shop extends JPanel {
 		return lblProfilePhoto;
 	}
 	// ==================================================================================================================
-	
-	// Tabbar ===========================================================================================================
-		private JLabel getLblBtnTabHome() {
-			if (lblBtnTabHome == null) {
-				lblBtnTabHome = new JLabel("");
-				lblBtnTabHome.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						setVisible(false);
-						Main.frame.getContentPane().add(new Panel03Home());
-					}
-				});
-				lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
-				lblBtnTabHome.setBounds(1, 729, 94, 50);
-			}
-			return lblBtnTabHome;
+
+	// Tabbar
+	// ===========================================================================================================
+	private JLabel getLblBtnTabHome() {
+		if (lblBtnTabHome == null) {
+			lblBtnTabHome = new JLabel("");
+			lblBtnTabHome.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel03Home());
+				}
+			});
+			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
+			lblBtnTabHome.setBounds(1, 729, 94, 50);
 		}
-		private JLabel getLblBtnTabOrder() {
-			if (lblBtnTabOrder == null) {
-				lblBtnTabOrder = new JLabel("");
-				lblBtnTabOrder.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						setVisible(false);
-						Main.frame.getContentPane().add(new Panel05Order01Shop());
-					}
-				});
-				lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
-				lblBtnTabOrder.setBounds(95, 729, 94, 50);
-			}
-			return lblBtnTabOrder;
+		return lblBtnTabHome;
+	}
+
+	private JLabel getLblBtnTabOrder() {
+		if (lblBtnTabOrder == null) {
+			lblBtnTabOrder = new JLabel("");
+			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel05Order01Shop());
+				}
+			});
+			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
+			lblBtnTabOrder.setBounds(95, 729, 94, 50);
 		}
-		private JLabel getLblBtnTabGift() {
-			if (lblBtnTabGift == null) {
-				lblBtnTabGift = new JLabel("");
-				lblBtnTabGift.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						setVisible(false);
-						Main.frame.getContentPane().add(new Panel06Gift());
-					}
-				});
-				lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
-				lblBtnTabGift.setBounds(187, 729, 94, 50);
-			}
-			return lblBtnTabGift;
+		return lblBtnTabOrder;
+	}
+
+	private JLabel getLblBtnTabGift() {
+		if (lblBtnTabGift == null) {
+			lblBtnTabGift = new JLabel("");
+			lblBtnTabGift.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel06Gift());
+				}
+			});
+			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
+			lblBtnTabGift.setBounds(187, 729, 94, 50);
 		}
-		private JLabel getLblBtnTabMypage() {
-			if (lblBtnTabMypage == null) {
-				lblBtnTabMypage = new JLabel("");
-				lblBtnTabMypage.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						setVisible(false);
-						Main.frame.getContentPane().add(new Panel04MyPage());
-					}
-				});
-				lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
-				lblBtnTabMypage.setBounds(281, 729, 94, 50);
-			}
-			return lblBtnTabMypage;
+		return lblBtnTabGift;
+	}
+
+	private JLabel getLblBtnTabMypage() {
+		if (lblBtnTabMypage == null) {
+			lblBtnTabMypage = new JLabel("");
+			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel04MyPage());
+				}
+			});
+			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
+			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
-		private JLabel getLblHomeIndicator() {
-			if (lblHomeIndicator == null) {
-				lblHomeIndicator = new JLabel("");
-				lblHomeIndicator.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
-				lblHomeIndicator.setBounds(1, 778, 375, 34);
-			}
-			return lblHomeIndicator;
+		return lblBtnTabMypage;
+	}
+
+	private JLabel getLblHomeIndicator() {
+		if (lblHomeIndicator == null) {
+			lblHomeIndicator = new JLabel("");
+			lblHomeIndicator
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
+			lblHomeIndicator.setBounds(1, 778, 375, 34);
 		}
-		// ==================================================================================================================
-		
+		return lblHomeIndicator;
+	}
+	// ==================================================================================================================
+
 	private JLabel getLblNewLabel_02() {
 		if (lblNewLabel_02 == null) {
 			lblNewLabel_02 = new JLabel("방문하실 매장을 선택해 주세요 !");
@@ -239,7 +251,8 @@ public class Panel05Order01Shop extends JPanel {
 		return lblNewLabel_02;
 	}
 
-	// Left Panel =======================================================================================================
+	// Left Panel
+	// =======================================================================================================
 	private JPanel getPnLeft() {
 		if (pnLeft == null) {
 			pnLeft = new JPanel();
@@ -260,6 +273,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return pnLeft;
 	}
+
 	private JLabel getLblNewLabel_2_1() {
 		if (lblNewLabel_03 == null) {
 			lblNewLabel_03 = new JLabel("시/도");
@@ -269,6 +283,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblNewLabel_03;
 	}
+
 	private JLabel getLblNewLabel_2_1_1() {
 		if (lblNewLabel_04 == null) {
 			lblNewLabel_04 = new JLabel("시/군/구");
@@ -278,6 +293,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblNewLabel_04;
 	}
+
 	private JLabel getLblNewLabel_05() {
 		if (lblNewLabel_05 == null) {
 			lblNewLabel_05 = new JLabel("동");
@@ -287,6 +303,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblNewLabel_05;
 	}
+
 	private JLabel getLblNewLabel_07() {
 		if (lblNewLabel_07 == null) {
 			lblNewLabel_07 = new JLabel("- 지역으로 검색하기 -");
@@ -297,6 +314,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblNewLabel_07;
 	}
+
 	private JLabel getLblNewLabel_06() {
 		if (lblNewLabel_06 == null) {
 			lblNewLabel_06 = new JLabel("지점명");
@@ -306,40 +324,45 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblNewLabel_06;
 	}
+
 	private JComboBox getCbAddrSiDo() {
 		if (cbAddrSiDo == null) {
 			cbAddrSiDo = new JComboBox();
-			cbAddrSiDo.setModel(new DefaultComboBoxModel(new String[] {"선택", "서울시", "경기도", "강원도", "충청북도", "충청남도", "경상북도", "경상남도", "전라북도", "전라남도", "울산시", "여주시"}));
+			cbAddrSiDo.setModel(new DefaultComboBoxModel(new String[] { "선택", "서울시", "경기도", "강원도", "충청북도", "충청남도",
+					"경상북도", "경상남도", "전라북도", "전라남도", "울산시", "여주시" }));
 			cbAddrSiDo.setBounds(156, 40, 139, 32);
 			cbAddrSiDo.setForeground(Color.decode("#B06C5A"));
 			cbAddrSiDo.setBackground(Color.decode("#FFEAEA"));
 		}
 		return cbAddrSiDo;
 	}
+
 	private JComboBox getCbAddrSiGoonGoo() {
 		if (cbAddrSiGoonGoo == null) {
 			cbAddrSiGoonGoo = new JComboBox();
-			cbAddrSiGoonGoo.setModel(new DefaultComboBoxModel(new String[] {"선택", "강북구", "강서구"}));
+			cbAddrSiGoonGoo.setModel(new DefaultComboBoxModel(new String[] { "선택", "강북구", "강서구" }));
 			cbAddrSiGoonGoo.setBounds(156, 84, 139, 44);
 			cbAddrSiGoonGoo.setForeground(Color.decode("#B06C5A"));
 			cbAddrSiGoonGoo.setBackground(Color.decode("#FFEAEA"));
 		}
 		return cbAddrSiGoonGoo;
 	}
+
 	private JComboBox getCbAddrDong() {
 		if (cbAddrDong == null) {
 			cbAddrDong = new JComboBox();
-			cbAddrDong.setModel(new DefaultComboBoxModel(new String[] {"선택", "논현동"}));
+			cbAddrDong.setModel(new DefaultComboBoxModel(new String[] { "선택", "논현동" }));
 			cbAddrDong.setBounds(156, 135, 139, 44);
 			cbAddrDong.setForeground(Color.decode("#B06C5A"));
 			cbAddrDong.setBackground(Color.decode("#FFEAEA"));
 		}
 		return cbAddrDong;
 	}
+
 	private JComboBox getCbAddrShopName() {
 		if (cbAddrShopName == null) {
 			cbAddrShopName = new JComboBox();
-			cbAddrShopName.setModel(new DefaultComboBoxModel(new String[] {"선택"}));
+			cbAddrShopName.setModel(new DefaultComboBoxModel(new String[] { "선택" }));
 			cbAddrShopName.setBounds(156, 179, 139, 44);
 			cbAddrShopName.setForeground(Color.decode("#B06C5A"));
 			cbAddrShopName.setBackground(Color.decode("#FFEAEA"));
@@ -348,7 +371,8 @@ public class Panel05Order01Shop extends JPanel {
 	}
 	// ==================================================================================================================
 
-	// Right Panel ======================================================================================================
+	// Right Panel
+	// ======================================================================================================
 	private JPanel getPnRight() {
 		if (pnRight == null) {
 			pnRight = new JPanel();
@@ -366,16 +390,18 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return pnRight;
 	}
+
 	private JComboBox getCbConditionQuery() {
 		if (cbConditionQuery == null) {
 			cbConditionQuery = new JComboBox();
-			cbConditionQuery.setModel(new DefaultComboBoxModel(new String[] {"지점명", "도/광역시", "시/군/구", "동"}));
+			cbConditionQuery.setModel(new DefaultComboBoxModel(new String[] { "지점명", "도/광역시", "시/군/구", "동" }));
 			cbConditionQuery.setForeground(new Color(176, 108, 90));
 			cbConditionQuery.setBackground(new Color(255, 234, 234));
 			cbConditionQuery.setBounds(9, 9, 151, 32);
 		}
 		return cbConditionQuery;
 	}
+
 	private JTextField getTfShopSearch() {
 		if (tfShopSearch == null) {
 			tfShopSearch = new JTextField();
@@ -385,6 +411,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return tfShopSearch;
 	}
+
 	private JLabel getLblBtnShopSearch() {
 		if (lblBtnShopSearch == null) {
 			lblBtnShopSearch = new JLabel("");
@@ -400,6 +427,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblBtnShopSearch;
 	}
+
 	private JScrollPane getSpShopList() {
 		if (spShopList == null) {
 			spShopList = new JScrollPane();
@@ -408,44 +436,53 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return spShopList;
 	}
+
 	private JTable getInnerTableShopList() {
 		if (InnerTableShopList == null) {
 			InnerTableShopList = new JTable();
 			InnerTableShopList.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(e.getButton() == 1) { //					좌측마우스 클릭 -> 1
+					if (e.getButton() == 1) { // 좌측마우스 클릭 -> 1
 						tableClick();
 					}
 				}
 			});
 			InnerTableShopList.setBackground(new Color(255, 242, 238));
 			InnerTableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			InnerTableShopList.setModel(OuterTable); // 								테이블 세팅(2/2) **********
+			InnerTableShopList.setModel(OuterTable); // 테이블 세팅(2/2) **********
+			cellAlignCenter.setHorizontalAlignment(JLabel.CENTER); // Center 정렬
+			InnerTableShopList.getTableHeader().setDefaultRenderer(cellAlignCenter); // Center 정렬
+
 
 		}
 		return InnerTableShopList;
 	}
+
 	private JLabel getLblBtnSelect() {
 		if (lblBtnSelect == null) {
 			lblBtnSelect = new JLabel("");
 			lblBtnSelect.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(shopcode == 0) {
+					if (shopcode == 0) {
 						JOptionPane.showMessageDialog(null, "지점을 선택해주세요.", "< 안 내 >", JOptionPane.ERROR_MESSAGE);
-					}else {
+					} else {
 						setVisible(false);
 						Main.frame.getContentPane().add(new Panel05Order02Time());
 					}
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select_C.png"));
+					lblBtnSelect
+							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+					lblBtnSelect
+							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
 				}
 			});
 			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
@@ -463,18 +500,20 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblPn2Background;
 	}
+
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_shop_background2.png"));
+			lblNewLabel
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_shop_background2.png"));
 			lblNewLabel.setBounds(0, 0, 344, 233);
 		}
 		return lblNewLabel;
 	}
-	
+
 	// Function
-	
+
 	// Init_Table / 테이블 세팅 및 정리
 	private void tableInit() {
 		OuterTable.addColumn("지점명"); // 1234
@@ -482,48 +521,46 @@ public class Panel05Order01Shop extends JPanel {
 		OuterTable.addColumn("전화번호");
 		OuterTable.addColumn("오픈");
 		OuterTable.addColumn("마감");
-	
-		OuterTable.setColumnCount(5); // 		***************
-	
+
+		OuterTable.setColumnCount(5); // ***************
+
 		int i = OuterTable.getRowCount();
 		for (int j = 0; j < i; j++) {
 			OuterTable.removeRow(0);
 		}
-	
+
 		InnerTableShopList.setAutoResizeMode(InnerTableShopList.AUTO_RESIZE_OFF); // 리사이즈 못하게 정의
-	
+
 		int vColIndex = 0;
 		TableColumn col = InnerTableShopList.getColumnModel().getColumn(vColIndex); // 0번부터
 		int width = 55;
 		col.setPreferredWidth(width);
-	
+
 		vColIndex = 1;
 		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
 		width = 100;
 		col.setPreferredWidth(width);
-	
+
 		vColIndex = 2;
 		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
 		width = 90;
 		col.setPreferredWidth(width);
-	
+
 		vColIndex = 3;
 		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
 		width = 40;
 		col.setPreferredWidth(width);
-	
+
 		vColIndex = 4;
 		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
 		width = 40;
 		col.setPreferredWidth(width);
 	}
 
-
-
 	// 테이블클릭할때 작동 / 현 프로젝트에서는 클릭시 각각의 Tf에 해당 정보를 가져옴
 	private void tableClick() {
 		int i = InnerTableShopList.getSelectedRow();
-		String wkName = (String)InnerTableShopList.getValueAt(i, 0); // 		String type으로 바꿔준다
+		String wkName = (String) InnerTableShopList.getValueAt(i, 0); // String type으로 바꿔준다
 		DaoShop daoShop = new DaoShop(wkName);
 
 		shopcode = daoShop.tableClick();
@@ -533,7 +570,7 @@ public class Panel05Order01Shop extends JPanel {
 	private void conditionQuery() {
 		int i = cbConditionQuery.getSelectedIndex();
 		String conditionQueryColumn = "";
-		switch(i) {
+		switch (i) {
 		case 0:
 			conditionQueryColumn = "name";
 			break;
@@ -555,19 +592,21 @@ public class Panel05Order01Shop extends JPanel {
 
 	// 검색조건과 검색명으로 검색실행 > DB에서 내용을 가져와서 테이블에 보여줌
 	private void conditionQueryAction(String conditionQueryColumn) {
-		
+
 		DaoShop daoShop = new DaoShop(conditionQueryColumn, tfShopSearch.getText());
 		ArrayList<DtoShop> dtoShopList = daoShop.conditionList();
-		
+
 		int listCount = dtoShopList.size();
-		
-		for(int index=0; index < listCount; index++) {
-			String[] qTxt = {dtoShopList.get(index).getName(), dtoShopList.get(index).getProvince() + dtoShopList.get(index).getCity()
-					+ dtoShopList.get(index).getTown(), dtoShopList.get(index).getPhone(), 
-					dtoShopList.get(index).getOpentime().toString().replaceAll(":00:00", "시").replaceAll(":00", ""), 
-					dtoShopList.get(index).getClosetime().toString().replaceAll(":00:00", "시").replaceAll(":00", "")};
+
+		for (int index = 0; index < listCount; index++) {
+			String[] qTxt = { dtoShopList.get(index).getName(),
+					dtoShopList.get(index).getProvince() + dtoShopList.get(index).getCity()
+							+ dtoShopList.get(index).getTown(),
+					dtoShopList.get(index).getPhone(),
+					dtoShopList.get(index).getOpentime().toString().replaceAll(":00:00", "시").replaceAll(":00", ""),
+					dtoShopList.get(index).getClosetime().toString().replaceAll(":00:00", "시").replaceAll(":00", "") };
 			OuterTable.addRow(qTxt);
-		}		
+		}
 	}
 
 } // End

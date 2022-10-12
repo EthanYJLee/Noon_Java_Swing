@@ -13,15 +13,19 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
+
+import com.noon.dao.DaoComplete;
+import com.noon.dao.DaoShop;
+import com.noon.dto.DtoShop;
 
 public class Panel05Order02Time extends JPanel {
 
 	private JLabel lblNewLabel_01;
 	private JLabel lblNewLabel_02;
-	private JLabel lblNewLabel_03;
 	private JLabel lblBtnSelect;
 	private JLabel lblBtnTabOrder;
 	private JLabel lblBtnTabMypage;
@@ -33,13 +37,22 @@ public class Panel05Order02Time extends JPanel {
 	private JLabel lblNewLabel_10;
 	private JComboBox cbTimeHour;
 	private JLabel lblLeftQuentity;
-	private JLabel lblNewLabel_06_2;
 	private JComboBox cbTimeMinute;
 	private JLabel lblNewLabel_03_1;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
+	
+	String openTime;
+	String closeTime;
+	int hourCheck = 0;
+	int minuteCheck = 0;
+	private JLabel lblOpenTime;
+	
+	// static 선언부
+	public static String ordertime;
 
-	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
+	// 바탕화면 그라데이션
+	// -------------------------------------------------------------------------------
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -50,7 +63,7 @@ public class Panel05Order02Time extends JPanel {
 		super.paintChildren(g);
 	}
 	// ----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -58,12 +71,10 @@ public class Panel05Order02Time extends JPanel {
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
-		
+
 		add(getLblNewLabel_01());
 		add(getLblNewLabel_02());
-		add(getLblNewLabel_03());
 		add(getLblLeftQuentity());
-		add(getLblNewLabel_06_2());
 		add(getLblHomeIndicator());
 		add(getLblBtnSelect());
 		add(getLblBtnTabHome());
@@ -78,9 +89,13 @@ public class Panel05Order02Time extends JPanel {
 		add(getLblNewLabel_03_1());
 		add(getLblNewLabel());
 		add(getLblNewLabel_1());
+		add(getLblOpenTime());
+		
+		openTimeCheck();
 	}
-	
-	// 상단바 =============================================================================================================
+
+	// 상단바
+	// =============================================================================================================
 	private JLabel getLblBtnSidebar() {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
@@ -90,6 +105,7 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblBtnSidebar;
 	}
+
 	private JLabel getLblBtnBack() {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
@@ -99,6 +115,7 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblBtnBack;
 	}
+
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
 			lblNewLabel_01 = new JLabel("매장 선택");
@@ -109,6 +126,7 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
+
 	private JLabel getLblNewLabel_10() {
 		if (lblNewLabel_10 == null) {
 			lblNewLabel_10 = new JLabel("");
@@ -126,34 +144,31 @@ public class Panel05Order02Time extends JPanel {
 			lblNewLabel_02.setForeground(new Color(60, 60, 60));
 			lblNewLabel_02.setFont(new Font("SansSerif", Font.BOLD, 18));
 			lblNewLabel_02.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_02.setBounds(1, 263, 374, 22);
+			lblNewLabel_02.setBounds(0, 281, 374, 22);
 		}
 		return lblNewLabel_02;
 	}
-	private JLabel getLblNewLabel_03() {
-		if (lblNewLabel_03 == null) {
-			lblNewLabel_03 = new JLabel("남은 개수 :");
-			lblNewLabel_03.setBounds(114, 313, 71, 16);
-			lblNewLabel_03.setForeground(new Color(176, 108, 89));
-			lblNewLabel_03.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		}
-		return lblNewLabel_03;
-	}
+
 	private JComboBox getCbTimeHour() {
 		if (cbTimeHour == null) {
 			cbTimeHour = new JComboBox();
 			cbTimeHour.setFont(new Font("SansSerif", Font.PLAIN, 16));
-			cbTimeHour.setModel(new DefaultComboBoxModel(new String[] {"시", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"}));
+			
+			
+			cbTimeHour.setModel(new DefaultComboBoxModel(new String[] { "시", "08", "09", "10", "11", "12", "13", "14",
+					"15", "16", "17", "18", "19", "20", "21", "22" }));
 			cbTimeHour.setBounds(91, 387, 89, 27);
 			cbTimeHour.setForeground(Color.decode("#B06C5A"));
 			cbTimeHour.setBackground(Color.decode("#FFEAEA"));
 		}
 		return cbTimeHour;
 	}
+
 	private JComboBox getCbTimeMinute() {
 		if (cbTimeMinute == null) {
 			cbTimeMinute = new JComboBox();
-			cbTimeMinute.setModel(new DefaultComboBoxModel(new String[] {"분", "0", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"}));
+			cbTimeMinute.setModel(new DefaultComboBoxModel(
+					new String[] {"0", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
 			cbTimeMinute.setForeground(new Color(176, 108, 90));
 			cbTimeMinute.setFont(new Font("SansSerif", Font.PLAIN, 16));
 			cbTimeMinute.setBackground(new Color(255, 234, 234));
@@ -161,24 +176,31 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return cbTimeMinute;
 	}
+
+	// 선택하기 버튼 클릭하기
 	private JLabel getLblBtnSelect() {
 		if (lblBtnSelect == null) {
 			lblBtnSelect = new JLabel("");
 			lblBtnSelect.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					String ordertime = cbTimeHour.getSelectedItem().toString() + ":" + cbTimeMinute.getSelectedItem();
-					insertTime();
-					setVisible(false);
-					Main.frame.getContentPane().add(new Panel05Order03Menu());
+					ordertime = cbTimeHour.getSelectedItem().toString() + ":" + cbTimeMinute.getSelectedItem();
+					if (ordertime.equals("시:0")){
+						JOptionPane.showMessageDialog(null, "시간을 확인해주세요", "안내", JOptionPane.INFORMATION_MESSAGE);
+					}else {
+						setVisible(false);
+						Main.frame.getContentPane().add(new Panel05Order03Menu());
+					}
 				}
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select_C.png"));
+					lblBtnSelect
+							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select_C.png"));
 				}
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+					lblBtnSelect
+							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
 				}
 			});
 			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
@@ -188,7 +210,8 @@ public class Panel05Order02Time extends JPanel {
 	}
 	// ==================================================================================================================
 
-	// Tabbar ===========================================================================================================
+	// Tabbar
+	// ===========================================================================================================
 	private JLabel getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
 			lblBtnTabHome = new JLabel("");
@@ -204,6 +227,7 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
+
 	private JLabel getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
 			lblBtnTabOrder = new JLabel("");
@@ -219,6 +243,7 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblBtnTabOrder;
 	}
+
 	private JLabel getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
 			lblBtnTabGift = new JLabel("");
@@ -234,6 +259,7 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
+
 	private JLabel getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
 			lblBtnTabMypage = new JLabel("");
@@ -249,35 +275,29 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblBtnTabMypage;
 	}
+
 	private JLabel getLblHomeIndicator() {
 		if (lblHomeIndicator == null) {
 			lblHomeIndicator = new JLabel("");
-			lblHomeIndicator.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
+			lblHomeIndicator
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
 			lblHomeIndicator.setBounds(1, 778, 375, 34);
 		}
 		return lblHomeIndicator;
 	}
 	// ==================================================================================================================
-	
+
 	private JLabel getLblLeftQuentity() {
 		if (lblLeftQuentity == null) {
-			lblLeftQuentity = new JLabel("");
-			lblLeftQuentity.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblLeftQuentity = new JLabel("판매가능 잔수 : " + Integer.toString(showLeftQuentity()) + "잔"); // 남은 잔수 보여주z기
+			lblLeftQuentity.setHorizontalAlignment(SwingConstants.CENTER);
 			lblLeftQuentity.setForeground(new Color(176, 108, 89));
 			lblLeftQuentity.setFont(new Font("SansSerif", Font.PLAIN, 16));
-			lblLeftQuentity.setBounds(183, 313, 42, 16);
+			lblLeftQuentity.setBounds(-1, 315, 375, 16);
 		}
 		return lblLeftQuentity;
 	}
-	private JLabel getLblNewLabel_06_2() {
-		if (lblNewLabel_06_2 == null) {
-			lblNewLabel_06_2 = new JLabel("잔");
-			lblNewLabel_06_2.setForeground(new Color(176, 108, 89));
-			lblNewLabel_06_2.setFont(new Font("SansSerif", Font.PLAIN, 16));
-			lblNewLabel_06_2.setBounds(229, 313, 17, 16);
-		}
-		return lblNewLabel_06_2;
-	}
+
 	private JLabel getLblNewLabel_03_1() {
 		if (lblNewLabel_03_1 == null) {
 			lblNewLabel_03_1 = new JLabel(":");
@@ -288,6 +308,7 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblNewLabel_03_1;
 	}
+
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
@@ -297,26 +318,48 @@ public class Panel05Order02Time extends JPanel {
 		}
 		return lblNewLabel;
 	}
+
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("<주의> 선택시간으로부터 30분 이후에도 방문하지 않을 시 폐기됩니다.");
 			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-			lblNewLabel_1.setBounds(15, 455, 345, 34);
+			lblNewLabel_1.setBounds(15, 493, 345, 34);
 		}
 		return lblNewLabel_1;
 	}
-	
+
+	private JLabel getLblOpenTime() {
+		if (lblOpenTime == null) {
+			lblOpenTime = new JLabel();
+			lblOpenTime.setHorizontalAlignment(SwingConstants.CENTER);
+			lblOpenTime.setForeground(new Color(175, 107, 90));
+			lblOpenTime.setFont(new Font("SansSerif", Font.BOLD, 16));
+			lblOpenTime.setBounds(0, 459, 374, 22);
+		}
+		return lblOpenTime;
+	}
+
 	// Function
-	private void insertTime() {
-		
+	// 남은잔 계산하기
+	private int showLeftQuentity() {
+		DaoComplete daoComplete = new DaoComplete();
+		return daoComplete.selectQuantity();
+
 	}
 	
-	
-	
-	
-	
-	
+	// 운영시간 가져오기
+	private void openTimeCheck() {
+		DaoShop daoShop = new DaoShop();
+		daoShop.openTimeCheck();
+
+		DtoShop dtoShop = daoShop.openTimeCheck();
+		lblOpenTime.setText("영업시간 : " + dtoShop.getOpentime().toString() + " ~ " + dtoShop.getClosetime().toString());
+		
+//		tfName.setText(dto.getName());
+//		tfTelno.setText(dto.getTelno());
+		
+	}
 	
 	
 } // End

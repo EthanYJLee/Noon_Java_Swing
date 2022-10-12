@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.noon.base.Panel05Order01Shop;
 import com.noon.dto.DtoShop;
 import com.noon.util.DBConnect;
 
@@ -23,12 +24,12 @@ public class DaoShop {
 	String closetime;
 	String conname;
 	String condata;
-	
+
 	// Constructor
 	public DaoShop() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public DaoShop(String conname, String condata) {
 		super();
 		this.conname = conname;
@@ -42,21 +43,22 @@ public class DaoShop {
 
 	// Method
 	// 조건 검색 결과를 Table로
-	public ArrayList<DtoShop> conditionList(){
-		
+	public ArrayList<DtoShop> conditionList() {
+
 		ArrayList<DtoShop> dtoShopList = new ArrayList<DtoShop>();
-		
+
 		String whereStatement = "select name, province, city, town, phone, opentime, closetime from shop ";
 		String whereStatement2 = "where " + conname + " like '%" + condata + "%'";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql, DBConnect.pw_mysql);
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
-	
+
 			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
-	
+
 			while (rs.next()) { // true값일때만 가져온다
-				
+
 				String wkName = rs.getString(1);
 				String wkProvince = rs.getString(2);
 				String wkCity = rs.getString(3);
@@ -64,58 +66,75 @@ public class DaoShop {
 				String wkPhone = rs.getString(5);
 				String wkOpenTime = rs.getString(6);
 				String wkCloseTime = rs.getString(7);
-			
+
 				DtoShop dtoShop = new DtoShop(wkName, wkProvince, wkCity, wkTown, wkPhone, wkOpenTime, wkCloseTime);
 				dtoShopList.add(dtoShop);
 			}
-	
+
 			conn_mysql.close();
-	
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dtoShopList;
 
 	}
-	
+
 	// Table을 Click하였을 경우
-		public int tableClick() {
-			
-			int i = 0;
-			String whereStatement = "select shopcode from shop "; // 마지막 띄워주기
-			String whereStatement2 = "where name = '" + name + "'";
-			
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql, DBConnect.pw_mysql);
-				Statement stmt_mysql = conn_mysql.createStatement();
-		
-				ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
-		
-				if (rs.next()) { // true값일때만 가져온다
-					i = rs.getInt(1);
-				}
-		
-				conn_mysql.close();
-		
-			} catch (Exception e) {
-				e.printStackTrace();
+	public int tableClick() {
+
+		int i = 0;
+		String whereStatement = "select shopcode from shop "; // 마지막 띄워주기
+		String whereStatement2 = "where name = '" + name + "'";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
+
+			if (rs.next()) { // true값일때만 가져온다
+				i = rs.getInt(1);
 			}
-			return i;
-			
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return i;
+
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 영업시간 가져오기
+	public DtoShop openTimeCheck() {
+		DtoShop dtoShop = null;
+		String whereStatement = "select opentime, closetime from shop ";
+		String whereStatement2 = "where shopcode = '" + Panel05Order01Shop.shopcode + "' ";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
+
+			if (rs.next()) { // true값일때만 가져온다
+				String wkOpen = rs.getString(1);
+				String wkClose = rs.getString(2);
+				
+				dtoShop = new DtoShop(wkOpen, wkClose);
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dtoShop;
+	}
 
 } // End
