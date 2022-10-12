@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -15,7 +15,6 @@ import com.javalec.dao.DaoManage;
 import com.javalec.util.GradientBack;
 import com.javalec.util.RoundedButton;
 
-import com.javalec.dao.DaoMember;
 import com.javalec.util.GradientBack;
 import com.javalec.util.RoundedButton;
 
@@ -24,7 +23,7 @@ public class LogIn extends GradientBack {
 	
 	private JTextField tfShopNo;
 	private JTextField tfManagerNo;
-	private RoundedButton btnNewButton = new RoundedButton("");
+	
 
 	public LogIn() {
 		setLayout(null);
@@ -49,41 +48,41 @@ public class LogIn extends GradientBack {
 		lblLogo.setBounds(72, 114, 200, 200);
 		add(lblLogo);
 
-		JLabel lblNewLabel = new JLabel("매장번호");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(59, 364, 82, 15);
-		add(lblNewLabel);
+		JLabel lblStoreNo = new JLabel("매장코드 : ");
+		lblStoreNo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStoreNo.setBounds(59, 364, 82, 15);
+		add(lblStoreNo);
 
-		JLabel lblNewLabel_1 = new JLabel("관리자번호");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(59, 395, 82, 15);
-		add(lblNewLabel_1);
-
-		btnNewButton.addActionListener(new ActionListener() {
+		JLabel lblManagerId = new JLabel("관리자 ID : ");
+		lblManagerId.setHorizontalAlignment(SwingConstants.CENTER);
+		lblManagerId.setBounds(59, 395, 82, 15);
+		add(lblManagerId);
+		
+		RoundedButton btnLogin = new RoundedButton();
+		btnLogin.setBackground(new Color(255, 255, 255));
+		btnLogin.setIcon(new ImageIcon(LogIn.class.getResource("/com/javalec/image/btn_login.png")));
+		btnLogin.setBounds(72, 461, 200, 100);
+		add(btnLogin);
+		btnLogin.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				loginAction();
-				setVisible(false);
-				Frame.frame.getContentPane().add(new Ad());
 			}
 		});
-		btnNewButton.setBackground(new Color(255, 0, 0, 0));
-		btnNewButton.setIcon(new ImageIcon(LogIn.class.getResource("/com/javalec/image/btn_login.png")));
-		btnNewButton.setBounds(72, 461, 200, 100);
-		add(btnNewButton);
+		
 	}
 
-	private void loginAction(){
+	public void loginAction(){
 		int id = Integer.parseInt(tfShopNo.getText());
-		int pw = Integer.parseInt(tfManagerNo.getText());
+		String pw = tfManagerNo.getText();
 		
 		DaoManage daoManage = new DaoManage(id, pw);
 		if(daoManage.loginAction() == 1) {
-			id = Integer.parseInt(tfShopNo.getText().trim());
-			setVisible(true);
+			setVisible(false);
 			Frame.frame.getContentPane().add(new Ad());
-		}else {
-			JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "로그인 안내", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "매장코드와 관리자ID를 확인해주세요.");
+			setVisible(true);
 		}
 	}
-
 }

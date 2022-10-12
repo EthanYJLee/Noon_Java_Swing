@@ -57,18 +57,6 @@ public class Cart extends JPanel {
 		add(panel);
 		panel.add(getScrollPane());
 		panel.setLayout(null);
-
-		
-		RoundedButton btnCancel = new RoundedButton("");
-		btnCancel.setBackground(new Color(255, 255, 255));
-		btnCancel.setIcon(new ImageIcon(Cart.class.getResource("/com/javalec/image/Group 6924.png")));
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				deleteAction();
-			}
-		});
-		btnCancel.setBounds(243, 286, 95, 59);
-		panel.add(btnCancel);
 		
 		RoundedButton btnOrderMore = new RoundedButton("");
 		btnOrderMore.setBackground(new Color(255, 255, 255));
@@ -87,6 +75,12 @@ public class Cart extends JPanel {
 		btnPay.setIcon(new ImageIcon(Cart.class.getResource("/com/javalec/image/Group 6921.png")));
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// 결제에 업데이트
+				
+				
+				
+				
+				
 				setVisible(false);
 				Frame.frame.getContentPane().add(new Point());
 			}
@@ -103,6 +97,10 @@ public class Cart extends JPanel {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(127, 355, 69, 30);
 		panel.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("선택 취소");
+		btnNewButton.setBounds(243, 286, 95, 23);
+		panel.add(btnNewButton);
 		
 		RoundedButton btnBack = new RoundedButton("");
 		btnBack.addActionListener(new ActionListener() {
@@ -196,10 +194,6 @@ public class Cart extends JPanel {
 	}
 	
 	public void searchAction() {
-		
-	}
-	
-	public void deleteAction() {
 		
 	}
 }

@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 public class Welcome extends GradientBack {
 	
 	public static String forHereToGo = null;
+	int countCoffee;
 	
 	public Welcome() {
 		setLayout(null);
@@ -34,9 +35,9 @@ public class Welcome extends GradientBack {
 		setBackground(new Color(244, 210, 201));
 		setBounds(0, 0, 350, 700);
 		
-		JLabel label = new JLabel("오늘 준비된 커피가 " + "잔 남았습니다.");
+		JLabel label = new JLabel("오늘 준비된 커피가 " + countCoffee + " 잔 남았습니다.");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(69, 105, 188, 15);
+		label.setBounds(12, 84, 326, 36);
 		add(label);
 		
 		JLabel lblLogo = new JLabel("");

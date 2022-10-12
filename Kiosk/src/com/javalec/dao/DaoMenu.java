@@ -1,5 +1,6 @@
 package com.javalec.dao;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -44,7 +45,7 @@ public class DaoMenu {
 		ArrayList<DtoMenu> dtoList = new ArrayList<DtoMenu>();
 
 		String whereStatement = "select name, price, photo from menu ";
-		String whereStatement2 = "where category = " + concategory;
+		String whereStatement2 = "where category " + concategory;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql, DBConnect.pw_mysql);
@@ -100,7 +101,10 @@ public class DaoMenu {
 				output.close();
 
 				Menu menu = new Menu();
-				menu.getLblMenuImage().setIcon(new ImageIcon(filepath));
+				ImageIcon icon = new ImageIcon(filepath);
+				Image img = icon.getImage();
+				Image changeImg = img.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+				menu.getLblMenuImage().setIcon(new ImageIcon(changeImg));
 				menu.getLblMenuName().setText(wkName);
 				menuList.add(menu);
 				

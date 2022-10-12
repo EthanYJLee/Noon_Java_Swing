@@ -1,23 +1,15 @@
 package com.javalec.base;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class Frame extends JFrame {
 
 	public static JFrame frame;
 	public JPanel login = new LogIn();
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -3,30 +3,24 @@ package com.javalec.base;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-import com.javalec.util.ImagePanel;
-import java.awt.Toolkit;
 import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class Ad extends JPanel {
-	private ImagePanel pnMiddle = new ImagePanel(Toolkit.getDefaultToolkit().getImage(Ad.class.getResource("/com/javalec/image/Group 6927.png")));
-	
-     
 	
 	public Ad() {
 		setLayout(null);
 		setLocation(0, 0);
 		setBounds(0, 0, 350, 700);
-		pnMiddle.setBackground(new Color(255, 255, 255));
+		setBackground(new Color(192, 192, 192));
 		
-		pnMiddle.setBounds(0, 0, 350, 700);
-		pnMiddle.setLayout(null);
-		add(pnMiddle);
-
+		JLabel advertisement = new JLabel("광고");
+		advertisement.setFont(new Font("굴림", Font.PLAIN, 38));
+		advertisement.setBounds(130, 211, 76, 141);
+		add(advertisement);
 		
 		addMouseListener(new MouseAdapter() {
 			@Override

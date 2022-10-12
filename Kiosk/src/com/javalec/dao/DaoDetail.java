@@ -16,17 +16,29 @@ public class DaoDetail {
 	private int quantity;
 	private int syrup;
 	private int shot;
-	private int water;
+	private int size;
 	
+	public DaoDetail() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	// insertToOrder 시 생성자 
-	public DaoDetail(int hotice, int quantity, int syrup, int shot, int water) {
+	public DaoDetail(int hotice, int quantity, int syrup, int shot, int size) {
 		super();
 		this.hotice = hotice;
 		this.quantity = quantity;
 		this.syrup = syrup;
 		this.shot = shot;
-		this.water = water;
+		this.size = size;
+	}
+	
+	
+
+	public DaoDetail(int syrup, int shot, int size) {
+		super();
+		this.syrup = syrup;
+		this.shot = shot;
+		this.size = size;
 	}
 
 	public boolean insertToOrder() {
@@ -37,7 +49,7 @@ public class DaoDetail {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
 					DBConnect.pw_mysql); 
-			String query = "insert into cart (hotice, quantity, shot, syrup, water, forheretogo, set_menu_name,staff_id,indiprice, set_setno, shopshopcode , ordertime) ";
+			String query = "insert into cart (hotice, quantity, shot, syrup, size, forheretogo, set_menu_name, staff_id, indiprice, setting_setno, shopshopcode , ordertime) ";
 			String query1 = "values (?,?,?,?,?,?,?,?,?,?,?,now())";
 
 			ps = conn_mysql.prepareStatement(query + query1);
@@ -45,7 +57,7 @@ public class DaoDetail {
 			ps.setInt(2, quantity);
 			ps.setInt(3, shot);
 			ps.setInt(4, syrup);
-			ps.setInt(5, water);
+			ps.setInt(5, size);
 			ps.setString(6, Welcome.forHereToGo);
 			ps.setString(7, MenuMain.menuname);
 			ps.setString(8, LogIn.kiosk_id);
@@ -68,7 +80,7 @@ public class DaoDetail {
 	public int indiPrice() {
 		// select pricenow from setting where menu_name = 'MenuMain.menuname' and enddate is null 
 		String whereStatement = "select pricenow from setting ";
-		String whereStatement2 = "where menu_name = '"+MenuMain.menuname+"' and enddate is null";
+		String whereStatement2 = "where menu_name = '"+ MenuMain.menuname + "' and enddate is null";
 		
 		int indiPrice = 0;
 		try {
@@ -89,7 +101,7 @@ public class DaoDetail {
 			e.printStackTrace(); // 개발 할 때는 이렇게, product를 만들 때는 경고문장을 넣어주면 된다.
 		}
 		
-		indiPrice = indiPrice + syrup + shot + water;
+		indiPrice = indiPrice + syrup + shot + size;
 		
 		return indiPrice;
 	}
@@ -123,7 +135,7 @@ public class DaoDetail {
 	
 	public int shopShopCode() {
 		// select shop_shopcode from hire where staff_id = 'Login.kiosk_id' and deletedate is null 
-		String whereStatement = "select shop_shopcode from  hire";
+		String whereStatement = "select shop_shopcode from hire ";
 		String whereStatement2 = "where staff_id = '"+LogIn.kiosk_id+"' and enddate is null";
 		
 		int shopcode = 0;
