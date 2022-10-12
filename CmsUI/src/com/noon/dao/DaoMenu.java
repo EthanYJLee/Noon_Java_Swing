@@ -165,7 +165,6 @@ public class DaoMenu {
 				int i = 0;
 				File check = new File(filepath);
 				while (check.exists()) {
-					check.delete();
 					filepath += 1;
 					check = new File(filepath);
 					i++;

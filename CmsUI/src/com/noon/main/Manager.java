@@ -1,6 +1,10 @@
 package com.noon.main;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -16,6 +20,7 @@ import com.noon.form.manager.ManagerEmpty;
 import com.noon.form.manager.ManagerForm1;
 import com.noon.form.manager.ManagerForm2;
 import com.noon.form.manager.ManagerForm3;
+import com.noon.form.manager.ManagerForm6;
 import com.noon.swing.PanelBorder;
 
 public class Manager extends javax.swing.JFrame {
@@ -42,7 +47,9 @@ public class Manager extends javax.swing.JFrame {
 					setManagerForm(new ManagerForm2());
 				} else if (index == 5) {
 					setManagerForm(new ManagerForm3());
-				} else {
+				} else if(index == 7){
+					setManagerForm(new ManagerForm6());
+				}else {
 					setManagerForm(new ManagerEmpty());
 				}
 
@@ -62,8 +69,18 @@ public class Manager extends javax.swing.JFrame {
 		panelBorder2 = new com.noon.swing.PanelBorder();
 		sideBar1 = new com.noon.component.SideBar();
 		header2 = new com.noon.component.Header();
-		mainPanel = new javax.swing.JPanel();
-
+		mainPanel = new javax.swing.JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				Graphics2D g2 = (Graphics2D) g;
+				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				GradientPaint g3 = new GradientPaint(0, 0, Color.decode("#ffffff"), 0, getHeight(), Color.decode("#FAF3E0"));
+		        g2.setPaint(g3);
+				g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+				super.paintComponent(g);
+			}
+		};
+		mainPanel.setOpaque(false);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setUndecorated(true);
 		setLocationRelativeTo(null);
@@ -112,6 +129,8 @@ public class Manager extends javax.swing.JFrame {
 
 		pack();
 		getContentPane().setLayout(layout);
+		
+		setManagerForm(new ManagerForm6());
 
 	}
 	
