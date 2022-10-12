@@ -26,6 +26,8 @@ import java.awt.event.MouseEvent;
 
 public class Welcome extends GradientBack {
 	
+	public static String forHereToGo = null;
+	
 	public Welcome() {
 		setLayout(null);
 		setVisible(true);
@@ -46,7 +48,6 @@ public class Welcome extends GradientBack {
 		RoundedButton btnForHere = new RoundedButton("");
 		btnForHere.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				forHere();
 				setVisible(false);
 				Frame.frame.getContentPane().add(new MenuMain());
 			}
@@ -59,7 +60,7 @@ public class Welcome extends GradientBack {
 		RoundedButton btnToGo = new RoundedButton("");
 		btnToGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				toGo();
+				forHereToGo = "togo";
 				setVisible(false);
 				Frame.frame.getContentPane().add(new MenuMain());
 			}
@@ -71,11 +72,5 @@ public class Welcome extends GradientBack {
 		
 	}
 	
-	public void forHere() {
-		
-		
-	}
-	public void toGo() {
-		
-	}
+	
 }

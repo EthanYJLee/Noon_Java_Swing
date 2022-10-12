@@ -5,45 +5,59 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.javalec.component.Menu;
+import com.javalec.dao.DaoDetail;
 import com.javalec.util.RoundedButton;
-import java.awt.GridLayout;
-import javax.swing.JButton;
 
 public class Detail extends JPanel {
+	
+	
+	
+	
+	
+	
+	
+	private int hotice;
+	private int water;
+	private int shot;
+	private int syrup;
+	private int quantity;
 
 	public Detail() {
-		setLayout(null);
 		setBackground(new Color(244, 210, 201));
 		setSize(350, 700);
+		setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 155, 350, 545);
 		panel.setBackground(new Color(255, 255, 255));
 		add(panel);
-		panel.setLayout(null);
 		
 		RoundedButton btnCancelAll = new RoundedButton("");
+		btnCancelAll.setBounds(12, 399, 326, 65);
 		btnCancelAll.setBackground(new Color(255, 255, 255));
 		btnCancelAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		panel.setLayout(null);
 		btnCancelAll.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/Group 69181.png")));
-		btnCancelAll.setBounds(12, 399, 326, 65);
 		panel.add(btnCancelAll);
 		
 		RoundedButton btnAddToCart = new RoundedButton("");
+		btnAddToCart.setBounds(12, 470, 326, 65);
 		btnAddToCart.setBackground(new Color(255, 255, 255));
 		btnAddToCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				insertToOrder();
 				setVisible(false);
 				Frame.frame.getContentPane().add(new Cart());
 			}
 		});
 		btnAddToCart.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/Group 69191.png")));
-		btnAddToCart.setBounds(12, 470, 326, 65);
 		panel.add(btnAddToCart);
 		
 		JPanel panel_1 = new JPanel();
@@ -116,6 +130,7 @@ public class Detail extends JPanel {
 		
 		
 		RoundedButton btnBack = new RoundedButton("");
+		btnBack.setBounds(12, 10, 33, 36);
 		btnBack.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/Vector.png")));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,8 +139,19 @@ public class Detail extends JPanel {
 			}
 		});
 		btnBack.setBackground(new Color(244, 210, 201));
-		btnBack.setBounds(12, 10, 33, 36);
 		add(btnBack);
-
+		
+		Menu menu = new Menu();
+		menu.setBounds(104, 10, 140, 140);
+		String filePath = "./" + MenuMain.menuname;
+		menu.getLblMenuImage().setIcon(new ImageIcon(filePath));
+		menu.getLblMenuName().setText(MenuMain.menuname);
+		add(menu);
+		
+	}
+	
+	public void insertToOrder() {
+		DaoDetail dao = new DaoDetail(hotice,quantity,syrup,shot,water);
+		dao.insertToOrder();
 	}
 }
