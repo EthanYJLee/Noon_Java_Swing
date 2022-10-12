@@ -1,16 +1,19 @@
 package com.javalec.base;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
+import com.javalec.dao.DaoManage;
 import com.javalec.util.GradientBack;
 import com.javalec.util.RoundedButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
 public class LogIn extends GradientBack {
 	private JTextField tfShopNo;
@@ -54,7 +57,7 @@ public class LogIn extends GradientBack {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				loginAction();
+				loginAction();
 				setVisible(false);
 				Frame.frame.getContentPane().add(new Ad());
 			}
@@ -65,29 +68,18 @@ public class LogIn extends GradientBack {
 		add(btnNewButton);
 	}
 	
-	private void loginAction() {
-
-			String pw = tfManagerNo.getText();
-			
-			DaoMember daoMember = new DaoMember(tfShopNo.getText().trim());
-			if(daoMember.checkId() == 1) {
-				id = tfId.getText().trim();
-				setVisible(false);
-				Main.frame.getContentPane().add(new Panel03Home());
-			}else {
-				JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "로그인 안내", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
+private void loginAction(){
+		int id = Integer.parseInt(tfShopNo.getText());
+		int pw = Integer.parseInt(tfManagerNo.getText());
 		
-		
-		private JPasswordField getPfPw() {
-			if (pfPw == null) {
-				pfPw = new JPasswordField();
-				pfPw.setBackground(new Color(176, 107, 89));
-				pfPw.setBounds(141, 418, 203, 36);
-			}
-			return pfPw;
+		DaoManage daoManage = new DaoManage(id, pw);
+		if(daoManage.loginAction() == 1) {
+			id = Integer.parseInt(tfShopNo.getText().trim());
+			setVisible(true);
+			Frame.frame.getContentPane().add(new Ad());
+		}else {
+			JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "로그인 안내", JOptionPane.INFORMATION_MESSAGE);
 		}
-	} // End
+	}
 
-}}
+}
