@@ -11,6 +11,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.javalec.dao.DaoManage;
+import com.javalec.util.GradientBack;
+import com.javalec.util.RoundedButton;
+
 import com.javalec.dao.DaoMember;
 import com.javalec.util.GradientBack;
 import com.javalec.util.RoundedButton;
@@ -57,7 +61,7 @@ public class LogIn extends GradientBack {
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				loginAction();
+				loginAction();
 				setVisible(false);
 				Frame.frame.getContentPane().add(new Ad());
 			}
@@ -66,6 +70,20 @@ public class LogIn extends GradientBack {
 		btnNewButton.setIcon(new ImageIcon(LogIn.class.getResource("/com/javalec/image/btn_login.png")));
 		btnNewButton.setBounds(72, 461, 200, 100);
 		add(btnNewButton);
+	}
+
+	private void loginAction(){
+		int id = Integer.parseInt(tfShopNo.getText());
+		int pw = Integer.parseInt(tfManagerNo.getText());
+		
+		DaoManage daoManage = new DaoManage(id, pw);
+		if(daoManage.loginAction() == 1) {
+			id = Integer.parseInt(tfShopNo.getText().trim());
+			setVisible(true);
+			Frame.frame.getContentPane().add(new Ad());
+		}else {
+			JOptionPane.showMessageDialog(null, "정보를 확인해주세요.", "로그인 안내", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 }
