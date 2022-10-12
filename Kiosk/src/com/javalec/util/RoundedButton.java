@@ -1,5 +1,6 @@
 package com.javalec.util;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -53,14 +54,10 @@ public class RoundedButton extends JButton {
 	    graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 	    if (getModel().isArmed()) {
-//	        graphics.setColor(new Color(250, 243, 224));
 	        graphics.setColor(new Color(255,0,0,0));
 	    } else if (getModel().isRollover()) {
-//	        graphics.setColor(new Color(244, 210, 201));
-//	        graphics.setColor(getBackground());
 	    	graphics.setColor(new Color(255,0,0,0));
 	    } else {
-//	        graphics.setColor(getBackground());;
 	    	graphics.setColor(new Color(255,0,0,0));
 	    }
 	    graphics.fillRoundRect(0, 0, width, height, 15, 15);

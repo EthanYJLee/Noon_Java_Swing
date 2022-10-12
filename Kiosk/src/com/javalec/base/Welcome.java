@@ -18,12 +18,13 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import com.javalec.util.GradientBack;
 import com.javalec.util.RoundedButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Welcome extends JPanel {
+public class Welcome extends GradientBack {
 	
 	public Welcome() {
 		setLayout(null);
@@ -77,16 +78,4 @@ public class Welcome extends JPanel {
 	public void toGo() {
 		
 	}
-	
-	public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        int w = getWidth(), h = getHeight();
-        Color color1 = new Color(244, 210, 201);
-        Color color2 = new Color(250, 243, 224);
-        GradientPaint gp = new GradientPaint(0, 0, color1, w, h, color2);
-        g2d.setPaint(gp);
-        g2d.fillRect(0, 0, w, h);
-    }
 }

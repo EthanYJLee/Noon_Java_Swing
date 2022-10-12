@@ -5,12 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.javalec.util.RoundedButton;
-import javax.swing.JRadioButton;
+import java.awt.GridLayout;
+import javax.swing.JButton;
 
 public class Detail extends JPanel {
 
@@ -47,83 +46,74 @@ public class Detail extends JPanel {
 		btnAddToCart.setBounds(12, 470, 326, 65);
 		panel.add(btnAddToCart);
 		
-		RoundedButton water1 = new RoundedButton();
-		water1.setBackground(new Color(255, 255, 255));
-		water1.setBounds(12, 115, 100, 40);
-		panel.add(water1);
-		water1.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_size_tall.png")));
-		RoundedButton water2 = new RoundedButton();
-		water2.setBackground(new Color(255, 255, 255));
-		water2.setBounds(124, 115, 100, 40);
-		panel.add(water2);
-		water2.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_size_grande.png")));
-		RoundedButton water3 = new RoundedButton();
-		water3.setBackground(new Color(255, 255, 255));
-		water3.setBounds(238, 115, 100, 40);
-		panel.add(water3);
-		water3.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_size_regular.png")));
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(12, 10, 326, 55);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
 		
-		RoundedButton shot0 = new RoundedButton();
-		shot0.setBackground(new Color(255, 255, 255));
-		shot0.setBounds(12, 184, 80, 60);
-		panel.add(shot0);
-		shot0.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_shot_basic.png")));
-		RoundedButton shot1 = new RoundedButton();
-		shot1.setBackground(new Color(255, 255, 255));
-		shot1.setBounds(95, 184, 80, 60);
-		panel.add(shot1);
-		shot1.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_shot_plus1.png")));
-		RoundedButton shot2 = new RoundedButton();
-		shot2.setBackground(new Color(255, 255, 255));
-		shot2.setBounds(176, 184, 80, 60);
-		panel.add(shot2);
-		shot2.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_shot_plus2.png")));
-		RoundedButton shot3 = new RoundedButton();
-		shot3.setBackground(new Color(255, 255, 255));
-		shot3.setBounds(258, 184, 80, 60);
-		panel.add(shot3);
-		shot3.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_shot_plus3.png")));
+		JButton btnNewButton = new JButton("Hot");
+		btnNewButton.setBounds(75, 22, 95, 23);
+		panel_1.add(btnNewButton);
 		
- 		
-		RoundedButton noSyrup = new RoundedButton();
-		noSyrup.setBackground(new Color(255, 255, 255));
-		noSyrup.setBounds(12, 268, 105, 60);
-		panel.add(noSyrup);
-		noSyrup.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_syrup_basic1.png")));
-		RoundedButton hazelnutSyrup = new RoundedButton();
-		hazelnutSyrup.setBackground(new Color(255, 255, 255));
-		hazelnutSyrup.setBounds(122, 268, 105, 60);
-		panel.add(hazelnutSyrup);
-		hazelnutSyrup.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_syrup_hazelnut.png")));
-		RoundedButton vanillaSyrup = new RoundedButton();
-		vanillaSyrup.setBackground(new Color(255, 255, 255));
-		vanillaSyrup.setBounds(233, 268, 105, 60);
-		panel.add(vanillaSyrup);
-		vanillaSyrup.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_syrup_vanila1.png")));
+		JButton btnIce = new JButton("Ice");
+		btnIce.setBounds(182, 22, 95, 23);
+		panel_1.add(btnIce);
 		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(12, 75, 326, 55);
+		panel.add(panel_2);
+		panel_2.setLayout(null);
 		
-		RoundedButton hot = new RoundedButton();
-		hot.setBackground(new Color(255, 255, 255));
-		hot.setBounds(208, 24, 85, 45);
-		panel.add(hot);
-		hot.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_hot1.png")));
-		RoundedButton ice = new RoundedButton();
-		ice.setBackground(new Color(255, 255, 255));
-		ice.setBounds(50, 24, 85, 45);
-		panel.add(ice);
-		ice.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/btn_ice1.png")));
+		JButton btnTall = new JButton("Tall");
+		btnTall.setBounds(67, 22, 77, 23);
+		panel_2.add(btnTall);
 		
-		JLabel lblNewLabel = new JLabel("물 양");
-		lblNewLabel.setBounds(12, 94, 152, 15);
-		panel.add(lblNewLabel);
+		JButton btnGrande = new JButton("Grande");
+		btnGrande.setBounds(156, 22, 85, 23);
+		panel_2.add(btnGrande);
 		
-		JLabel lblNewLabel_1 = new JLabel("샷 추가");
-		lblNewLabel_1.setBounds(12, 170, 152, 15);
-		panel.add(lblNewLabel_1);
+		JButton btnVenti = new JButton("Venti");
+		btnVenti.setBounds(253, 22, 61, 23);
+		panel_2.add(btnVenti);
 		
-		JLabel lblNewLabel_2 = new JLabel("시럽 추가");
-		lblNewLabel_2.setBounds(12, 249, 152, 15);
-		panel.add(lblNewLabel_2);
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(12, 140, 326, 55);
+		panel.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JButton btnNewButton_5 = new JButton("기본");
+		btnNewButton_5.setBounds(32, 22, 56, 23);
+		panel_3.add(btnNewButton_5);
+		
+		JButton btnNewButton_6 = new JButton("+1");
+		btnNewButton_6.setBounds(100, 22, 56, 23);
+		panel_3.add(btnNewButton_6);
+		
+		JButton btnNewButton_7 = new JButton("+2");
+		btnNewButton_7.setBounds(176, 22, 56, 23);
+		panel_3.add(btnNewButton_7);
+		
+		JButton btnNewButton_8 = new JButton("+3");
+		btnNewButton_8.setBounds(258, 22, 56, 23);
+		panel_3.add(btnNewButton_8);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(12, 205, 326, 55);
+		panel.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JButton btnNewButton_9 = new JButton("없음");
+		btnNewButton_9.setBounds(55, 22, 64, 23);
+		panel_4.add(btnNewButton_9);
+		
+		JButton btnNewButton_10 = new JButton("헤이즐넛");
+		btnNewButton_10.setBounds(131, 22, 90, 23);
+		panel_4.add(btnNewButton_10);
+		
+		JButton btnNewButton_11 = new JButton("바닐라");
+		btnNewButton_11.setBounds(233, 22, 81, 23);
+		panel_4.add(btnNewButton_11);
+		
 		
 		RoundedButton btnBack = new RoundedButton("");
 		btnBack.setIcon(new ImageIcon(Detail.class.getResource("/com/javalec/image/Vector.png")));
@@ -136,9 +126,6 @@ public class Detail extends JPanel {
 		btnBack.setBackground(new Color(244, 210, 201));
 		btnBack.setBounds(12, 10, 33, 36);
 		add(btnBack);
-		
-		
-		
 
 	}
 }

@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 public class Frame extends JFrame {
 
 	public static JFrame frame;
-	public JPanel ad = new Ad();
+	public JPanel login = new LogIn();
 
 	/**
 	 * Launch the application.
@@ -40,7 +40,7 @@ public class Frame extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(450, 0, 350, 700);
 		frame.setUndecorated(true);
-		frame.getContentPane().add(ad);
+		frame.getContentPane().add(login);
 		
 	}
 

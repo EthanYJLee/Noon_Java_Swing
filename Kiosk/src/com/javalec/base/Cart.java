@@ -120,8 +120,11 @@ public class Cart extends JPanel {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
+			scrollPane.setBackground(new Color(244, 210, 201));
+			scrollPane.setOpaque(false);
 			scrollPane.setBounds(12, 10, 326, 266);
 			scrollPane.setViewportView(getInner_Table());
+			scrollPane.getViewport().setBackground(getBackground());
 		}
 		return scrollPane;
 	}
@@ -129,8 +132,12 @@ public class Cart extends JPanel {
 	private JTable getInner_Table() {
 		if (Inner_Table == null) {
 			Inner_Table = new JTable();
+			Inner_Table.setForeground(new Color(244, 210, 201));
+			Inner_Table.setOpaque(true);
+//			Inner_Table.setBackground(new Color(255, 255, 255));
 			Inner_Table.setFont(new Font("굴림", Font.PLAIN, 20));
 			Inner_Table.getTableHeader().setFont(new Font("굴림", Font.PLAIN, 15));
+			Inner_Table.getTableHeader().setBackground(Color.white);
 			Inner_Table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -165,7 +172,7 @@ public class Cart extends JPanel {
 
 		int vColIndex = 0;
 		TableColumn col = Inner_Table.getColumnModel().getColumn(vColIndex);
-		int width = 100;
+		int width = 95;
 		col.setPreferredWidth(width);
 		
 		
