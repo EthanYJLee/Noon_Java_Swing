@@ -100,7 +100,7 @@ public class Panel05Order02Time extends JPanel {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
 			lblBtnSidebar.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnSidebar.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/icon_sidebar.png"));
+			lblBtnSidebar.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_sidebar.png"));
 			lblBtnSidebar.setBounds(13, 26, 36, 32);
 		}
 		return lblBtnSidebar;
@@ -110,7 +110,7 @@ public class Panel05Order02Time extends JPanel {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
 			lblBtnBack.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnBack.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/icon_back.png"));
+			lblBtnBack.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_back.png"));
 			lblBtnBack.setBounds(51, 26, 32, 32);
 		}
 		return lblBtnBack;
@@ -131,7 +131,7 @@ public class Panel05Order02Time extends JPanel {
 		if (lblNewLabel_10 == null) {
 			lblNewLabel_10 = new JLabel("");
 			lblNewLabel_10.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblNewLabel_10.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/profile_photo.png"));
+			lblNewLabel_10.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/profile_photo.png"));
 			lblNewLabel_10.setBounds(297, 26, 36, 36);
 		}
 		return lblNewLabel_10;
@@ -195,15 +195,15 @@ public class Panel05Order02Time extends JPanel {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblBtnSelect
-							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select_C.png"));
+							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select_C.png"));
 				}
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblBtnSelect
-							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select.png"));
 				}
 			});
-			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select.png"));
 			lblBtnSelect.setBounds(15, 644, 345, 61);
 		}
 		return lblBtnSelect;
@@ -254,7 +254,7 @@ public class Panel05Order02Time extends JPanel {
 					Main.frame.getContentPane().add(new Panel06Gift());
 				}
 			});
-			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
+			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_gift.png"));
 			lblBtnTabGift.setBounds(187, 729, 94, 50);
 		}
 		return lblBtnTabGift;
@@ -270,7 +270,7 @@ public class Panel05Order02Time extends JPanel {
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
 			});
-			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
+			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_mypage.png"));
 			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
 		return lblBtnTabMypage;
@@ -280,7 +280,7 @@ public class Panel05Order02Time extends JPanel {
 		if (lblHomeIndicator == null) {
 			lblHomeIndicator = new JLabel("");
 			lblHomeIndicator
-					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/homeindicator.png"));
 			lblHomeIndicator.setBounds(1, 778, 375, 34);
 		}
 		return lblHomeIndicator;

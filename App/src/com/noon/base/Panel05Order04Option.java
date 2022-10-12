@@ -10,12 +10,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class Panel05Order04Option extends JPanel {
-	
+
 	private JLabel lblNewLabel_01;
 	private JLabel lblBtnTabOrder;
 	private JLabel lblBtnTabMypage;
@@ -27,17 +28,17 @@ public class Panel05Order04Option extends JPanel {
 	private JLabel lblProfilePhoto;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	private JLabel lblBtnHot;
-	private JLabel lblBtnIce;
-	private JLabel lblBtnWaterLittle;
-	private JLabel lblBtnWaterDefault;
-	private JLabel lblBtnWaterMore;
-	private JLabel lblBtnShot0;
-	private JLabel lblBtnShot1;
-	private JLabel lblBtnShot2;
-	private JLabel lblBtnShot3;
-	private JLabel lblBtnSyrupNot;
-	private JLabel lblBtnSyrupHazelnut;
+	private JButton btnHot;
+	private JButton btnIce;
+	private JButton btnSizeTall;
+	private JButton btnSizeRegular;
+	private JButton btnSizeGrande;
+	private JButton btnShot0;
+	private JButton btnShot1;
+	private JButton btnShot2;
+	private JButton btnShot3;
+	private JButton btnSyrupNot;
+	private JButton btnSyrupHazelnut;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
 	private JLabel lblBtnMinus;
@@ -47,16 +48,29 @@ public class Panel05Order04Option extends JPanel {
 	private JPanel pnCategoryCoffee;
 	private JLabel lblpn1Background;
 	private JPanel pnCategoryTeaBeverage;
-	private JLabel lblBtnHotPn2;
-	private JLabel lblBtnIcePn2;
-	private JLabel lblBtnSizeTall;
-	private JLabel lblBtnSizeRegular;
-	private JLabel lblBtnSizeGrande;
+	private JButton btnHotPn2;
+	private JButton btnIcePn2;
+	private JButton btnSizeTallPn2;
+	private JButton btnSizeRegularPn2;
+	private JButton btnSizeGrandePn2;
 	private JLabel lblPn2Background;
-	private JLabel lblBtnSyrupHazelnut_1;
+	private JButton btnSyrupVanila;
+	private JLabel lblOptionInfo;
 
+	//
+	private String hoticeCheck = "핫";
+	private String sizeCheck = "Tall";
+	private String shotCheck = "기본";
+	private String syrupCheck = "없음";
 
-	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
+	// static
+	public static int hotice;
+	public static int size;
+	public static int shot;
+	public static int syrup;
+
+	// 바탕화면 그라데이션
+	// -------------------------------------------------------------------------------
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -67,7 +81,7 @@ public class Panel05Order04Option extends JPanel {
 		super.paintChildren(g);
 	}
 	// ----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -77,7 +91,7 @@ public class Panel05Order04Option extends JPanel {
 		setLayout(null);
 		add(getLblBtnSidebar());
 		add(getLblBtnBack());
-		
+
 		add(getLblNewLabel_01());
 		add(getLblProfilePhoto());
 		add(getLblBtnTabHome());
@@ -95,27 +109,32 @@ public class Panel05Order04Option extends JPanel {
 		add(getLblBtnPutIn());
 		add(getPnCategoryCoffee());
 		add(getPnCategoryTeaBeverage());
+		add(getLblOptionInfo());
 	}
-	
-	// 상단바 =============================================================================================================
+
+	// 상단바
+	// =============================================================================================================
 	private JLabel getLblBtnSidebar() {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
 			lblBtnSidebar.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnSidebar.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/icon_sidebar.png"));
+			lblBtnSidebar
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_sidebar.png"));
 			lblBtnSidebar.setBounds(13, 26, 36, 32);
 		}
 		return lblBtnSidebar;
 	}
+
 	private JLabel getLblBtnBack() {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
 			lblBtnBack.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnBack.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/icon_back.png"));
+			lblBtnBack.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_back.png"));
 			lblBtnBack.setBounds(51, 26, 32, 32);
 		}
 		return lblBtnBack;
 	}
+
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
 			lblNewLabel_01 = new JLabel("옵션 선택");
@@ -126,18 +145,21 @@ public class Panel05Order04Option extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
+
 	private JLabel getLblProfilePhoto() {
 		if (lblProfilePhoto == null) {
 			lblProfilePhoto = new JLabel("");
 			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblProfilePhoto.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/profile_photo.png"));
+			lblProfilePhoto
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/profile_photo.png"));
 			lblProfilePhoto.setBounds(322, 26, 36, 36);
 		}
 		return lblProfilePhoto;
 	}
 	// ==================================================================================================================
 
-	// Tabbar ===========================================================================================================
+	// Tabbar
+	// ===========================================================================================================
 	private JLabel getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
 			lblBtnTabHome = new JLabel("");
@@ -148,11 +170,12 @@ public class Panel05Order04Option extends JPanel {
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
 			});
-			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
+			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_home.png"));
 			lblBtnTabHome.setBounds(1, 729, 94, 50);
 		}
 		return lblBtnTabHome;
 	}
+
 	private JLabel getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
 			lblBtnTabOrder = new JLabel("");
@@ -163,11 +186,13 @@ public class Panel05Order04Option extends JPanel {
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
-			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
+			lblBtnTabOrder
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
 			lblBtnTabOrder.setBounds(95, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
 	}
+
 	private JLabel getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
 			lblBtnTabGift = new JLabel("");
@@ -178,11 +203,12 @@ public class Panel05Order04Option extends JPanel {
 					Main.frame.getContentPane().add(new Panel06Gift());
 				}
 			});
-			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
+			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_gift.png"));
 			lblBtnTabGift.setBounds(187, 729, 94, 50);
 		}
 		return lblBtnTabGift;
 	}
+
 	private JLabel getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
 			lblBtnTabMypage = new JLabel("");
@@ -193,15 +219,18 @@ public class Panel05Order04Option extends JPanel {
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
 			});
-			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
+			lblBtnTabMypage
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_mypage.png"));
 			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
 		return lblBtnTabMypage;
 	}
+
 	private JLabel getLblHomeIndicator() {
 		if (lblHomeIndicator == null) {
 			lblHomeIndicator = new JLabel("");
-			lblHomeIndicator.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
+			lblHomeIndicator
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/homeindicator.png"));
 			lblHomeIndicator.setBounds(1, 778, 375, 34);
 		}
 		return lblHomeIndicator;
@@ -218,6 +247,7 @@ public class Panel05Order04Option extends JPanel {
 		}
 		return lblNewLabel;
 	}
+
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("상품사진select");
@@ -226,7 +256,7 @@ public class Panel05Order04Option extends JPanel {
 		}
 		return lblNewLabel_1;
 	}
-	
+
 	// =================================================
 	private JPanel getPnCategoryCoffee() {
 		if (pnCategoryCoffee == null) {
@@ -234,143 +264,261 @@ public class Panel05Order04Option extends JPanel {
 			pnCategoryCoffee.setBackground(new Color(255, 0, 0, 0));
 			pnCategoryCoffee.setBounds(20, 244, 335, 277);
 			pnCategoryCoffee.setLayout(null);
-			pnCategoryCoffee.add(getLblBtnHot());
-			pnCategoryCoffee.add(getLblBtnIce());
-			pnCategoryCoffee.add(getLblBtnWaterLittle());
-			pnCategoryCoffee.add(getLblBtnWaterDefault());
-			pnCategoryCoffee.add(getLblBtnWaterMore());
-			pnCategoryCoffee.add(getLblBtnShot0());
-			pnCategoryCoffee.add(getLblBtnShot1());
-			pnCategoryCoffee.add(getLblBtnShot2());
-			pnCategoryCoffee.add(getLblBtnShot3());
-			pnCategoryCoffee.add(getLblBtnSyrupNot());
-			pnCategoryCoffee.add(getLblBtnSyrupHazelnut());
-			pnCategoryCoffee.add(getLblBtnSyrupHazelnut_1());
+			pnCategoryCoffee.add(getBtnHot());
+			pnCategoryCoffee.add(getBtnIce());
+			pnCategoryCoffee.add(getBtnSizeTall());
+			pnCategoryCoffee.add(getBtnSizeRegular());
+			pnCategoryCoffee.add(getBtnSizeGrande());
+			pnCategoryCoffee.add(getBtnShot0());
+			pnCategoryCoffee.add(getBtnShot1());
+			pnCategoryCoffee.add(getBtnShot2());
+			pnCategoryCoffee.add(getBtnShot3());
+			pnCategoryCoffee.add(getBtnSyrupNot());
+			pnCategoryCoffee.add(getBtnSyrupHazelnut());
+			pnCategoryCoffee.add(getBtnSyrupVanila());
 			pnCategoryCoffee.add(getLblpn1Background());
 
 			//
-			pnCategoryCoffee.setVisible(true);
-			
+			pnCategoryCoffee.setVisible(false);
+			if (Panel05Order03Menu.selectedCategory == "coffee") {
+				pnCategoryCoffee.setVisible(true);
+			}
 		}
 		return pnCategoryCoffee;
 	}
-	private JLabel getLblBtnHot() {
-		if (lblBtnHot == null) {
-			lblBtnHot = new JLabel("");
-			lblBtnHot.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_hot1.png"));
-			lblBtnHot.setBounds(87, 20, 77, 32);
+
+	private JButton getBtnHot() {
+		if (btnHot == null) {
+			btnHot = new JButton("");
+			btnHot.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					hoticeCheck = "Hot";
+					optionInfo();
+				}
+			});
+			btnHot.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_hot1.png"));
+			btnHot.setBounds(87, 20, 77, 32);
 		}
-		return lblBtnHot;
+		return btnHot;
 	}
-	private JLabel getLblBtnIce() {
-		if (lblBtnIce == null) {
-			lblBtnIce = new JLabel("");
-			lblBtnIce.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_ice1.png"));
-			lblBtnIce.setBounds(232, 20, 77, 32);
+
+	private JButton getBtnIce() {
+		if (btnIce == null) {
+			btnIce = new JButton("");
+			btnIce.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					hoticeCheck = "Ice";
+					optionInfo();
+				}
+			});
+			btnIce.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_ice1.png"));
+			btnIce.setBounds(232, 20, 77, 32);
 		}
-		return lblBtnIce;
+		return btnIce;
 	}
-	private JLabel getLblBtnWaterLittle() {
-		if (lblBtnWaterLittle == null) {
-			lblBtnWaterLittle = new JLabel("");
-			lblBtnWaterLittle.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_size_tall.png"));
-			lblBtnWaterLittle.setBounds(87, 86, 45, 31);
+
+	private JButton getBtnSizeTall() {
+		if (btnSizeTall == null) {
+			btnSizeTall = new JButton("");
+			btnSizeTall.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sizeCheck = "Tall";
+					optionInfo();
+				}
+			});
+			btnSizeTall.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_size_tall.png"));
+			btnSizeTall.setBounds(87, 86, 45, 31);
 		}
-		return lblBtnWaterLittle;
+		return btnSizeTall;
 	}
-	private JLabel getLblBtnWaterDefault() {
-		if (lblBtnWaterDefault == null) {
-			lblBtnWaterDefault = new JLabel("");
-			lblBtnWaterDefault.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_size_regular_.png"));
-			lblBtnWaterDefault.setBounds(146, 86, 78, 43);
+
+	private JButton getBtnSizeRegular() {
+		if (btnSizeRegular == null) {
+			btnSizeRegular = new JButton("");
+			btnSizeRegular.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sizeCheck = "Regular";
+					optionInfo();
+				}
+			});
+			btnSizeRegular
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_size_regular.png"));
+			btnSizeRegular.setBounds(146, 86, 78, 31);
 		}
-		return lblBtnWaterDefault;
+		return btnSizeRegular;
 	}
-	private JLabel getLblBtnWaterMore() {
-		if (lblBtnWaterMore == null) {
-			lblBtnWaterMore = new JLabel("");
-			lblBtnWaterMore.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_size_grande_.png"));
-			lblBtnWaterMore.setBounds(237, 86, 72, 43);
+
+	private JButton getBtnSizeGrande() {
+		if (btnSizeGrande == null) {
+			btnSizeGrande = new JButton("");
+			btnSizeGrande.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sizeCheck = "Grande";
+					optionInfo();
+				}
+			});
+			btnSizeGrande
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_size_grande.png"));
+			btnSizeGrande.setBounds(237, 86, 72, 31);
 		}
-		return lblBtnWaterMore;
+		return btnSizeGrande;
 	}
-	private JLabel getLblBtnShot0() {
-		if (lblBtnShot0 == null) {
-			lblBtnShot0 = new JLabel("");
-			lblBtnShot0.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_shot_basic.png"));
-			lblBtnShot0.setBounds(87, 151, 45, 31);
+
+	private JButton getBtnShot0() {
+		if (btnShot0 == null) {
+			btnShot0 = new JButton("");
+			btnShot0.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					shotCheck = "";
+					optionInfo();
+				}
+			});
+			btnShot0.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_shot_basic.png"));
+			btnShot0.setBounds(87, 151, 45, 31);
 		}
-		return lblBtnShot0;
+		return btnShot0;
 	}
-	private JLabel getLblBtnShot1() {
-		if (lblBtnShot1 == null) {
-			lblBtnShot1 = new JLabel("");
-			lblBtnShot1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_shot_plus1_.png"));
-			lblBtnShot1.setBounds(146, 151, 45, 43);
+
+	private JButton getBtnShot1() {
+		if (btnShot1 == null) {
+			btnShot1 = new JButton("");
+			btnShot1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					shotCheck = "+1샷";
+					optionInfo();
+				}
+			});
+			btnShot1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_shot_plus1.png"));
+			btnShot1.setBounds(146, 151, 45, 31);
 		}
-		return lblBtnShot1;
+		return btnShot1;
 	}
-	private JLabel getLblBtnShot2() {
-		if (lblBtnShot2 == null) {
-			lblBtnShot2 = new JLabel("");
-			lblBtnShot2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_shot_plus2_.png"));
-			lblBtnShot2.setBounds(205, 151, 45, 43);
+
+	private JButton getBtnShot2() {
+		if (btnShot2 == null) {
+			btnShot2 = new JButton("");
+			btnShot2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					shotCheck = "+2샷";
+					optionInfo();
+				}
+			});
+			btnShot2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_shot_plus2.png"));
+			btnShot2.setBounds(205, 151, 45, 31);
 		}
-		return lblBtnShot2;
+		return btnShot2;
 	}
-	private JLabel getLblBtnShot3() {
-		if (lblBtnShot3 == null) {
-			lblBtnShot3 = new JLabel("");
-			lblBtnShot3.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_shot_plus3__.png"));
-			lblBtnShot3.setBounds(264, 151, 45, 43);
+
+	private JButton getBtnShot3() {
+		if (btnShot3 == null) {
+			btnShot3 = new JButton("");
+			btnShot3.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					shotCheck = "+3샷";
+					optionInfo();
+				}
+			});
+			btnShot3.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_shot_plus3.png"));
+			btnShot3.setBounds(264, 151, 45, 31);
 		}
-		return lblBtnShot3;
+		return btnShot3;
 	}
-	private JLabel getLblBtnSyrupNot() {
-		if (lblBtnSyrupNot == null) {
-			lblBtnSyrupNot = new JLabel("");
-			lblBtnSyrupNot.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_syrup_basic1.png"));
-			lblBtnSyrupNot.setBounds(87, 216, 45, 31);
+
+	private JButton getBtnSyrupNot() {
+		if (btnSyrupNot == null) {
+			btnSyrupNot = new JButton("");
+			btnSyrupNot.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					syrupCheck = "";
+					optionInfo();
+				}
+			});
+			btnSyrupNot
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_syrup_basic1.png"));
+			btnSyrupNot.setBounds(87, 216, 45, 31);
 		}
-		return lblBtnSyrupNot;
+		return btnSyrupNot;
 	}
-	private JLabel getLblBtnSyrupHazelnut() {
-		if (lblBtnSyrupHazelnut == null) {
-			lblBtnSyrupHazelnut = new JLabel("");
-			lblBtnSyrupHazelnut.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_syrup_hazelnut2.png"));
-			lblBtnSyrupHazelnut.setBounds(151, 216, 76, 43);
+
+	private JButton getBtnSyrupHazelnut() {
+		if (btnSyrupHazelnut == null) {
+			btnSyrupHazelnut = new JButton("");
+			btnSyrupHazelnut.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					syrupCheck = "헤이즐넛";
+					optionInfo();
+				}
+			});
+			btnSyrupHazelnut.setIcon(
+					new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_syrup_hazelnut5.png"));
+			btnSyrupHazelnut.setBounds(151, 216, 76, 31);
 		}
-		return lblBtnSyrupHazelnut;
+		return btnSyrupHazelnut;
 	}
-	
+
+	private JButton getBtnSyrupVanila() {
+		if (btnSyrupVanila == null) {
+			btnSyrupVanila = new JButton("");
+			btnSyrupVanila.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					syrupCheck = "바닐라";
+					optionInfo();
+				}
+			});
+			btnSyrupVanila.setIcon(
+					new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_syrup_vanila5.png"));
+			btnSyrupVanila.setBounds(245, 216, 63, 31);
+		}
+		return btnSyrupVanila;
+	}
+
 	// =============================
-	
+
 	private JLabel getLblNewLabel_4() {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("");
 			lblNewLabel_4.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblNewLabel_4.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_option_cancel_all_C.png"));
+					lblNewLabel_4.setIcon(new ImageIcon(
+							"/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_option_cancel_all_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblNewLabel_4.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_option_cancel_all.png"));
+					lblNewLabel_4.setIcon(new ImageIcon(
+							"/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_option_cancel_all.png"));
 				}
 			});
-			lblNewLabel_4.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_option_cancel_all.png"));
+			lblNewLabel_4.setIcon(
+					new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_option_cancel_all.png"));
 			lblNewLabel_4.setBounds(15, 580, 166, 45);
 		}
 		return lblNewLabel_4;
 	}
+
 	private JLabel getLblNewLabel_5() {
 		if (lblNewLabel_5 == null) {
 			lblNewLabel_5 = new JLabel("");
-			lblNewLabel_5.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_round_base.png"));
+			lblNewLabel_5
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_base.png"));
 			lblNewLabel_5.setBounds(193, 580, 167, 45);
 		}
 		return lblNewLabel_5;
 	}
+
 	private JLabel getLblBtnMinus() {
 		if (lblBtnMinus == null) {
 			lblBtnMinus = new JLabel("");
@@ -378,21 +526,27 @@ public class Panel05Order04Option extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnMinus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_round_minus_C.png"));
+					lblBtnMinus.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_minus_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnMinus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_round_minus.png"));
+					lblBtnMinus.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_minus.png"));
 				}
 			});
 			lblBtnMinus.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnMinus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_round_minus.png"));
+			lblBtnMinus
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_minus.png"));
 			lblBtnMinus.setBounds(189, 576, 53, 53);
 		}
 		return lblBtnMinus;
 	}
+
 	private JLabel getLblBtnPlus() {
 		if (lblBtnPlus == null) {
 			lblBtnPlus = new JLabel("");
@@ -400,21 +554,26 @@ public class Panel05Order04Option extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnPlus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_round_plus_C.png"));
+					lblBtnPlus.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_plus_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnPlus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_round_plus.png"));
+					lblBtnPlus.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_plus.png"));
 				}
 			});
 			lblBtnPlus.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnPlus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_round_plus.png"));
+			lblBtnPlus.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_round_plus.png"));
 			lblBtnPlus.setBounds(311, 576, 53, 53);
 		}
 		return lblBtnPlus;
 	}
+
 	private JLabel getLblOrderQuentity() {
 		if (lblOrderQuentity == null) {
 			lblOrderQuentity = new JLabel("갯수");
@@ -425,109 +584,214 @@ public class Panel05Order04Option extends JPanel {
 		}
 		return lblOrderQuentity;
 	}
+
 	private JLabel getLblBtnPutIn() {
 		if (lblBtnPutIn == null) {
 			lblBtnPutIn = new JLabel("");
 			lblBtnPutIn.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					insertAction();
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order05Cart());
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_put_in_C.png"));
+					lblBtnPutIn.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_put_in_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_put_in.png"));
+					lblBtnPutIn.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_put_in.png"));
 				}
 			});
-			lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_put_in.png"));
+			lblBtnPutIn.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_put_in.png"));
 			lblBtnPutIn.setBounds(15, 644, 345, 61);
 		}
 		return lblBtnPutIn;
 	}
+
 	private JLabel getLblpn1Background() {
 		if (lblpn1Background == null) {
 			lblpn1Background = new JLabel("");
-			lblpn1Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_option_category_coffee.png"));
+			lblpn1Background.setIcon(
+					new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/pn_option_category_coffee.png"));
 			lblpn1Background.setBounds(0, 0, 335, 277);
 		}
 		return lblpn1Background;
 	}
+
+	// -----------------------------------------------
 	private JPanel getPnCategoryTeaBeverage() {
 		if (pnCategoryTeaBeverage == null) {
 			pnCategoryTeaBeverage = new JPanel();
 			pnCategoryTeaBeverage.setBackground(new Color(255, 0, 0, 0));
 			pnCategoryTeaBeverage.setBounds(20, 244, 335, 277);
 			pnCategoryTeaBeverage.setLayout(null);
-			pnCategoryTeaBeverage.add(getLblBtnHotPn2());
-			pnCategoryTeaBeverage.add(getLblBtnIcePn2());
-			pnCategoryTeaBeverage.add(getLblBtnSizeTall());
-			pnCategoryTeaBeverage.add(getLblBtnSizeRegular());
-			pnCategoryTeaBeverage.add(getLblBtnSizeGrande());
+			pnCategoryTeaBeverage.add(getBtnHotPn2());
+			pnCategoryTeaBeverage.add(getBtnIcePn2());
+			pnCategoryTeaBeverage.add(getBtnSizeTallPn2());
+			pnCategoryTeaBeverage.add(getBtnSizeRegularPn2());
+			pnCategoryTeaBeverage.add(getBtnSizeGrandePn2());
 			pnCategoryTeaBeverage.add(getLabel_1_1());
 			//
-//			pnCategoryTeaBeverage.setVisible(true);
+			pnCategoryTeaBeverage.setVisible(false);
+			if (Panel05Order03Menu.selectedCategory != "coffee") {
+				pnCategoryTeaBeverage.setVisible(true);
+			}
 		}
 		return pnCategoryTeaBeverage;
 	}
-	
-	private JLabel getLblBtnHotPn2() {
-		if (lblBtnHotPn2 == null) {
-			lblBtnHotPn2 = new JLabel("");
-			lblBtnHotPn2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_hot1.png"));
-			lblBtnHotPn2.setBounds(87, 55, 77, 32);
+
+	private JButton getBtnHotPn2() {
+		if (btnHotPn2 == null) {
+			btnHotPn2 = new JButton("");
+			btnHotPn2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					hoticeCheck = "Hot";
+					optionInfo();
+				}
+			});
+			btnHotPn2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_hot1.png"));
+			btnHotPn2.setBounds(87, 55, 77, 32);
 		}
-		return lblBtnHotPn2;
+		return btnHotPn2;
 	}
-	private JLabel getLblBtnIcePn2() {
-		if (lblBtnIcePn2 == null) {
-			lblBtnIcePn2 = new JLabel("");
-			lblBtnIcePn2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_ice1.png"));
-			lblBtnIcePn2.setBounds(232, 55, 77, 32);
+
+	private JButton getBtnIcePn2() {
+		if (btnIcePn2 == null) {
+			btnIcePn2 = new JButton("");
+			btnIcePn2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					hoticeCheck = "Ice";
+					optionInfo();
+				}
+			});
+			btnIcePn2.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_ice1.png"));
+			btnIcePn2.setBounds(232, 55, 77, 32);
 		}
-		return lblBtnIcePn2;
+		return btnIcePn2;
 	}
-	private JLabel getLblBtnSizeTall() {
-		if (lblBtnSizeTall == null) {
-			lblBtnSizeTall = new JLabel("");
-			lblBtnSizeTall.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_size_tall.png"));
-			lblBtnSizeTall.setBounds(87, 189, 45, 31);
+
+	private JButton getBtnSizeTallPn2() {
+		if (btnSizeTallPn2 == null) {
+			btnSizeTallPn2 = new JButton("");
+			btnSizeTallPn2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sizeCheck = "Tall";
+					optionInfo();
+				}
+			});
+			btnSizeTallPn2
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_size_tall.png"));
+			btnSizeTallPn2.setBounds(87, 189, 45, 31);
 		}
-		return lblBtnSizeTall;
+		return btnSizeTallPn2;
 	}
-	private JLabel getLblBtnSizeRegular() {
-		if (lblBtnSizeRegular == null) {
-			lblBtnSizeRegular = new JLabel("");
-			lblBtnSizeRegular.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_size_regular_.png"));
-			lblBtnSizeRegular.setBounds(146, 189, 78, 43);
+
+	private JButton getBtnSizeRegularPn2() {
+		if (btnSizeRegularPn2 == null) {
+			btnSizeRegularPn2 = new JButton("");
+			btnSizeRegularPn2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sizeCheck = "Regular";
+					optionInfo();
+				}
+			});
+			btnSizeRegularPn2
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_size_regular.png"));
+			btnSizeRegularPn2.setBounds(146, 189, 78, 31);
 		}
-		return lblBtnSizeRegular;
+		return btnSizeRegularPn2;
 	}
-	private JLabel getLblBtnSizeGrande() {
-		if (lblBtnSizeGrande == null) {
-			lblBtnSizeGrande = new JLabel("");
-			lblBtnSizeGrande.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_size_grande_.png"));
-			lblBtnSizeGrande.setBounds(237, 189, 72, 43);
+
+	private JButton getBtnSizeGrandePn2() {
+		if (btnSizeGrandePn2 == null) {
+			btnSizeGrandePn2 = new JButton("");
+			btnSizeGrandePn2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sizeCheck = "Grande";
+					optionInfo();
+				}
+			});
+			btnSizeGrandePn2
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_size_grande.png"));
+			btnSizeGrandePn2.setBounds(237, 189, 72, 31);
 		}
-		return lblBtnSizeGrande;
+		return btnSizeGrandePn2;
 	}
+
 	private JLabel getLabel_1_1() {
 		if (lblPn2Background == null) {
 			lblPn2Background = new JLabel("");
-			lblPn2Background.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/pn_option_category_tea&beverage.png"));
+			lblPn2Background.setIcon(new ImageIcon(
+					"/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/pn_option_category_tea&beverage.png"));
 			lblPn2Background.setBounds(0, 0, 335, 277);
 		}
 		return lblPn2Background;
 	}
-	private JLabel getLblBtnSyrupHazelnut_1() {
-		if (lblBtnSyrupHazelnut_1 == null) {
-			lblBtnSyrupHazelnut_1 = new JLabel("");
-			lblBtnSyrupHazelnut_1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_syrup_vanila2.png"));
-			lblBtnSyrupHazelnut_1.setBounds(245, 216, 63, 43);
+
+	private JLabel getLblOptionInfo() {
+		if (lblOptionInfo == null) {
+			lblOptionInfo = new JLabel();
+			lblOptionInfo.setFont(new Font("SansSerif", Font.PLAIN, 16));
+			lblOptionInfo.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblOptionInfo.setBounds(30, 533, 321, 32);
 		}
-		return lblBtnSyrupHazelnut_1;
+		return lblOptionInfo;
 	}
+
+	// Function
+	private void optionInfo() {
+		if (Panel05Order03Menu.selectedCategory == "coffee") {
+			lblOptionInfo.setText(hoticeCheck + " / " + sizeCheck + " / " + shotCheck + " / " + syrupCheck);
+		} else {
+			lblOptionInfo.setText(hoticeCheck + " / " + sizeCheck);
+		}
+	}
+
+	// Insert
+	private void insertAction() {
+		if (hoticeCheck == "핫") {
+			hotice = 0;
+		} else {
+			hotice = 1;
+		}
+
+		if (sizeCheck == "Tall") {
+			size = 0;
+		} else if (sizeCheck == "Regular") {
+			size = 1;
+		} else {
+			size = 2;
+		}
+
+		if (shotCheck == "") {
+			shot = 0;
+		} else if (shotCheck == "+1샷") {
+			shot = 500;
+		} else if (shotCheck == "+2샷") {
+			shot = 1000;
+		} else {
+			shot = 1500;
+		}
+
+		if (syrupCheck == "") {
+			syrup = 0;
+		} else if (syrupCheck == "헤이즐넛") {
+			syrup = 1;
+		} else {
+			syrup = 2;
+		}
+
+	}
+
 } // End

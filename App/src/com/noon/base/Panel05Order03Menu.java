@@ -50,6 +50,9 @@ public class Panel05Order03Menu extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable InnerTable;
 
+	public static String selectedMenu;
+	public static String selectedCategory;
+
 	// -- Table Definition
 	private final DefaultTableModel OuterTable = new DefaultTableModel(); // ******* 테이블 세팅(1/2)
 
@@ -58,7 +61,7 @@ public class Panel05Order03Menu extends JPanel {
 	// -- file 정리
 	ArrayList<DtoMenu> beanList = null;
 
-	String clickedCategory;
+	
 
 	// 바탕화면 그라데이션
 	// -------------------------------------------------------------------------------
@@ -91,7 +94,6 @@ public class Panel05Order03Menu extends JPanel {
 				closingAction(); // <--***************************************************
 			}
 		});
-		
 
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
@@ -122,7 +124,8 @@ public class Panel05Order03Menu extends JPanel {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
 			lblBtnSidebar.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnSidebar.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/icon_sidebar.png"));
+			lblBtnSidebar
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_sidebar.png"));
 			lblBtnSidebar.setBounds(13, 26, 36, 32);
 		}
 		return lblBtnSidebar;
@@ -132,7 +135,7 @@ public class Panel05Order03Menu extends JPanel {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
 			lblBtnBack.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnBack.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/icon_back.png"));
+			lblBtnBack.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_back.png"));
 			lblBtnBack.setBounds(51, 26, 32, 32);
 		}
 		return lblBtnBack;
@@ -153,7 +156,8 @@ public class Panel05Order03Menu extends JPanel {
 		if (lblProfilePhoto == null) {
 			lblProfilePhoto = new JLabel("");
 			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblProfilePhoto.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/profile_photo.png"));
+			lblProfilePhoto
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/profile_photo.png"));
 			lblProfilePhoto.setBounds(322, 26, 36, 36);
 		}
 		return lblProfilePhoto;
@@ -172,7 +176,7 @@ public class Panel05Order03Menu extends JPanel {
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
 			});
-			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_home.png"));
+			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_home.png"));
 			lblBtnTabHome.setBounds(1, 729, 94, 50);
 		}
 		return lblBtnTabHome;
@@ -188,7 +192,8 @@ public class Panel05Order03Menu extends JPanel {
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
-			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_order.png"));
+			lblBtnTabOrder
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
 			lblBtnTabOrder.setBounds(95, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
@@ -204,7 +209,7 @@ public class Panel05Order03Menu extends JPanel {
 					Main.frame.getContentPane().add(new Panel06Gift());
 				}
 			});
-			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_gift.png"));
+			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_gift.png"));
 			lblBtnTabGift.setBounds(187, 729, 94, 50);
 		}
 		return lblBtnTabGift;
@@ -220,7 +225,8 @@ public class Panel05Order03Menu extends JPanel {
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
 			});
-			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/tabbar_mypage.png"));
+			lblBtnTabMypage
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_mypage.png"));
 			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
 		return lblBtnTabMypage;
@@ -230,7 +236,7 @@ public class Panel05Order03Menu extends JPanel {
 		if (lblHomeIndicator == null) {
 			lblHomeIndicator = new JLabel("");
 			lblHomeIndicator
-					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/homeindicator.png"));
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/homeindicator.png"));
 			lblHomeIndicator.setBounds(1, 778, 375, 34);
 		}
 		return lblHomeIndicator;
@@ -253,9 +259,17 @@ public class Panel05Order03Menu extends JPanel {
 					return (column == 0) ? Icon.class : Object.class; // <--****************
 				}
 			};
+			InnerTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (e.getButton() == 1) { // 좌측마우스 클릭 -> 1
+						tableClick();
+					}
+				}
+			});
 			InnerTable.setBackground(Color.decode("#F4F4F4"));
 //			InnerTable.getTableHeader().setFont(new Font("San serif", Font.PLAIN, 16));
-			InnerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			InnerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			InnerTable.setRowHeight(80); // <--***************************************************
 			InnerTable.setModel(OuterTable); // <--***************************************************
 
@@ -277,18 +291,18 @@ public class Panel05Order03Menu extends JPanel {
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnSelect
-							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select_C.png"));
+					lblBtnSelect.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select_C.png"));
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnSelect
-							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+					lblBtnSelect.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select.png"));
 
 				}
 			});
-			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_select.png"));
+			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select.png"));
 
 			lblBtnSelect.setBounds(13, 644, 316, 61);
 		}
@@ -308,17 +322,17 @@ public class Panel05Order03Menu extends JPanel {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblBtnGoCart.setIcon(
-							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_go_cart_C.png"));
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart_C.png"));
 
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnGoCart
-							.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_go_cart2.png"));
+					lblBtnGoCart.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart2.png"));
 				}
 			});
-			lblBtnGoCart.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/btn_go_cart2.png"));
+			lblBtnGoCart.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart2.png"));
 			lblBtnGoCart.setBounds(297, 644, 61, 61);
 		}
 		return lblBtnGoCart;
@@ -339,7 +353,7 @@ public class Panel05Order03Menu extends JPanel {
 			lblCategoryCoffee = new JLabel("");
 			lblCategoryCoffee.setVerticalAlignment(SwingConstants.TOP);
 			lblCategoryCoffee
-					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/category_coffee.png"));
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/category_coffee.png"));
 			lblCategoryCoffee.setBounds(23, 78, 63, 81);
 		}
 		return lblCategoryCoffee;
@@ -349,8 +363,8 @@ public class Panel05Order03Menu extends JPanel {
 		if (lblCategoryBeverage == null) {
 			lblCategoryBeverage = new JLabel("");
 			lblCategoryBeverage.setVerticalAlignment(SwingConstants.TOP);
-			lblCategoryBeverage
-					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/category_beverage.png"));
+			lblCategoryBeverage.setIcon(
+					new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/category_beverage.png"));
 			lblCategoryBeverage.setBounds(111, 78, 63, 81);
 		}
 		return lblCategoryBeverage;
@@ -360,7 +374,8 @@ public class Panel05Order03Menu extends JPanel {
 		if (lblCategoryTea == null) {
 			lblCategoryTea = new JLabel("");
 			lblCategoryTea.setVerticalAlignment(SwingConstants.TOP);
-			lblCategoryTea.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/category_tea.png"));
+			lblCategoryTea
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/category_tea.png"));
 			lblCategoryTea.setBounds(202, 78, 63, 81);
 		}
 		return lblCategoryTea;
@@ -370,8 +385,8 @@ public class Panel05Order03Menu extends JPanel {
 		if (lblCategoryAllMenu == null) {
 			lblCategoryAllMenu = new JLabel("");
 			lblCategoryAllMenu.setVerticalAlignment(SwingConstants.TOP);
-			lblCategoryAllMenu
-					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/src/com/noon/app/category_all_menu.png"));
+			lblCategoryAllMenu.setIcon(
+					new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/category_all_menu.png"));
 			lblCategoryAllMenu.setBounds(292, 78, 63, 81);
 		}
 		return lblCategoryAllMenu;
@@ -408,7 +423,6 @@ public class Panel05Order03Menu extends JPanel {
 		width = 50;
 		col.setPreferredWidth(width);
 
-
 	}
 
 	// Function
@@ -428,15 +442,18 @@ public class Panel05Order03Menu extends JPanel {
 	}
 
 	public void closingAction() {
-		
 //		int listCount = beanList.size();
-
 		for (int index = 0; index < beanList.size(); index++) {
 			File file = new File("./" + beanList.get(index).getFilename());
 			file.delete();
-
 		}
+	}
 
+	// 테이블클릭하면 해당메뉴 기억하기
+	private void tableClick() {
+		int i = InnerTable.getSelectedRow();
+		selectedMenu = (String) InnerTable.getValueAt(i, 1); // String type으로 바꿔준다
+		System.out.println(selectedMenu);
 	}
 
 } // End
