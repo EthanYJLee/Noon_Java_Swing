@@ -36,7 +36,7 @@ public class ManagerForm5 extends JPanel {
 
 	public ManagerForm5 jpanel5;
 
-	private String filepath;
+	private String filepath = "";
 
 	/**
 	 * Create the panel.
@@ -117,28 +117,40 @@ public class ManagerForm5 extends JPanel {
 	private void addMenu() {
 		FileInputStream input = null;
 		FileInputStream input2 = null;
-		File file = new File(filepath);
-		File file2 = new File(filepath);
-		try {
-			input = new FileInputStream(file);
-			input2 = new FileInputStream(file2);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		File file = null;
+		File file2 = null;
+		if (checkFilepath()) {
+			file = new File(filepath);
+			file2 = new File(filepath);
+		} else {
+			return;
 		}
-		DaoMenu dao = new DaoMenu(tfPrice.getText().trim(), input, tfMenuName.getText().trim(),
-				(String) cbCategory.getSelectedItem());
-		dao.addMenu();
-		DaoSetting dao2 = new DaoSetting(Integer.parseInt(tfPrice.getText().trim()),
-				(String) cbCategory.getSelectedItem(), input2, tfMenuName.getText().trim());
-		dao2.addSetting();
-		clearTF();
+		
+		if (checkTF()) {
+			try {
+				input = new FileInputStream(file);
+				input2 = new FileInputStream(file2);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			DaoMenu dao = new DaoMenu(tfPrice.getText().trim(), input, tfMenuName.getText().trim(),
+					(String) cbCategory.getSelectedItem());
+			dao.addMenu();
+			DaoSetting dao2 = new DaoSetting(Integer.parseInt(tfPrice.getText().trim()),
+					(String) cbCategory.getSelectedItem(), input2, tfMenuName.getText().trim());
+			dao2.addSetting();
+			JOptionPane.showConfirmDialog(null, "메뉴가 등록되셨습니다.");
+			clearTF();
+		}
 	}
 
 	private void clearTF() {
 		tfPrice.setText("");
 		tfMenuName.setText("");
-		cbCategory.setSelectedItem(null);
+		cbCategory.setSelectedItem(cbCategory);
+		;
 		lblMenuImage.setIcon(null);
 	}
 
@@ -157,4 +169,41 @@ public class ManagerForm5 extends JPanel {
 		lblMenuImage.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
+	private boolean checkFilepath() {
+		if (filepath.equals("")) {
+			JOptionPane.showConfirmDialog(null, "메뉴 사진 선택해 주세요");
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	private boolean checkTF() {
+		String error = "";
+		int i = 0;
+		if (tfPrice.getText().trim().length() != 0) {
+			try {
+				int check = Integer.parseInt(tfPrice.getText().trim());
+			} catch (NumberFormatException e) {
+				JOptionPane.showConfirmDialog(null, "가격에는 숫자만 입력해주세요");
+				tfPrice.setText(" ");
+				return false;
+			}
+		} else {
+			error = "가격";
+			i++;
+		}
+
+		if (tfMenuName.getText().trim().length() == 0) {
+			error = "메뉴이름";
+			i++;
+		}
+
+		if (i == 0) {
+			return true;
+		} else {
+			JOptionPane.showConfirmDialog(null, error + "을 입력해주세요");
+			return false;
+		}
+	}
 }

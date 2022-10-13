@@ -2,12 +2,18 @@
 package com.noon.main;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import com.noon.component.Header;
 import com.noon.component.SideBarExecutive;
+import com.noon.dao.DaoEmployee;
 import com.noon.dao.DaoHeader;
 import com.noon.event.EventCategorySelected;
 import com.noon.form.executive.ExecutiveForm1;
@@ -16,12 +22,11 @@ import com.noon.form.parttime.ParttimeForm1;
 import com.noon.swing.PanelBorder;
 
 public class Executive extends javax.swing.JFrame {
-	
+
 	private Header header2;
 	private JPanel mainPanel;
 	private PanelBorder panelBorder2;
 	private SideBarExecutive sideBar1;
-
 
 	ExecutiveForm1 eform1;
 
@@ -35,7 +40,7 @@ public class Executive extends javax.swing.JFrame {
 			public void selected(int index) {
 				if (index == 2) {
 					setManagerForm(new ExecutiveForm1());
-				}else {
+				} else {
 					setManagerForm(new ManagerEmpty());
 				}
 
@@ -55,7 +60,19 @@ public class Executive extends javax.swing.JFrame {
 		panelBorder2 = new com.noon.swing.PanelBorder();
 		sideBar1 = new com.noon.component.SideBarExecutive();
 		header2 = new com.noon.component.Header();
-		mainPanel = new javax.swing.JPanel();
+		mainPanel = new javax.swing.JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				Graphics2D g2 = (Graphics2D) g;
+				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				GradientPaint g3 = new GradientPaint(0, 0, Color.decode("#ffffff"), 0, getHeight(),
+						Color.decode("#FAF3E0"));
+				g2.setPaint(g3);
+				g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+				super.paintComponent(g);
+			}
+		};
+		mainPanel.setOpaque(false);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setUndecorated(true);
@@ -68,7 +85,7 @@ public class Executive extends javax.swing.JFrame {
 
 		mainPanel.setBackground(new Color(255, 248, 229));
 		mainPanel.setLayout(new java.awt.BorderLayout());
-		
+
 		setStatus();
 
 		javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
@@ -103,17 +120,18 @@ public class Executive extends javax.swing.JFrame {
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(panelBorder2,
 						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-		
-		
+
 		pack();
 		getContentPane().setLayout(layout);
-
 	}
-	
+
 	public void setStatus() {
 		DaoHeader dao = new DaoHeader();
-		header2.getLblName().setText(dao.getName()); 
+		DaoEmployee dao2 = new DaoEmployee();
+		header2.getLblName().setText(dao.getName());
 		header2.getLblShopName().setText("본사");
+		header2.getImageAvatar2().setIcon(new ImageIcon(dao2.selectPhoto()));
+		header2.getImageAvatar2().repaint();
 	}
 
 }

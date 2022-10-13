@@ -29,7 +29,6 @@ public class DaoShopup {
 	}
 
 	public boolean insertShop() {
-		boolean result = false;
 		PreparedStatement ps = null;
 
 		try {
@@ -44,30 +43,20 @@ public class DaoShopup {
 			ps.setInt(1, shopcode);
 			ps.setString(2, name);
 			ps.setString(3, phone);
-//			ps.setString(1,Panel1.id);
-//			ps.setInt(2,Panel4.detail_no);
-//			ps.setInt(3,Panel3.clickNo);
-//			ps.setInt(4, price);
-//			ps.setInt(5, amount);
 
-			int i = ps.executeUpdate();
 
-			if (i == 1) {
-				result = true;
-			} else {
-				result = false;
-			}
+			ps.executeUpdate();
 
 			conn_mysql.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
-		return result;
+		return true;
 	}
 
 	public boolean insertShopregi() {
-		boolean result = false;
 		PreparedStatement ps = null;
 
 		try {
@@ -82,20 +71,18 @@ public class DaoShopup {
 			ps.setInt(1, shop_shopcode);
 			ps.setString(2, executive_id);
 
-			int i = ps.executeUpdate();
+			ps.executeUpdate();
 
-			if (i == 1) {
-				result = true;
-			} else {
-				result = false;
-			}
-
+	
 			conn_mysql.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
-		return result;
+		return true;
 	}
+	
+	
 
 }

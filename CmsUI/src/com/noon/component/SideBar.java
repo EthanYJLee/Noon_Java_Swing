@@ -34,7 +34,7 @@ public class SideBar extends javax.swing.JPanel {
 
     private void init() {
         listCategory1.addItem(new Model_Category("1", "알바 관리", Model_Category.CategoryType.CATEGORY));
-        listCategory1.addItem(new Model_Category("", "급여 관리", Model_Category.CategoryType.SUBCATEGORY));
+        listCategory1.addItem(new Model_Category("", "주문 실적", Model_Category.CategoryType.SUBCATEGORY));
         listCategory1.addItem(new Model_Category("", "등록", Model_Category.CategoryType.SUBCATEGORY));
         listCategory1.addItem(new Model_Category("", "근태 관리", Model_Category.CategoryType.SUBCATEGORY));
 

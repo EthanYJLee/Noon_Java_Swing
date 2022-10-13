@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -14,6 +15,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.noon.component.Header;
 import com.noon.component.SideBar;
+import com.noon.dao.DaoEmployee;
 import com.noon.dao.DaoHeader;
 import com.noon.event.EventCategorySelected;
 import com.noon.form.manager.ManagerEmpty;
@@ -136,9 +138,11 @@ public class Manager extends javax.swing.JFrame {
 	
 	public void setStatus() {
 		DaoHeader dao = new DaoHeader();
+		DaoEmployee dao2 = new DaoEmployee();
 		header2.getLblName().setText(dao.getName()); 
 		header2.getLblShopName().setText(dao.getManagerShopName());
-//		header2.getImageAvatar2().setIcon(ImageIcon 불러오는 메소드 작성해야됨); 이거 이따 하자 시간 너무 뺏길듯
+		header2.getImageAvatar2().setIcon(new ImageIcon(dao2.selectPhoto()));
+		header2.getImageAvatar2().repaint();
 	}
 
 

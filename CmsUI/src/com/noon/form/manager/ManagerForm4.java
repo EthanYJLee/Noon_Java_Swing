@@ -29,6 +29,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.noon.dao.DaoMenu;
 import com.noon.dao.DaoSetting;
 import com.noon.dto.DtoSetting;
+import com.noon.main.Manager;
 
 public class ManagerForm4 extends JPanel {
 	private JTextField tfMenuname;
@@ -37,7 +38,7 @@ public class ManagerForm4 extends JPanel {
 	private JLabel lblPhoto;
 	private JLabel lblChangePhoto;
 
-	private String filepath ="";
+	private String filepath = "";
 
 	/**
 	 * Create the panel.
@@ -49,9 +50,11 @@ public class ManagerForm4 extends JPanel {
 			}
 
 			public void ancestorMoved(AncestorEvent event) {
+
 			}
 
 			public void ancestorRemoved(AncestorEvent event) {
+
 			}
 		});
 		setLayout(null);
@@ -96,6 +99,7 @@ public class ManagerForm4 extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				deleteMenu();
+				
 			}
 		});
 		ImageIcon icon1 = new ImageIcon((ManagerForm4.class.getResource("/com/noon/icon/delete.png")));
@@ -156,14 +160,19 @@ public class ManagerForm4 extends JPanel {
 		for (int i = 1; i <= ManagerForm3.numOfOne; i++) {
 			filePath2 += 1;
 		}
-
 		lblPhoto.setIcon(new ImageIcon(filePath2));
 		lblPhoto.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
 	private void deleteMenu() {
 		DaoMenu dao = new DaoMenu(tfMenuname.getText().trim());
-		dao.deleteMenu();
+		boolean result = dao.deleteMenu();
+		if (result) {
+			JOptionPane.showConfirmDialog(null, "메뉴가 삭제되었습니다.");
+			Manager.setManagerForm(new ManagerForm3());
+		} else {
+			JOptionPane.showConfirmDialog(null, "메뉴가 삭제되지 않았습니다.");
+		}
 	}
 
 	private void updateMenu() {
@@ -173,8 +182,8 @@ public class ManagerForm4 extends JPanel {
 			for (int i = 1; i <= ManagerForm3.numOfOne; i++) {
 				filepath += 1;
 			}
-			
-		} 
+		}
+
 		File file = new File(filepath);
 		try {
 			input = new FileInputStream(file);
@@ -182,9 +191,18 @@ public class ManagerForm4 extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DaoMenu dao = new DaoMenu(tfPrice.getText().trim(), input, tfMenuname.getText().trim(),
-				(String) cbCategory.getSelectedItem());
-		dao.updateMenu();
+		
+		if (checkTF()) {
+			DaoMenu dao = new DaoMenu(tfPrice.getText().trim(), input, tfMenuname.getText().trim(),
+					(String) cbCategory.getSelectedItem());
+			boolean result = dao.updateMenu();
+			if (result) {
+				JOptionPane.showConfirmDialog(null, "메뉴가 수정되었습니다.");
+				Manager.setManagerForm(new ManagerForm3());
+			} else {
+				JOptionPane.showConfirmDialog(null, "메뉴가 수정되지 않았습니다.");
+			}
+		}
 	}
 
 	private void FilePath() {
@@ -200,5 +218,24 @@ public class ManagerForm4 extends JPanel {
 		filepath = chooser.getSelectedFile().getPath();
 		lblPhoto.setIcon(new ImageIcon(filepath));
 		lblPhoto.setHorizontalAlignment(SwingConstants.CENTER);
+	}
+
+	private boolean checkTF() {
+		String error = null;
+		int i = 0;
+		if (tfPrice.getText().trim().length() == 0) {
+			error = "가격";
+			i++;
+		} else if (tfMenuname.getText().trim().length() == 0) {
+			error = "메뉴이름";
+			i++;
+		}
+
+		if (i == 0) {
+			return true;
+		} else {
+			JOptionPane.showConfirmDialog(null, error + "가 입력되지 않았습니다.");
+			return false;
+		}
 	}
 }
