@@ -92,13 +92,14 @@ public class ExecutiveForm1 extends JPanel {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(textField_2.getText().length() == 11 && textField_1.getText().trim().length() != 0) {
+				if(textField_2.getText().length() == 10 && textField_1.getText().trim().length() != 0) {
 				insertShop();
 				insertShopregi();
 				JOptionPane.showConfirmDialog(null, "지점 등록 완료");
 				}else {
 					JOptionPane.showConfirmDialog(null, "등록 양식이 틀렸습니다");
-					setVisible(false);
+					clearColumn();
+//					setVisible(false);
 				}
 				
 				
@@ -125,6 +126,12 @@ public class ExecutiveForm1 extends JPanel {
 		String ko = "mong";
 		DaoShopup dao = new DaoShopup(num,ko);
 		dao.insertShopregi();
+	}
+	private void clearColumn() {
+		textField.setText("");
+		textField_1.setText("");
+		textField_2.setText("");
+
 	}
 	
 }
