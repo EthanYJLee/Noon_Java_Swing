@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.noon.base.Panel01Login;
 import com.noon.dto.DtoMember;
 import com.noon.util.DBConnect;
 
@@ -44,7 +45,6 @@ public class DaoMember {
 		this.name = name;
 		this.phone = phone;
 	}
-
 	
 	// Method
 	// Table을 Click하였을 경우
@@ -159,12 +159,64 @@ public class DaoMember {
 			e.printStackTrace();
 		}
 		return check;
-
 	}
 	
+	// 포인트적립을 위해 사용자 전화번호 정보가 아이디와 일치하는지 체크하기
+	public int checkPoint(String phone){
+		
+		int i = 0;
+		String whereStatement = "select count(id) from member ";
+		String whereStatement2 = "where id = '" + Panel01Login.id + "' and phone = '" + phone + "' ";
+		String whereStatement3 = "and deletedate is null";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql, DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
 	
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2 + whereStatement3);
 	
+			while (rs.next()) { // true값일때만 가져온다
+				i = rs.getInt(1);
+			}
 	
+			conn_mysql.close();
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+	
+	// 마이페이지로 유저정보 가져오기
+	public DtoMember selectInfo() {
+		DtoMember dtoMember = null;
+		String whereStatement = "select id, pw, name, phone from member ";
+		String whereStatement2 = "where id = '" + Panel01Login.id + "'";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
+
+			if (rs.next()) { // true값일때만 가져온다
+				String wkId = rs.getString(1);
+				String wkPw = rs.getString(2);
+				String wkName = rs.getString(3);
+				String wkPhone = rs.getString(4);
+
+				dtoMember = new DtoMember(wkId, wkPw, wkName, wkPhone);
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dtoMember;
+	}
 	
 	
 	
