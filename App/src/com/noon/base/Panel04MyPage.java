@@ -6,6 +6,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,16 +16,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.noon.dao.DaoMember;
+import com.noon.dao.DaoPoint;
+import com.noon.dto.DtoMember;
+
 import java.awt.GridLayout;
+import javax.swing.JButton;
 
 public class Panel04MyPage extends JPanel {
 	
 	private JLabel lblNewLabel_01;
-	private JLabel lblBtnTabOrder;
-	private JLabel lblBtnTabMypage;
+	private JButton lblBtnTabOrder;
+	private JButton lblBtnTabMypage;
 	private JLabel lblHomeIndicator;
-	private JLabel lblBtnTabHome;
-	private JLabel lblBtnTabGift;
+	private JButton lblBtnTabHome;
+	private JButton lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
 	private JLabel lblProfilePhoto;
@@ -31,11 +39,9 @@ public class Panel04MyPage extends JPanel {
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_5_1;
 	private JLabel lblNewLabel_5_2;
-	private JLabel lblNewLabel_5_3;
-	private JLabel lblNewLabel_5_4;
-	private JLabel lblNewLabel_5_4_1;
-	private JLabel lblNewLabel_5_4_1_1;
-	private JLabel lblNewLabel_5_4_1_1_1;
+	private JLabel lblName;
+	private JLabel lblId;
+	private JLabel lblPhone;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JLabel lblPurchaceHistory;
@@ -45,6 +51,8 @@ public class Panel04MyPage extends JPanel {
 	private JLabel lblEdit;
 	private JLabel lblNewLabel_9;
 	private JLabel lblCouponNum;
+	private JLabel lblNewLabel_5_2_1;
+	private JLabel lblPoint;
 
 	// 바탕화면 그라데이션 ---------------------------------------------------------------------------------------------
 	@Override
@@ -79,12 +87,14 @@ public class Panel04MyPage extends JPanel {
 		add(getLblNewLabel_5());
 		add(getLblNewLabel_5_1());
 		add(getLblNewLabel_5_2());
-		add(getLblNewLabel_5_3());
-		add(getLblNewLabel_5_4());
-		add(getLblNewLabel_5_4_1());
-		add(getLblNewLabel_5_4_1_1());
-		add(getLblNewLabel_5_4_1_1_1());
+		add(getLblName());
+		add(getLblId());
+		add(getLblPhone());
 		add(getPanel());
+		add(getLblNewLabel_5_2_1());
+		add(getLblPoint());
+		
+		selectInfo();
 	}
 	
 	// 상단바 =============================================================================================================
@@ -128,12 +138,11 @@ public class Panel04MyPage extends JPanel {
 	// ==================================================================================================================
 
 	// Tabbar ===========================================================================================================
-	private JLabel getLblBtnTabHome() {
+	private JButton getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
-			lblBtnTabHome = new JLabel("");
-			lblBtnTabHome.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabHome = new JButton("");
+			lblBtnTabHome.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
@@ -143,27 +152,25 @@ public class Panel04MyPage extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
-	private JLabel getLblBtnTabOrder() {
+	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
-			lblBtnTabOrder = new JLabel("");
-			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabOrder = new JButton("");
+			lblBtnTabOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
 			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
-			lblBtnTabOrder.setBounds(95, 729, 94, 50);
+			lblBtnTabOrder.setBounds(94, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
 	}
-	private JLabel getLblBtnTabGift() {
+	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
-			lblBtnTabGift = new JLabel("");
-			lblBtnTabGift.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabGift = new JButton("");
+			lblBtnTabGift.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel06Gift());
 				}
@@ -173,12 +180,11 @@ public class Panel04MyPage extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
-	private JLabel getLblBtnTabMypage() {
+	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
-			lblBtnTabMypage = new JLabel("");
-			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabMypage = new JButton("");
+			lblBtnTabMypage.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
@@ -234,50 +240,32 @@ public class Panel04MyPage extends JPanel {
 		}
 		return lblNewLabel_5_2;
 	}
-	private JLabel getLblNewLabel_5_3() {
-		if (lblNewLabel_5_3 == null) {
-			lblNewLabel_5_3 = new JLabel("주소 :");
-			lblNewLabel_5_3.setForeground(new Color(60, 60, 60));
-			lblNewLabel_5_3.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblNewLabel_5_3.setBounds(16, 216, 38, 24);
+	private JLabel getLblName() {
+		if (lblName == null) {
+			lblName = new JLabel("");
+			lblName.setForeground(new Color(60, 60, 60));
+			lblName.setFont(new Font("SansSerif", Font.BOLD, 16));
+			lblName.setBounds(58, 100, 132, 24);
 		}
-		return lblNewLabel_5_3;
+		return lblName;
 	}
-	private JLabel getLblNewLabel_5_4() {
-		if (lblNewLabel_5_4 == null) {
-			lblNewLabel_5_4 = new JLabel("select");
-			lblNewLabel_5_4.setForeground(new Color(60, 60, 60));
-			lblNewLabel_5_4.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblNewLabel_5_4.setBounds(58, 100, 132, 24);
+	private JLabel getLblId() {
+		if (lblId == null) {
+			lblId = new JLabel("");
+			lblId.setForeground(new Color(60, 60, 60));
+			lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
+			lblId.setBounds(50, 137, 132, 24);
 		}
-		return lblNewLabel_5_4;
+		return lblId;
 	}
-	private JLabel getLblNewLabel_5_4_1() {
-		if (lblNewLabel_5_4_1 == null) {
-			lblNewLabel_5_4_1 = new JLabel("select");
-			lblNewLabel_5_4_1.setForeground(new Color(60, 60, 60));
-			lblNewLabel_5_4_1.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblNewLabel_5_4_1.setBounds(50, 137, 132, 24);
+	private JLabel getLblPhone() {
+		if (lblPhone == null) {
+			lblPhone = new JLabel("");
+			lblPhone.setForeground(new Color(60, 60, 60));
+			lblPhone.setFont(new Font("SansSerif", Font.BOLD, 16));
+			lblPhone.setBounds(87, 179, 132, 24);
 		}
-		return lblNewLabel_5_4_1;
-	}
-	private JLabel getLblNewLabel_5_4_1_1() {
-		if (lblNewLabel_5_4_1_1 == null) {
-			lblNewLabel_5_4_1_1 = new JLabel("select");
-			lblNewLabel_5_4_1_1.setForeground(new Color(60, 60, 60));
-			lblNewLabel_5_4_1_1.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblNewLabel_5_4_1_1.setBounds(87, 179, 132, 24);
-		}
-		return lblNewLabel_5_4_1_1;
-	}
-	private JLabel getLblNewLabel_5_4_1_1_1() {
-		if (lblNewLabel_5_4_1_1_1 == null) {
-			lblNewLabel_5_4_1_1_1 = new JLabel("select");
-			lblNewLabel_5_4_1_1_1.setForeground(new Color(60, 60, 60));
-			lblNewLabel_5_4_1_1_1.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblNewLabel_5_4_1_1_1.setBounds(59, 216, 132, 24);
-		}
-		return lblNewLabel_5_4_1_1_1;
+		return lblPhone;
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -363,4 +351,37 @@ public class Panel04MyPage extends JPanel {
 		}
 		return lblCouponNum;
 	}
+	private JLabel getLblNewLabel_5_2_1() {
+		if (lblNewLabel_5_2_1 == null) {
+			lblNewLabel_5_2_1 = new JLabel("적립금 : ");
+			lblNewLabel_5_2_1.setForeground(new Color(60, 60, 60));
+			lblNewLabel_5_2_1.setFont(new Font("SansSerif", Font.BOLD, 16));
+			lblNewLabel_5_2_1.setBounds(16, 221, 67, 24);
+		}
+		return lblNewLabel_5_2_1;
+	}
+	private JLabel getLblPoint() {
+		if (lblPoint == null) {
+			lblPoint = new JLabel("");
+			lblPoint.setForeground(new Color(60, 60, 60));
+			lblPoint.setFont(new Font("SansSerif", Font.BOLD, 16));
+			lblPoint.setBounds(76, 221, 112, 24);
+		}
+		return lblPoint;
+	}
+	
+	// Function
+	
+	private void selectInfo() {
+		DaoMember daoMember = new DaoMember();
+		daoMember.selectInfo();
+		DtoMember dtoMember = daoMember.selectInfo();
+		
+		DaoPoint daoPoint = new DaoPoint();
+	}
+	
+	
+	
+	
+
 } // End

@@ -24,6 +24,7 @@ public class DaoSetting {
 	String photonow;
 	String menu_name;
 	int shop_shopcode;
+	String categorynow;
 
 	// Constructor
 	public DaoSetting() {
@@ -33,12 +34,64 @@ public class DaoSetting {
 	// Method
 	// Menu 불러오기
 	public ArrayList<DtoSetting> menuList() {
+		
+		ArrayList<DtoSetting> BeanList = new ArrayList<DtoSetting>();
+		
+		String whereStatement = "select setno, menu_name, categorynow, pricenow, photonow from setting ";
+		String whereStatement2 = "where enddate is null ";
+		String whereStatement3 = "and shop_shopcode = '" + Panel05Order01Shop.shopcode + "'";
+		
+		// select s.menu_name, s.pricenow, s.photonow from setting s, menu m
+		// where m.name = s.menu_name and s.enddate is null and s.shop_shopcode = 1;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2 + whereStatement3);
+			
+			int wkFilename = 0;
+			while (rs.next()) { // true값일때만 가져온다
+				
+				int wkSetno = rs.getInt(1);
+				String wkMenuName = rs.getString(2);
+				String wkCategory = rs.getString(3);
+				int wkPrice = rs.getInt(4);
+				
+				// File
+				wkFilename = wkFilename + 1;
+				File file = new File("./" + wkFilename);
+				
+				FileOutputStream output = new FileOutputStream(file);
+				InputStream input = rs.getBinaryStream(5);
+				byte[] buffer = new byte[1024];
+				while (input.read(buffer) > 0) {
+					output.write(buffer);
+				}
+				
+				DtoSetting dtoSetting = new DtoSetting(wkSetno, wkPrice, wkMenuName, wkFilename);
+				BeanList.add(dtoSetting);
+			}
+			
+			conn_mysql.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return BeanList;
+	}
+	
+	// category별 불러오기
+	public ArrayList<DtoSetting> menuListCategory(String category) {
 
 		ArrayList<DtoSetting> BeanList = new ArrayList<DtoSetting>();
 
-		String whereStatement = "select s.setno, s.menu_name, m.category, s.pricenow, s.photonow from setting s, menu m ";
-		String whereStatement2 = "where m.name = s.menu_name and s.enddate is null ";
-		String whereStatement3 = "and s.shop_shopcode = '" + Panel05Order01Shop.shopcode + "'";
+		String whereStatement = "select setno, menu_name, categorynow, pricenow, photonow from setting ";
+		String whereStatement2 = "where enddate is null ";
+		String whereStatement3 = "and shop_shopcode = '" + Panel05Order01Shop.shopcode + "' ";
+		String whereStatement4 = "and categorynow = '" + category + "'";
 
 		// select s.menu_name, s.pricenow, s.photonow from setting s, menu m
 		// where m.name = s.menu_name and s.enddate is null and s.shop_shopcode = 1;
@@ -49,7 +102,7 @@ public class DaoSetting {
 					DBConnect.pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2 + whereStatement3);
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2 + whereStatement3 + whereStatement4);
 
 			int wkFilename = 0;
 			while (rs.next()) { // true값일때만 가져온다
@@ -58,7 +111,7 @@ public class DaoSetting {
 				String wkMenuName = rs.getString(2);
 				String wkCategory = rs.getString(3);
 				int wkPrice = rs.getInt(4);
-
+				System.out.println("wkCategory");
 				// File
 				wkFilename = wkFilename + 1;
 				File file = new File("./" + wkFilename);
@@ -80,7 +133,6 @@ public class DaoSetting {
 			e.printStackTrace();
 		}
 		return BeanList;
-
 	}
 
 	public DtoSetting tableClick() {

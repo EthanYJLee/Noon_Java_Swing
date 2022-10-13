@@ -68,6 +68,12 @@ public class DaoOrder {
 		this.orderno = orderno;
 	}
 
+	public DaoOrder(String forheretogo, String member_id) {
+		super();
+		this.forheretogo = forheretogo;
+		this.member_id = member_id;
+	}
+
 	// Method
 	// 입력
 	public int insertActionCart() {
@@ -213,7 +219,7 @@ public class DaoOrder {
 
 	}
 
-	// 장바구니에 담은 리스트 불러오기
+	// 장바구니 전체 합계 구하기
 	public int calcTotalCart() {
 
 		int totalCart = 0;
@@ -252,5 +258,30 @@ public class DaoOrder {
 		}
 		return totalCart;
 	}
+	
+	// 결제하기버튼 -> 오더테이블 업데이트
+	public int updateAction() {
+		PreparedStatement ps = null;
+		int check = 0;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql, DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			String query = "update noon.order set forheretogo = ?, paytime = now() "; // *** 마지막 한칸 뛰기 ***
+			String query2 = "where member_id = '" + Panel01Login.id + "'";
+			
+			ps = conn_mysql.prepareStatement(query + query2);
+			ps.setString(1, forheretogo);
+						
+			check = ps.executeUpdate(); // 끝나면 int값이 날라옴 / -1은 에러 / (1인지 -1인지 확인)
+			
+			conn_mysql.close(); // 여러명이 쓴다는것을 생각해야함
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return check;
 
+	}
 } // End

@@ -23,6 +23,14 @@ public class DtoMember {
 		this.updatedate = updatedate;
 		this.deletedate = deletedate;
 	}
+	
+	public DtoMember(String id, String pw, String name, String phone) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.phone = phone;
+	}
 
 	// Method
 	public String getId() {

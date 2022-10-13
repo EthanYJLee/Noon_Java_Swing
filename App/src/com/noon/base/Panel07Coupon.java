@@ -6,6 +6,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,16 +16,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 public class Panel07Coupon extends JPanel {
 
 	
 	private JLabel lblNewLabel_01;
-	private JLabel lblBtnTabOrder;
-	private JLabel lblBtnTabMypage;
+	private JButton lblBtnTabOrder;
+	private JButton lblBtnTabMypage;
 	private JLabel lblHomeIndicator;
-	private JLabel lblBtnTabHome;
-	private JLabel lblBtnTabGift;
+	private JButton lblBtnTabHome;
+	private JButton lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
 	private JLabel lblProfilePhoto;
@@ -102,12 +105,11 @@ public class Panel07Coupon extends JPanel {
 	// ==================================================================================================================
 
 	// Tabbar ===========================================================================================================
-	private JLabel getLblBtnTabHome() {
+	private JButton getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
-			lblBtnTabHome = new JLabel("");
-			lblBtnTabHome.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabHome = new JButton("");
+			lblBtnTabHome.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
@@ -117,29 +119,27 @@ public class Panel07Coupon extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
-	private JLabel getLblBtnTabOrder() {
+	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
-			lblBtnTabOrder = new JLabel("");
-			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabOrder = new JButton("");
+			lblBtnTabOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
 			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
-			lblBtnTabOrder.setBounds(95, 729, 94, 50);
+			lblBtnTabOrder.setBounds(94, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
 	}
-	private JLabel getLblBtnTabGift() {
+	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
-			lblBtnTabGift = new JLabel("");
-			lblBtnTabGift.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabGift = new JButton("");
+			lblBtnTabGift.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					Main.frame.getContentPane().add(new Panel07Coupon());
+					Main.frame.getContentPane().add(new Panel06Gift());
 				}
 			});
 			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_gift.png"));
@@ -147,12 +147,11 @@ public class Panel07Coupon extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
-	private JLabel getLblBtnTabMypage() {
+	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
-			lblBtnTabMypage = new JLabel("");
-			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabMypage = new JButton("");
+			lblBtnTabMypage.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}

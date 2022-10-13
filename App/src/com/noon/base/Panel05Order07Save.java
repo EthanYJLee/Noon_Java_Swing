@@ -6,23 +6,31 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.noon.dao.DaoMember;
+import com.noon.dao.DaoOrder;
+import com.noon.dao.DaoPoint;
+import javax.swing.JButton;
+
 public class Panel05Order07Save extends JPanel {
 	
 	private JLabel lblNewLabel_01;
-	private JLabel lblBtnTabOrder;
-	private JLabel lblBtnTabMypage;
+	private JButton lblBtnTabOrder;
+	private JButton lblBtnTabMypage;
 	private JLabel lblHomeIndicator;
-	private JLabel lblBtnTabHome;
-	private JLabel lblBtnTabGift;
+	private JButton lblBtnTabHome;
+	private JButton lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
 	private JLabel lblProfilePhoto;
@@ -109,12 +117,11 @@ public class Panel05Order07Save extends JPanel {
 	// ==================================================================================================================
 
 	// Tabbar ===========================================================================================================
-	private JLabel getLblBtnTabHome() {
+	private JButton getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
-			lblBtnTabHome = new JLabel("");
-			lblBtnTabHome.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabHome = new JButton("");
+			lblBtnTabHome.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
@@ -124,27 +131,25 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
-	private JLabel getLblBtnTabOrder() {
+	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
-			lblBtnTabOrder = new JLabel("");
-			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabOrder = new JButton("");
+			lblBtnTabOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
 			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
-			lblBtnTabOrder.setBounds(95, 729, 94, 50);
+			lblBtnTabOrder.setBounds(94, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
 	}
-	private JLabel getLblBtnTabGift() {
+	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
-			lblBtnTabGift = new JLabel("");
-			lblBtnTabGift.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabGift = new JButton("");
+			lblBtnTabGift.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel06Gift());
 				}
@@ -154,12 +159,11 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
-	private JLabel getLblBtnTabMypage() {
+	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
-			lblBtnTabMypage = new JLabel("");
-			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabMypage = new JButton("");
+			lblBtnTabMypage.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
@@ -227,6 +231,8 @@ public class Panel05Order07Save extends JPanel {
 			lblNewLabel_1.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					checkPoint();
+					
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
@@ -253,4 +259,22 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblNewLabel_3;
 	}
+	
+	// Function
+	private void checkPoint() {
+		// 값이 있는지 카운트로 확인
+		// 입력
+		DaoMember daoMember = new DaoMember();
+		if(daoMember.checkPoint(tfPhone.getText()) == 1) {
+			insertPoint();
+		}else {
+			JOptionPane.showMessageDialog(null, "정보가 일치하지않습니다.", "< 안 내 >", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	private void insertPoint() {
+		DaoPoint daoPoint = new DaoPoint(Panel05Order05Cart.cartTotalPrice/10, Panel01Login.id);
+		daoPoint.insertPoint();
+	}
+	
 } // End
