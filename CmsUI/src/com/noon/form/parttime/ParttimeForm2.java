@@ -143,6 +143,7 @@ public class ParttimeForm2 extends JPanel {
 		}
 
 		File file = new File(filepath);
+		
 		try {
 			input = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
@@ -151,8 +152,7 @@ public class ParttimeForm2 extends JPanel {
 		}
 		
 		if (checkTF()) {
-			DaoStaff dao = new DaoStaff(tfId.getText().trim(), pfPw.getText().trim(),
-					tfPhone.getText().trim(),input);
+			DaoStaff dao = new DaoStaff(tfId.getText().trim(), pfPw.getText().trim(),tfPhone.getText().trim(),input);
 			boolean result = dao.updateStaff2();
 			if (result) {
 				JOptionPane.showConfirmDialog(null, "회원정보가 수정되었습니다.");
