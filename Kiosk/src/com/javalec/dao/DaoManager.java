@@ -43,11 +43,12 @@ public class DaoManager {
 
 			// Method
 			// Table을 Click하였을 경우
-			public int checkId() {
+			
+			public int checkPw() {	// 키오스크 로그인 패스워드는 관리자 id임
 				
 				int check = 0;
 				
-				String whereStatement = "select count(*) from member "; // 마지막 띄워주기
+				String whereStatement = "select count(*) from manager "; // 마지막 띄워주기
 				String whereStatement2 = "where id = '" + id + "' and deletedate is null";
 				
 				try {

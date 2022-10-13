@@ -52,6 +52,23 @@ public class Complete extends GradientBack {
 		btnNo.setBackground(new Color(255, 0, 0, 0));
 		add(btnNo);
 		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setIcon(new ImageIcon(Complete.class.getResource("/com/javalec/image/Ellipse 2.png")));
+		lblNewLabel_2.setBounds(75, 150, 200, 200);
+		add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setIcon(new ImageIcon(Complete.class.getResource("/com/javalec/image/paymentComplete.png")));
+		lblNewLabel_3.setBounds(12, 41, 326, 50);
+		add(lblNewLabel_3);
+		
+		String a = LogIn.myBranch;
+		JLabel lblMyBranch = new JLabel("카페 눈 " + a);
+		lblMyBranch.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblMyBranch.setBounds(173, 10, 165, 28);
+		add(lblMyBranch);
 
 	}
 }

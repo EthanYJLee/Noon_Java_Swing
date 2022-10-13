@@ -8,7 +8,6 @@ import java.sql.Statement;
 import com.javalec.util.DBConnect;
 
 public class DaoPoint {
-	String member_id;
 	int order_no;
 	
 	
@@ -20,14 +19,7 @@ public class DaoPoint {
 	}
 	
 	
-	public DaoPoint(String member_id, int order_no) {
-		super();
-		this.member_id = member_id;
-		this.order_no = order_no;
-	}
-
-
-	private void searchAction() {
+	private void searchNumberAction() {
 		String whereStatement = "select m.number, p.pointno from member m, point p, order o ";
 		String whereStatement2 = "where m.id = p.member_id and p.order_orderno = o.orderno";
 		try {

@@ -17,21 +17,28 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import com.javalec.component.Menu;
+import com.javalec.dao.DaoCart;
 import com.javalec.dao.DaoMenu;
+import com.javalec.dto.DtoMenu;
 import com.javalec.util.RoundedButton;
 
 public class MenuMain extends JPanel {
 
 	public static String menuname;
-	
+
+	String concategory = "";
+
 	JPanel panel = new JPanel();
 
 	List<Menu> menuList = new ArrayList<>();
+
+	List<DtoMenu> specificList = new ArrayList<>();
 
 	GridBagLayout gbl_subpanel = new GridBagLayout();
 	GridBagConstraints gbc = new GridBagConstraints();
@@ -64,13 +71,18 @@ public class MenuMain extends JPanel {
 		RoundedButton btnToCart = new RoundedButton("");
 		btnToCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// if 장바구니 담긴 상품 없으면 showMessageDialog
-				// else Cart로 이동
+				DaoCart daoCart = new DaoCart();
+				if (daoCart.searchCartList() == 0) {
+					JOptionPane.showMessageDialog(null, "선택한 상품이 없습니다.");
+				} else {
+					setVisible(false);
+					Frame.frame.getContentPane().add(new Cart());
+				}
 			}
 		});
 		btnToCart.setBackground(new Color(255, 255, 255));
 		btnToCart.setIcon(new ImageIcon(MenuMain.class.getResource("/com/javalec/image/Group 6910.png")));
-		btnToCart.setBounds(288, 390, 50, 50);
+		btnToCart.setBounds(288, 400, 50, 50);
 		panel.add(btnToCart);
 
 		subpanel = new JPanel();
@@ -100,6 +112,8 @@ public class MenuMain extends JPanel {
 		btnCoffee.setBorderPainted(false);
 		btnCoffee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				concategory = "= coffee";
+				categorySearch();
 
 			}
 		});
@@ -113,6 +127,8 @@ public class MenuMain extends JPanel {
 		btnBeverage.setBorderPainted(false);
 		btnBeverage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				concategory = "= beverage";
+				categorySearch();
 
 			}
 		});
@@ -126,7 +142,8 @@ public class MenuMain extends JPanel {
 		btnTea.setBorderPainted(false);
 		btnTea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				searchCategory();
+				concategory = "= tea";
+				categorySearch();
 
 			}
 		});
@@ -140,6 +157,8 @@ public class MenuMain extends JPanel {
 		btnShowAll.setBorderPainted(false);
 		btnShowAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				concategory = "is not null";
+				categorySearch();
 
 			}
 		});
@@ -190,6 +209,12 @@ public class MenuMain extends JPanel {
 
 		makeGridMenuList();
 
+		String a = LogIn.myBranch;
+		JLabel lblMyBranch = new JLabel("카페 눈 " + a);
+		lblMyBranch.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblMyBranch.setBounds(173, 10, 165, 28);
+		add(lblMyBranch);
+
 	}
 
 	public void make(JComponent c, int x, int y, int w, int h) {
@@ -207,7 +232,7 @@ public class MenuMain extends JPanel {
 			for (int j = 0; j < 2; j++) {
 				if (!(i == menuList.size() / 2 && j == menuList.size() % 2)) {
 					make(menuList.get(i * 2 + j), j, i, 1, 1);
-					menuList.get(i * 2 + j).setPreferredSize(new Dimension(140, 140));
+					menuList.get(i * 2 + j).setPreferredSize(new Dimension(120, 120));
 					subpanel.add(menuList.get(i * 2 + j));
 					menuList.get(i * 2 + j).addMouseListener(new MouseAdapter() {
 						@Override
@@ -225,11 +250,24 @@ public class MenuMain extends JPanel {
 		}
 	}
 
-	public void searchCategory() {
+	private void categorySearch() {
+//		DaoMenu daoMenu = new DaoMenu();
+//		specificList = daoMenu.selectList(concategory);
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
 
 	}
 
-	public void showAllAction() {
+	public void cartSearch() {
 
 	}
+
 }
