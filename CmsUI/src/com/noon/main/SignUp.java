@@ -70,7 +70,12 @@ public class SignUp extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				insertManager();
+				if(tfId.getText().trim() == "") {
+					JOptionPane.showConfirmDialog(null, "ID를 입력하시오");
+				}else {
+					insertManager();
+				}
+				
 			}
 		});
 		// 이미지 줄이기 메소드
@@ -169,6 +174,7 @@ public class SignUp extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				checkShopcode();
+		
 			}
 		});
 		lblNewLabel_3_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -213,7 +219,7 @@ public class SignUp extends JFrame {
 		boolean res = false;
 
 		if (result == 0) {
-			JOptionPane.showConfirmDialog(null, "인증되셨습니다.");
+			JOptionPane.showConfirmDialog(null, "관리자로 등록 되었습니다.");
 			res = true;
 		} else if (result == 1) {
 			JOptionPane.showConfirmDialog(null, "이미 관리자가 있습니다.");
@@ -258,12 +264,20 @@ public class SignUp extends JFrame {
 					Integer.parseInt(tfEmployeeno.getText().trim()));
 			dao.insertManager();
 			insertManage();
-			
 			setVisible(false);
 			Login login = new Login();
 			login.frame.setVisible(true);
-		} else {
-			JOptionPane.showMessageDialog(null, "몬가 틀림");
+		} 
+		else if(tfId.getText().trim().length() != 0 && pfPw.getText().trim().length() != 0 && tfEmployeeno.getText().trim().length() != 0 &&  tfName.getText().trim().length() == 0){
+			JOptionPane.showMessageDialog(null, "이름을 입력 해주세요");
+		}else if(tfId.getText().trim().length() != 0 && pfPw.getText().trim().length() != 0 && tfEmployeeno.getText().trim().length() == 0 &&  tfName.getText().trim().length() != 0){
+			JOptionPane.showMessageDialog(null, "사원번호를 입력 해주세요");
+		}else if(tfId.getText().trim().length() != 0 && pfPw.getText().trim().length() == 0 && tfEmployeeno.getText().trim().length() != 0 &&  tfName.getText().trim().length() != 0) {
+			JOptionPane.showMessageDialog(null, "pw를 입력 해주세요");
+		}else if(tfId.getText().trim().length() == 0 && pfPw.getText().trim().length() != 0 && tfEmployeeno.getText().trim().length() != 0 &&  tfName.getText().trim().length() != 0) {
+			JOptionPane.showMessageDialog(null, "id를 입력 해주세요");
+		}else {
+			JOptionPane.showMessageDialog(null, "빈 칸이 너무 많습니다.");
 		}
 	}
 
@@ -272,6 +286,8 @@ public class SignUp extends JFrame {
 		DaoManage dao = new DaoManage(Integer.parseInt(tfShopcode.getText().trim()), tfId.getText().trim());
 		dao.insertManage();
 	}
+
+
 }
 
 // JLabel lblNewLabel_4 = new JLabel("이미 존재하거나, 탈퇴한 아이디 입니다.");

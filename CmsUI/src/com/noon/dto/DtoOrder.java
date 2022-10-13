@@ -1,16 +1,12 @@
 package com.noon.dto;
 
 public class DtoOrder {
-	String paydate;
-	String menuname;
-	int sum_quantity;
-	int count_orderno;
-	int count_completetime;
 
 	int customerno;
 	// 대기번호
 	int orderno;
 	// 주문번ㅎ호
+	int completeno;
 	int quantity;
 	// ㅈ 주문개수
 	String name;
@@ -18,13 +14,54 @@ public class DtoOrder {
 	String ordertime;
 //	// 주문시간
 	String completetime;
-	
+	private String accepttime;
+	private String paytime;
+	private String menu_name;
+
+	public int getCompleteno() {
+		return completeno;
+	}
+
+	public void setCompleteno(int completeno) {
+		this.completeno = completeno;
+	}
+
+	public String getAccepttime() {
+		return accepttime;
+	}
+
+	public void setAccepttime(String accepttime) {
+		this.accepttime = accepttime;
+	}
+
+	public String getPaytime() {
+		return paytime;
+	}
+
+	public void setPaytime(String paytime) {
+		this.paytime = paytime;
+	}
+
+	public String getMenu_name() {
+		return menu_name;
+	}
+
+	public void setMenu_name(String menu_name) {
+		this.menu_name = menu_name;
+	}
+
 	public DtoOrder() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public DtoOrder(String completetime) {
 		super();
+		this.completetime = completetime;
+	}
+
+	public DtoOrder(String completetime, int completeno) {
+		super();
+		this.completeno = completeno;
 		this.completetime = completetime;
 	}
 
@@ -47,54 +84,18 @@ public class DtoOrder {
 		this.completetime = completetime;
 	}
 
-	public DtoOrder(String paydate, String menuname, int sum_quantity, int count_orderno, int count_completetime) {
-		this.paydate = paydate;
-		this.menuname = menuname;
-		this.sum_quantity = sum_quantity;
-		this.count_completetime = count_completetime;
-		this.count_orderno = count_orderno;
+	// o.orderno, o.menu_name, o.quantity, o.paytime , c.accepttime , c.completetime
+	// rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),
+	// rs.getString(5), rs.getString(6)
+	public DtoOrder(int orderno, String menu_name, int quantity, String paytime, String accepttime,
+			String completetime) {
+		this.orderno = orderno;
+		this.menu_name = menu_name;
+		this.quantity = quantity;
+		this.paytime = paytime;
+		this.accepttime = accepttime;
+		this.completetime = completetime;
 	}
-
-	public String getPaydate() {
-		return paydate;
-	}
-
-	public void setPaydate(String paydate) {
-		this.paydate = paydate;
-	}
-
-	public String getMenuname() {
-		return menuname;
-	}
-
-	public void setMenuname(String menuname) {
-		this.menuname = menuname;
-	}
-
-	public int getSum_quantity() {
-		return sum_quantity;
-	}
-
-	public void setSum_quantity(int sum_quantity) {
-		this.sum_quantity = sum_quantity;
-	}
-
-	public int getCount_orderno() {
-		return count_orderno;
-	}
-
-	public void setCount_orderno(int count_orderno) {
-		this.count_orderno = count_orderno;
-	}
-
-	public int getCount_completetime() {
-		return count_completetime;
-	}
-
-	public void setCount_completetime(int count_completetime) {
-		this.count_completetime = count_completetime;
-	}
-
 
 	public int getCustomerno() {
 		return customerno;
