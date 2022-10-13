@@ -36,8 +36,8 @@ public class ManagerForm4 extends JPanel {
 	private JComboBox cbCategory;
 	private JLabel lblPhoto;
 	private JLabel lblChangePhoto;
-	
-	private String filepath;
+
+	private String filepath ="";
 
 	/**
 	 * Create the panel.
@@ -47,14 +47,16 @@ public class ManagerForm4 extends JPanel {
 			public void ancestorAdded(AncestorEvent event) {
 				setTf();
 			}
+
 			public void ancestorMoved(AncestorEvent event) {
 			}
+
 			public void ancestorRemoved(AncestorEvent event) {
 			}
 		});
 		setLayout(null);
 		setOpaque(false);
-		
+
 		JLabel lblMenuname = new JLabel("메뉴명");
 		lblMenuname.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblMenuname.setBounds(57, 70, 42, 32);
@@ -129,55 +131,62 @@ public class ManagerForm4 extends JPanel {
 		lblChangePhoto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChangePhoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		Font font2 = lblChangePhoto.getFont();
-        Map attributes2 = font2.getAttributes();
-        attributes2.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        lblChangePhoto.setFont(font2.deriveFont(attributes2));
-        lblChangePhoto.setHorizontalAlignment(SwingConstants.CENTER);
+		Map attributes2 = font2.getAttributes();
+		attributes2.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		lblChangePhoto.setFont(font2.deriveFont(attributes2));
+		lblChangePhoto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChangePhoto.setBounds(542, 309, 118, 16);
 		add(lblChangePhoto);
-		
+
 		cbCategory = new JComboBox();
-		cbCategory.setModel(new DefaultComboBoxModel(new String[] {"coffee", "beverage", "tea"}));
+		cbCategory.setModel(new DefaultComboBoxModel(new String[] { "coffee", "beverage", "tea" }));
 		cbCategory.setBounds(128, 261, 149, 45);
 		add(cbCategory);
 	}
-	
+
 	private void setTf() {
 		DaoSetting dao = new DaoSetting();
 		DtoSetting dto = dao.setTf();
-		
+
 		tfPrice.setText(Integer.toString(dto.getPricenow()));
 		tfMenuname.setText(dto.getMenu_name());
 		cbCategory.setName(dto.getCategorynow());
 		String filePath2 = "./" + dto.getMenu_name();
-		
-		for(int i=1;i<=ManagerForm3.numOfOne;i++) {
+
+		for (int i = 1; i <= ManagerForm3.numOfOne; i++) {
 			filePath2 += 1;
 		}
-		
+
 		lblPhoto.setIcon(new ImageIcon(filePath2));
 		lblPhoto.setHorizontalAlignment(SwingConstants.CENTER);
 	}
-	
+
 	private void deleteMenu() {
 		DaoMenu dao = new DaoMenu(tfMenuname.getText().trim());
 		dao.deleteMenu();
 	}
-	
+
 	private void updateMenu() {
 		FileInputStream input = null;
+		if (filepath.equals("")) {
+			filepath = "./" + tfMenuname.getText().trim();
+			for (int i = 1; i <= ManagerForm3.numOfOne; i++) {
+				filepath += 1;
+			}
+			
+		} 
 		File file = new File(filepath);
 		try {
-			System.out.println(filepath);
 			input = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DaoMenu dao = new DaoMenu(tfPrice.getText().trim(),input,tfMenuname.getText().trim(),(String)cbCategory.getSelectedItem());
+		DaoMenu dao = new DaoMenu(tfPrice.getText().trim(), input, tfMenuname.getText().trim(),
+				(String) cbCategory.getSelectedItem());
 		dao.updateMenu();
 	}
-	
+
 	private void FilePath() {
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, BMP", "jpg", "png", "bmp");

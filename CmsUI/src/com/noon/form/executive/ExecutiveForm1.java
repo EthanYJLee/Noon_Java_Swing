@@ -3,6 +3,10 @@ package com.noon.form.executive;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
@@ -12,13 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.NumberFormatter;
 
-import com.noon.dao.DaoManage;
 import com.noon.dao.DaoShopup;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import com.noon.main.Login;
 
 public class ExecutiveForm1 extends JPanel {
 	private JTextField textField;
@@ -92,7 +91,7 @@ public class ExecutiveForm1 extends JPanel {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(textField_2.getText().length() == 11 && textField_1.getText().trim().length() != 0) {
+				if(textField_2.getText().length() <= 9 && textField_1.getText().trim().length() != 0) {
 				insertShop();
 				insertShopregi();
 				JOptionPane.showConfirmDialog(null, "지점 등록 완료");
@@ -119,11 +118,12 @@ public class ExecutiveForm1 extends JPanel {
 			dao.insertShop();
 
 	}
+	
+	
 	private void insertShopregi(){
 		
 		int num = Integer.parseInt(textField.getText().trim());
-		String ko = "mong";
-		DaoShopup dao = new DaoShopup(num,ko);
+		DaoShopup dao = new DaoShopup(num,Login.id);
 		dao.insertShopregi();
 	}
 	

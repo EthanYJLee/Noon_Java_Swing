@@ -48,7 +48,7 @@ public class Menu extends JPanel {
 		lblMenuImage = new JLabel();
 		lblMenuImage.setBackground(new Color(253, 255, 248));
 		lblMenuImage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMenuImage.setBounds(10, 0, 90, 90);
+		lblMenuImage.setBounds(15, 10, 80, 80);
 		add(lblMenuImage);
 
 		lblMenuName = new JLabel("Menu name");

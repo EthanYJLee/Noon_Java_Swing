@@ -1,5 +1,6 @@
 package com.noon.dao;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,9 +12,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import com.noon.component.Menu;
+import com.noon.form.manager.ManagerForm4;
 import com.noon.main.Login;
 import com.noon.util.DBConnect;
 
@@ -72,10 +75,11 @@ public class DaoMenu {
 					DBConnect.pw_mysql);
 
 			String A = "update setting set enddate = curdate() ";
-			String B = "where enddate is null and menu_name = ?";
+			String B = "where enddate is null and menu_name = ? and shop_shopcode = ?";
 
 			ps = conn_mysql.prepareStatement(A + B);
 			ps.setString(1, menuname.trim());
+			ps.setInt(2, getShopcode());
 			ps.executeUpdate();
 
 			String C = "insert into setting (initdate ,menu_name ,shop_shopcode ,categorynow ,pricenow ,photonow)";
@@ -107,10 +111,11 @@ public class DaoMenu {
 			Statement stmt_mysql = conn_mysql.createStatement();
 
 			String A = "update setting set enddate = curdate() ";
-			String B = "where enddate is null and menu_name = ?";
+			String B = "where enddate is null and menu_name = ? and shop_shopcode = ?";
 
 			ps = conn_mysql.prepareStatement(A + B);
 			ps.setString(1, menuname.trim());
+			ps.setInt(2, getShopcode());
 			ps.executeUpdate();
 
 			conn_mysql.close();
@@ -147,8 +152,8 @@ public class DaoMenu {
 	public ArrayList<Menu> showMenu() {
 		ArrayList<Menu> menuList = new ArrayList<>();
 		;
-		String whereStatement = "select menu_name , photonow from setting where shop_shopcode = " + getShopcode()
-				+ " and enddate is null";
+		String whereStatement = "select menu_name ,photonow ,shop_shopcode from setting where enddate is null and shop_shopcode in (0,"
+				+ getShopcode() + ")";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -181,12 +186,43 @@ public class DaoMenu {
 				input.close();
 				output.close();
 
+				int wkShopcode = rs.getInt(3);
+				int size = 0;
+				
 				Menu menu = new Menu();
-				menu.getLblMenuImage().setIcon(new ImageIcon(filepath));
+				ImageIcon icon = new ImageIcon(filepath);
+				Image img = icon.getImage();
+				Image changeImg = img.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+				menu.getLblMenuImage().setIcon(new ImageIcon(changeImg));
 				menu.getLblMenuName().setText(wkName);
 				menu.setNumOfOne(i);
-				menuList.add(menu);
 				
+				
+				if (menuList.size() != 0) {
+					for (int j = 0; j < menuList.size(); j++) {
+						if (menuList.get(j).getLblMenuName().getText().equals(wkName)) {
+							if (wkShopcode == getShopcode()) {
+								menuList.set(j, menu);
+							}
+						}else {
+							size++;
+						}
+					}
+					if(size == menuList.size()) {
+						menuList.add(menu);
+					}
+				}else {
+					menuList.add(menu);
+				}
+
+//				Menu menu = new Menu();
+//				ImageIcon icon = new ImageIcon(filepath);
+//				Image img = icon.getImage();
+//				Image changeImg = img.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+//				menu.getLblMenuImage().setIcon(new ImageIcon(changeImg));
+//				menu.getLblMenuName().setText(wkName);
+//				menu.setNumOfOne(i);
+//				menuList.add(menu);
 
 			}
 

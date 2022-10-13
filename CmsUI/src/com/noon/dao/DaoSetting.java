@@ -20,11 +20,10 @@ public class DaoSetting {
 	private int price;
 	private String category;
 
-
 	public DaoSetting() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public DaoSetting(int price, String category, InputStream input, String menuname) {
 		super();
 		this.price = price;
@@ -32,12 +31,13 @@ public class DaoSetting {
 		this.input = input;
 		this.menuname = menuname;
 	}
-	
+
 	public DtoSetting setTf() {
 		DtoSetting dto = null;
 
-		String whereStatement = "select pricenow,categorynow , menu_name from setting where menu_name = '"
-				+ ManagerForm3.menuname + "' and shop_shopcode = " + getShopcode() + " and enddate is null";
+		String whereStatement = "select pricenow, categorynow , menu_name from setting where menu_name = '"
+				+ ManagerForm3.menuname + "' and shop_shopcode in ( 0 , " + getShopcode()
+				+ ") and enddate is null";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
@@ -46,11 +46,10 @@ public class DaoSetting {
 
 			ResultSet rs = stmt_mysql.executeQuery(whereStatement);
 
-			if (rs.next()) { // true값일때만 가져온다
+			while(rs.next()) { // true값일때만 가져온다
 				int pricenow = rs.getInt(1);
 				String categorynow = rs.getString(2);
 				String menuname = rs.getString(3);
-
 				dto = new DtoSetting(menuname, categorynow, pricenow);
 			}
 
@@ -61,7 +60,7 @@ public class DaoSetting {
 		}
 		return dto;
 	}
-	
+
 	public boolean addSetting() {
 		PreparedStatement ps = null;
 		try {

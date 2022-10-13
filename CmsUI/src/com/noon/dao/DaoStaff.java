@@ -28,18 +28,11 @@ public class DaoStaff {
 
 	}
 
-//	public DaoStaff(String conname, String condata) {
-//		this.conname = conname;
-//		this.condata = condata;
-//	}
+	public DaoStaff(String conname, String condata) {
+		this.conname = conname;
+		this.condata = condata;
+	}
 	
-	// 정보 수정
-//	public DaoStaff( String pw, String phone, FileInputStream file) {
-//		super();
-//		this.name = pw;
-//		this.phone = phone;
-//		this.file = file;
-//	}
 	
 	public DaoStaff(String pw, String phone, FileInputStream file) {
 		super();

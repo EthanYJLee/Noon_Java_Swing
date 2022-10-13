@@ -99,7 +99,7 @@ public class ManagerForm6 extends JPanel {
 		addChartLineItem();
 
 		tableInit();
-		searchAction();
+//		searchAction();
 
 	}
 
