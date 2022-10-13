@@ -8,13 +8,22 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+
+import com.noon.dao.DaoOrder;
+import com.noon.dto.DtoOrder;
+
 import javax.swing.event.AncestorEvent;
+import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ParttimeForm1 extends JPanel {
 	private JTable Inner_table; // 이너테이블 
@@ -22,7 +31,16 @@ public class ParttimeForm1 extends JPanel {
 	// -- Table Definition
 	// 아우터 테이블
 	private final DefaultTableModel Outer_Table = new DefaultTableModel(); //********  중요 ********
+	private JTextField tforderno;
+	private JTextField tfcoffename;
+	private JTextField tfquantity;
+	private JTextField textField_3;
+	private JTextField tfordertime;
+	private JTextField tfendtime;
+	private JTextField tfnoclear;
 
+
+	public static int orderno;
 	/**
 	 * Create the panel.
 	 */
@@ -38,6 +56,9 @@ public class ParttimeForm1 extends JPanel {
 		scrollPane.addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
 				tableInit();
+				
+					searchAction();
+
 			}
 			public void ancestorMoved(AncestorEvent event) {
 			}
@@ -47,35 +68,43 @@ public class ParttimeForm1 extends JPanel {
 		scrollPane.setBounds(30, 100, 418, 321);
 		add(scrollPane);
 		
+		
 		Inner_table = new JTable();
+		Inner_table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tableClick();
+				
+			}
+		});
 		Inner_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Inner_table.setModel(Outer_Table);
 		scrollPane.setViewportView(Inner_table);
 		
 		
-		JLabel lblNewLabel_1 = new JLabel("미완료 건수 : ");
-		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(30, 442, 195, 39);
-		add(lblNewLabel_1);
+		JLabel lblNoclear = new JLabel("미완료 건수 : ");
+		lblNoclear.setFont(new Font("굴림", Font.BOLD, 20));
+		lblNoclear.setBounds(30, 442, 121, 39);
+		add(lblNoclear);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("주문 리스트");
 		lblNewLabel_1_1.setFont(new Font("굴림", Font.BOLD, 40));
 		lblNewLabel_1_1.setBounds(72, 38, 250, 39);
 		add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("주문번호 : 2022102500");
+		JLabel lblNewLabel_1_2 = new JLabel("주문번호 : ");
 		lblNewLabel_1_2.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1_2.setBounds(465, 102, 196, 39);
+		lblNewLabel_1_2.setBounds(465, 102, 101, 39);
 		add(lblNewLabel_1_2);
 		
-		JLabel lblNewLabel_1_2_1 = new JLabel("음료명    : 아메리카노");
+		JLabel lblNewLabel_1_2_1 = new JLabel("음료명   :");
 		lblNewLabel_1_2_1.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1_2_1.setBounds(464, 148, 250, 39);
+		lblNewLabel_1_2_1.setBounds(464, 148, 80, 39);
 		add(lblNewLabel_1_2_1);
 		
-		JLabel lblNewLabel_1_2_2 = new JLabel("주문수량 :  2");
+		JLabel lblNewLabel_1_2_2 = new JLabel("주문수량 :");
 		lblNewLabel_1_2_2.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1_2_2.setBounds(464, 226, 195, 39);
+		lblNewLabel_1_2_2.setBounds(464, 226, 80, 39);
 		add(lblNewLabel_1_2_2);
 		
 		JLabel lblNewLabel_1_2_3 = new JLabel("주문시각 : ");
@@ -85,45 +114,13 @@ public class ParttimeForm1 extends JPanel {
 		
 		JLabel lblNewLabel_1_2_4 = new JLabel("추가사항 : ");
 		lblNewLabel_1_2_4.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1_2_4.setBounds(467, 314, 195, 39);
+		lblNewLabel_1_2_4.setBounds(467, 314, 91, 39);
 		add(lblNewLabel_1_2_4);
-		
-		JLabel lblNewLabel_1_2_2_1 = new JLabel("               (ICE)");
-		lblNewLabel_1_2_2_1.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1_2_2_1.setBounds(472, 179, 195, 39);
-		add(lblNewLabel_1_2_2_1);
-		
-		JLabel lblNewLabel_1_2_4_1 = new JLabel("22.10.25.");
-		lblNewLabel_1_2_4_1.setFont(new Font("굴림", Font.BOLD, 18));
-		lblNewLabel_1_2_4_1.setBounds(572, 275, 91, 39);
-		add(lblNewLabel_1_2_4_1);
-		
-		JLabel lblNewLabel_1_2_4_1_1 = new JLabel("샷2, 시럽, 토핑");
-		lblNewLabel_1_2_4_1_1.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1_2_4_1_1.setBounds(576, 314, 155, 39);
-		add(lblNewLabel_1_2_4_1_1);
-		
-		JLabel lblNewLabel_1_2_4_1_2 = new JLabel("10:15:23");
-		lblNewLabel_1_2_4_1_2.setForeground(new Color(0, 0, 255));
-		lblNewLabel_1_2_4_1_2.setFont(new Font("굴림", Font.BOLD, 18));
-		lblNewLabel_1_2_4_1_2.setBounds(662, 274, 91, 39);
-		add(lblNewLabel_1_2_4_1_2);
-		
-		JLabel lblNewLabel_1_2_2_2 = new JLabel("12");
-		lblNewLabel_1_2_2_2.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1_2_2_2.setBounds(168, 443, 42, 39);
-		add(lblNewLabel_1_2_2_2);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("완료 시각 : ");
 		lblNewLabel_1_3.setFont(new Font("굴림", Font.BOLD, 20));
 		lblNewLabel_1_3.setBounds(475, 443, 114, 39);
 		add(lblNewLabel_1_3);
-		
-		JLabel lblNewLabel_1_2_4_1_2_1 = new JLabel("10:18:27");
-		lblNewLabel_1_2_4_1_2_1.setForeground(new Color(254, 20, 1));
-		lblNewLabel_1_2_4_1_2_1.setFont(new Font("굴림", Font.BOLD, 20));
-		lblNewLabel_1_2_4_1_2_1.setBounds(590, 442, 91, 39);
-		add(lblNewLabel_1_2_4_1_2_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(getClass().getResource("/com/noon/icon/완료버튼.png")));
@@ -140,12 +137,59 @@ public class ParttimeForm1 extends JPanel {
 		lblNewLabel_2_2.setBounds(207, 492, 115, 50);
 		add(lblNewLabel_2_2);
 		
+		tforderno = new JTextField();
+		tforderno.setBounds(554, 100, 195, 37);
+		add(tforderno);
+		tforderno.setColumns(10);
+		
+		tfcoffename = new JTextField();
+		tfcoffename.setColumns(10);
+		tfcoffename.setBounds(556, 148, 195, 37);
+		add(tfcoffename);
+		
+		tfquantity = new JTextField();
+		tfquantity.setColumns(10);
+		tfquantity.setBounds(556, 226, 195, 37);
+		add(tfquantity);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(561, 314, 195, 37);
+		add(textField_3);
+		
+		tfordertime = new JTextField();
+		tfordertime.setColumns(10);
+		tfordertime.setBounds(554, 274, 195, 37);
+		add(tfordertime);
+		
+		tfendtime = new JTextField();
+		tfendtime.setColumns(10);
+		tfendtime.setBounds(573, 442, 195, 37);
+		add(tfendtime);
+		
+		tfnoclear = new JTextField();
+		tfnoclear.setColumns(10);
+		tfnoclear.setBounds(127, 446, 195, 37);
+		add(tfnoclear);
+		
 
 
 	}
 	
+	private void searchAction() {
+		DaoOrder daoDetail = new DaoOrder();
+		ArrayList<DtoOrder> dtoOrderList = daoDetail.searchAction2();
+
+		for (DtoOrder a : dtoOrderList) {
+			String[] qTxt = { Integer.toString(a.getCustomerno()), Integer.toString(a.getOrderno()),
+					Integer.toString(a.getQuantity()), a.getName(),a.getOrdertime(),a.getCompletetime()};
+			Outer_Table.addRow(qTxt);
+		}
+
+	}
+	
 	// Init the table
-			private void tableInit() {
+	private void tableInit() {
 				Outer_Table.addColumn("번호");
 				Outer_Table.addColumn("주문번호 ");
 				Outer_Table.addColumn("음료명");
@@ -194,4 +238,69 @@ public class ParttimeForm1 extends JPanel {
 				col.setPreferredWidth(width);
 				
 			}
+	private void tableClick() {
+		
+		int selectRow = Inner_table.getSelectedRow();
+		String wkSequence = (String) Inner_table.getValueAt(selectRow, 0);
+		orderno = Integer.parseInt(wkSequence);
+		DaoOrder dao = new DaoOrder(orderno);
+		DtoOrder dto = dao.tableClick();
+		
+
+		tforderno.setText(Integer.toString(dto.getOrderno()));
+		tfcoffename.setText(dto.getName());
+		tfquantity.setText(Integer.toString(dto.getQuantity()));
+		tfordertime.setText(dto.getOrdertime());
+		tfendtime.setText(dto.getCompletetime());
+		tfnoclear.setText(dto.getCompletetime());
+		
+		
 }
+//	private void counttable()	{
+//		int selectRow = Inner_table.getSelectedRow();
+//		String wkSequence = (String) Inner_table.getValueAt(selectRow, 0);
+//		orderno = Integer.parseInt(wkSequence);
+//		DaoOrder dao = new DaoOrder();
+//		DtoOrder dto = dao.tableClick();
+//		
+//		lblNoclear.setText(dto.getCompletetime());
+//	}
+			
+
+//	private void insertToCartAction() {
+//		try {
+//			int selectRow = Inner_Table.getSelectedRow();
+//			String wkSequence = (String) Inner_Table.getValueAt(selectRow, 2);
+//			int num = Integer.parseInt(textField_4.getText().trim());
+//			
+//			if(num > Integer.parseInt(wkSequence)) {
+//				textField_4.setText("");
+//			}else {
+//				DaoCart dao = new DaoCart(Integer.parseInt(textField.getText().trim()), num);
+//				dao.insertToCartAction();
+//			}
+//			
+//		}catch(NumberFormatException e) {
+//			textField_4.setText("");
+//			e.printStackTrace();
+//		}
+}
+
+			
+			
+//			private void tableClick() {
+//				
+//				int selectRow = Inner_Table.getSelectedRow();
+//				String wkSequence = (String) Inner_Table.getValueAt(selectRow, 0);
+//				detail_no = Integer.parseInt(wkSequence);
+//				DaoDetail dao = new DaoDetail(detail_no);
+//				DtoDetail dto = dao.tableClick();
+//				int a = dto.getP_product_no();
+//				DaoProduct daoPro = new DaoProduct(a);
+//				DtoProduct dtoPro = daoPro.tableClick();
+//				
+//				textField_3.setText(Integer.toString(dto.getSize()));
+//				textField.setText(Integer.toString(dtoPro.getPrice()));
+//				textField_1.setText(dtoPro.getModel());
+//				textField_2.setText(dtoPro.getBrand());
+//		}

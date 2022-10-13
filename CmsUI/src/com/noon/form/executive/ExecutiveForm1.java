@@ -34,45 +34,43 @@ public class ExecutiveForm1 extends JPanel {
 		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 40));
 		lblNewLabel_1.setBounds(133, 51, 172, 50);
 		add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("지점번호");
 		lblNewLabel_1_1.setFont(new Font("굴림", Font.BOLD, 20));
 		lblNewLabel_1_1.setBounds(133, 140, 133, 61);
 		add(lblNewLabel_1_1);
-		
+
 		textField = new JTextField();
 		textField.setBounds(263, 149, 322, 45);
 		add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblNewLabel_1_1_1 = new JLabel("지점명");
 		lblNewLabel_1_1_1.setFont(new Font("굴림", Font.BOLD, 20));
 		lblNewLabel_1_1_1.setBounds(135, 213, 133, 61);
 		add(lblNewLabel_1_1_1);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(264, 222, 321, 45);
 		add(textField_1);
-		
+
 		JLabel lblNewLabel_1_1_2 = new JLabel("전화번호");
 		lblNewLabel_1_1_2.setFont(new Font("굴림", Font.BOLD, 20));
 		lblNewLabel_1_1_2.setBounds(133, 288, 133, 61);
 		add(lblNewLabel_1_1_2);
-		
-		
+
 		textField_2 = new JFormattedTextField(new NumberFormatter());
 		textField_2.setColumns(10);
 		textField_2.setBounds(263, 290, 322, 45);
 		textField_2.addKeyListener(new KeyAdapter() {
 			public void KeyTyped(KeyEvent ke) {
-				if(((JFormattedTextField)ke.getSource()).getText().length() > 3)
+				if (((JFormattedTextField) ke.getSource()).getText().length() > 3)
 					ke.consume();
 			}
 		});
 		add(textField_2);
-	
-		
+
 //		JFormattedTextField textField_2= new JFormattedTextField(new NumberFormatter());
 //		textField_2.setColumns(10);
 //		textField_2.setBounds(263, 290, 322, 45);
@@ -85,22 +83,22 @@ public class ExecutiveForm1 extends JPanel {
 //		});
 //		add(textField_2);
 //		
-		
-		
+
 		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(textField_2.getText().length() <= 9 && textField_1.getText().trim().length() != 0) {
-				insertShop();
-				insertShopregi();
-				JOptionPane.showConfirmDialog(null, "지점 등록 완료");
-				}else {
+
+				if (textField_2.getText().length() <= 9 && textField_1.getText().trim().length() != 0) {
+					insertShop();
+					insertShopregi();
+					JOptionPane.showConfirmDialog(null, "지점 등록 완료");
+				} else {
 					JOptionPane.showConfirmDialog(null, "등록 양식이 틀렸습니다");
-					setVisible(false);
+					clearColumn();
+//					setVisible(false);
 				}
-				
-				
+
 			}
 		});
 		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -112,19 +110,27 @@ public class ExecutiveForm1 extends JPanel {
 		add(lblNewLabel);
 
 	}
-	private void insertShop() { 
-		
-			DaoShopup dao = new DaoShopup(Integer.parseInt(textField.getText().trim()), textField_1.getText().trim(),textField_2.getText().trim());
-			dao.insertShop();
+
+	private void insertShop() {
+
+		DaoShopup dao = new DaoShopup(Integer.parseInt(textField.getText().trim()), textField_1.getText().trim(),
+				textField_2.getText().trim());
+		dao.insertShop();
 
 	}
-	
-	
-	private void insertShopregi(){
-		
+
+	private void insertShopregi() {
+
 		int num = Integer.parseInt(textField.getText().trim());
-		DaoShopup dao = new DaoShopup(num,Login.id);
+		DaoShopup dao = new DaoShopup(num, Login.id);
 		dao.insertShopregi();
 	}
-	
+
+	private void clearColumn() {
+		textField.setText("");
+		textField_1.setText("");
+		textField_2.setText("");
+
+	}
+
 }

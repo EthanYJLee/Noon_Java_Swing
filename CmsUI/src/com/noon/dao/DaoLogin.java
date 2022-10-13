@@ -28,7 +28,7 @@ public class DaoLogin {
 	public int loginAction() {
 		int i = 2;
 		if (Login.type.equals("")) {
-			JOptionPane.showConfirmDialog(null, "너 위에꺼 선택해");
+			JOptionPane.showConfirmDialog(null, "상단의 로그인 타입을 선택 하세요.");
 		} else {
 
 			String whereStatement = "select count(id and pw) from " + Login.type + " where id = '" + id + "' and pw = '"
