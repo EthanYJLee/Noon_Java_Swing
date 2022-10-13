@@ -58,6 +58,16 @@ public class DaoOrder {
 		this.staff_id = staff_id;
 	}
 
+	public DaoOrder(String set_menu_name) {
+		super();
+		this.set_menu_name = set_menu_name;
+	}
+
+	public DaoOrder(int orderno) {
+		super();
+		this.orderno = orderno;
+	}
+
 	// Method
 	// 입력
 	public int insertActionCart() {
@@ -70,14 +80,9 @@ public class DaoOrder {
 			Statement stmt_mysql = conn_mysql.createStatement();
 
 			String query = "insert into noon.order (ordertime, hotice, quantity, shot, syrup, size, indiprice, "; // ***
-																													// 마지막
-																													// 한칸
-																													// 뛰기
-																													// ***
-			String query2 = "member_id, set_setno, set_menu_name, shop_shopcode, staff_id) ";
-			String query3 = "values (concat(curdate(),' ',?),?,?,?,?,?,?,?,?,?,?,?)";
-
-			ps = conn_mysql.prepareStatement(query + query2 + query3);
+			String query2 = "member_id, set_setno, set_menu_name, shop_shopcode, staff_id) "; // 마지막
+			String query3 = "values (concat(curdate(),' ',?),?,?,?,?,?,?,?,?,?,?,?)"; // 뛰기
+			ps = conn_mysql.prepareStatement(query + query2 + query3); // ***
 			ps.setString(1, ordertime);
 			ps.setInt(2, hotice);
 			ps.setInt(3, quantity);
@@ -153,7 +158,99 @@ public class DaoOrder {
 			e.printStackTrace();
 		}
 		return BeanList;
+	}
 
+	// Table을 Click하였을 경우 해당 열의 orderno를 가져오기
+	public int tableClick() {
+		int i = 0;
+		String whereStatement = "select orderno from noon.order "; // 마지막 띄워주기
+		String whereStatement2 = "where set_menu_name = '" + set_menu_name + "' and member_id = '" + Panel01Login.id
+				+ "' and paytime is null";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
+
+			if (rs.next()) { // true값일때만 가져온다
+				i = rs.getInt(1);
+			}
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return i;
+
+	}
+
+	// 장바구니 목록 삭제하기
+	public boolean deleteAction() {
+		PreparedStatement ps = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			String query = "delete from noon.order where orderno = ? "; // *** 마지막 한칸 뛰기 ***
+
+			ps = conn_mysql.prepareStatement(query);
+			ps.setInt(1, orderno);
+
+			ps.executeUpdate(); // 끝나면 int값이 날라오는구나 / -1은 에러 / 1인지 -1인지 확인
+
+			conn_mysql.close(); // 여러명이 쓴다는것을 생각해야함
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+
+	}
+
+	// 장바구니에 담은 리스트 불러오기
+	public int calcTotalCart() {
+
+		int totalCart = 0;
+
+		String whereStatement = "select o.quantity, o.shot, o.syrup, o.size, o.indiprice from setting s, noon.order o ";
+		String whereStatement2 = "where s.setno = o.set_setno and o.paytime is null and o.member_id = '"
+				+ Panel01Login.id + "' ";
+		String whereStatement3 = "and s.shop_shopcode = '" + Panel05Order01Shop.shopcode + "'";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2 + whereStatement3);
+
+			while (rs.next()) { // true값일때만 가져온다
+				int i = 0;
+				int wkQuantity = rs.getInt(1);
+				int wkShot = rs.getInt(2);
+				int wkSyrup = 0;
+				if (rs.getInt(3) == 1 || rs.getInt(3) == 2) {
+					wkSyrup = 500;
+				}
+				int wkSize = rs.getInt(4);
+				int wkPrice = rs.getInt(5);
+				i = (wkPrice + wkShot + wkSize + wkSyrup) * wkQuantity;
+				totalCart = totalCart + i;
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return totalCart;
 	}
 
 } // End

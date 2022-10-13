@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.noon.dao.DaoOrder;
+import com.noon.style.Style;
 
 public class Panel05Order04Option extends JPanel {
 
@@ -63,8 +64,8 @@ public class Panel05Order04Option extends JPanel {
 	//
 	private String hoticeCheck = "Hot";
 	private String sizeCheck = "Tall";
-	private String shotCheck = "기본";
-	private String syrupCheck = "없음";
+	private String shotCheck = "";
+	private String syrupCheck = "";
 
 	// static
 	public static int hotice;
@@ -141,7 +142,7 @@ public class Panel05Order04Option extends JPanel {
 
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
-			lblNewLabel_01 = new JLabel("옵션 선택");
+			lblNewLabel_01 = new JLabel("Option");
 			lblNewLabel_01.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_01.setForeground(new Color(176, 108, 89));
 			lblNewLabel_01.setFont(new Font("Lucida Grande", Font.PLAIN, 28));
@@ -244,9 +245,10 @@ public class Panel05Order04Option extends JPanel {
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setIcon(new ImageIcon("./" + Panel05Order03Menu.selectedPhoto));
+			Style style = new Style();
+			lblNewLabel_1.setIcon(style.imageSize140("./" + Panel05Order03Menu.selectedPhoto));
 			lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_1.setBounds(138, 100, 100, 100);
+			lblNewLabel_1.setBounds(138, 90, 100, 100);
 		}
 		return lblNewLabel_1;
 	}
@@ -256,7 +258,7 @@ public class Panel05Order04Option extends JPanel {
 			lblNewLabel = new JLabel(Panel05Order03Menu.selectedMenu);
 			lblNewLabel.setForeground(new Color(176, 108, 89));
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setFont(new Font("SansSerif", Font.PLAIN, 20));
+			lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
 			lblNewLabel.setBounds(1, 200, 374, 32);
 		}
 		return lblNewLabel;
@@ -608,6 +610,7 @@ public class Panel05Order04Option extends JPanel {
 		return lblOrderQuentity;
 	}
 
+	// 담기 버튼
 	private JLabel getLblBtnPutIn() {
 		if (lblBtnPutIn == null) {
 			lblBtnPutIn = new JLabel("");
@@ -662,7 +665,7 @@ public class Panel05Order04Option extends JPanel {
 			//
 			if (Panel05Order03Menu.selectedCategory.equals("tea")
 					|| Panel05Order03Menu.selectedCategory.equals("beverage")) {
-			}else {
+			} else {
 				pnCategoryTeaBeverage.setVisible(false);
 			}
 			System.out.println(Panel05Order03Menu.selectedCategory);
@@ -793,9 +796,9 @@ public class Panel05Order04Option extends JPanel {
 		if (sizeCheck == "Tall") {
 			size = 0;
 		} else if (sizeCheck == "Regular") {
-			size = 1;
+			size = 500;
 		} else {
-			size = 2;
+			size = 1000;
 		}
 
 		if (shotCheck == "") {

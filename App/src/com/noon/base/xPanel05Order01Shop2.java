@@ -30,7 +30,7 @@ import javax.swing.table.TableColumn;
 import com.noon.dao.DaoShop;
 import com.noon.dto.DtoShop;
 
-public class Panel05Order01Shop2 extends JPanel {
+public class xPanel05Order01Shop2 extends JPanel {
 
 	private JLabel lblNewLabel_01;
 	private JLabel lblNewLabel_02;
@@ -86,7 +86,7 @@ public class Panel05Order01Shop2 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Panel05Order01Shop2() {
+	public xPanel05Order01Shop2() {
 
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
@@ -188,7 +188,7 @@ public class Panel05Order01Shop2 extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
-					Main.frame.getContentPane().add(new Panel05Order01Shop2());
+					Main.frame.getContentPane().add(new xPanel05Order01Shop2());
 				}
 			});
 			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
@@ -469,7 +469,7 @@ public class Panel05Order01Shop2 extends JPanel {
 						JOptionPane.showMessageDialog(null, "지점을 선택해주세요.", "< 안 내 >", JOptionPane.ERROR_MESSAGE);
 					} else {
 						setVisible(false);
-						Main.frame.getContentPane().add(new Panel05Order02Time());
+						Main.frame.getContentPane().add(new xPanel05Order02Time());
 					}
 				}
 

@@ -26,8 +26,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.noon.dao.DaoOrder;
 import com.noon.dao.DaoSetting;
-import com.noon.dao.DtoSetting;
+import com.noon.dto.DtoSetting;
+import com.noon.style.Style;
 
 public class Panel05Order03Menu extends JPanel {
 
@@ -42,7 +44,6 @@ public class Panel05Order03Menu extends JPanel {
 	private JLabel lblProfilePhoto;
 	private JLabel lblBtnSelect;
 	private JLabel lblBtnGoCart;
-	private JLabel lblTotalPrice;
 	private JLabel lblCategoryAllMenu;
 	private JLabel lblCategoryTea;
 	private JLabel lblCategoryBeverage;
@@ -55,14 +56,14 @@ public class Panel05Order03Menu extends JPanel {
 	public static int selectedPrice;
 	public static int selectedSetno;
 	public static int selectedPhoto;
-	
-	
+
 	// -- Table Definition
 	private final DefaultTableModel OuterTable = new DefaultTableModel(); // ******* 테이블 세팅(1/2)
 	private DefaultTableCellRenderer cellAlignCenter = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성/ 테이블가운데정렬에 필요
 
 	// -- file 정리
 	ArrayList<DtoSetting> beanList = null;
+	private JLabel lblCartTotal;
 
 	// 바탕화면 그라데이션
 	// -------------------------------------------------------------------------------
@@ -86,6 +87,8 @@ public class Panel05Order03Menu extends JPanel {
 			public void ancestorAdded(AncestorEvent event) {
 				tableInit(); // <--***************************************************
 				makeTableData(); // <--***************************************************
+//				basicInit();
+				cartPriceInit();
 			}
 
 			public void ancestorMoved(AncestorEvent event) {
@@ -112,11 +115,11 @@ public class Panel05Order03Menu extends JPanel {
 		add(getLblBtnTabMypage());
 		add(getScrollPane());
 		add(getLblBtnSelect());
-		add(getLblTotalPrice());
 		add(getLblCategoryAllMenu());
 		add(getLblCategoryTea());
 		add(getLblCategoryBeverage());
 		add(getLblCategoryCoffee());
+		add(getLblCartTotal());
 	}
 
 	// 상단바
@@ -255,9 +258,9 @@ public class Panel05Order03Menu extends JPanel {
 
 	private JTable getInnerTable() {
 		if (InnerTable == null) {
-			InnerTable = new JTable() { 								// <--****************
-				public Class getColumnClass(int column) {				// <--****************
-					return (column == 0) ? Icon.class : Object.class; 	// <--****************
+			InnerTable = new JTable() { // <--****************
+				public Class getColumnClass(int column) { // <--****************
+					return (column == 0) ? Icon.class : Object.class; // <--****************
 				}
 			};
 			InnerTable.addMouseListener(new MouseAdapter() {
@@ -271,10 +274,10 @@ public class Panel05Order03Menu extends JPanel {
 			InnerTable.setBackground(Color.decode("#F4F4F4"));
 //			InnerTable.getTableHeader().setFont(new Font("San serif", Font.PLAIN, 16));
 			InnerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			InnerTable.setRowHeight(80);	 // <--***************************************************
+			InnerTable.setRowHeight(120); // <--***************************************************
 			InnerTable.setModel(OuterTable); // <--***************************************************
 
-			cellAlignCenter.setHorizontalAlignment(JLabel.CENTER);			 // Center 정렬
+			cellAlignCenter.setHorizontalAlignment(JLabel.CENTER); // Center 정렬
 			InnerTable.getTableHeader().setDefaultRenderer(cellAlignCenter); // Center 정렬
 		}
 		return InnerTable;
@@ -299,13 +302,13 @@ public class Panel05Order03Menu extends JPanel {
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblBtnSelect.setIcon(
-							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select.png"));
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select2.png"));
 
 				}
 			});
-			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select.png"));
+			lblBtnSelect.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_select2.png"));
 
-			lblBtnSelect.setBounds(13, 644, 316, 61);
+			lblBtnSelect.setBounds(13, 644, 345, 61);
 		}
 		return lblBtnSelect;
 	}
@@ -323,30 +326,30 @@ public class Panel05Order03Menu extends JPanel {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblBtnGoCart.setIcon(
-							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart_C.png"));
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart3_C.png"));
 
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblBtnGoCart.setIcon(
-							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart2.png"));
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart3.png"));
 				}
 			});
-			lblBtnGoCart.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart2.png"));
-			lblBtnGoCart.setBounds(297, 644, 61, 61);
+			lblBtnGoCart.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_go_cart3.png"));
+			lblBtnGoCart.setBounds(14, 635, 80, 80);
 		}
 		return lblBtnGoCart;
 	}
 
-	private JLabel getLblTotalPrice() {
-		if (lblTotalPrice == null) {
-			lblTotalPrice = new JLabel("select \"Total : 24000원\"");
-			lblTotalPrice.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblTotalPrice.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblTotalPrice.setBounds(145, 618, 211, 19);
+	private JLabel getLblCartTotal() {
+		if (lblCartTotal == null) {
+			lblCartTotal = new JLabel("");
+			lblCartTotal.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblCartTotal.setFont(new Font("SansSerif", Font.PLAIN, 20));
+			lblCartTotal.setBounds(209, 615, 149, 25);
 		}
-		return lblTotalPrice;
+		return lblCartTotal;
 	}
 
 	private JLabel getLblCategoryCoffee() {
@@ -411,12 +414,12 @@ public class Panel05Order03Menu extends JPanel {
 
 		int vColIndex = 0;
 		TableColumn col = InnerTable.getColumnModel().getColumn(vColIndex); // 0번부터
-		int width = 100;
+		int width = 120;
 		col.setPreferredWidth(width);
 
 		vColIndex = 1;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 100;
+		width = 110;
 		col.setPreferredWidth(width);
 
 		vColIndex = 2;
@@ -435,7 +438,9 @@ public class Panel05Order03Menu extends JPanel {
 		int listCount = beanList.size();
 
 		for (int index = 0; index < listCount; index++) {
-			ImageIcon icon = new ImageIcon("./" + beanList.get(index).getFilename());
+			Style style = new Style();
+//			style.imageSize("./" + beanList.get(index).getFilename());
+			ImageIcon icon = style.imageSize120("./" + beanList.get(index).getFilename());
 			System.out.println("./" + beanList.get(index).getFilename());
 			Object[] tempData = { icon, beanList.get(index).getMenu_name(), beanList.get(index).getPricenow() };
 			OuterTable.addRow(tempData);
@@ -461,6 +466,12 @@ public class Panel05Order03Menu extends JPanel {
 		selectedCategory = dtoSetting.getCategory();
 		selectedPhoto = dtoSetting.getFilename();
 		System.out.println(selectedCategory);
+	}
+
+	// 장바구니에 담긴 합계 DB에서 가져오기
+	public void cartPriceInit() {
+		DaoOrder daoOrder = new DaoOrder();
+		lblCartTotal.setText("Total : " + Integer.toString(daoOrder.calcTotalCart()) + "원");
 	}
 
 } // End
