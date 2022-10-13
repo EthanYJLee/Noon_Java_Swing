@@ -29,7 +29,8 @@ public class DaoSetting {
 		// TODO Auto-generated constructor stub
 	}
 
-	//Method
+	// Method
+	// Menu 불러오기
 	public ArrayList<DtoSetting> menuList() {
 
 		ArrayList<DtoSetting> BeanList = new ArrayList<DtoSetting>();
