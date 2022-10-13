@@ -3,13 +3,24 @@ package com.javalec.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
+import com.javalec.base.LogIn;
+import com.javalec.dto.DtoOrder;
 import com.javalec.util.DBConnect;
 
 public class DaoCart {
-
+	int orderno;
+	
 	public DaoCart() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public DaoCart(int orderno) {
+		super();
+		this.orderno = orderno;
 	}
 
 	// 카트에 담긴 상품 있는지 확인
@@ -25,13 +36,13 @@ public class DaoCart {
 					DBConnect.pw_mysql);
 			String query = "select count(*) from order ";
 			String query2 = "where shop_shopcode = '" + shopcode + "' and paytime is null";
-			
+
 			ps = conn_mysql.prepareStatement(query + query2);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return i;
 	}
+	
 }
-// 카트에 담긴 리스트 보여주기

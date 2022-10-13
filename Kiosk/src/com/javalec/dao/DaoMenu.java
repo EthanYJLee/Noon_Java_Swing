@@ -40,42 +40,11 @@ public class DaoMenu {
 		this.concategory = conname;
 	}
 	
-	public ArrayList<DtoMenu> selectList(String concategory){
-		
-		ArrayList<DtoMenu> dtoList = new ArrayList<DtoMenu>();
-
-		String whereStatement = "select name, price, photo from menu ";
-		String whereStatement2 = "where category " + concategory;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql, DBConnect.pw_mysql);
-			Statement stmt_mysql = conn_mysql.createStatement();
-	
-			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
-	
-			while (rs.next()) {
-				
-				String wkName = rs.getString(1); 
-				int wkPrice = rs.getInt(2);
-			
-				DtoMenu dto = new DtoMenu(wkName, wkPrice);
-				dtoList.add(dto);
-			}
-	
-			conn_mysql.close();
-	
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return dtoList;
-
-	}
 	
 	public ArrayList<Menu> showMenu() {
 		ArrayList<Menu> menuList = new ArrayList<>();
-		;
-		String whereStatement = "select menu_name , photonow from setting where shop_shopcode = " + 1
-				+ " and enddate is null";
+		
+		String whereStatement = "select menu_name, photonow from setting where shop_shopcode in( " + LogIn.shopcode + ", 0) and enddate is null";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

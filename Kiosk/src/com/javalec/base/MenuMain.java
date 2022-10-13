@@ -31,7 +31,7 @@ import com.javalec.util.RoundedButton;
 public class MenuMain extends JPanel {
 
 	public static String menuname;
-	
+
 	String concategory = "";
 
 	JPanel panel = new JPanel();
@@ -39,7 +39,7 @@ public class MenuMain extends JPanel {
 	List<Menu> menuList = new ArrayList<>();
 
 	List<DtoMenu> specificList = new ArrayList<>();
-			
+
 	GridBagLayout gbl_subpanel = new GridBagLayout();
 	GridBagConstraints gbc = new GridBagConstraints();
 
@@ -209,6 +209,12 @@ public class MenuMain extends JPanel {
 
 		makeGridMenuList();
 
+		String a = LogIn.myBranch;
+		JLabel lblMyBranch = new JLabel("카페 눈 " + a);
+		lblMyBranch.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblMyBranch.setBounds(173, 10, 165, 28);
+		add(lblMyBranch);
+
 	}
 
 	public void make(JComponent c, int x, int y, int w, int h) {
@@ -226,7 +232,7 @@ public class MenuMain extends JPanel {
 			for (int j = 0; j < 2; j++) {
 				if (!(i == menuList.size() / 2 && j == menuList.size() % 2)) {
 					make(menuList.get(i * 2 + j), j, i, 1, 1);
-					menuList.get(i * 2 + j).setPreferredSize(new Dimension(140, 140));
+					menuList.get(i * 2 + j).setPreferredSize(new Dimension(120, 120));
 					subpanel.add(menuList.get(i * 2 + j));
 					menuList.get(i * 2 + j).addMouseListener(new MouseAdapter() {
 						@Override
@@ -245,8 +251,8 @@ public class MenuMain extends JPanel {
 	}
 
 	private void categorySearch() {
-		DaoMenu daoMenu = new DaoMenu();
-		specificList = daoMenu.selectList(concategory);
+//		DaoMenu daoMenu = new DaoMenu();
+//		specificList = daoMenu.selectList(concategory);
 		//
 		//
 		//
@@ -257,11 +263,9 @@ public class MenuMain extends JPanel {
 		//
 		//
 		//
-		
+
 	}
-	
-	
-	
+
 	public void cartSearch() {
 
 	}

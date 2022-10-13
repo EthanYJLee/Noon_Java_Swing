@@ -42,6 +42,7 @@ public class Point extends JPanel {
 		keypad.panelDisplay.setLocation(0, 0);
 		keypad.panelDisplay.setFont(new Font("굴림", Font.PLAIN, 20));
 		keypad.panelKey.setBackground(new Color(255, 255, 255));
+		keypad.panelDisplay.setEditable(false);
 		keypad.setBackground(new Color(255, 255, 255));
 
 		keypad.setBounds(25, 10, 300, 379);
@@ -76,8 +77,33 @@ public class Point extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon(Point.class.getResource("/com/javalec/image/pointMessage.png")));
 		lblNewLabel.setBounds(12, 85, 326, 60);
 		add(lblNewLabel);
+		
+		String a = LogIn.myBranch;
+		JLabel lblMyBranch = new JLabel("카페 눈 " + a);
+		lblMyBranch.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblMyBranch.setBounds(173, 10, 165, 28);
+		add(lblMyBranch);
 	}
 
+	
+	
+	
+	
+	
+	// ---------------------------------------------------------------
+	// 메소드 수정 필요~~~~~~~~~~~~~~~~~
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void insertNumber() {
 		// 입력항목 Check
 		int i_chk = insertFieldCheck();
@@ -128,6 +154,10 @@ public class Point extends JPanel {
 			e.printStackTrace();
 		}
 		return check;
+	}
+	
+	public void completePayment() {
+		
 	}
 
 }

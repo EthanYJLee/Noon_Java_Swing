@@ -23,12 +23,12 @@ public class DaoDetail {
 	}
 	
 	// insertToOrder 시 생성자 
-	public DaoDetail(int hotice, int quantity, int syrup, int shot, int size) {
+	public DaoDetail(int hotice, int quantity, int shot, int syrup, int size) {
 		super();
 		this.hotice = hotice;
 		this.quantity = quantity;
-		this.syrup = syrup;
-		this.shot = shot;
+		this.syrup = shot;
+		this.shot = syrup;
 		this.size = size;
 	}
 	
@@ -49,8 +49,8 @@ public class DaoDetail {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
 					DBConnect.pw_mysql); 
-			String query = "insert into cart (hotice, quantity, shot, syrup, size, forheretogo, set_menu_name, staff_id, indiprice, setting_setno, shopshopcode , ordertime) ";
-			String query1 = "values (?,?,?,?,?,?,?,?,?,?,?,now())";
+			String query = "insert into noon.order (hotice, quantity, shot, syrup, size, forheretogo, set_menu_name, staff_id, indiprice, set_setno, shop_shopcode, ordertime, member_id) ";
+			String query1 = "values (?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 
 			ps = conn_mysql.prepareStatement(query + query1);
 			ps.setInt(1, hotice);
@@ -64,7 +64,7 @@ public class DaoDetail {
 			ps.setInt(9, indiPrice());
 			ps.setInt(10, settingSetNo());
 			ps.setInt(11, shopShopCode());
-			
+			ps.setString(12, "guest");
 			
 			ps.executeUpdate(); 
 
@@ -78,9 +78,8 @@ public class DaoDetail {
 	}
 	
 	public int indiPrice() {
-		// select pricenow from setting where menu_name = 'MenuMain.menuname' and enddate is null 
 		String whereStatement = "select pricenow from setting ";
-		String whereStatement2 = "where menu_name = '"+ MenuMain.menuname + "' and enddate is null";
+		String whereStatement2 = "where menu_name = '" + MenuMain.menuname + "' and enddate is null";
 		
 		int indiPrice = 0;
 		try {
@@ -109,12 +108,12 @@ public class DaoDetail {
 	public int settingSetNo() {
 		// select setno from setting where menu_name = 'MenuMain.menuname' and enddate is null
 		String whereStatement = "select setno from setting ";
-		String whereStatement2 = "where menu_name = '"+MenuMain.menuname+"' and enddate is null";
+		String whereStatement2 = "where menu_name = '" + MenuMain.menuname + "' and enddate is null";
 		
 		int setno = 0;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
-			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+			Connection conn_mysql = DriverManager.getConnection (DBConnect.url_mysql, DBConnect.id_mysql,
 					DBConnect.pw_mysql); 
 			Statement stmt_mysql = conn_mysql.createStatement(); 
 			
@@ -134,9 +133,8 @@ public class DaoDetail {
 	}
 	
 	public int shopShopCode() {
-		// select shop_shopcode from hire where staff_id = 'Login.kiosk_id' and deletedate is null 
 		String whereStatement = "select shop_shopcode from hire ";
-		String whereStatement2 = "where staff_id = '"+LogIn.kiosk_id+"' and enddate is null";
+		String whereStatement2 = "where staff_id = '" + LogIn.kiosk_id + "' and deletedate is null";
 		
 		int shopcode = 0;
 		try {

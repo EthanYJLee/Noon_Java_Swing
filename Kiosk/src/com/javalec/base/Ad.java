@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -30,6 +31,11 @@ public class Ad extends JPanel {
 			}
 		});
 		
+		String a = LogIn.myBranch;
+		JLabel lblMyBranch = new JLabel("카페 눈 " + a);
+		lblMyBranch.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblMyBranch.setBounds(173, 10, 165, 28);
+		add(lblMyBranch);
 		
 	}
 }

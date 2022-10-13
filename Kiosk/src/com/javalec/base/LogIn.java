@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.javalec.dao.DaoManage;
+import com.javalec.dao.DaoShop;
 import com.javalec.util.GradientBack;
 import com.javalec.util.RoundedButton;
 
@@ -19,10 +20,11 @@ import com.javalec.util.GradientBack;
 import com.javalec.util.RoundedButton;
 
 public class LogIn extends GradientBack {
-	public static String kiosk_id;
-	
+	public static String kiosk_id = "shop2kiosk1";
 	private JTextField tfShopNo;
 	private JTextField tfManagerNo;
+	public static String myBranch;
+	public static int shopcode;
 	
 
 	public LogIn() {
@@ -45,7 +47,7 @@ public class LogIn extends GradientBack {
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo.setIcon(new ImageIcon(Welcome.class.getResource("/com/javalec/image/Group 6888 (2) (1).png")));
-		lblLogo.setBounds(72, 114, 200, 200);
+		lblLogo.setBounds(75, 114, 200, 200);
 		add(lblLogo);
 
 		JLabel lblStoreNo = new JLabel("매장코드 : ");
@@ -61,7 +63,7 @@ public class LogIn extends GradientBack {
 		RoundedButton btnLogin = new RoundedButton();
 		btnLogin.setBackground(new Color(255, 255, 255));
 		btnLogin.setIcon(new ImageIcon(LogIn.class.getResource("/com/javalec/image/btn_login.png")));
-		btnLogin.setBounds(72, 461, 200, 100);
+		btnLogin.setBounds(75, 486, 200, 55);
 		add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
@@ -78,6 +80,9 @@ public class LogIn extends GradientBack {
 		
 		DaoManage daoManage = new DaoManage(id, pw);
 		if(daoManage.loginAction() == 1) {
+			DaoShop daoShop = new DaoShop(id);
+			myBranch = daoShop.getMyBranch();	// 매장이름 받아옴 (myBranch)
+			shopcode = id;
 			setVisible(false);
 			Frame.frame.getContentPane().add(new Ad());
 		} else {
@@ -85,4 +90,7 @@ public class LogIn extends GradientBack {
 			setVisible(true);
 		}
 	}
+
+	
+	
 }

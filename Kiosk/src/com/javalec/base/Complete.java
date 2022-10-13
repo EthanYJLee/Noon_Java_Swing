@@ -64,6 +64,11 @@ public class Complete extends GradientBack {
 		lblNewLabel_3.setBounds(12, 41, 326, 50);
 		add(lblNewLabel_3);
 		
+		String a = LogIn.myBranch;
+		JLabel lblMyBranch = new JLabel("카페 눈 " + a);
+		lblMyBranch.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblMyBranch.setBounds(173, 10, 165, 28);
+		add(lblMyBranch);
 
 	}
 }
