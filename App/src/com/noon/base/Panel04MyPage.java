@@ -5,24 +5,20 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.noon.dao.DaoMember;
 import com.noon.dao.DaoPoint;
 import com.noon.dto.DtoMember;
-
-import java.awt.GridLayout;
-import javax.swing.JButton;
 
 public class Panel04MyPage extends JPanel {
 	
@@ -43,16 +39,14 @@ public class Panel04MyPage extends JPanel {
 	private JLabel lblId;
 	private JLabel lblPhone;
 	private JPanel panel;
-	private JPanel panel_1;
 	private JLabel lblPurchaceHistory;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_6;
 	private JLabel lblNewLabel_7;
 	private JLabel lblEdit;
-	private JLabel lblNewLabel_9;
-	private JLabel lblCouponNum;
 	private JLabel lblNewLabel_5_2_1;
 	private JLabel lblPoint;
+	private JLabel lblNewLabel_9_1;
 
 	// 바탕화면 그라데이션 ---------------------------------------------------------------------------------------------
 	@Override
@@ -245,7 +239,7 @@ public class Panel04MyPage extends JPanel {
 			lblName = new JLabel("");
 			lblName.setForeground(new Color(60, 60, 60));
 			lblName.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblName.setBounds(58, 100, 132, 24);
+			lblName.setBounds(58, 100, 151, 24);
 		}
 		return lblName;
 	}
@@ -254,7 +248,7 @@ public class Panel04MyPage extends JPanel {
 			lblId = new JLabel("");
 			lblId.setForeground(new Color(60, 60, 60));
 			lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblId.setBounds(50, 137, 132, 24);
+			lblId.setBounds(50, 137, 184, 24);
 		}
 		return lblId;
 	}
@@ -263,7 +257,7 @@ public class Panel04MyPage extends JPanel {
 			lblPhone = new JLabel("");
 			lblPhone.setForeground(new Color(60, 60, 60));
 			lblPhone.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblPhone.setBounds(87, 179, 132, 24);
+			lblPhone.setBounds(87, 179, 173, 24);
 		}
 		return lblPhone;
 	}
@@ -272,8 +266,8 @@ public class Panel04MyPage extends JPanel {
 			panel = new JPanel();
 			panel.setBounds(15, 285, 345, 385);
 			panel.setLayout(new GridLayout(0, 1, 0, 12));
-			panel.setBackground(new Color(255, 0, 0, 0)); // Panel 투명하게하기
-			panel.add(getPanel_1());
+			panel.setBackground(new Color(255, 0, 0, 0));
+			panel.add(getLblNewLabel_9_1());
 			panel.add(getLblPurchaceHistory());
 			panel.add(getLblNewLabel_3());
 			panel.add(getLblNewLabel_6());
@@ -281,16 +275,6 @@ public class Panel04MyPage extends JPanel {
 			panel.add(getLblEdit());
 		}
 		return panel;
-	}
-	private JPanel getPanel_1() {
-		if (panel_1 == null) {
-			panel_1 = new JPanel();
-			panel_1.setLayout(null);
-			panel_1.add(getLblNewLabel_9());
-			panel_1.add(getLblCouponNum());
-			panel_1.setBackground(new Color(255, 0, 0, 0)); // Panel 투명하게하기
-		}
-		return panel_1;
 	}
 	private JLabel getLblPurchaceHistory() {
 		if (lblPurchaceHistory == null) {
@@ -332,31 +316,12 @@ public class Panel04MyPage extends JPanel {
 		}
 		return lblEdit;
 	}
-	private JLabel getLblNewLabel_9() {
-		if (lblNewLabel_9 == null) {
-			lblNewLabel_9 = new JLabel("");
-			lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_9.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/mypage_coupon1.png"));
-			lblNewLabel_9.setBounds(0, 0, 345, 54);
-		}
-		return lblNewLabel_9;
-	}
-	private JLabel getLblCouponNum() {
-		if (lblCouponNum == null) {
-			lblCouponNum = new JLabel("10");
-			lblCouponNum.setForeground(new Color(60, 60, 60));
-			lblCouponNum.setFont(new Font("SansSerif", Font.BOLD, 20));
-			lblCouponNum.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblCouponNum.setBounds(206, 5, 34, 42);
-		}
-		return lblCouponNum;
-	}
 	private JLabel getLblNewLabel_5_2_1() {
 		if (lblNewLabel_5_2_1 == null) {
 			lblNewLabel_5_2_1 = new JLabel("적립금 : ");
 			lblNewLabel_5_2_1.setForeground(new Color(60, 60, 60));
 			lblNewLabel_5_2_1.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblNewLabel_5_2_1.setBounds(16, 221, 67, 24);
+			lblNewLabel_5_2_1.setBounds(15, 221, 67, 24);
 		}
 		return lblNewLabel_5_2_1;
 	}
@@ -365,7 +330,7 @@ public class Panel04MyPage extends JPanel {
 			lblPoint = new JLabel("");
 			lblPoint.setForeground(new Color(60, 60, 60));
 			lblPoint.setFont(new Font("SansSerif", Font.BOLD, 16));
-			lblPoint.setBounds(76, 221, 112, 24);
+			lblPoint.setBounds(76, 221, 184, 24);
 		}
 		return lblPoint;
 	}
@@ -376,12 +341,23 @@ public class Panel04MyPage extends JPanel {
 		DaoMember daoMember = new DaoMember();
 		daoMember.selectInfo();
 		DtoMember dtoMember = daoMember.selectInfo();
+		lblId.setText(dtoMember.getId().toString());
+		lblName.setText(dtoMember.getName().toString());
+		lblPhone.setText(dtoMember.getPhone().toString());
 		
 		DaoPoint daoPoint = new DaoPoint();
+		lblPoint.setText(Integer.toString(daoPoint.selectPoint()) + "점");
 	}
 	
 	
 	
-	
 
+	private JLabel getLblNewLabel_9_1() {
+		if (lblNewLabel_9_1 == null) {
+			lblNewLabel_9_1 = new JLabel("");
+			lblNewLabel_9_1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/mypage_coupon2.png"));
+			lblNewLabel_9_1.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		return lblNewLabel_9_1;
+	}
 } // End

@@ -42,6 +42,45 @@ public class DaoShop {
 	}
 
 	// Method
+	// 테이블 초기설정
+	public ArrayList<DtoShop> searchAction() {
+
+		ArrayList<DtoShop> dtoShopList = new ArrayList<DtoShop>();
+
+		String whereStatement = "select name, province, city, town, phone, opentime, closetime from shop ";
+		String whereStatement2 = "order by name asc'";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement);
+
+			while (rs.next()) { // true값일때만 가져온다
+
+				String wkName = rs.getString(1);
+				String wkProvince = rs.getString(2);
+				String wkCity = rs.getString(3);
+				String wkTown = (rs.getString(4) != null ? rs.getString(4) : "");
+				String wkPhone = (rs.getString(5) != null ? rs.getString(5) : "");
+				String wkOpenTime = (rs.getString(6) != null ? rs.getString(6) : "");
+				String wkCloseTime = (rs.getString(7) != null ? rs.getString(7) : "");
+
+				DtoShop dtoShop = new DtoShop(wkName, wkProvince, wkCity, wkTown, wkPhone, wkOpenTime, wkCloseTime);
+				dtoShopList.add(dtoShop);
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dtoShopList;
+
+	}
+	
+	
 	// 조건 검색 결과를 Table로
 	public ArrayList<DtoShop> conditionList() {
 
