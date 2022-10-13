@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,7 +33,6 @@ import javax.swing.table.TableColumn;
 import com.noon.dao.DaoComplete;
 import com.noon.dao.DaoShop;
 import com.noon.dto.DtoShop;
-import javax.swing.JButton;
 
 public class Panel05Order01Shop extends JPanel {
 
@@ -100,6 +100,7 @@ public class Panel05Order01Shop extends JPanel {
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
 				tableInit(); // <--***************************************************
+				searchAction();
 			}
 
 			public void ancestorMoved(AncestorEvent event) {
@@ -196,6 +197,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
+
 	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
 			lblBtnTabOrder = new JButton("");
@@ -205,11 +207,13 @@ public class Panel05Order01Shop extends JPanel {
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
-			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
+			lblBtnTabOrder
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
 			lblBtnTabOrder.setBounds(94, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
 	}
+
 	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
 			lblBtnTabGift = new JButton("");
@@ -224,6 +228,7 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
+
 	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
 			lblBtnTabMypage = new JButton("");
@@ -233,7 +238,8 @@ public class Panel05Order01Shop extends JPanel {
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
 			});
-			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_mypage.png"));
+			lblBtnTabMypage
+					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_mypage.png"));
 			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
 		return lblBtnTabMypage;
@@ -512,17 +518,17 @@ public class Panel05Order01Shop extends JPanel {
 
 		int vColIndex = 0;
 		TableColumn col = InnerTableShopList.getColumnModel().getColumn(vColIndex); // 0번부터
-		int width = 55;
+		int width = 50;
 		col.setPreferredWidth(width);
 
 		vColIndex = 1;
 		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
-		width = 100;
+		width = 120;
 		col.setPreferredWidth(width);
 
 		vColIndex = 2;
 		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
-		width = 90;
+		width = 80;
 		col.setPreferredWidth(width);
 
 		vColIndex = 3;
@@ -535,6 +541,24 @@ public class Panel05Order01Shop extends JPanel {
 		width = 40;
 		col.setPreferredWidth(width);
 	}
+	
+	private void searchAction() {
+		DaoShop daoShop = new DaoShop();
+		ArrayList<DtoShop> dtoShopList = daoShop.searchAction();
+
+		int listCount = dtoShopList.size();
+
+		for (int index = 0; index < listCount; index++) {
+			String[] qTxt = { dtoShopList.get(index).getName(),
+					dtoShopList.get(index).getProvince() +" "+ dtoShopList.get(index).getCity()
+							+" "+ dtoShopList.get(index).getTown(),
+					dtoShopList.get(index).getPhone(),
+					dtoShopList.get(index).getOpentime().toString().replaceAll(":00:00", "시").replaceAll(":00", ""),
+					dtoShopList.get(index).getClosetime().toString().replaceAll(":00:00", "시").replaceAll(":00", "") };
+			OuterTable.addRow(qTxt);
+		}
+	}
+
 
 	// 검색조건
 	private void conditionQuery() {

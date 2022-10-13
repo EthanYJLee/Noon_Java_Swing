@@ -267,11 +267,13 @@ public class Panel05Order07Save extends JPanel {
 		DaoMember daoMember = new DaoMember();
 		if(daoMember.checkPoint(tfPhone.getText()) == 1) {
 			insertPoint();
+			JOptionPane.showMessageDialog(null, "적립이 완료되었습니다", "< 안 내 >", JOptionPane.INFORMATION_MESSAGE);
 		}else {
 			JOptionPane.showMessageDialog(null, "정보가 일치하지않습니다.", "< 안 내 >", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
+	// 10%적립률로 적립실행
 	private void insertPoint() {
 		DaoPoint daoPoint = new DaoPoint(Panel05Order05Cart.cartTotalPrice/10, Panel01Login.id);
 		daoPoint.insertPoint();

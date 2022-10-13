@@ -62,20 +62,21 @@ public class Panel05Order04Option extends JPanel {
 	private JLabel lblPn2Background;
 	private JButton btnSyrupVanila;
 	private JLabel lblOptionInfo;
+	private JLabel lblShopname;
 
 	//
 	private String hoticeCheck = "Hot";
 	private String sizeCheck = "Tall";
 	private String shotCheck = "";
 	private String syrupCheck = "";
+	private int quantity = 1;
 
 	// static
 	public static int hotice;
 	public static int size;
 	public static int shot;
 	public static int syrup;
-	public static int quantity = 1;
-	private JLabel lblShopname;
+	
 
 	// 바탕화면 그라데이션
 	// -------------------------------------------------------------------------------
