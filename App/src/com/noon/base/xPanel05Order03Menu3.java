@@ -27,7 +27,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.ScrollPaneConstants;
 
-public class Panel05Order03Menu3 extends JPanel {
+public class xPanel05Order03Menu3 extends JPanel {
 	
 	private JLabel lblNewLabel_01;
 	private JLabel lblBtnTabOrder;
@@ -69,7 +69,7 @@ public class Panel05Order03Menu3 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Panel05Order03Menu3() {
+	public xPanel05Order03Menu3() {
 		
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {

@@ -62,10 +62,10 @@ public class DaoShop {
 				String wkName = rs.getString(1);
 				String wkProvince = rs.getString(2);
 				String wkCity = rs.getString(3);
-				String wkTown = rs.getString(4);
-				String wkPhone = rs.getString(5);
-				String wkOpenTime = rs.getString(6);
-				String wkCloseTime = rs.getString(7);
+				String wkTown = (rs.getString(4) != null ? rs.getString(4) : "");
+				String wkPhone = (rs.getString(5) != null ? rs.getString(5) : "");
+				String wkOpenTime = (rs.getString(6) != null ? rs.getString(6) : "");
+				String wkCloseTime = (rs.getString(7) != null ? rs.getString(7) : "");
 
 				DtoShop dtoShop = new DtoShop(wkName, wkProvince, wkCity, wkTown, wkPhone, wkOpenTime, wkCloseTime);
 				dtoShopList.add(dtoShop);
@@ -107,7 +107,7 @@ public class DaoShop {
 		return i;
 
 	}
-	
+
 	// 영업시간 가져오기
 	public DtoShop openTimeCheck() {
 		DtoShop dtoShop = null;
@@ -125,7 +125,7 @@ public class DaoShop {
 			if (rs.next()) { // true값일때만 가져온다
 				String wkOpen = rs.getString(1);
 				String wkClose = rs.getString(2);
-				
+
 				dtoShop = new DtoShop(wkOpen, wkClose);
 			}
 

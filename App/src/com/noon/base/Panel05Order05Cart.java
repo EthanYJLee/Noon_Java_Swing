@@ -18,22 +18,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 import com.noon.dao.DaoOrder;
-import com.noon.dao.DaoSetting;
-import com.noon.dao.DtoSetting;
 import com.noon.dto.DtoOrder;
-
-import javax.swing.ScrollPaneConstants;
+import com.noon.style.Style;
 
 public class Panel05Order05Cart extends JPanel {
 
@@ -55,13 +50,17 @@ public class Panel05Order05Cart extends JPanel {
 	private DefaultTableCellRenderer cellAlignCenter = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성/ 테이블가운데정렬에 필요
 
 	private JScrollPane scrollPane;
-	private JLabel lblNewLabel;
-	private JLabel lblselect;
-	private JLabel lblNewLabel_1;
+	private JLabel lblCartTotal;
 	private JTable InnerTable;
+
+	// static
+	public static int cartTotalPrice;
+
+	private int clickedOrderno;
 
 	// -- file 정리
 	ArrayList<DtoOrder> beanList = null;
+	private JLabel btnCancel;
 
 	// 바탕화면 그라데이션
 	// -------------------------------------------------------------------------------
@@ -84,7 +83,7 @@ public class Panel05Order05Cart extends JPanel {
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
 				tableInit(); // <--***************************************************
-				makeTableData(); // <--***************************************************
+				makeTableDataCart(); // <--***************************************************
 			}
 
 			public void ancestorMoved(AncestorEvent event) {
@@ -112,9 +111,8 @@ public class Panel05Order05Cart extends JPanel {
 		add(getBtnUseCoupon());
 		add(getLblBtnPutIn());
 		add(getScrollPane());
-		add(getLblNewLabel());
-		add(getLblselect());
-		add(getLblNewLabel_1());
+		add(getBtnCancel());
+		add(getLblCartTotal());
 	}
 
 	// 상단바
@@ -142,7 +140,7 @@ public class Panel05Order05Cart extends JPanel {
 
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
-			lblNewLabel_01 = new JLabel("장바구니");
+			lblNewLabel_01 = new JLabel("Cart");
 			lblNewLabel_01.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel_01.setForeground(new Color(176, 108, 89));
 			lblNewLabel_01.setFont(new Font("Lucida Grande", Font.PLAIN, 28));
@@ -249,6 +247,8 @@ public class Panel05Order05Cart extends JPanel {
 			btnOrderMore.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel05Order03Menu());
 				}
 
 				@Override
@@ -336,33 +336,14 @@ public class Panel05Order05Cart extends JPanel {
 		return scrollPane;
 	}
 
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("Total :");
-			lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
-			lblNewLabel.setBounds(173, 543, 66, 25);
+	private JLabel getLblCartTotal() {
+		if (lblCartTotal == null) {
+			lblCartTotal = new JLabel("");
+			lblCartTotal.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblCartTotal.setFont(new Font("SansSerif", Font.PLAIN, 20));
+			lblCartTotal.setBounds(209, 522, 149, 25);
 		}
-		return lblNewLabel;
-	}
-
-	private JLabel getLblselect() {
-		if (lblselect == null) {
-			lblselect = new JLabel("금액select");
-			lblselect.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblselect.setFont(new Font("SansSerif", Font.PLAIN, 20));
-			lblselect.setBounds(237, 543, 100, 25);
-		}
-		return lblselect;
-	}
-
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("원");
-			lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblNewLabel_1.setFont(new Font("SansSerif", Font.PLAIN, 20));
-			lblNewLabel_1.setBounds(341, 543, 17, 25);
-		}
-		return lblNewLabel_1;
+		return lblCartTotal;
 	}
 
 	private JTable getInnerTable() {
@@ -376,7 +357,7 @@ public class Panel05Order05Cart extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if (e.getButton() == 1) { // 좌측마우스 클릭 -> 1
-//						tableClick();
+						tableClick();
 					}
 				}
 			});
@@ -399,13 +380,14 @@ public class Panel05Order05Cart extends JPanel {
 	// InitTable / 테이블 세팅 및 정리
 	private void tableInit() {
 		OuterTable.addColumn("사진"); // 1234
-		OuterTable.addColumn("상품"); // 1234
+		OuterTable.addColumn("상품");
+		OuterTable.addColumn("옵션");
 		OuterTable.addColumn("단가");
 		OuterTable.addColumn("추가");
 		OuterTable.addColumn("수량");
 		OuterTable.addColumn("합계");
 
-		OuterTable.setColumnCount(6); // ***************
+		OuterTable.setColumnCount(7); // ***************
 
 		int i = OuterTable.getRowCount();
 		for (int j = 0; j < i; j++) {
@@ -421,33 +403,38 @@ public class Panel05Order05Cart extends JPanel {
 
 		vColIndex = 1;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 100;
+		width = 55;
 		col.setPreferredWidth(width);
 
 		vColIndex = 2;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 40;
+		width = 50;
 		col.setPreferredWidth(width);
 
 		vColIndex = 3;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 40;
+		width = 35;
 		col.setPreferredWidth(width);
 
 		vColIndex = 4;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 20;
+		width = 35;
 		col.setPreferredWidth(width);
 
 		vColIndex = 5;
+		col = InnerTable.getColumnModel().getColumn(vColIndex);
+		width = 30;
+		col.setPreferredWidth(width);
+
+		vColIndex = 6;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
 		width = 50;
 		col.setPreferredWidth(width);
 	}
 
 	// Function
-
-	private void makeTableData() {
+	// Cart 테이블 실행하기
+	private void makeTableDataCart() {
 		DaoOrder dbAction = new DaoOrder();
 		beanList = dbAction.menuList();
 
@@ -456,14 +443,16 @@ public class Panel05Order05Cart extends JPanel {
 		String strHotice;
 		String strSize;
 		int optionPrice;
+		cartTotalPrice = 0;
 
 		for (int index = 0; index < listCount; index++) {
-			ImageIcon icon = new ImageIcon("./" + beanList.get(index).getFilename());
-			System.out.println("./" + beanList.get(index).getFilename());
+			Style style = new Style();
+			ImageIcon icon = style.imageSize80("./" + beanList.get(index).getFilename());
+			// 옵션값 변환하기
 			if (beanList.get(index).getHotice() == 0) {
-				strHotice = "Hot";
+				strHotice = "H";
 			} else {
-				strHotice = "Ice";
+				strHotice = "I";
 			}
 			if (beanList.get(index).getSize() == 0) {
 				strSize = "Tall";
@@ -472,16 +461,28 @@ public class Panel05Order05Cart extends JPanel {
 			} else {
 				strSize = "Grande";
 			}
-			optionPrice = beanList.get(index).getSize() + beanList.get(index).getShot()
-					+ (beanList.get(index).getSyrup()) * 500;
-			strMenuname = strHotice + "/" + beanList.get(index).getSet_menu_name() + "/" + strSize;
-			Object[] tempData = { icon, strMenuname, beanList.get(index).getIndiprice(), optionPrice,
-					beanList.get(index).getQuantity(), beanList.get(index).getIndiprice() + optionPrice };
+			// 시럽 가격 가져오기
+			int tempSyrup = beanList.get(index).getSyrup();
+			if (tempSyrup == 1 || tempSyrup == 2) {
+				tempSyrup = 500;
+			}
+			// 상품정보 표현하기
+			strMenuname = beanList.get(index).getSet_menu_name();
+			// 옵션총합구하기
+			optionPrice = beanList.get(index).getSize() + beanList.get(index).getShot() + tempSyrup;
+			// 각 음료마다의 합계
+			int cartPrice = (beanList.get(index).getIndiprice() + optionPrice) * beanList.get(index).getQuantity();
+			// 배열로 쌓기
+			Object[] tempData = { icon, strMenuname, strHotice + "/" + strSize, beanList.get(index).getIndiprice(),
+					optionPrice, beanList.get(index).getQuantity(), cartPrice };
+			// Row에 추가하기
 			OuterTable.addRow(tempData);
+			cartTotalPrice = cartTotalPrice + cartPrice;
 		}
+		lblCartTotal.setText("Total : " + Integer.toString(cartTotalPrice) + "원");
 	}
 
-	
+	// 사진 삭제하기
 	public void closingAction() {
 //		int listCount = beanList.size();
 		for (int index = 0; index < beanList.size(); index++) {
@@ -490,32 +491,47 @@ public class Panel05Order05Cart extends JPanel {
 		}
 	}
 
-	// 테이블클릭하면 해당메뉴 기억하기
-//	private void tableClick() {
-//		int i = InnerTable.getSelectedRow();
-//		selectedMenu = (String) InnerTable.getValueAt(i, 1); // String type으로 바꿔준다
-//		selectedPrice = (int) InnerTable.getValueAt(i, 2); // Int type으로 바꿔준다
-//		DaoSetting daoSetting = new DaoSetting();
-//		DtoSetting dtoSetting = daoSetting.tableClick();
-//		selectedSetno = dtoSetting.getSetno();
-//		selectedCategory = dtoSetting.getCategory();
-//		selectedPhoto = dtoSetting.getFilename();
-//	}
+	//
+	private JLabel getBtnCancel() {
+		if (btnCancel == null) {
+			btnCancel = new JLabel("");
+			btnCancel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					deleteList();
+					tableInit();
+					makeTableDataCart();
+				}
 
-	// DB to Table / DB search > select
-//	private void searchAction() {
-//		Dao dao = new Dao();
-//		dao.selectList();
-//		ArrayList<Dto> dtoList = dao.selectList(); // 		DB > Read(select)
-//		
-//		int listCount = dtoList.size();
-//		
-//		for(int index=0; index < listCount; index++) {
-//			String temp = Integer.toString(dtoList.get(index).getSeqno());
-//			String[] qTxt = {temp, dtoList.get(index).getName(), dtoList.get(index).getTelno(), dtoList.get(index).getRelation()};
-//			Outer_Table.addRow(qTxt);
-//			
-//		}	
-//	}
+				@Override
+				public void mousePressed(MouseEvent e) {
+					btnCancel.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btnCancel_C.png"));
+				}
 
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					btnCancel.setIcon(
+							new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btnCancel.png"));
+				}
+			});
+			btnCancel.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btnCancel.png"));
+			btnCancel.setBounds(11, 510, 77, 47);
+		}
+		return btnCancel;
+	}
+
+	// 테이블클릭시 작동
+	private void tableClick() {
+		int i = InnerTable.getSelectedRow();
+		String wkMenuname = (String) InnerTable.getValueAt(i, 1); // String type으로 바꿔준다
+		DaoOrder daoOrder = new DaoOrder(wkMenuname);
+		clickedOrderno = daoOrder.tableClick();
+	}
+
+	// 클릭한 테이블 리스트 삭제
+	private void deleteList() {
+		DaoOrder daoOrder = new DaoOrder(clickedOrderno);
+		daoOrder.deleteAction();
+	}
 } // End

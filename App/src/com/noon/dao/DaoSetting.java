@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import com.noon.base.Panel05Order01Shop;
 import com.noon.base.Panel05Order03Menu;
+import com.noon.dto.DtoSetting;
 import com.noon.util.DBConnect;
 
 public class DaoSetting {
@@ -23,7 +24,7 @@ public class DaoSetting {
 	String photonow;
 	String menu_name;
 	int shop_shopcode;
-	
+
 	// Constructor
 	public DaoSetting() {
 		// TODO Auto-generated constructor stub
@@ -37,7 +38,7 @@ public class DaoSetting {
 
 		String whereStatement = "select s.setno, s.menu_name, m.category, s.pricenow, s.photonow from setting s, menu m ";
 		String whereStatement2 = "where m.name = s.menu_name and s.enddate is null ";
-		String whereStatement3 = "and s.shop_shopcode = '" + Panel05Order01Shop.shopcode +"'";
+		String whereStatement3 = "and s.shop_shopcode = '" + Panel05Order01Shop.shopcode + "'";
 
 		// select s.menu_name, s.pricenow, s.photonow from setting s, menu m
 		// where m.name = s.menu_name and s.enddate is null and s.shop_shopcode = 1;
@@ -57,7 +58,7 @@ public class DaoSetting {
 				String wkMenuName = rs.getString(2);
 				String wkCategory = rs.getString(3);
 				int wkPrice = rs.getInt(4);
-				
+
 				// File
 				wkFilename = wkFilename + 1;
 				File file = new File("./" + wkFilename);
@@ -81,7 +82,7 @@ public class DaoSetting {
 		return BeanList;
 
 	}
-	
+
 	public DtoSetting tableClick() {
 
 		DtoSetting dtoSetting = null;
@@ -99,10 +100,10 @@ public class DaoSetting {
 
 			int wkFilename = 0;
 			if (rs.next()) { // true값일때만 가져온다
-				
-				int wkSetno= rs.getInt(1);
+
+				int wkSetno = rs.getInt(1);
 				String wkCategory = rs.getString(2);
-				
+
 				// File
 				wkFilename = wkFilename + 1;
 				File file = new File("./" + wkFilename);
@@ -125,6 +126,5 @@ public class DaoSetting {
 		return dtoSetting;
 
 	}
-	
-	
+
 } // End

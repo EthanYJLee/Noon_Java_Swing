@@ -22,7 +22,7 @@ import com.noon.dao.DaoComplete;
 import com.noon.dao.DaoShop;
 import com.noon.dto.DtoShop;
 
-public class Panel05Order02Time extends JPanel {
+public class xPanel05Order02Time extends JPanel {
 
 	private JLabel lblNewLabel_01;
 	private JLabel lblNewLabel_02;
@@ -67,7 +67,7 @@ public class Panel05Order02Time extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Panel05Order02Time() {
+	public xPanel05Order02Time() {
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);

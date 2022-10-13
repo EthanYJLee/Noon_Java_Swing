@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.JSplitPane;
 import javax.swing.JButton;
 
-public class Panel05Order03Menu2 extends JPanel {
+public class xPanel05Order03Menu2 extends JPanel {
 
 	private JLabel lblNewLabel_01;
 	private JLabel lblBtnTabOrder;
@@ -124,7 +124,7 @@ public class Panel05Order03Menu2 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Panel05Order03Menu2() {
+	public xPanel05Order03Menu2() {
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);

@@ -24,10 +24,26 @@ public class Style {
 	
 	// Method
 	// change image scale >>"파일경로" input<<
-	public ImageIcon imageSize(String imagePath) {
+	public ImageIcon imageSize120(String imagePath) {
 		ImageIcon icon = new ImageIcon(imagePath); // 파일경로 입력
 		Image img = icon.getImage(); // 이미지아이콘을 이미지로 변환
-		Image changeImg = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH); // 사이즈 조정
+		Image changeImg = img.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // 사이즈 조정
+		ImageIcon changeIcon = new ImageIcon(changeImg); // 이미지에서 이미지아이콘으로 다시 변환
+		return changeIcon;
+	}
+	
+	public ImageIcon imageSize140(String imagePath) {
+		ImageIcon icon = new ImageIcon(imagePath); // 파일경로 입력
+		Image img = icon.getImage(); // 이미지아이콘을 이미지로 변환
+		Image changeImg = img.getScaledInstance(140, 140, Image.SCALE_SMOOTH); // 사이즈 조정
+		ImageIcon changeIcon = new ImageIcon(changeImg); // 이미지에서 이미지아이콘으로 다시 변환
+		return changeIcon;
+	}
+	
+	public ImageIcon imageSize80(String imagePath) {
+		ImageIcon icon = new ImageIcon(imagePath); // 파일경로 입력
+		Image img = icon.getImage(); // 이미지아이콘을 이미지로 변환
+		Image changeImg = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH); // 사이즈 조정
 		ImageIcon changeIcon = new ImageIcon(changeImg); // 이미지에서 이미지아이콘으로 다시 변환
 		return changeIcon;
 	}

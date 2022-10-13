@@ -1,4 +1,4 @@
-package com.noon.dao;
+package com.noon.dto;
 
 public class DtoSetting {
 
@@ -12,7 +12,7 @@ public class DtoSetting {
 	int shop_shopcode;
 	int filename;
 	String category;
-	
+
 	// Constructor
 	public DtoSetting() {
 		// TODO Auto-generated constructor stub
@@ -111,7 +111,7 @@ public class DtoSetting {
 	public void setFilename(int filename) {
 		this.filename = filename;
 	}
-	
+
 	public String getCategory() {
 		return category;
 	}
@@ -120,5 +120,4 @@ public class DtoSetting {
 		this.category = category;
 	}
 
-	
 }

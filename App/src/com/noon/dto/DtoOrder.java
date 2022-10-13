@@ -20,7 +20,7 @@ public class DtoOrder {
 	int shop_shopcode;
 	String staff_id;
 	int filename;
-	
+
 	// Constructor
 	public DtoOrder() {
 		// TODO Auto-generated constructor stub
@@ -64,8 +64,9 @@ public class DtoOrder {
 		this.shop_shopcode = shop_shopcode;
 		this.staff_id = staff_id;
 	}
-	
-	public DtoOrder(int hotice, int quantity, int shot, int syrup, int size, int indiprice, String set_menu_name, int filename) {
+
+	public DtoOrder(int hotice, int quantity, int shot, int syrup, int size, int indiprice, String set_menu_name,
+			int filename) {
 		super();
 		this.hotice = hotice;
 		this.quantity = quantity;
@@ -205,7 +206,7 @@ public class DtoOrder {
 	public void setStaff_id(String staff_id) {
 		this.staff_id = staff_id;
 	}
-	
+
 	public int getFilename() {
 		return filename;
 	}
@@ -213,6 +214,5 @@ public class DtoOrder {
 	public void setFilename(int filename) {
 		this.filename = filename;
 	}
-	
-	
+
 }
