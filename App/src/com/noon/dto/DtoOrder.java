@@ -19,6 +19,7 @@ public class DtoOrder {
 	String set_menu_name;
 	int shop_shopcode;
 	String staff_id;
+	int filename;
 	
 	// Constructor
 	public DtoOrder() {
@@ -46,7 +47,6 @@ public class DtoOrder {
 		this.shop_shopcode = shop_shopcode;
 		this.staff_id = staff_id;
 	}
-	
 
 	public DtoOrder(String ordertime, int hotice, int quantity, int shot, int syrup, int size, int indiprice,
 			String member_id, int set_setno, String set_menu_name, int shop_shopcode, String staff_id) {
@@ -64,7 +64,20 @@ public class DtoOrder {
 		this.shop_shopcode = shop_shopcode;
 		this.staff_id = staff_id;
 	}
+	
+	public DtoOrder(int hotice, int quantity, int shot, int syrup, int size, int indiprice, String set_menu_name, int filename) {
+		super();
+		this.hotice = hotice;
+		this.quantity = quantity;
+		this.shot = shot;
+		this.syrup = syrup;
+		this.size = size;
+		this.indiprice = indiprice;
+		this.set_menu_name = set_menu_name;
+		this.filename = filename;
+	}
 
+	// -------------
 	public int getOrderno() {
 		return orderno;
 	}
@@ -191,6 +204,14 @@ public class DtoOrder {
 
 	public void setStaff_id(String staff_id) {
 		this.staff_id = staff_id;
+	}
+	
+	public int getFilename() {
+		return filename;
+	}
+
+	public void setFilename(int filename) {
+		this.filename = filename;
 	}
 	
 	

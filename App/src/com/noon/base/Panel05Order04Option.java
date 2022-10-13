@@ -284,11 +284,11 @@ public class Panel05Order04Option extends JPanel {
 			pnCategoryCoffee.add(getLblpn1Background());
 
 			//
-			if (Panel05Order03Menu.selectedCategory == "coffee") {
-				pnCategoryCoffee.setVisible(true);
-			}else {
+			if (Panel05Order03Menu.selectedCategory.equals("coffee")) {
+			} else {
 				pnCategoryCoffee.setVisible(false);
 			}
+			System.out.println(Panel05Order03Menu.selectedCategory);
 		}
 		return pnCategoryCoffee;
 	}
@@ -505,11 +505,13 @@ public class Panel05Order04Option extends JPanel {
 					lblOrderQuentity.setText("1");
 					optionInfo();
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblOptionReset.setIcon(new ImageIcon(
 							"/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_option_cancel_all_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblOptionReset.setIcon(new ImageIcon(
@@ -658,11 +660,12 @@ public class Panel05Order04Option extends JPanel {
 			pnCategoryTeaBeverage.add(getBtnSizeGrandePn2());
 			pnCategoryTeaBeverage.add(getLabel_1_1());
 			//
-			if (Panel05Order03Menu.selectedCategory != "tea") {
-				pnCategoryTeaBeverage.setVisible(true);
+			if (Panel05Order03Menu.selectedCategory.equals("tea")
+					|| Panel05Order03Menu.selectedCategory.equals("beverage")) {
 			}else {
 				pnCategoryTeaBeverage.setVisible(false);
 			}
+			System.out.println(Panel05Order03Menu.selectedCategory);
 		}
 		return pnCategoryTeaBeverage;
 	}
@@ -772,7 +775,7 @@ public class Panel05Order04Option extends JPanel {
 
 	// Function
 	private void optionInfo() {
-		if (Panel05Order03Menu.selectedCategory == "coffee") {
+		if (Panel05Order03Menu.selectedCategory.equals("coffee")) {
 			lblOptionInfo.setText(hoticeCheck + " / " + sizeCheck + " / " + shotCheck + " / " + syrupCheck);
 		} else {
 			lblOptionInfo.setText(hoticeCheck + " / " + sizeCheck);
@@ -816,7 +819,7 @@ public class Panel05Order04Option extends JPanel {
 
 	// 담기
 	private void insertActionCart() {
-		DaoOrder daoOrder = new DaoOrder(Panel05Order02Time.ordertime, hotice, quantity, shot, syrup, size,
+		DaoOrder daoOrder = new DaoOrder(Panel05Order01Shop.ordertime, hotice, quantity, shot, syrup, size,
 				Panel05Order03Menu.selectedPrice, Panel01Login.id, Panel05Order03Menu.selectedSetno,
 				Panel05Order03Menu.selectedMenu, Panel05Order01Shop.shopcode, "none");
 		if (daoOrder.insertActionCart() == 1) {

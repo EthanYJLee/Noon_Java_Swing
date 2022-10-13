@@ -456,10 +456,11 @@ public class Panel05Order01Shop extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					ordertime = cbTimeHour.getSelectedItem().toString() + ":" + cbTimeMinute.getSelectedItem();
+					System.out.println(ordertime);
 					if (shopcode == 0) {
 						JOptionPane.showMessageDialog(null, "지점을 선택해주세요.", "< 안 내 >", JOptionPane.ERROR_MESSAGE);
 					}else if (ordertime.equals("시:0")){
-						JOptionPane.showMessageDialog(null, "시간을 확인해주세요", "안내", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "시간을 확인해주세요", "< 안 내 >", JOptionPane.INFORMATION_MESSAGE);
 					}else {
 						setVisible(false);
 						Main.frame.getContentPane().add(new Panel05Order03Menu());

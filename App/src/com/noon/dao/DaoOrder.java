@@ -1,10 +1,18 @@
 package com.noon.dao;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import com.noon.base.Panel01Login;
+import com.noon.base.Panel05Order01Shop;
+import com.noon.dto.DtoOrder;
 import com.noon.util.DBConnect;
 
 public class DaoOrder {
@@ -12,6 +20,7 @@ public class DaoOrder {
 	// Fields
 	int orderno;
 	String ordertime;
+	String paytime;
 	String refundtime;
 	int hotice;
 	int quantity;
@@ -26,12 +35,12 @@ public class DaoOrder {
 	String set_menu_name;
 	int shop_shopcode;
 	String staff_id;
-	
+
 	// Constructor
 	public DaoOrder() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public DaoOrder(String ordertime, int hotice, int quantity, int shot, int syrup, int size, int indiprice,
 			String member_id, int set_setno, String set_menu_name, int shop_shopcode, String staff_id) {
 		super();
@@ -49,7 +58,6 @@ public class DaoOrder {
 		this.staff_id = staff_id;
 	}
 
-
 	// Method
 	// 입력
 	public int insertActionCart() {
@@ -57,13 +65,18 @@ public class DaoOrder {
 		int check = 0;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql, DBConnect.pw_mysql);
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
-			
-			String query = "insert into noon.order (ordertime, hotice, quantity, shot, syrup, size, indiprice, "; // *** 마지막 한칸 뛰기 ***
+
+			String query = "insert into noon.order (ordertime, hotice, quantity, shot, syrup, size, indiprice, "; // ***
+																													// 마지막
+																													// 한칸
+																													// 뛰기
+																													// ***
 			String query2 = "member_id, set_setno, set_menu_name, shop_shopcode, staff_id) ";
-			String query3 = "values (?,?,?,?,?,?,?,?,?,?,?,?)";
-			
+			String query3 = "values (concat(curdate(),' ',?),?,?,?,?,?,?,?,?,?,?,?)";
+
 			ps = conn_mysql.prepareStatement(query + query2 + query3);
 			ps.setString(1, ordertime);
 			ps.setInt(2, hotice);
@@ -77,17 +90,70 @@ public class DaoOrder {
 			ps.setString(10, set_menu_name);
 			ps.setInt(11, shop_shopcode);
 			ps.setString(12, staff_id);
-			
+
 			check = ps.executeUpdate(); // 끝나면 int값이 날라옴 / -1은 에러 / (1인지 -1인지 확인)
-			
+
 			conn_mysql.close(); // 여러명이 쓴다는것을 생각해야함
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return check;
 
 	}
 
+	// 장바구니에 담은 리스트 불러오기
+	public ArrayList<DtoOrder> menuList() {
+
+		ArrayList<DtoOrder> BeanList = new ArrayList<DtoOrder>();
+
+		String whereStatement = "select o.hotice, o.quantity, o.shot, o.syrup, o.size, o.indiprice, o.set_menu_name, s.photonow from setting s, noon.order o ";
+		String whereStatement2 = "where s.setno = o.set_setno and o.paytime is null and o.member_id = '"
+				+ Panel01Login.id + "' ";
+		String whereStatement3 = "and s.shop_shopcode = '" + Panel05Order01Shop.shopcode + "'";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2 + whereStatement3);
+
+			int wkFilename = 0;
+			while (rs.next()) { // true값일때만 가져온다
+
+				int wkHotice = rs.getInt(1);
+				int wkQuantity = rs.getInt(2);
+				int wkShot = rs.getInt(3);
+				int wkSyrup = rs.getInt(4);
+				int wkSize = rs.getInt(5);
+				int wkPrice = rs.getInt(6);
+				String wkMenuName = rs.getString(7);
+
+				// File
+				wkFilename = wkFilename + 1;
+				File file = new File("./" + wkFilename);
+
+				FileOutputStream output = new FileOutputStream(file);
+				InputStream input = rs.getBinaryStream(8);
+				byte[] buffer = new byte[1024];
+				while (input.read(buffer) > 0) {
+					output.write(buffer);
+				}
+
+				DtoOrder dtoOrder = new DtoOrder(wkHotice, wkQuantity, wkShot, wkSyrup, wkSize, wkPrice, wkMenuName,
+						wkFilename);
+				BeanList.add(dtoOrder);
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return BeanList;
+
+	}
 
 } // End

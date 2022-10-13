@@ -59,13 +59,10 @@ public class Panel05Order03Menu extends JPanel {
 	
 	// -- Table Definition
 	private final DefaultTableModel OuterTable = new DefaultTableModel(); // ******* 테이블 세팅(1/2)
-
 	private DefaultTableCellRenderer cellAlignCenter = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성/ 테이블가운데정렬에 필요
 
 	// -- file 정리
 	ArrayList<DtoSetting> beanList = null;
-
-	
 
 	// 바탕화면 그라데이션
 	// -------------------------------------------------------------------------------
@@ -258,9 +255,9 @@ public class Panel05Order03Menu extends JPanel {
 
 	private JTable getInnerTable() {
 		if (InnerTable == null) {
-			InnerTable = new JTable() { // <--****************
-				public Class getColumnClass(int column) { // <--****************
-					return (column == 0) ? Icon.class : Object.class; // <--****************
+			InnerTable = new JTable() { 								// <--****************
+				public Class getColumnClass(int column) {				// <--****************
+					return (column == 0) ? Icon.class : Object.class; 	// <--****************
 				}
 			};
 			InnerTable.addMouseListener(new MouseAdapter() {
@@ -274,10 +271,10 @@ public class Panel05Order03Menu extends JPanel {
 			InnerTable.setBackground(Color.decode("#F4F4F4"));
 //			InnerTable.getTableHeader().setFont(new Font("San serif", Font.PLAIN, 16));
 			InnerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			InnerTable.setRowHeight(80); // <--***************************************************
+			InnerTable.setRowHeight(80);	 // <--***************************************************
 			InnerTable.setModel(OuterTable); // <--***************************************************
 
-			cellAlignCenter.setHorizontalAlignment(JLabel.CENTER); // Center 정렬
+			cellAlignCenter.setHorizontalAlignment(JLabel.CENTER);			 // Center 정렬
 			InnerTable.getTableHeader().setDefaultRenderer(cellAlignCenter); // Center 정렬
 		}
 		return InnerTable;
@@ -414,17 +411,17 @@ public class Panel05Order03Menu extends JPanel {
 
 		int vColIndex = 0;
 		TableColumn col = InnerTable.getColumnModel().getColumn(vColIndex); // 0번부터
-		int width = 80;
+		int width = 100;
 		col.setPreferredWidth(width);
 
 		vColIndex = 1;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 90;
+		width = 100;
 		col.setPreferredWidth(width);
 
 		vColIndex = 2;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 50;
+		width = 100;
 		col.setPreferredWidth(width);
 
 	}
@@ -463,6 +460,7 @@ public class Panel05Order03Menu extends JPanel {
 		selectedSetno = dtoSetting.getSetno();
 		selectedCategory = dtoSetting.getCategory();
 		selectedPhoto = dtoSetting.getFilename();
+		System.out.println(selectedCategory);
 	}
 
 } // End
