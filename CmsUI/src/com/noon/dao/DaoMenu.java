@@ -188,7 +188,7 @@ public class DaoMenu {
 
 				int wkShopcode = rs.getInt(3);
 				int size = 0;
-				
+
 				Menu menu = new Menu();
 				ImageIcon icon = new ImageIcon(filepath);
 				Image img = icon.getImage();
@@ -196,34 +196,23 @@ public class DaoMenu {
 				menu.getLblMenuImage().setIcon(new ImageIcon(changeImg));
 				menu.getLblMenuName().setText(wkName);
 				menu.setNumOfOne(i);
-				
-				
+
 				if (menuList.size() != 0) {
 					for (int j = 0; j < menuList.size(); j++) {
 						if (menuList.get(j).getLblMenuName().getText().equals(wkName)) {
 							if (wkShopcode == getShopcode()) {
 								menuList.set(j, menu);
 							}
-						}else {
+						} else {
 							size++;
 						}
 					}
-					if(size == menuList.size()) {
+					if (size == menuList.size()) {
 						menuList.add(menu);
 					}
-				}else {
+				} else {
 					menuList.add(menu);
 				}
-
-//				Menu menu = new Menu();
-//				ImageIcon icon = new ImageIcon(filepath);
-//				Image img = icon.getImage();
-//				Image changeImg = img.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-//				menu.getLblMenuImage().setIcon(new ImageIcon(changeImg));
-//				menu.getLblMenuName().setText(wkName);
-//				menu.setNumOfOne(i);
-//				menuList.add(menu);
-
 			}
 
 			conn_mysql.close();

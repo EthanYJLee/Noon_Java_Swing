@@ -19,28 +19,32 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.noon.component.Header;
-import com.noon.dao.DaoHeader;
-import com.noon.dao.DaoHire;
 import com.noon.dao.DaoStaff;
+import com.noon.dto.DtoStaff;
+import com.noon.form.manager.ManagerForm3;
 import com.noon.main.Login;
+import com.noon.main.Manager;
 import com.noon.swing.ImageAvatar;
 
 public class ParttimeForm2 extends JPanel {
     private JLabel lblNewLabel_1;
     private ImageAvatar imageAvatar;
     private JTextField tfId;
-    private JTextField tfPW;
     private JTextField tfPhone;
     private JTextField textField_3;
     private Header header2;
     
-    private String filepath;
+    private String filepath = "";
+    private JPasswordField pfPw;
 
+    DtoStaff dto;
+    
     /**
      * Create the panel.
      */
@@ -57,8 +61,9 @@ public class ParttimeForm2 extends JPanel {
         add(lblNewLabel);
         
         tfId = new JTextField();
+        tfId.setEditable(false);
         tfId.setForeground(new Color(0, 0, 0));
-        tfId.setBackground(new Color(250, 243, 224));
+        tfId.setBackground(new Color(255, 255, 255));
         tfId.setColumns(10);
         tfId.setBounds(118, 106, 300, 41);
         tfId.setText(Login.id);
@@ -76,11 +81,6 @@ public class ParttimeForm2 extends JPanel {
         lblNewLabel_2_1.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
         lblNewLabel_2_1.setBounds(45, 177, 61, 30);
         add(lblNewLabel_2_1);
-        
-        tfPW = new JTextField();
-        tfPW.setColumns(10);
-        tfPW.setBounds(118, 175, 300, 41);
-        add(tfPW);
         
         JLabel lblNewLabel_2_1_1 = new JLabel("전화번호");
         lblNewLabel_2_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -126,12 +126,22 @@ public class ParttimeForm2 extends JPanel {
         lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_4.setBounds(550, 355, 113, 16);
         add(lblNewLabel_4);
+        
+        pfPw = new JPasswordField();
+        pfPw.setBounds(118, 170, 300, 41);
+        add(pfPw);
+        
+        setStatus();
     }
     
     
     // 정보수정 메소드
     private void updateAction() {
     	FileInputStream input = null;
+		if (filepath.equals("")) {
+			filepath = dto.getFilepath();
+		}
+
 		File file = new File(filepath);
 		try {
 			input = new FileInputStream(file);
@@ -139,10 +149,17 @@ public class ParttimeForm2 extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// DaoStaff 의 updateStaff();
-		DaoStaff dao = new DaoStaff(tfPW.getText().trim(), tfPhone.getText().trim(),input);
-		int num = dao.updateStaff();
-		JOptionPane.showMessageDialog(null, "정보수정이 완료되었습니다.");
+		
+		if (checkTF()) {
+			DaoStaff dao = new DaoStaff(tfId.getText().trim(), pfPw.getText().trim(),
+					tfPhone.getText().trim(),input);
+			boolean result = dao.updateStaff2();
+			if (result) {
+				JOptionPane.showConfirmDialog(null, "회원정보가 수정되었습니다.");
+			} else {
+				JOptionPane.showConfirmDialog(null, "회원정보가 수정되지 않았습니다.");
+			}
+		}
     }
     
     
@@ -150,7 +167,9 @@ public class ParttimeForm2 extends JPanel {
      private ImageAvatar getImageAvatar() {
         if (imageAvatar == null) {
             imageAvatar = new ImageAvatar();
-            imageAvatar.setIcon(new ImageIcon(getClass().getResource("/com/noon/icon/bigperson.png")));
+//            DaoStaff dao =new DaoStaff();
+//     		String filepath = dao.selectPhoto();
+//            imageAvatar.setIcon(new ImageIcon(filepath));
             imageAvatar.setBounds(476, 87, 256, 256);
         }
         return imageAvatar;
@@ -171,7 +190,8 @@ public class ParttimeForm2 extends JPanel {
 		imageAvatar.setIcon(new ImageIcon(filepath));
 		imageAvatar.repaint();
 	}
-    
+
+ 	
     @Override
     protected void paintChildren (Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
@@ -180,9 +200,33 @@ public class ParttimeForm2 extends JPanel {
         super.paintChildren(g);
     }
     
+    public boolean checkTF() {
+    	String error = null;
+    	int i = 0;
+    	if(pfPw.getText().trim().length() == 0) {
+    		error = "패스워드";
+    		i++;
+    	}else if(tfPhone.getText().trim().length() == 0) {
+    		error ="전화번호";
+    		i++;
+    	}
+    	
+    	if(i == 0) {
+    		return true;
+    	}else {
+    		JOptionPane.showConfirmDialog(null, error + "를 입력해주세요");
+    		return false;
+    	}
+    }
+    
+    
     public void setStatus() {
-		DaoHeader dao = new DaoHeader();
-		tfId.setText(dao.getName()); 
-		
+        DaoStaff dao = new DaoStaff();
+        dto = dao.setTfImage();
+        tfId.setText(dto.getId());
+        pfPw.setText(dto.getPw());
+        tfPhone.setText(dto.getPhone());
+        imageAvatar.setIcon(new ImageIcon(dto.getFilepath()));
+        repaint();
 	}
 }

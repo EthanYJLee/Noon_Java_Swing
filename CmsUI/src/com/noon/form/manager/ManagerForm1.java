@@ -59,13 +59,13 @@ public class ManagerForm1 extends JPanel {
         
         
         JPanel panel = new JPanel();
-        panel.setBounds(28, 83, 728, 414);
+        panel.setBounds(28, 80, 728, 283);
         add(panel);
         panel.setLayout(null);
         
         // 스크롤
         JScrollPane scrollPane_1 = new JScrollPane();
-        scrollPane_1.setBounds(0, 0, 728, 414);
+        scrollPane_1.setBounds(0, 0, 728, 283);
         panel.add(scrollPane_1);
         
         table_1 = new JTable();
@@ -74,7 +74,7 @@ public class ManagerForm1 extends JPanel {
         scrollPane_1.setViewportView(table_1); // 스크롤에 이너테이블 연결
         
         tfSelection = new JTextField();
-        tfSelection.setBounds(357, 40, 260, 27);
+        tfSelection.setBounds(357, 28, 289, 35);
         add(tfSelection);
         tfSelection.setColumns(10);
 
@@ -82,9 +82,9 @@ public class ManagerForm1 extends JPanel {
 
     private JLabel getLblNewLabel() {
         if (lblNewLabel == null) {
-            lblNewLabel = new JLabel("알바 급여 관리");
-            lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
-            lblNewLabel.setBounds(28, 46, 123, 16);
+            lblNewLabel = new JLabel("알바별 처리 건수");
+            lblNewLabel.setFont(new Font("Arial", Font.BOLD, 26));
+            lblNewLabel.setBounds(28, 28, 174, 34);
         }
         return lblNewLabel;
     }
@@ -93,7 +93,7 @@ public class ManagerForm1 extends JPanel {
         if (comboBox == null) {
             comboBox = new JComboBox();
             comboBox.setModel(new DefaultComboBoxModel(new String[] {"이름", "ID"}));
-            comboBox.setBounds(227, 41, 118, 27);
+            comboBox.setBounds(227, 28, 118, 34);
         }
         return comboBox;
     }
@@ -107,7 +107,7 @@ public class ManagerForm1 extends JPanel {
             		conditionQuery();
             	}
             });
-            btnNewButton.setBounds(620, 38, 111, 24);
+            btnNewButton.setBounds(658, 28, 98, 34);
         }
         return btnNewButton;
     }
@@ -118,11 +118,9 @@ public class ManagerForm1 extends JPanel {
 		Outer_Table.addColumn("ID");
 		Outer_Table.addColumn("이름");
 		Outer_Table.addColumn("전화번호");
-		Outer_Table.addColumn("주문처리 건수");
-		Outer_Table.addColumn("인센티브 비율");
-		Outer_Table.addColumn("이번달 급여");
+		Outer_Table.addColumn("주문처리 건수");;
 
-		Outer_Table.setColumnCount(6);
+		Outer_Table.setColumnCount(4);
 
 		// table에 있는 데이터 지우기
 		int a = Outer_Table.getRowCount();
@@ -136,33 +134,24 @@ public class ManagerForm1 extends JPanel {
 		// ID column
 		int vColIndex = 0;
 		TableColumn col = table_1.getColumnModel().getColumn(vColIndex);
-		int width = 80;
+		int width = 182;
 		col.setPreferredWidth(width);
 		// 이름 column
 		vColIndex = 1;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 100;
+		width = 182;
 		col.setPreferredWidth(width);
 		// 전화번호 column
 		vColIndex = 2;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 150;
+		width = 182;
 		col.setPreferredWidth(width);
 		// 주문처리 건수 column
 		vColIndex = 3;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 100;
+		width = 182;
 		col.setPreferredWidth(width);
-		// 인센티브 비율 column
-		vColIndex = 4;
-		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 100;
-		col.setPreferredWidth(width);
-		// 이번달 급여 column
-		vColIndex = 5;
-		col = table_1.getColumnModel().getColumn(vColIndex);
-		width = 300;
-		col.setPreferredWidth(width);
+
 	}
 	
 	private void searchAction() {

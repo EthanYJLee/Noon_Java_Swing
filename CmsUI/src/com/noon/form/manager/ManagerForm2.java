@@ -24,8 +24,11 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.noon.dao.DaoHire;
+import com.noon.dao.DaoSignUp;
 import com.noon.dao.DaoStaff;
 import com.noon.swing.ImageAvatar;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ManagerForm2 extends JPanel {
 	private JLabel lblNewLabel_1;
@@ -34,8 +37,8 @@ public class ManagerForm2 extends JPanel {
 	private JTextField tfName;
 	private JTextField tfPhone;
 	private JTextField tfDebitno;
-
-	private String filepath;
+	private JLabel lblCheckId;
+	private String filepath ="";
 
 	/**
 	 * Create the panel.
@@ -53,6 +56,12 @@ public class ManagerForm2 extends JPanel {
 		add(lblNewLabel);
 
 		tfId = new JTextField();
+		tfId.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				checkId();
+			}
+		});
 		tfId.setBackground(new Color(255, 255, 255));
 		tfId.setBounds(118, 106, 300, 41);
 		add(tfId);
@@ -101,7 +110,7 @@ public class ManagerForm2 extends JPanel {
 		lblNewLabel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				insertAction();
+				checkTf(); // 이거 true면 insertAction 실시
 			}
 		});
 		ImageIcon icon = new ImageIcon((ManagerForm2.class.getResource("/com/noon/icon/register.png")));
@@ -127,11 +136,22 @@ public class ManagerForm2 extends JPanel {
 		lblRegisterImage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegisterImage.setBounds(550, 355, 113, 16);
 		add(lblRegisterImage);
+		
+		lblCheckId = new JLabel("");
+		lblCheckId.setBounds(118, 141, 300, 22);
+		add(lblCheckId);
 	}
 
 	private void insertAction() {
 		FileInputStream input = null;
-		File file = new File(filepath);
+		File file = null;
+
+		if (!filepath.equals("")) {
+			file = new File(filepath);
+		} else {
+			file = new File("./src/com/noon/icon/bigperson.png");
+		}
+
 		try {
 			input = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
@@ -174,6 +194,76 @@ public class ManagerForm2 extends JPanel {
 		imageAvatar.repaint();
 	}
 
+	private void checkTf() {
+		String empty = "";
+		int i = 0;
+		int tf = 0;
+		try {
+			if (tfPhone.getText().trim().length() != 0) {
+				tf = 1;
+				int check = Integer.parseInt(tfPhone.getText().trim());
+			}
+			if (tfDebitno.getText().trim().length() != 0) {
+				tf = 2;
+				int check = Integer.parseInt(tfDebitno.getText().trim());
+			}
+
+			if (tfId.getText().trim().length() == 0) {
+				empty = "ID";
+				i++;
+			} else if (tfName.getText().trim().length() == 0) {
+				empty = "이름";
+				i++;
+			} else if (tfPhone.getText().trim().length() == 0) {
+				empty = "전화번호";
+				i++;
+			} else if (tfDebitno.getText().trim().length() == 0) {
+				empty = "계좌번호";
+				i++;
+			}
+
+			if (i == 0) {
+				JOptionPane.showConfirmDialog(null, "등록완료되었습니다.");
+				insertAction();
+				clearTf();
+			} else {
+				JOptionPane.showConfirmDialog(null, empty + "를 입력해주세요.");
+				return;
+			}
+
+		} catch (NumberFormatException e) {
+			if(tf == 1) {
+				tfPhone.setText("");
+			}
+			if(tf == 2) {
+				tfDebitno.setText("");
+			}
+			JOptionPane.showConfirmDialog(null, "숫자만 입력해주세요.");
+		}
+	}
+	
+	public void clearTf() {
+		tfDebitno.setText("");
+		tfId.setText("");
+		tfName.setText("");
+		tfPhone.setText("");
+	}
+	
+	private boolean checkId() {
+		DaoStaff dao = new DaoStaff(tfId.getText().trim());
+		boolean result = dao.checkId();
+
+		if (result) {
+			lblCheckId.setText("생성 가능한 아이디입니다.");
+			lblCheckId.setForeground(new Color(0, 0, 255));
+		} else {
+			lblCheckId.setText("이미 존재하거나 탈퇴한 아이디입니다.");
+			lblCheckId.setForeground(new Color(255, 0, 0));
+		}
+
+		return result;
+	}
+	
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
