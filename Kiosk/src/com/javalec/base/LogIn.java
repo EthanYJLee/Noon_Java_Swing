@@ -20,7 +20,7 @@ import com.javalec.util.GradientBack;
 import com.javalec.util.RoundedButton;
 
 public class LogIn extends GradientBack {
-	public static String kiosk_id = "shop2kiosk1";
+	public static String kiosk_id ;
 	private JTextField tfShopNo;
 	private JTextField tfManagerNo;
 	public static String myBranch;
@@ -50,12 +50,12 @@ public class LogIn extends GradientBack {
 		lblLogo.setBounds(75, 114, 200, 200);
 		add(lblLogo);
 
-		JLabel lblStoreNo = new JLabel("매장코드 : ");
+		JLabel lblStoreNo = new JLabel("키오스크ID : ");
 		lblStoreNo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStoreNo.setBounds(59, 364, 82, 15);
 		add(lblStoreNo);
 
-		JLabel lblManagerId = new JLabel("관리자 ID : ");
+		JLabel lblManagerId = new JLabel("키오스크PW : ");
 		lblManagerId.setHorizontalAlignment(SwingConstants.CENTER);
 		lblManagerId.setBounds(59, 395, 82, 15);
 		add(lblManagerId);
@@ -68,21 +68,41 @@ public class LogIn extends GradientBack {
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				loginAction();
+//				loginAction();
+				loginAction2();
 			}
 		});
 		
 	}
 
-	public void loginAction(){
-		int id = Integer.parseInt(tfShopNo.getText());
-		String pw = tfManagerNo.getText();
+//	public void loginAction(){
+//		int id = Integer.parseInt(tfShopNo.getText());
+//		String pw = tfManagerNo.getText();
+//		
+//		DaoManage daoManage = new DaoManage(id, pw);
+//		if(daoManage.loginAction() == 1) {
+//			DaoShop daoShop = new DaoShop(id);
+//			myBranch = daoShop.getMyBranch();	// 매장이름 받아옴 (myBranch)
+//			shopcode = id;
+//			setVisible(false);
+//			Frame.frame.getContentPane().add(new Ad());
+//		} else {
+//			JOptionPane.showMessageDialog(null, "매장코드와 관리자ID를 확인해주세요.");
+//			setVisible(true);
+//		}
+//	}
+	
+	
+	public void loginAction2() {
+		DaoManage daoManage = new DaoManage(tfShopNo.getText().trim(), tfManagerNo.getText().trim());
+		int checkLogin = daoManage.loginAction2();
 		
-		DaoManage daoManage = new DaoManage(id, pw);
-		if(daoManage.loginAction() == 1) {
-			DaoShop daoShop = new DaoShop(id);
-			myBranch = daoShop.getMyBranch();	// 매장이름 받아옴 (myBranch)
-			shopcode = id;
+		if(checkLogin == 1) {
+			kiosk_id = tfShopNo.getText().trim();
+			int shopcode = daoManage.getShopcode();
+			this.shopcode = shopcode;
+			DaoShop daoShop = new DaoShop(shopcode);
+			myBranch = daoShop.getMyBranch();
 			setVisible(false);
 			Frame.frame.getContentPane().add(new Ad());
 		} else {
@@ -90,7 +110,6 @@ public class LogIn extends GradientBack {
 			setVisible(true);
 		}
 	}
-
 	
 	
 }

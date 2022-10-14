@@ -123,6 +123,8 @@ public class Parttime extends javax.swing.JFrame {
 
 		pack();
 		getContentPane().setLayout(layout);
+		
+		setManagerForm(new ParttimeForm1());
 
 	}
 	

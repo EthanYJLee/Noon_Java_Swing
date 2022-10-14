@@ -86,6 +86,7 @@ public class Cart extends JPanel {
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateAction();
+				insertToCompleteAction();
 				tableInit();
 				setVisible(false);
 				Frame.frame.getContentPane().add(new Point());
@@ -315,8 +316,8 @@ public class Cart extends JPanel {
 					DBConnect.pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			String query = "update order set paytime = now() ";
-			String query2 = "where paytime is null";
+			String query = "update noon.order set paytime = now() ";
+			String query2 = "where paytime is null and staff_id = '" + LogIn.kiosk_id + "'";
 
 			ps = conn_mysql.prepareStatement(query + query2);
 
@@ -327,5 +328,32 @@ public class Cart extends JPanel {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void insertToCompleteAction() {
+		PreparedStatement ps = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			String query = "insert into complete (staff_id, shop_shopcode ,order_orderno, order_member_id, order_set_setno, order_set_menu_name,\n"
+					+ "order_shop_shopcode,order_staff_id) \n"
+					+ "select 'none', shop_shopcode ,orderno, member_id, set_setno ,set_menu_name, shop_shopcode ,staff_id from noon.order \n"
+					+ "where shop_shopcode = ? and staff_id = ? and paytime is not null and ordertime is not null and refundtime is null and "
+					+ "complete_completeno is null";
+
+			ps = conn_mysql.prepareStatement(query);
+			
+			ps.setInt(1,LogIn.shopcode);
+			ps.setString(2,LogIn.kiosk_id);
+
+			ps.executeUpdate();
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

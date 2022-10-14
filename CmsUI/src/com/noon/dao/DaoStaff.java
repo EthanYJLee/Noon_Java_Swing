@@ -70,7 +70,7 @@ public class DaoStaff {
 		ArrayList<DtoStaff> dtoList = new ArrayList<DtoStaff>();
 
 		String whereStatement = "select s.id , s.name , s.phone from staff s, hire h where s.id = h.staff_id and h.manager_id = '"
-				+ Login.id + "'";
+				+ Login.id + "' and s.id not like '%kiosk%'";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

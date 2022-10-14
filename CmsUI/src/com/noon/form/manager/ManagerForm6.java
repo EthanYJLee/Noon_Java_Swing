@@ -171,14 +171,14 @@ public class ManagerForm6 extends JPanel {
 
 	}
 
-	private void searchAction() {
-		DaoOrder dao = new DaoOrder();
-		ArrayList<DtoOrder> dtoList = dao.searchAction();
-
-		for (DtoOrder a : dtoList) {
-			String[] qTxt = { a.getPaydate(), a.getMenuname(), Integer.toString(a.getSum_quantity()),
-					Integer.toString(a.getCount_orderno()), Integer.toString(a.getCount_completetime()) };
-			Outer_Table.addRow(qTxt);
-		}
-	}
+//	private void searchAction() {
+//		DaoOrder dao = new DaoOrder();
+//		ArrayList<DtoOrder> dtoList = dao.searchAction();
+//
+//		for (DtoOrder a : dtoList) {
+//			String[] qTxt = { a.getPaydate(), a.getMenuname(), Integer.toString(a.getSum_quantity()),
+//					Integer.toString(a.getCount_orderno()), Integer.toString(a.getCount_completetime()) };
+//			Outer_Table.addRow(qTxt);
+//		}
+//	}
 }
