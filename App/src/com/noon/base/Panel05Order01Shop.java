@@ -348,6 +348,7 @@ public class Panel05Order01Shop extends JPanel {
 			});
 			InnerTableShopList.setBackground(new Color(255, 242, 238));
 			InnerTableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			InnerTableShopList.setRowHeight(20);
 			InnerTableShopList.setModel(OuterTable); // 테이블 세팅(2/2) **********
 			cellAlignCenter.setHorizontalAlignment(JLabel.CENTER); // Center 정렬
 			InnerTableShopList.getTableHeader().setDefaultRenderer(cellAlignCenter); // Center 정렬

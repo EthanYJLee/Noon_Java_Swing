@@ -134,7 +134,7 @@ public class Panel02SignUp extends JPanel {
 			tfId = new JTextField();
 			tfId.setColumns(10);
 			tfId.setBackground(new Color(176, 108, 89));
-			tfId.setBounds(140, 406, 143, 32);
+			tfId.setBounds(140, 406, 141, 32);
 		}
 		return tfId;
 	}
