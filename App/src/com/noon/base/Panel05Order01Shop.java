@@ -6,12 +6,15 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,11 +39,11 @@ public class Panel05Order01Shop extends JPanel {
 	private JLabel lblNewLabel_01;
 	private JLabel lblNewLabel_02;
 	private JLabel lblBtnSelect;
-	private JLabel lblBtnTabOrder;
-	private JLabel lblBtnTabMypage;
+	private JButton lblBtnTabOrder;
+	private JButton lblBtnTabMypage;
 	private JLabel lblHomeIndicator;
-	private JLabel lblBtnTabHome;
-	private JLabel lblBtnTabGift;
+	private JButton lblBtnTabHome;
+	private JButton lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
 	private JLabel lblProfilePhoto;
@@ -63,6 +66,7 @@ public class Panel05Order01Shop extends JPanel {
 	// static 선언부
 	public static int shopcode = 0;
 	public static String ordertime;
+	public static String shopname = "";
 	//
 	String openTime;
 	String closeTime;
@@ -96,6 +100,7 @@ public class Panel05Order01Shop extends JPanel {
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
 				tableInit(); // <--***************************************************
+				searchAction();
 			}
 
 			public void ancestorMoved(AncestorEvent event) {
@@ -178,12 +183,11 @@ public class Panel05Order01Shop extends JPanel {
 
 	// Tabbar
 	// ===========================================================================================================
-	private JLabel getLblBtnTabHome() {
+	private JButton getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
-			lblBtnTabHome = new JLabel("");
-			lblBtnTabHome.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabHome = new JButton("");
+			lblBtnTabHome.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
@@ -194,29 +198,27 @@ public class Panel05Order01Shop extends JPanel {
 		return lblBtnTabHome;
 	}
 
-	private JLabel getLblBtnTabOrder() {
+	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
-			lblBtnTabOrder = new JLabel("");
-			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabOrder = new JButton("");
+			lblBtnTabOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
 			lblBtnTabOrder
 					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
-			lblBtnTabOrder.setBounds(95, 729, 94, 50);
+			lblBtnTabOrder.setBounds(94, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
 	}
 
-	private JLabel getLblBtnTabGift() {
+	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
-			lblBtnTabGift = new JLabel("");
-			lblBtnTabGift.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabGift = new JButton("");
+			lblBtnTabGift.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel06Gift());
 				}
@@ -227,12 +229,11 @@ public class Panel05Order01Shop extends JPanel {
 		return lblBtnTabGift;
 	}
 
-	private JLabel getLblBtnTabMypage() {
+	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
-			lblBtnTabMypage = new JLabel("");
-			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabMypage = new JButton("");
+			lblBtnTabMypage.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
@@ -347,6 +348,7 @@ public class Panel05Order01Shop extends JPanel {
 			});
 			InnerTableShopList.setBackground(new Color(255, 242, 238));
 			InnerTableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			InnerTableShopList.setRowHeight(20);
 			InnerTableShopList.setModel(OuterTable); // 테이블 세팅(2/2) **********
 			cellAlignCenter.setHorizontalAlignment(JLabel.CENTER); // Center 정렬
 			InnerTableShopList.getTableHeader().setDefaultRenderer(cellAlignCenter); // Center 정렬
@@ -517,17 +519,17 @@ public class Panel05Order01Shop extends JPanel {
 
 		int vColIndex = 0;
 		TableColumn col = InnerTableShopList.getColumnModel().getColumn(vColIndex); // 0번부터
-		int width = 55;
+		int width = 50;
 		col.setPreferredWidth(width);
 
 		vColIndex = 1;
 		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
-		width = 100;
+		width = 120;
 		col.setPreferredWidth(width);
 
 		vColIndex = 2;
 		col = InnerTableShopList.getColumnModel().getColumn(vColIndex);
-		width = 90;
+		width = 80;
 		col.setPreferredWidth(width);
 
 		vColIndex = 3;
@@ -540,6 +542,24 @@ public class Panel05Order01Shop extends JPanel {
 		width = 40;
 		col.setPreferredWidth(width);
 	}
+	
+	private void searchAction() {
+		DaoShop daoShop = new DaoShop();
+		ArrayList<DtoShop> dtoShopList = daoShop.searchAction();
+
+		int listCount = dtoShopList.size();
+
+		for (int index = 0; index < listCount; index++) {
+			String[] qTxt = { dtoShopList.get(index).getName(),
+					dtoShopList.get(index).getProvince() +" "+ dtoShopList.get(index).getCity()
+							+" "+ dtoShopList.get(index).getTown(),
+					dtoShopList.get(index).getPhone(),
+					dtoShopList.get(index).getOpentime().toString().replaceAll(":00:00", "시").replaceAll(":00", ""),
+					dtoShopList.get(index).getClosetime().toString().replaceAll(":00:00", "시").replaceAll(":00", "") };
+			OuterTable.addRow(qTxt);
+		}
+	}
+
 
 	// 검색조건
 	private void conditionQuery() {
@@ -592,6 +612,7 @@ public class Panel05Order01Shop extends JPanel {
 		int i = InnerTableShopList.getSelectedRow();
 		String wkName = (String) InnerTableShopList.getValueAt(i, 0); // String type으로 바꿔준다
 		DaoShop daoShop = new DaoShop(wkName);
+		shopname = wkName;
 
 		shopcode = daoShop.tableClick();
 

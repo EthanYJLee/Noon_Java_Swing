@@ -1,7 +1,7 @@
 package com.noon.dto;
 
 public class DtoMember {
-	
+
 	// Fields
 	String id;
 	String pw;
@@ -10,7 +10,7 @@ public class DtoMember {
 	String initdate;
 	String updatedate;
 	String deletedate;
-	
+
 	// Constructor
 	public DtoMember(String id, String pw, String name, String phone, String initdate, String updatedate,
 			String deletedate) {
@@ -22,6 +22,14 @@ public class DtoMember {
 		this.initdate = initdate;
 		this.updatedate = updatedate;
 		this.deletedate = deletedate;
+	}
+
+	public DtoMember(String id, String pw, String name, String phone) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.phone = phone;
 	}
 
 	// Method
@@ -80,6 +88,5 @@ public class DtoMember {
 	public void setDeletedate(String deletedate) {
 		this.deletedate = deletedate;
 	}
-	
 
 }
