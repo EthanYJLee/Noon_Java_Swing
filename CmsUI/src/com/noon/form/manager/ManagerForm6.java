@@ -97,9 +97,8 @@ public class ManagerForm6 extends JPanel {
 
 		addChartPieItem();
 		addChartLineItem();
-
 		tableInit();
-//		searchAction();
+		searchAction();
 
 	}
 
@@ -107,13 +106,24 @@ public class ManagerForm6 extends JPanel {
 		DaoOrder dao = new DaoOrder();
 		HashMap<String, Integer> map = dao.countOrderNum7Day();
 		Set<String> mapSet = map.keySet();
-
+		
+		Color[] colorArr = new Color[7];
+		colorArr[0] = new Color(217,215,241);
+		colorArr[1] = new Color(255,253,222);
+		colorArr[2] = new Color(231,251,190);
+		colorArr[3] = new Color(255,203,203);
+		colorArr[4] = new Color(255,219,164);
+		colorArr[5] = new Color(255,233,174);
+		colorArr[6] = new Color(193,239,255);
+		int i = 0;
+		
 		for (String a : mapSet) {
 			int num = map.get(a);
-			ModelChartPie add = new ModelChartPie(a, num, new Color(num / 255, num / 255 + 10, num / 255 + 50));
+			ModelChartPie add = new ModelChartPie(a, num, colorArr[i]);
 			ItemChartPie text = new ItemChartPie(add);
 			chartPie.addItem(add);
 			panelTextPie.add(text);
+			i++;
 		}
 	}
 
@@ -121,7 +131,6 @@ public class ManagerForm6 extends JPanel {
 		DaoOrder dao = new DaoOrder();
 		HashMap<String, Integer> map = dao.countOrderNum7Day();
 		Set<String> mapSet = map.keySet();
-
 		for (String a : mapSet) {
 			int num = map.get(a);
 			ModelChartLine add = new ModelChartLine(a, num);
@@ -135,9 +144,8 @@ public class ManagerForm6 extends JPanel {
 		Outer_Table.addColumn("메뉴이름");
 		Outer_Table.addColumn("음료");
 		Outer_Table.addColumn("주문건수");
-		Outer_Table.addColumn("처리건수");
 
-		Outer_Table.setColumnCount(5);
+		Outer_Table.setColumnCount(4);
 
 		// table에 있는 데이터 지우기
 		int a = Outer_Table.getRowCount();
@@ -151,34 +159,30 @@ public class ManagerForm6 extends JPanel {
 		// ID column
 		int vColIndex = 0;
 		TableColumn col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(151);
+		col.setPreferredWidth(189);
 
 		vColIndex = 1;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(151);
+		col.setPreferredWidth(189);
 
 		vColIndex = 2;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(151);
+		col.setPreferredWidth(189);
 
 		vColIndex = 3;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(151);
+		col.setPreferredWidth(189);
 
-		vColIndex = 4;
-		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(152);
 
 	}
 
-//	private void searchAction() {
-//		DaoOrder dao = new DaoOrder();
-//		ArrayList<DtoOrder> dtoList = dao.searchAction();
-//
-//		for (DtoOrder a : dtoList) {
-//			String[] qTxt = { a.getPaydate(), a.getMenuname(), Integer.toString(a.getSum_quantity()),
-//					Integer.toString(a.getCount_orderno()), Integer.toString(a.getCount_completetime()) };
-//			Outer_Table.addRow(qTxt);
-//		}
-//	}
+	private void searchAction() {
+		DaoOrder dao = new DaoOrder();
+		ArrayList<DtoOrder> dtoList = dao.searchGroupByMenuAction();
+		
+		for (DtoOrder a : dtoList) {
+			String[] qTxt = {a.getDatepaytime() , a.getMenu_name() , Integer.toString(a.getQuantity()),Integer.toString(a.getCount())};
+			Outer_Table.addRow(qTxt);
+		}
+	}
 }

@@ -65,7 +65,7 @@ public class PanelChartLine extends javax.swing.JPanel {
                 x += space;
             }
             p.lineTo(x - space, getHeight() - margin);
-            GradientPaint gra = new GradientPaint(0, margin, new Color(6, 131, 212), 0, getHeight(), new Color(255, 255, 255, 0));
+            GradientPaint gra = new GradientPaint(0, margin, new Color(21, 114, 161), 0, getHeight(), new Color(255, 255, 255, 0));
             g2.setPaint(gra);
             g2.fill(p);
             drawPoint(g2);

@@ -38,8 +38,8 @@ public class DaoOrder {
 
 		HashMap<String, Integer> countMap = new HashMap<>();
 
-		String whereStatement = "select count(orderno) , paytime from noon.order ";
-		String whereStatement2 = "where paytime between date_add(curdate(),interval -7 day) and curdate() group by paytime";
+		String whereStatement = "select count(orderno) , date(paytime) from noon.order ";
+		String whereStatement2 = "where date(paytime) between date_add(curdate(),interval -7 day) and curdate() group by date(paytime)";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -65,7 +65,6 @@ public class DaoOrder {
 		super();
 		this.orderno = orderno;
 	}
-
 
 	public ArrayList<DtoOrder> searchAction2() {
 		ArrayList<DtoOrder> DtoOrder = new ArrayList<>();
@@ -122,7 +121,6 @@ public class DaoOrder {
 
 				orderList.add(new DtoOrder(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),
 						rs.getString(5), rs.getString(6)));
-				System.out.println(rs.getString(2) + " " + rs.getString(4));
 
 			}
 			conn_mysql.close();
@@ -157,7 +155,7 @@ public class DaoOrder {
 				int wKshot = rs.getInt(6);
 				int wKsyrup = rs.getInt(7);
 				int wKsize = rs.getInt(8);
-				
+
 				System.out.println(wKmenuname);
 				dto = new DtoOrder(wKorderno, wKmenuname, wKquantity, wKhotice, wkforheretogo, wKshot, wKsyrup, wKsize);
 			}
@@ -223,22 +221,22 @@ public class DaoOrder {
 			Class.forName("com.mysql.cj.jdbc.Driver"); // .
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
 					DBConnect.pw_mysql);
-			String query = "update complete set completetime = now() where order_orderno = ? and accepttime is not null and completetime is null";
-			
+			String query = "update complete set completetime = now() where order_orderno = ? and staff_id = ? and accepttime is not null and completetime is null";
 
 			ps = conn_mysql.prepareStatement(query);
 			ps.setInt(1, orderno);
+			ps.setString(1, Login.id);
 
 			i = ps.executeUpdate();
-			
+
 			conn_mysql.close();
 
 		} catch (Exception e) {
-			e.printStackTrace(); // 개발 할 때는 이렇게, product를 만들 때는 경고문장을 넣어주면 된다.
+			JOptionPane.showConfirmDialog(null, "다른사람이 주문 받은 건입니다."); // 개발 할 때는 이렇게, product를 만들 때는 경고문장을 넣어주면 된다.
 		}
 		return i;
 	}
-	
+
 	public int updateOrderCompleteNo() {
 		PreparedStatement ps = null;
 		int i = 0;
@@ -247,14 +245,13 @@ public class DaoOrder {
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
 					DBConnect.pw_mysql);
 			String query = "update noon.order set complete_completeno = ? where orderno = ? ";
-			
 
 			ps = conn_mysql.prepareStatement(query);
 			ps.setInt(1, findCompleteno());
 			ps.setInt(2, orderno);
 
 			i = ps.executeUpdate();
-			
+
 			conn_mysql.close();
 
 		} catch (Exception e) {
@@ -262,7 +259,7 @@ public class DaoOrder {
 		}
 		return i;
 	}
-	
+
 	public int findCompleteno() {
 		String whereStatement = "select completeno from complete where order_orderno = " + orderno;
 		int num = 0;
@@ -286,7 +283,7 @@ public class DaoOrder {
 		}
 		return num;
 	}
-	
+
 	public int updateAction() {
 		PreparedStatement ps = null;
 		int i = 0;
@@ -388,4 +385,60 @@ public class DaoOrder {
 		return shopcode;
 	}
 //	"update complete set completetime = now() where order_orderno  and completetime is null";
+
+//	Outer_Table.addColumn("날짜");
+//	Outer_Table.addColumn("메뉴이름");
+//	Outer_Table.addColumn("음료");
+//	Outer_Table.addColumn("주문건수");
+	
+	public int getManagerShopCode() {
+		int shopcode = 0;
+		String whereStatement = "select shop_shopcode from manage where manager_id = '" + Login.id + "'";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement);
+
+			if (rs.next()) { // true값일때만 가져온다
+				shopcode = rs.getInt(1);
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return shopcode;
+	}
+
+	public ArrayList<DtoOrder> searchGroupByMenuAction() {
+		ArrayList<DtoOrder> menuOrderList = new ArrayList<>();
+		String whereStatement = "select date(paytime), set_menu_name , sum(quantity) , count(*) from noon.order\n"
+				+ "where date(paytime) between date_add(curdate(),interval -7 day) and curdate() and shop_shopcode = " + getManagerShopCode()
+				+  " group by set_menu_name, date(paytime) order by date(paytime) desc";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement);
+
+			while (rs.next()) {
+
+				menuOrderList.add(new DtoOrder(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
+				
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return menuOrderList;
+	}
 }

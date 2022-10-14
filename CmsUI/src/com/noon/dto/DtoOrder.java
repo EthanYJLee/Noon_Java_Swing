@@ -22,6 +22,8 @@ public class DtoOrder {
 	private String syrup;
 	private String size;
 	private String shot;
+	private String datepaytime;
+	private int count;
 
 	public String getForheretogo() {
 		return forheretogo;
@@ -235,6 +237,29 @@ public class DtoOrder {
 
 	public void setCompletetime(String completetime) {
 		this.completetime = completetime;
+	}
+	
+	public DtoOrder(String datepaytime , String menu_name, int quantity, int count) {
+		this.datepaytime = datepaytime;
+		this.menu_name = menu_name;
+		this.quantity = quantity;
+		this.count = count;
+	}
+
+	public String getDatepaytime() {
+		return datepaytime;
+	}
+
+	public void setDatepaytime(String datepaytime) {
+		this.datepaytime = datepaytime;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 }

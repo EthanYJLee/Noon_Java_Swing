@@ -70,7 +70,7 @@ public class Panel01Login extends JPanel {
 	private JLabel getLblLogo() {
 		if (lblLogo == null) {
 			lblLogo = new JLabel("");
-			lblLogo.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/logo.png"));
+			lblLogo.setIcon(new ImageIcon("./src/com/noon/app/logo.png"));
 			lblLogo.setBounds(101, 126, 172, 172);
 		}
 		return lblLogo;
