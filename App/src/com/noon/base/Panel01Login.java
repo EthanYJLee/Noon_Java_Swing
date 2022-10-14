@@ -114,14 +114,14 @@ public class Panel01Login extends JPanel {
 				}
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnLogin.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_login_C.png"));
+					lblBtnLogin.setIcon(new ImageIcon("./src/com/noon/app/btn_login_C.png"));
 				}
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnLogin.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_login.png"));
+					lblBtnLogin.setIcon(new ImageIcon("./src/com/noon/app/btn_login.png"));
 				}
 			});
-			lblBtnLogin.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_login.png"));
+			lblBtnLogin.setIcon(new ImageIcon("./src/com/noon/app/btn_login.png"));
 			lblBtnLogin.setBounds(100, 522, 174, 49);
 		}
 		return lblBtnLogin;
@@ -137,14 +137,14 @@ public class Panel01Login extends JPanel {
 				}
 				@Override
 				public void mousePressed(MouseEvent e) {
-					lblBtnSignup.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_signup_C.png"));
+					lblBtnSignup.setIcon(new ImageIcon("./src/com/noon/app/btn_signup_C.png"));
 				}
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					lblBtnSignup.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_signup.png"));
+					lblBtnSignup.setIcon(new ImageIcon("./src/com/noon/app/btn_signup.png"));
 				}
 			});
-			lblBtnSignup.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/btn_signup.png"));
+			lblBtnSignup.setIcon(new ImageIcon("./src/com/noon/app/btn_signup.png"));
 			lblBtnSignup.setBounds(101, 595, 174, 49);
 		}
 		return lblBtnSignup;

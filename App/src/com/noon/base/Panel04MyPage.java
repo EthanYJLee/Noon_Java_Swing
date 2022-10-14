@@ -96,7 +96,7 @@ public class Panel04MyPage extends JPanel {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
 			lblBtnSidebar.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnSidebar.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_sidebar.png"));
+			lblBtnSidebar.setIcon(new ImageIcon("./src/com/noon/app/icon_sidebar.png"));
 			lblBtnSidebar.setBounds(13, 26, 36, 32);
 		}
 		return lblBtnSidebar;
@@ -105,7 +105,7 @@ public class Panel04MyPage extends JPanel {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
 			lblBtnBack.setHorizontalAlignment(SwingConstants.CENTER);
-			lblBtnBack.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/Appsrc/com/noon/app/icon_back.png"));
+			lblBtnBack.setIcon(new ImageIcon("./src/com/noon/app/icon_back.png"));
 			lblBtnBack.setBounds(51, 26, 32, 32);
 		}
 		return lblBtnBack;
@@ -124,7 +124,7 @@ public class Panel04MyPage extends JPanel {
 		if (lblProfilePhoto == null) {
 			lblProfilePhoto = new JLabel("");
 			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblProfilePhoto.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/profile_photo.png"));
+			lblProfilePhoto.setIcon(new ImageIcon("./src/com/noon/app/profile_photo.png"));
 			lblProfilePhoto.setBounds(322, 26, 36, 36);
 		}
 		return lblProfilePhoto;
@@ -141,7 +141,7 @@ public class Panel04MyPage extends JPanel {
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
 			});
-			lblBtnTabHome.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_home.png"));
+			lblBtnTabHome.setIcon(new ImageIcon("./src/com/noon/app/tabbar_home.png"));
 			lblBtnTabHome.setBounds(1, 729, 94, 50);
 		}
 		return lblBtnTabHome;
@@ -155,7 +155,7 @@ public class Panel04MyPage extends JPanel {
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
-			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
+			lblBtnTabOrder.setIcon(new ImageIcon("./src/com/noon/app/tabbar_order.png"));
 			lblBtnTabOrder.setBounds(94, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
@@ -169,7 +169,7 @@ public class Panel04MyPage extends JPanel {
 					Main.frame.getContentPane().add(new Panel06Gift());
 				}
 			});
-			lblBtnTabGift.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_gift.png"));
+			lblBtnTabGift.setIcon(new ImageIcon("./src/com/noon/app/tabbar_gift.png"));
 			lblBtnTabGift.setBounds(187, 729, 94, 50);
 		}
 		return lblBtnTabGift;
@@ -183,7 +183,7 @@ public class Panel04MyPage extends JPanel {
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
 			});
-			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_mypage.png"));
+			lblBtnTabMypage.setIcon(new ImageIcon("./src/com/noon/app/tabbar_mypage.png"));
 			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
 		return lblBtnTabMypage;
@@ -191,7 +191,7 @@ public class Panel04MyPage extends JPanel {
 	private JLabel getLblHomeIndicator() {
 		if (lblHomeIndicator == null) {
 			lblHomeIndicator = new JLabel("");
-			lblHomeIndicator.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/homeindicator.png"));
+			lblHomeIndicator.setIcon(new ImageIcon("./src/com/noon/app/homeindicator.png"));
 			lblHomeIndicator.setBounds(1, 778, 375, 34);
 		}
 		return lblHomeIndicator;
@@ -202,7 +202,7 @@ public class Panel04MyPage extends JPanel {
 		if (lblNewLabel_4 == null) {
 			lblNewLabel_4 = new JLabel("");
 			lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_4.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/ProfilePhotoDefault.png"));
+			lblNewLabel_4.setIcon(new ImageIcon("./src/com/noon/app/ProfilePhotoDefault.png"));
 			lblNewLabel_4.setBounds(260, 97, 100, 100);
 		}
 		return lblNewLabel_4;
@@ -280,7 +280,7 @@ public class Panel04MyPage extends JPanel {
 		if (lblPurchaceHistory == null) {
 			lblPurchaceHistory = new JLabel("");
 			lblPurchaceHistory.setHorizontalAlignment(SwingConstants.CENTER);
-			lblPurchaceHistory.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/mypage_history.png"));
+			lblPurchaceHistory.setIcon(new ImageIcon("./src/com/noon/app/mypage_history.png"));
 		}
 		return lblPurchaceHistory;
 	}
@@ -288,14 +288,14 @@ public class Panel04MyPage extends JPanel {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("");
 			lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_3.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/mypage_notice.png"));
+			lblNewLabel_3.setIcon(new ImageIcon("./src/com/noon/app/mypage_notice.png"));
 		}
 		return lblNewLabel_3;
 	}
 	private JLabel getLblNewLabel_6() {
 		if (lblNewLabel_6 == null) {
 			lblNewLabel_6 = new JLabel("");
-			lblNewLabel_6.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/mypage_write.png"));
+			lblNewLabel_6.setIcon(new ImageIcon("./src/com/noon/app/mypage_write.png"));
 			lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return lblNewLabel_6;
@@ -303,7 +303,7 @@ public class Panel04MyPage extends JPanel {
 	private JLabel getLblNewLabel_7() {
 		if (lblNewLabel_7 == null) {
 			lblNewLabel_7 = new JLabel("");
-			lblNewLabel_7.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/mypage_favorite.png"));
+			lblNewLabel_7.setIcon(new ImageIcon("./src/com/noon/app/mypage_favorite.png"));
 			lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return lblNewLabel_7;
@@ -311,7 +311,7 @@ public class Panel04MyPage extends JPanel {
 	private JLabel getLblEdit() {
 		if (lblEdit == null) {
 			lblEdit = new JLabel("");
-			lblEdit.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/mypage_edit.png"));
+			lblEdit.setIcon(new ImageIcon("./src/com/noon/app/mypage_edit.png"));
 			lblEdit.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return lblEdit;
@@ -355,7 +355,7 @@ public class Panel04MyPage extends JPanel {
 	private JLabel getLblNewLabel_9_1() {
 		if (lblNewLabel_9_1 == null) {
 			lblNewLabel_9_1 = new JLabel("");
-			lblNewLabel_9_1.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/mypage_coupon2.png"));
+			lblNewLabel_9_1.setIcon(new ImageIcon("./src/com/noon/app/mypage_coupon2.png"));
 			lblNewLabel_9_1.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return lblNewLabel_9_1;
