@@ -21,8 +21,8 @@ import com.javalec.util.RoundedButton;
 
 public class LogIn extends GradientBack {
 	public static String kiosk_id ;
-	private JTextField tfShopNo;
-	private JTextField tfManagerNo;
+	private JTextField tfKioskId;
+	private JTextField tfKioskPw;
 	public static String myBranch;
 	public static int shopcode;
 	
@@ -32,17 +32,17 @@ public class LogIn extends GradientBack {
 		setLocation(0, 0);
 		setBounds(0, 0, 350, 700);
 
-		tfShopNo = new JTextField();
-		tfShopNo.setBackground(new Color(176, 108, 90));
-		tfShopNo.setBounds(153, 361, 130, 21);
-		add(tfShopNo);
-		tfShopNo.setColumns(10);
+		tfKioskId = new JTextField();
+		tfKioskId.setBackground(new Color(176, 108, 90));
+		tfKioskId.setBounds(153, 361, 130, 21);
+		add(tfKioskId);
+		tfKioskId.setColumns(10);
 
-		tfManagerNo = new JTextField();
-		tfManagerNo.setBackground(new Color(176, 108, 90));
-		tfManagerNo.setColumns(10);
-		tfManagerNo.setBounds(153, 392, 130, 21);
-		add(tfManagerNo);
+		tfKioskPw = new JTextField();
+		tfKioskPw.setBackground(new Color(176, 108, 90));
+		tfKioskPw.setColumns(10);
+		tfKioskPw.setBounds(153, 392, 130, 21);
+		add(tfKioskPw);
 
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -94,11 +94,11 @@ public class LogIn extends GradientBack {
 	
 	
 	public void loginAction2() {
-		DaoManage daoManage = new DaoManage(tfShopNo.getText().trim(), tfManagerNo.getText().trim());
+		DaoManage daoManage = new DaoManage(tfKioskId.getText().trim(), tfKioskPw.getText().trim());
 		int checkLogin = daoManage.loginAction2();
 		
 		if(checkLogin == 1) {
-			kiosk_id = tfShopNo.getText().trim();
+			kiosk_id = tfKioskId.getText().trim();
 			int shopcode = daoManage.getShopcode();
 			this.shopcode = shopcode;
 			DaoShop daoShop = new DaoShop(shopcode);
@@ -106,7 +106,7 @@ public class LogIn extends GradientBack {
 			setVisible(false);
 			Frame.frame.getContentPane().add(new Ad());
 		} else {
-			JOptionPane.showMessageDialog(null, "매장코드와 관리자ID를 확인해주세요.");
+			JOptionPane.showMessageDialog(null, "키오스크 ID와 비밀번호를 확인해주세요.");
 			setVisible(true);
 		}
 	}

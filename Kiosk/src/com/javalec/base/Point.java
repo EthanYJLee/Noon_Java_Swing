@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.swing.ImageIcon;
@@ -77,7 +78,7 @@ public class Point extends JPanel {
 		lblNewLabel.setIcon(new ImageIcon(Point.class.getResource("/com/javalec/image/pointMessage.png")));
 		lblNewLabel.setBounds(12, 85, 326, 60);
 		add(lblNewLabel);
-		
+
 		String a = LogIn.myBranch;
 		JLabel lblMyBranch = new JLabel("카페 눈 " + a);
 		lblMyBranch.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -85,48 +86,86 @@ public class Point extends JPanel {
 		add(lblMyBranch);
 	}
 
-	
-	
-	
-	
-	
-	// ---------------------------------------------------------------
-	// 메소드 수정 필요~~~~~~~~~~~~~~~~~
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void insertNumber() {
 		// 입력항목 Check
 		int i_chk = insertFieldCheck();
 		if (i_chk == 0) {
-			int check = insertAction();
-			JOptionPane.showMessageDialog(null, panelDisplay.getText() + "번으로 포인트가 적립되었습니다.");
-			setVisible(false);
-			Frame.frame.getContentPane().add(new Complete());
-			if (i_chk == 1) {
-				JOptionPane.showMessageDialog(null, panelDisplay.getText() + "번호를 확인해주십시오.");
+			String checkMember = searchMember();
+			if (checkMember != "") {
+				updateCompleteAction(checkMember);
+				int getPoint = insertAction();
+				if (getPoint == 1) {
+					JOptionPane.showMessageDialog(null, panelDisplay.getText() + "번으로 포인트가 적립되었습니다.");
+					setVisible(false);
+					Frame.frame.getContentPane().add(new Complete());
+				} else if (getPoint == 1) {
+					JOptionPane.showMessageDialog(null, panelDisplay.getText() + "번호를 확인해주십시오.");
+					panelDisplay.requestFocus();
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "등록되지 않은 번호입니다.");
 			}
-		}
 	}
+}
 
 	public int insertFieldCheck() {
 		int i = 0;
-		String message = "";
 		if (panelDisplay.getText().trim().length() != 11) {
 			i++;
-			JOptionPane.showMessageDialog(null, "번호를 확인하세요.");
-			panelDisplay.requestFocus();
 		}
 		return i;
+	}
+
+	public void updateCompleteAction(String checkMember) {
+		PreparedStatement ps = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			String query = "update complete (order_member_id) ";
+			String query2 = "value (?) ";
+			String query3 = "where shop_shopcode = ? and staff_id = ? and paytime is not null and ordertime is not null and refundtime is null and complete_completeno is not null";
+
+			ps = conn_mysql.prepareStatement(query);
+
+			ps.setString(1, checkMember);
+			ps.setString(2, LogIn.kiosk_id);
+
+			ps.executeUpdate();
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private String searchMember() {
+		PreparedStatement ps = null;
+		String member = "";
+		String whereStatement = "select id from member ";
+		String whereStatement2 = "where phone = ?";
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			ps = conn_mysql.prepareStatement(whereStatement + whereStatement2);
+			ps.setString(1, panelDisplay.getText().trim());
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2); // <=검색 시작
+
+			while (rs.next()) {
+				member = rs.getString(1);
+			}
+
+			conn_mysql.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return member;
 	}
 
 	private int insertAction() {
@@ -140,7 +179,7 @@ public class Point extends JPanel {
 
 			String query = "insert into point (pointdate, pointcash) ";
 			String query1 = "values (now, order.indiprice*order.quantity) ";
-			String query2 = "where member.id = point.member_id and point.order_orderno = order.orderno ";
+			String query2 = "where point.member_id = guest and point.order_orderno = order.orderno ";
 			String query3 = "and member.phone = ?";
 			ps = conn_mysql.prepareStatement(query + query1 + query2 + query3);
 
@@ -154,10 +193,6 @@ public class Point extends JPanel {
 			e.printStackTrace();
 		}
 		return check;
-	}
-	
-	public void completePayment() {
-		
 	}
 
 }
