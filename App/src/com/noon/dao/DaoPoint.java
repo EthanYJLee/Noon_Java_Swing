@@ -41,8 +41,10 @@ public class DaoPoint {
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql, DBConnect.pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 			
-			String query = "insert into point (pointdate, pointcash, member_id) "; // *** 마지막 한칸 뛰기 ***
-			String query1 = "values (curdate(),?,?)";
+			String query = "insert into point (pointdate, pointcash, member_id, order_orderno, order_member_id, order_set_setno, order_set_menu_name, order_shop_shopcode, order_staff_id) "; // *** 마지막 한칸 뛰기 ***
+			String query1 = "select curdate(),?,?,orderno,member_id,set_setno, set_menu_name, shop_shopcode, staff_id from noon.order";
+			//insert into point (pointdate, pointcash, member_id, order_orderno, order_member_id, order_set_setno, order_set_menu_name, order_shop_shopcode, order_staff_id) 
+			//select curdate(),10,'asd',orderno,member_id,set_setno, set_menu_name, shop_shopcode, staff_id from noon.order;
 			
 			ps = conn_mysql.prepareStatement(query + query1);
 			ps.setInt(1, pointcash);
