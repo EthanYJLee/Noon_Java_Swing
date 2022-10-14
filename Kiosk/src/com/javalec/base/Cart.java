@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,8 +30,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import com.javalec.dao.DaoCart;
+//import com.javalec.util.Countdown;
 import com.javalec.util.DBConnect;
 import com.javalec.util.RoundedButton;
+import java.awt.event.MouseMotionAdapter;
 
 public class Cart extends JPanel {
 	private JScrollPane scrollPane;
@@ -42,6 +46,29 @@ public class Cart extends JPanel {
 	private JTextField tfSum;
 
 	public Cart() {
+//		addMouseMotionListener(new MouseMotionAdapter() {
+//			@Override
+//			public void mouseMoved(MouseEvent e) {
+//			}
+//		});
+//		addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				Countdown cd = new Countdown();
+//				add(cd);
+//				
+//				if(e.MOUSE_ENTERED > 1) {
+//					remove(cd);
+//				
+//				}
+//			
+//			}
+//		});
+			
+				
+			
+			
+	
 		addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
 				tableInit();
@@ -141,6 +168,8 @@ public class Cart extends JPanel {
 		lblMyBranch.setBounds(173, 10, 165, 28);
 		add(lblMyBranch);
 
+		
+		
 	}
 
 	private JScrollPane getScrollPane() {
@@ -243,7 +272,7 @@ public class Cart extends JPanel {
 
 		vColIndex = 4;
 		col = Inner_Table.getColumnModel().getColumn(vColIndex);
-		width = 90;
+		width = 99;
 		col.setPreferredWidth(width);
 
 	}
@@ -328,4 +357,5 @@ public class Cart extends JPanel {
 		}
 
 	}
+
 }
