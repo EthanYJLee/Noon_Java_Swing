@@ -49,6 +49,7 @@ public class Welcome extends GradientBack {
 		RoundedButton btnForHere = new RoundedButton("");
 		btnForHere.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				forHereToGo = "forhere";
 				setVisible(false);
 				Frame.frame.getContentPane().add(new MenuMain());
 			}

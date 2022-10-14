@@ -11,7 +11,7 @@ public class DtoSetting {
 	String menu_name;
 	int shop_shopcode;
 	int filename;
-	String category;
+	String categorynow;
 
 	// Constructor
 	public DtoSetting() {
@@ -19,7 +19,7 @@ public class DtoSetting {
 	}
 
 	public DtoSetting(int setno, String initdate, String enddate, int pricenow, String photonow, String menu_name,
-			int shop_shopcode, int filename, String category) {
+			int shop_shopcode, int filename, String categorynow) {
 		super();
 		this.setno = setno;
 		this.initdate = initdate;
@@ -29,7 +29,7 @@ public class DtoSetting {
 		this.menu_name = menu_name;
 		this.shop_shopcode = shop_shopcode;
 		this.filename = filename;
-		this.category = category;
+		this.categorynow = categorynow;
 	}
 
 	public DtoSetting(int setno, int pricenow, String menu_name, int filename) {
@@ -40,11 +40,11 @@ public class DtoSetting {
 		this.filename = filename;
 	}
 
-	public DtoSetting(int setno, int filename, String category) {
+	public DtoSetting(int setno, int filename, String categorynow) {
 		super();
 		this.setno = setno;
 		this.filename = filename;
-		this.category = category;
+		this.categorynow = categorynow;
 	}
 
 	// ---------------------
@@ -112,12 +112,12 @@ public class DtoSetting {
 		this.filename = filename;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getCategorynow() {
+		return categorynow;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategorynow(String categorynow) {
+		this.categorynow = categorynow;
 	}
 
 }

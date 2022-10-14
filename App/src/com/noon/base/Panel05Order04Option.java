@@ -6,6 +6,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -22,13 +24,13 @@ import com.noon.style.Style;
 public class Panel05Order04Option extends JPanel {
 
 	private JLabel lblNewLabel_01;
-	private JLabel lblBtnTabOrder;
-	private JLabel lblBtnTabMypage;
+	private JButton lblBtnTabOrder;
+	private JButton lblBtnTabMypage;
 	private JLabel lblHomeIndicator;
-	private JLabel lblBtnTabHome;
-	private JLabel lblBtnTabGift;
-	private JLabel lblBtnSidebar;
-	private JLabel lblBtnBack;
+	private JButton lblBtnTabHome;
+	private JButton lblBtnTabGift;
+	private JButton lblBtnSidebar;
+	private JButton lblBtnBack;
 	private JLabel lblProfilePhoto;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -60,19 +62,21 @@ public class Panel05Order04Option extends JPanel {
 	private JLabel lblPn2Background;
 	private JButton btnSyrupVanila;
 	private JLabel lblOptionInfo;
+	private JLabel lblShopname;
 
 	//
 	private String hoticeCheck = "Hot";
 	private String sizeCheck = "Tall";
 	private String shotCheck = "";
 	private String syrupCheck = "";
+	private int quantity = 1;
 
 	// static
 	public static int hotice;
 	public static int size;
 	public static int shot;
 	public static int syrup;
-	public static int quantity = 1;
+	
 
 	// 바탕화면 그라데이션
 	// -------------------------------------------------------------------------------
@@ -115,13 +119,14 @@ public class Panel05Order04Option extends JPanel {
 		add(getPnCategoryCoffee());
 		add(getPnCategoryTeaBeverage());
 		add(getLblOptionInfo());
+		add(getLblShopname());
 	}
 
 	// 상단바
 	// =============================================================================================================
-	private JLabel getLblBtnSidebar() {
+	private JButton getLblBtnSidebar() {
 		if (lblBtnSidebar == null) {
-			lblBtnSidebar = new JLabel("");
+			lblBtnSidebar = new JButton("");
 			lblBtnSidebar.setHorizontalAlignment(SwingConstants.CENTER);
 			lblBtnSidebar
 					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_sidebar.png"));
@@ -130,9 +135,9 @@ public class Panel05Order04Option extends JPanel {
 		return lblBtnSidebar;
 	}
 
-	private JLabel getLblBtnBack() {
+	private JButton getLblBtnBack() {
 		if (lblBtnBack == null) {
-			lblBtnBack = new JLabel("");
+			lblBtnBack = new JButton("");
 			lblBtnBack.setHorizontalAlignment(SwingConstants.CENTER);
 			lblBtnBack.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/icon_back.png"));
 			lblBtnBack.setBounds(51, 26, 32, 32);
@@ -165,12 +170,11 @@ public class Panel05Order04Option extends JPanel {
 
 	// Tabbar
 	// ===========================================================================================================
-	private JLabel getLblBtnTabHome() {
+	private JButton getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
-			lblBtnTabHome = new JLabel("");
-			lblBtnTabHome.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabHome = new JButton("");
+			lblBtnTabHome.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
@@ -180,30 +184,25 @@ public class Panel05Order04Option extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
-
-	private JLabel getLblBtnTabOrder() {
+	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
-			lblBtnTabOrder = new JLabel("");
-			lblBtnTabOrder.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabOrder = new JButton("");
+			lblBtnTabOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order01Shop());
 				}
 			});
-			lblBtnTabOrder
-					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
-			lblBtnTabOrder.setBounds(95, 729, 94, 50);
+			lblBtnTabOrder.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_order.png"));
+			lblBtnTabOrder.setBounds(94, 729, 94, 50);
 		}
 		return lblBtnTabOrder;
 	}
-
-	private JLabel getLblBtnTabGift() {
+	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
-			lblBtnTabGift = new JLabel("");
-			lblBtnTabGift.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabGift = new JButton("");
+			lblBtnTabGift.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel06Gift());
 				}
@@ -213,19 +212,16 @@ public class Panel05Order04Option extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
-
-	private JLabel getLblBtnTabMypage() {
+	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
-			lblBtnTabMypage = new JLabel("");
-			lblBtnTabMypage.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			lblBtnTabMypage = new JButton("");
+			lblBtnTabMypage.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel04MyPage());
 				}
 			});
-			lblBtnTabMypage
-					.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_mypage.png"));
+			lblBtnTabMypage.setIcon(new ImageIcon("/Users/sangwon_kim/GitHub/Noon/App/src/com/noon/app/tabbar_mypage.png"));
 			lblBtnTabMypage.setBounds(281, 729, 94, 50);
 		}
 		return lblBtnTabMypage;
@@ -290,7 +286,6 @@ public class Panel05Order04Option extends JPanel {
 			} else {
 				pnCategoryCoffee.setVisible(false);
 			}
-			System.out.println(Panel05Order03Menu.selectedCategory);
 		}
 		return pnCategoryCoffee;
 	}
@@ -668,7 +663,6 @@ public class Panel05Order04Option extends JPanel {
 			} else {
 				pnCategoryTeaBeverage.setVisible(false);
 			}
-			System.out.println(Panel05Order03Menu.selectedCategory);
 		}
 		return pnCategoryTeaBeverage;
 	}
@@ -771,9 +765,18 @@ public class Panel05Order04Option extends JPanel {
 			lblOptionInfo = new JLabel("Hot / Tall");
 			lblOptionInfo.setFont(new Font("SansSerif", Font.PLAIN, 16));
 			lblOptionInfo.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblOptionInfo.setBounds(30, 533, 321, 32);
+			lblOptionInfo.setBounds(89, 533, 262, 32);
 		}
 		return lblOptionInfo;
+	}
+	
+	private JLabel getLblShopname() {
+		if (lblShopname == null) {
+			lblShopname = new JLabel(Panel05Order01Shop.shopname);
+			lblShopname.setFont(new Font("SansSerif", Font.PLAIN, 16));
+			lblShopname.setBounds(24, 524, 149, 25);
+		}
+		return lblShopname;
 	}
 
 	// Function
@@ -832,5 +835,6 @@ public class Panel05Order04Option extends JPanel {
 			JOptionPane.showMessageDialog(null, "서버점검중입니다. 불편을 끼쳐드려 죄송합니다.");
 		}
 	}
+
 
 } // End

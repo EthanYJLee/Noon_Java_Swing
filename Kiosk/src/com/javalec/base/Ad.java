@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class Ad extends JPanel {
 	
@@ -17,11 +18,6 @@ public class Ad extends JPanel {
 		setLocation(0, 0);
 		setBounds(0, 0, 350, 700);
 		setBackground(new Color(192, 192, 192));
-		
-		JLabel advertisement = new JLabel("광고");
-		advertisement.setFont(new Font("굴림", Font.PLAIN, 38));
-		advertisement.setBounds(130, 211, 76, 141);
-		add(advertisement);
 		
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -36,6 +32,11 @@ public class Ad extends JPanel {
 		lblMyBranch.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblMyBranch.setBounds(173, 10, 165, 28);
 		add(lblMyBranch);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Ad.class.getResource("/com/javalec/image/Ad1.jpg")));
+		lblNewLabel.setBounds(0, 0, 350, 700);
+		add(lblNewLabel);
 		
 	}
 }
