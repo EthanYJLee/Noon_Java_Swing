@@ -46,7 +46,7 @@ public class Panel05Order01Shop extends JPanel {
 	private JButton lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
-	private JLabel lblProfilePhoto;
+	private JLabel lblUserId;
 	private JPanel pnRight;
 	private JLabel lblBtnShopSearch;
 	private JTextField tfShopSearch;
@@ -124,7 +124,7 @@ public class Panel05Order01Shop extends JPanel {
 		add(getLblBtnTabMypage());
 		add(getLblBtnSidebar());
 		add(getLblBtnBack());
-		add(getLblProfilePhoto());
+		add(getLblUserId());
 		add(getLblNewLabel_02_1());
 		add(getLblLeftQuentity());
 		add(getCbTimeMinute());
@@ -169,15 +169,14 @@ public class Panel05Order01Shop extends JPanel {
 		return lblNewLabel_01;
 	}
 
-	private JLabel getLblProfilePhoto() {
-		if (lblProfilePhoto == null) {
-			lblProfilePhoto = new JLabel("");
-			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblProfilePhoto
-					.setIcon(new ImageIcon("./src/com/noon/app/profile_photo.png"));
-			lblProfilePhoto.setBounds(322, 26, 36, 36);
+	private JLabel getLblUserId() {
+		if (lblUserId == null) {
+			lblUserId = new JLabel(Panel01Login.id + " 님");
+			lblUserId.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblUserId.setForeground(new Color(176, 108, 89));
+			lblUserId.setBounds(264, 26, 94, 36);
 		}
-		return lblProfilePhoto;
+		return lblUserId;
 	}
 	// ==================================================================================================================
 

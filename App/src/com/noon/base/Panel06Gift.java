@@ -20,7 +20,6 @@ import javax.swing.JButton;
 
 public class Panel06Gift extends JPanel {
 
-	
 	private JLabel lblNewLabel_01;
 	private JButton lblBtnTabOrder;
 	private JButton lblBtnTabMypage;
@@ -29,10 +28,11 @@ public class Panel06Gift extends JPanel {
 	private JButton lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
-	private JLabel lblProfilePhoto;
 	private JLabel lblBtnGift;
+	private JLabel lblUserId;
 
-	// 바탕화면 그라데이션 ---------------------------------------------------------------------------------------------
+	// 바탕화면 그라데이션
+	// ---------------------------------------------------------------------------------------------
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -43,7 +43,7 @@ public class Panel06Gift extends JPanel {
 		super.paintChildren(g);
 	}
 	// ------------------------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -55,16 +55,17 @@ public class Panel06Gift extends JPanel {
 		add(getLblBtnSidebar());
 		add(getLblBtnBack());
 		add(getLblNewLabel_01());
-		add(getLblProfilePhoto());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
 		add(getLblBtnTabGift());
 		add(getLblBtnTabMypage());
 		add(getLblHomeIndicator());
 		add(getLblBtnGift());
+		add(getLblUserId());
 	}
-	
-	// 상단바 =============================================================================================================
+
+	// 상단바
+	// =============================================================================================================
 	private JLabel getLblBtnSidebar() {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
@@ -74,6 +75,7 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblBtnSidebar;
 	}
+
 	private JLabel getLblBtnBack() {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
@@ -83,6 +85,7 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblBtnBack;
 	}
+
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
 			lblNewLabel_01 = new JLabel("Gift");
@@ -93,18 +96,20 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
-	private JLabel getLblProfilePhoto() {
-		if (lblProfilePhoto == null) {
-			lblProfilePhoto = new JLabel("");
-			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblProfilePhoto.setIcon(new ImageIcon("./src/com/noon/app/profile_photo.png"));
-			lblProfilePhoto.setBounds(322, 26, 36, 36);
+	
+	private JLabel getLblUserId() {
+		if (lblUserId == null) {
+			lblUserId = new JLabel(Panel01Login.id + " 님");
+			lblUserId.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblUserId.setForeground(new Color(176, 108, 89));
+			lblUserId.setBounds(264, 26, 94, 36);
 		}
-		return lblProfilePhoto;
+		return lblUserId;
 	}
 	// ==================================================================================================================
 
-	// Tabbar ===========================================================================================================
+	// Tabbar
+	// ===========================================================================================================
 	private JButton getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
 			lblBtnTabHome = new JButton("");
@@ -119,6 +124,7 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
+
 	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
 			lblBtnTabOrder = new JButton("");
@@ -133,6 +139,7 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblBtnTabOrder;
 	}
+
 	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
 			lblBtnTabGift = new JButton("");
@@ -147,6 +154,7 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
+
 	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
 			lblBtnTabMypage = new JButton("");
@@ -161,6 +169,7 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblBtnTabMypage;
 	}
+
 	private JLabel getLblHomeIndicator() {
 		if (lblHomeIndicator == null) {
 			lblHomeIndicator = new JLabel("");
@@ -169,6 +178,7 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblHomeIndicator;
 	}
+
 	private JLabel getLblBtnGift() {
 		if (lblBtnGift == null) {
 			lblBtnGift = new JLabel("");
@@ -177,9 +187,5 @@ public class Panel06Gift extends JPanel {
 		}
 		return lblBtnGift;
 	}
-	
-	
-	
-	
-	
+
 } // End

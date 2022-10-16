@@ -111,7 +111,6 @@ public class DaoSetting {
 				String wkMenuName = rs.getString(2);
 				String wkCategory = rs.getString(3);
 				int wkPrice = rs.getInt(4);
-				System.out.println("wkCategory");
 				// File
 				wkFilename = wkFilename + 1;
 				File file = new File("./" + wkFilename);

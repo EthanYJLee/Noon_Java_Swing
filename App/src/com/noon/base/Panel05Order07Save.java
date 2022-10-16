@@ -33,12 +33,12 @@ public class Panel05Order07Save extends JPanel {
 	private JButton lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
-	private JLabel lblProfilePhoto;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_2;
 	private JTextField tfPhone;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_3;
+	private JLabel lblUserId;
 
 	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
 	@Override
@@ -63,7 +63,6 @@ public class Panel05Order07Save extends JPanel {
 		add(getLblBtnBack());
 		
 		add(getLblNewLabel_01());
-		add(getLblProfilePhoto());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
 		add(getLblBtnTabGift());
@@ -74,6 +73,7 @@ public class Panel05Order07Save extends JPanel {
 		add(getTfPhone());
 		add(getLblNewLabel_1());
 		add(getLblNewLabel_3());
+		add(getLblUserId());
 	}
 	
 	// 상단바 =============================================================================================================
@@ -105,14 +105,15 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
-	private JLabel getLblProfilePhoto() {
-		if (lblProfilePhoto == null) {
-			lblProfilePhoto = new JLabel("");
-			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblProfilePhoto.setIcon(new ImageIcon("./src/com/noon/app/profile_photo.png"));
-			lblProfilePhoto.setBounds(322, 26, 36, 36);
+	
+	private JLabel getLblUserId() {
+		if (lblUserId == null) {
+			lblUserId = new JLabel(Panel01Login.id + " 님");
+			lblUserId.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblUserId.setForeground(new Color(176, 108, 89));
+			lblUserId.setBounds(264, 26, 94, 36);
 		}
-		return lblProfilePhoto;
+		return lblUserId;
 	}
 	// ==================================================================================================================
 
@@ -279,4 +280,5 @@ public class Panel05Order07Save extends JPanel {
 		daoPoint.insertPoint();
 	}
 	
+
 } // End

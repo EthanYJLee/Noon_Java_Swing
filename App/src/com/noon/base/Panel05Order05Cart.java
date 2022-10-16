@@ -43,7 +43,6 @@ public class Panel05Order05Cart extends JPanel {
 	private JButton lblBtnTabGift;
 	private JButton lblBtnSidebar;
 	private JButton lblBtnBack;
-	private JLabel lblProfilePhoto;
 	private JLabel btnOrderMore;
 	private JLabel btnUseCoupon;
 	private JLabel lblBtnPutIn;
@@ -67,6 +66,7 @@ public class Panel05Order05Cart extends JPanel {
 
 	// -- file 정리
 	ArrayList<DtoOrder> beanList = null;
+	private JLabel lblUserId;
 
 
 	// 바탕화면 그라데이션
@@ -108,7 +108,6 @@ public class Panel05Order05Cart extends JPanel {
 		add(getLblBtnBack());
 
 		add(getLblNewLabel_01());
-		add(getLblProfilePhoto());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
 		add(getLblBtnTabGift());
@@ -123,6 +122,7 @@ public class Panel05Order05Cart extends JPanel {
 		add(getLblShopname());
 		add(getBtnTogo());
 		add(getBtnHere());
+		add(getLblUserId());
 	}
 
 	// 상단바
@@ -158,17 +158,17 @@ public class Panel05Order05Cart extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
-
-	private JLabel getLblProfilePhoto() {
-		if (lblProfilePhoto == null) {
-			lblProfilePhoto = new JLabel("");
-			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblProfilePhoto
-					.setIcon(new ImageIcon("./src/com/noon/app/profile_photo.png"));
-			lblProfilePhoto.setBounds(322, 26, 36, 36);
+	
+	private JLabel getLblUserId() {
+		if (lblUserId == null) {
+			lblUserId = new JLabel(Panel01Login.id + " 님");
+			lblUserId.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblUserId.setForeground(new Color(176, 108, 89));
+			lblUserId.setBounds(264, 26, 94, 36);
 		}
-		return lblProfilePhoto;
+		return lblUserId;
 	}
+
 	// ==================================================================================================================
 
 	// Tabbar

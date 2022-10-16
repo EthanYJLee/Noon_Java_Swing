@@ -30,8 +30,6 @@ public class Panel04MyPage extends JPanel {
 	private JButton lblBtnTabGift;
 	private JLabel lblBtnSidebar;
 	private JLabel lblBtnBack;
-	private JLabel lblProfilePhoto;
-	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_5_1;
 	private JLabel lblNewLabel_5_2;
@@ -47,6 +45,7 @@ public class Panel04MyPage extends JPanel {
 	private JLabel lblNewLabel_5_2_1;
 	private JLabel lblPoint;
 	private JLabel lblNewLabel_9_1;
+	private JLabel lblUserId;
 
 	// 바탕화면 그라데이션 ---------------------------------------------------------------------------------------------
 	@Override
@@ -71,13 +70,11 @@ public class Panel04MyPage extends JPanel {
 		add(getLblBtnSidebar());
 		add(getLblBtnBack());
 		add(getLblNewLabel_01());
-		add(getLblProfilePhoto());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
 		add(getLblBtnTabGift());
 		add(getLblBtnTabMypage());
 		add(getLblHomeIndicator());
-		add(getLblNewLabel_4());
 		add(getLblNewLabel_5());
 		add(getLblNewLabel_5_1());
 		add(getLblNewLabel_5_2());
@@ -87,6 +84,7 @@ public class Panel04MyPage extends JPanel {
 		add(getPanel());
 		add(getLblNewLabel_5_2_1());
 		add(getLblPoint());
+		add(getLblUserId());
 		
 		selectInfo();
 	}
@@ -120,15 +118,17 @@ public class Panel04MyPage extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
-	private JLabel getLblProfilePhoto() {
-		if (lblProfilePhoto == null) {
-			lblProfilePhoto = new JLabel("");
-			lblProfilePhoto.setHorizontalAlignment(SwingConstants.TRAILING);
-			lblProfilePhoto.setIcon(new ImageIcon("./src/com/noon/app/profile_photo.png"));
-			lblProfilePhoto.setBounds(322, 26, 36, 36);
+	
+	private JLabel getLblUserId() {
+		if (lblUserId == null) {
+			lblUserId = new JLabel(Panel01Login.id + " 님");
+			lblUserId.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblUserId.setForeground(new Color(176, 108, 89));
+			lblUserId.setBounds(264, 26, 94, 36);
 		}
-		return lblProfilePhoto;
+		return lblUserId;
 	}
+
 	// ==================================================================================================================
 
 	// Tabbar ===========================================================================================================
@@ -195,17 +195,6 @@ public class Panel04MyPage extends JPanel {
 			lblHomeIndicator.setBounds(1, 778, 375, 34);
 		}
 		return lblHomeIndicator;
-	}
-	// ==================================================================================================================
-	
-	private JLabel getLblNewLabel_4() {
-		if (lblNewLabel_4 == null) {
-			lblNewLabel_4 = new JLabel("");
-			lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel_4.setIcon(new ImageIcon("./src/com/noon/app/ProfilePhotoDefault.png"));
-			lblNewLabel_4.setBounds(260, 97, 100, 100);
-		}
-		return lblNewLabel_4;
 	}
 	private JLabel getLblNewLabel_5() {
 		if (lblNewLabel_5 == null) {
@@ -348,9 +337,6 @@ public class Panel04MyPage extends JPanel {
 		DaoPoint daoPoint = new DaoPoint();
 		lblPoint.setText(Integer.toString(daoPoint.selectPoint()) + "점");
 	}
-	
-	
-	
 
 	private JLabel getLblNewLabel_9_1() {
 		if (lblNewLabel_9_1 == null) {
@@ -360,4 +346,6 @@ public class Panel04MyPage extends JPanel {
 		}
 		return lblNewLabel_9_1;
 	}
+
+
 } // End

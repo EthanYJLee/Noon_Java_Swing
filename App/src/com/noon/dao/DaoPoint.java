@@ -60,7 +60,7 @@ public class DaoPoint {
 		return check;
 	}
 	
-	// 포인트 정보 가져오기
+	// 포인트 정보 가져오기 to 마이페이지
 	public int selectPoint() {
 		int i = 0;
 		
@@ -79,7 +79,6 @@ public class DaoPoint {
 				i = rs.getInt(1);
 			}
 			conn_mysql.close();
-			System.out.println(i);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
