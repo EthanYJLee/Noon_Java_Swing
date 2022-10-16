@@ -35,7 +35,8 @@ public class Panel05Order06Pay extends JPanel {
 	private JLabel lblBtnSaveGo;
 	private JLabel lblUserId;
 
-	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
+	// 바탕화면 그라데이션
+	// -------------------------------------------------------------------------------
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -46,7 +47,7 @@ public class Panel05Order06Pay extends JPanel {
 		super.paintChildren(g);
 	}
 	// ----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -56,7 +57,7 @@ public class Panel05Order06Pay extends JPanel {
 		setLayout(null);
 		add(getLblBtnSidebar());
 		add(getLblBtnBack());
-		
+
 		add(getLblNewLabel_01());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
@@ -65,12 +66,13 @@ public class Panel05Order06Pay extends JPanel {
 		add(getLblHomeIndicator());
 		add(getPnPayComplete());
 		add(getPnPayFailed());
-		
+
 		lblPayResult.setText(Integer.toString(Panel05Order05Cart.cartTotalPrice));
 		add(getLblUserId());
 	}
-	
-	// 상단바 =============================================================================================================
+
+	// 상단바
+	// =============================================================================================================
 	private JLabel getLblBtnSidebar() {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
@@ -80,6 +82,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblBtnSidebar;
 	}
+
 	private JLabel getLblBtnBack() {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
@@ -89,6 +92,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblBtnBack;
 	}
+
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
 			lblNewLabel_01 = new JLabel("결제");
@@ -99,7 +103,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
-	
+
 	private JLabel getLblUserId() {
 		if (lblUserId == null) {
 			lblUserId = new JLabel(Panel01Login.id + " 님");
@@ -112,7 +116,8 @@ public class Panel05Order06Pay extends JPanel {
 
 	// ==================================================================================================================
 
-	// Tabbar ===========================================================================================================
+	// Tabbar
+	// ===========================================================================================================
 	private JButton getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
 			lblBtnTabHome = new JButton("");
@@ -127,6 +132,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
+
 	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
 			lblBtnTabOrder = new JButton("");
@@ -141,6 +147,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblBtnTabOrder;
 	}
+
 	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
 			lblBtnTabGift = new JButton("");
@@ -155,6 +162,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
+
 	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
 			lblBtnTabMypage = new JButton("");
@@ -169,6 +177,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblBtnTabMypage;
 	}
+
 	private JLabel getLblHomeIndicator() {
 		if (lblHomeIndicator == null) {
 			lblHomeIndicator = new JLabel("");
@@ -191,6 +200,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return pnPayComplete;
 	}
+
 	private JLabel getLblPn1Background() {
 		if (lblPn1Background == null) {
 			lblPn1Background = new JLabel("");
@@ -201,6 +211,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblPn1Background;
 	}
+
 	private JLabel getLblPayResult() {
 		if (lblPayResult == null) {
 			lblPayResult = new JLabel("");
@@ -210,6 +221,7 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblPayResult;
 	}
+
 	private JLabel getLblBtnSaveGo() {
 		if (lblBtnSaveGo == null) {
 			lblBtnSaveGo = new JLabel("");
@@ -219,10 +231,12 @@ public class Panel05Order06Pay extends JPanel {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel05Order07Save());
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblBtnSaveGo.setIcon(new ImageIcon("./src/com/noon/app/btn_save_go_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblBtnSaveGo.setIcon(new ImageIcon("./src/com/noon/app/btn_save_go.png"));
@@ -242,10 +256,11 @@ public class Panel05Order06Pay extends JPanel {
 			pnPayFailed.setLayout(null);
 			pnPayFailed.add(getLblPn2Background());
 			pnPayFailed.setVisible(false);
-			
+
 		}
 		return pnPayFailed;
 	}
+
 	private JLabel getLblPn2Background() {
 		if (lblPn2Background == null) {
 			lblPn2Background = new JLabel("");
@@ -257,6 +272,5 @@ public class Panel05Order06Pay extends JPanel {
 		}
 		return lblPn2Background;
 	}
-	
-	
+
 } // End

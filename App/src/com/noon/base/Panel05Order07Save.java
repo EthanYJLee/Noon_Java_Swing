@@ -24,7 +24,7 @@ import com.noon.dao.DaoPoint;
 import javax.swing.JButton;
 
 public class Panel05Order07Save extends JPanel {
-	
+
 	private JLabel lblNewLabel_01;
 	private JButton lblBtnTabOrder;
 	private JButton lblBtnTabMypage;
@@ -40,7 +40,8 @@ public class Panel05Order07Save extends JPanel {
 	private JLabel lblNewLabel_3;
 	private JLabel lblUserId;
 
-	// 바탕화면 그라데이션 -------------------------------------------------------------------------------
+	// 바탕화면 그라데이션
+	// -------------------------------------------------------------------------------
 	@Override
 	protected void paintChildren(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -51,7 +52,7 @@ public class Panel05Order07Save extends JPanel {
 		super.paintChildren(g);
 	}
 	// ----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -61,7 +62,7 @@ public class Panel05Order07Save extends JPanel {
 		setLayout(null);
 		add(getLblBtnSidebar());
 		add(getLblBtnBack());
-		
+
 		add(getLblNewLabel_01());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
@@ -75,8 +76,9 @@ public class Panel05Order07Save extends JPanel {
 		add(getLblNewLabel_3());
 		add(getLblUserId());
 	}
-	
-	// 상단바 =============================================================================================================
+
+	// 상단바
+	// =============================================================================================================
 	private JLabel getLblBtnSidebar() {
 		if (lblBtnSidebar == null) {
 			lblBtnSidebar = new JLabel("");
@@ -86,6 +88,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblBtnSidebar;
 	}
+
 	private JLabel getLblBtnBack() {
 		if (lblBtnBack == null) {
 			lblBtnBack = new JLabel("");
@@ -95,6 +98,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblBtnBack;
 	}
+
 	private JLabel getLblNewLabel_01() {
 		if (lblNewLabel_01 == null) {
 			lblNewLabel_01 = new JLabel("결제");
@@ -105,7 +109,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblNewLabel_01;
 	}
-	
+
 	private JLabel getLblUserId() {
 		if (lblUserId == null) {
 			lblUserId = new JLabel(Panel01Login.id + " 님");
@@ -117,7 +121,8 @@ public class Panel05Order07Save extends JPanel {
 	}
 	// ==================================================================================================================
 
-	// Tabbar ===========================================================================================================
+	// Tabbar
+	// ===========================================================================================================
 	private JButton getLblBtnTabHome() {
 		if (lblBtnTabHome == null) {
 			lblBtnTabHome = new JButton("");
@@ -132,6 +137,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblBtnTabHome;
 	}
+
 	private JButton getLblBtnTabOrder() {
 		if (lblBtnTabOrder == null) {
 			lblBtnTabOrder = new JButton("");
@@ -146,6 +152,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblBtnTabOrder;
 	}
+
 	private JButton getLblBtnTabGift() {
 		if (lblBtnTabGift == null) {
 			lblBtnTabGift = new JButton("");
@@ -160,6 +167,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblBtnTabGift;
 	}
+
 	private JButton getLblBtnTabMypage() {
 		if (lblBtnTabMypage == null) {
 			lblBtnTabMypage = new JButton("");
@@ -174,6 +182,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblBtnTabMypage;
 	}
+
 	private JLabel getLblHomeIndicator() {
 		if (lblHomeIndicator == null) {
 			lblHomeIndicator = new JLabel("");
@@ -184,8 +193,6 @@ public class Panel05Order07Save extends JPanel {
 	}
 	// ==================================================================================================================
 
-	
-	
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
@@ -195,10 +202,12 @@ public class Panel05Order07Save extends JPanel {
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblNewLabel.setIcon(new ImageIcon("./src/com/noon/app/btn_save_not_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblNewLabel.setIcon(new ImageIcon("./src/com/noon/app/btn_save_not.png"));
@@ -209,6 +218,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblNewLabel;
 	}
+
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("");
@@ -218,6 +228,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblNewLabel_2;
 	}
+
 	private JTextField getTfPhone() {
 		if (tfPhone == null) {
 			tfPhone = new JTextField();
@@ -226,6 +237,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return tfPhone;
 	}
+
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("");
@@ -233,14 +245,16 @@ public class Panel05Order07Save extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					checkPoint();
-					
+
 					setVisible(false);
 					Main.frame.getContentPane().add(new Panel03Home());
 				}
+
 				@Override
 				public void mousePressed(MouseEvent e) {
 					lblNewLabel_1.setIcon(new ImageIcon("./src/com/noon/app/btn_save_C.png"));
 				}
+
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					lblNewLabel_1.setIcon(new ImageIcon("./src/com/noon/app/btn_save1.png"));
@@ -251,6 +265,7 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblNewLabel_1;
 	}
+
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("전화번호  :");
@@ -260,25 +275,24 @@ public class Panel05Order07Save extends JPanel {
 		}
 		return lblNewLabel_3;
 	}
-	
+
 	// Function
 	private void checkPoint() {
 		// 값이 있는지 카운트로 확인
 		// 입력
 		DaoMember daoMember = new DaoMember();
-		if(daoMember.checkPoint(tfPhone.getText()) == 1) {
+		if (daoMember.checkPoint(tfPhone.getText()) == 1) {
 			insertPoint();
 			JOptionPane.showMessageDialog(null, "적립이 완료되었습니다", "< 안 내 >", JOptionPane.INFORMATION_MESSAGE);
-		}else {
+		} else {
 			JOptionPane.showMessageDialog(null, "정보가 일치하지않습니다.", "< 안 내 >", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-	
+
 	// 10%적립률로 적립실행
 	private void insertPoint() {
-		DaoPoint daoPoint = new DaoPoint(Panel05Order05Cart.cartTotalPrice/10, Panel01Login.id);
+		DaoPoint daoPoint = new DaoPoint(Panel05Order05Cart.cartTotalPrice / 10, Panel01Login.id);
 		daoPoint.insertPoint();
 	}
-	
 
 } // End

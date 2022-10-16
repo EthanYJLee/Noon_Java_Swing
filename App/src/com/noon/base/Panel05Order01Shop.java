@@ -78,6 +78,7 @@ public class Panel05Order01Shop extends JPanel {
 	// -- Table Definition
 	private final DefaultTableModel OuterTable = new DefaultTableModel(); // ******* 테이블 세팅(1/2)
 	private DefaultTableCellRenderer cellAlignCenter = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성/ 테이블가운데정렬에 필요
+	private JLabel lblBtnGoCart;
 
 	// 바탕화면 그라데이션
 	// -------------------------------------------------------------------------------
@@ -113,6 +114,7 @@ public class Panel05Order01Shop extends JPanel {
 		setBounds(0, 0, 375, 812);
 		setOpaque(true);
 		setLayout(null);
+		add(getLblBtnGoCart());
 
 		add(getLblNewLabel_01());
 		add(getPnRight());
@@ -496,6 +498,34 @@ public class Panel05Order01Shop extends JPanel {
 		}
 		return lblBtnSelect;
 	}
+	
+	private JLabel getLblBtnGoCart() {
+		if (lblBtnGoCart == null) {
+			lblBtnGoCart = new JLabel("GoCartBtn");
+			lblBtnGoCart.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					Main.frame.getContentPane().add(new Panel05Order05Cart());
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					lblBtnGoCart.setIcon(new ImageIcon("./src/com/noon/app/btn_go_cart3_C.png"));
+
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					lblBtnGoCart.setIcon(new ImageIcon("./src/com/noon/app/btn_go_cart3.png"));
+				}
+			});
+			lblBtnGoCart.setIcon(new ImageIcon("./src/com/noon/app/btn_go_cart3.png"));
+			lblBtnGoCart.setBounds(14, 635, 80, 80);
+		}
+		return lblBtnGoCart;
+	}
+
 
 	// Function
 
@@ -635,5 +665,6 @@ public class Panel05Order01Shop extends JPanel {
 		lblOpenTime.setText("영업시간 : " + dtoShop.getOpentime().toString().replaceAll(":00:00", "시").replaceAll(":00", "")
 				+ " ~ " + dtoShop.getClosetime().toString().replaceAll(":00:00", "시").replaceAll(":00", ""));
 	}
+
 
 } // End
