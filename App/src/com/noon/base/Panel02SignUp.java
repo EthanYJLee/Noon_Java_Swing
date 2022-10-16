@@ -411,6 +411,7 @@ public class Panel02SignUp extends JPanel {
 				setVisible(false);
 				Main.frame.getContentPane().add(new Panel03Home());
 			}
+			Panel01Login.id = tfId.getText();
 		} else {
 			JOptionPane.showMessageDialog(null, "입력하신 정보를 확인해주세요.");
 		}
