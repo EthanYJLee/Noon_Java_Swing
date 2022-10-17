@@ -31,7 +31,7 @@ public class Panel01Login extends JPanel {
 	private JLabel lblBtnPasswordSearch;
 	
 	// 선언부
-	public static String id;
+	public static String id = null;
 	private JPasswordField pfPw;
 	
 	
