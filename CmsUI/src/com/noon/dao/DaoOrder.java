@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import com.noon.dto.DtoOrder;
+import com.noon.dto.DtoOrder2;
 import com.noon.main.Login;
 import com.noon.util.DBConnect;
 
@@ -441,4 +442,34 @@ public class DaoOrder {
 		}
 		return menuOrderList;
 	}
+	
+	// 임원 전체 가게 현황 / DtoOrder2 사용
+	public ArrayList<DtoOrder2> searchGroupByMenuAction2() {
+		ArrayList<DtoOrder2> menuOrderList = new ArrayList<>();
+		String whereStatement = "select s.shopcode, s.name, date(o.paytime), o.set_menu_name , sum(o.quantity) , count(o.orderno) from noon.order o, shop s ";
+		String whereStatement2 = "where date(o.paytime) between date_add(curdate(),interval -7 day) and curdate() ";
+		String whereStatement3 = "group by s.shopcode, o.set_menu_name, date(o.paytime) order by s.shopcode asc;";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement+whereStatement2+whereStatement3);
+			
+			while (rs.next()) {
+				
+				menuOrderList.add(new DtoOrder2(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6)));
+				
+			}
+			
+			conn_mysql.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return menuOrderList;
+	}
+	
 }

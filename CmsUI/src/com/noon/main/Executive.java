@@ -17,6 +17,7 @@ import com.noon.dao.DaoEmployee;
 import com.noon.dao.DaoHeader;
 import com.noon.event.EventCategorySelected;
 import com.noon.form.executive.ExecutiveForm1;
+import com.noon.form.executive.ExecutiveForm5;
 import com.noon.form.manager.ManagerEmpty;
 import com.noon.form.parttime.ParttimeForm1;
 import com.noon.swing.PanelBorder;
@@ -40,7 +41,9 @@ public class Executive extends javax.swing.JFrame {
 			public void selected(int index) {
 				if (index == 2) {
 					setManagerForm(new ExecutiveForm1());
-				} else {
+				}else if(index == 6){
+					setManagerForm(new ExecutiveForm5());
+				}else {
 					setManagerForm(new ManagerEmpty());
 				}
 
