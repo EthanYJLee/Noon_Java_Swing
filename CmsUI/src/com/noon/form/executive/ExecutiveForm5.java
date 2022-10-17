@@ -16,16 +16,18 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.noon.chart.ItemChartPie;
+import com.noon.chart.ItemChartPie2;
 import com.noon.chart.ModelChartLine;
 import com.noon.chart.ModelChartPie;
 import com.noon.chart.PanelChartLine;
 import com.noon.chart.PanelChartPie;
 import com.noon.dao.DaoOrder;
-import com.noon.dto.DtoOrder;
 import com.noon.dto.DtoOrder2;
 
 public class ExecutiveForm5 extends JPanel {
+	
+	// 2022.10.17
+	
 	PanelChartPie chartPie;
 	PanelChartLine chartLine;
 	JPanel panelTextPie;
@@ -105,7 +107,7 @@ public class ExecutiveForm5 extends JPanel {
 
 	private void addChartPieItem() {
 		DaoOrder dao = new DaoOrder();
-		HashMap<String, Integer> map = dao.countOrderNum7Day();
+		HashMap<String, Integer> map = dao.countOrderNum7Day2();
 		Set<String> mapSet = map.keySet();
 		
 		Color[] colorArr = new Color[7];
@@ -121,7 +123,7 @@ public class ExecutiveForm5 extends JPanel {
 		for (String a : mapSet) {
 			int num = map.get(a);
 			ModelChartPie add = new ModelChartPie(a, num, colorArr[i]);
-			ItemChartPie text = new ItemChartPie(add);
+			ItemChartPie2 text = new ItemChartPie2(add);
 			chartPie.addItem(add);
 			panelTextPie.add(text);
 			i++;
@@ -130,7 +132,7 @@ public class ExecutiveForm5 extends JPanel {
 
 	private void addChartLineItem() {
 		DaoOrder dao = new DaoOrder();
-		HashMap<String, Integer> map = dao.countOrderNum7Day();
+		HashMap<String, Integer> map = dao.countOrderNum7Day2();
 		Set<String> mapSet = map.keySet();
 		for (String a : mapSet) {
 			int num = map.get(a);
@@ -162,27 +164,27 @@ public class ExecutiveForm5 extends JPanel {
 		// ID column
 		int vColIndex = 0;
 		TableColumn col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(50);
+		col.setPreferredWidth(75);
 
 		vColIndex = 1;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(189);
+		col.setPreferredWidth(125);
 
 		vColIndex = 2;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(189);
+		col.setPreferredWidth(150);
 
 		vColIndex = 3;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(189);
+		col.setPreferredWidth(150);
 		
 		vColIndex = 4;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(189);
+		col.setPreferredWidth(125);
 		
 		vColIndex = 5;
 		col = table_1.getColumnModel().getColumn(vColIndex);
-		col.setPreferredWidth(189);
+		col.setPreferredWidth(125);
 
 
 	}

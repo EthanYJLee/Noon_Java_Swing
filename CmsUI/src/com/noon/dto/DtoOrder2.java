@@ -2,6 +2,7 @@ package com.noon.dto;
 
 public class DtoOrder2 {
 
+	// 2022.10.17
 	
 	int shopcode;
 	String name;

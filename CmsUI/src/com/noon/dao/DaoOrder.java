@@ -61,6 +61,35 @@ public class DaoOrder {
 		}
 		return countMap;
 	}
+	
+	// 임원 전체가게 현황 / 전체가게의 날짜별(7일간) 총매출
+	// 2022.10.17
+	public HashMap<String, Integer> countOrderNum7Day2() {
+		
+		HashMap<String, Integer> countMap = new HashMap<>();
+		
+		String whereStatement = "select sum((indiprice+size+shot+syrup*500)*quantity) , date(paytime) from noon.order ";
+		String whereStatement2 = "where date(paytime) between date_add(curdate(),interval -7 day) and curdate() group by date(paytime)";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+					DBConnect.pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
+			
+			while (rs.next()) {
+				countMap.put(rs.getString(2), rs.getInt(1));
+			}
+			
+			conn_mysql.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace(); // 개발 할 때는 이렇게, product를 만들 때는 경고문장을 넣어주면 된다. 내가한거 아닌데 왜 있지
+		}
+		return countMap;
+	}
 
 	public DaoOrder(int orderno) {
 		super();
@@ -391,7 +420,7 @@ public class DaoOrder {
 //	Outer_Table.addColumn("메뉴이름");
 //	Outer_Table.addColumn("음료");
 //	Outer_Table.addColumn("주문건수");
-	
+
 	public int getManagerShopCode() {
 		int shopcode = 0;
 		String whereStatement = "select shop_shopcode from manage where manager_id = '" + Login.id + "'";
@@ -418,9 +447,9 @@ public class DaoOrder {
 	public ArrayList<DtoOrder> searchGroupByMenuAction() {
 		ArrayList<DtoOrder> menuOrderList = new ArrayList<>();
 		String whereStatement = "select date(paytime), set_menu_name , sum(quantity) , count(*) from noon.order\n"
-				+ "where date(paytime) between date_add(curdate(),interval -7 day) and curdate() and shop_shopcode = " + getManagerShopCode()
-				+  " group by set_menu_name, date(paytime) order by date(paytime) desc";
-		
+				+ "where date(paytime) between date_add(curdate(),interval -7 day) and curdate() and shop_shopcode = "
+				+ getManagerShopCode() + " group by set_menu_name, date(paytime) order by date(paytime) desc";
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
@@ -432,7 +461,7 @@ public class DaoOrder {
 			while (rs.next()) {
 
 				menuOrderList.add(new DtoOrder(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
-				
+
 			}
 
 			conn_mysql.close();
@@ -442,34 +471,36 @@ public class DaoOrder {
 		}
 		return menuOrderList;
 	}
-	
+
 	// 임원 전체 가게 현황 / DtoOrder2 사용
+	// 2022.10.17
 	public ArrayList<DtoOrder2> searchGroupByMenuAction2() {
 		ArrayList<DtoOrder2> menuOrderList = new ArrayList<>();
 		String whereStatement = "select s.shopcode, s.name, date(o.paytime), o.set_menu_name , sum(o.quantity) , count(o.orderno) from noon.order o, shop s ";
-		String whereStatement2 = "where date(o.paytime) between date_add(curdate(),interval -7 day) and curdate() ";
-		String whereStatement3 = "group by s.shopcode, o.set_menu_name, date(o.paytime) order by s.shopcode asc;";
-		
+		String whereStatement2 = "where date(o.paytime) between date_add(curdate(),interval -7 day) and curdate() and s.shopcode = o.shop_shopcode ";
+		String whereStatement3 = "group by s.shopcode, o.set_menu_name, date(o.paytime) order by s.shopcode asc, date(paytime) desc;";
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
 					DBConnect.pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
-			
-			ResultSet rs = stmt_mysql.executeQuery(whereStatement+whereStatement2+whereStatement3);
-			
+
+			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2 + whereStatement3);
+
 			while (rs.next()) {
-				
-				menuOrderList.add(new DtoOrder2(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6)));
-				
+
+				menuOrderList.add(new DtoOrder2(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getInt(5), rs.getInt(6)));
+
 			}
-			
+
 			conn_mysql.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return menuOrderList;
 	}
-	
+
 }
