@@ -451,12 +451,12 @@ public class Panel05Order05Cart extends JPanel {
 
 		vColIndex = 2;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 50;
+		width = 55;
 		col.setPreferredWidth(width);
 
 		vColIndex = 3;
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
-		width = 35;
+		width = 50;
 		col.setPreferredWidth(width);
 
 		vColIndex = 4;
@@ -492,9 +492,9 @@ public class Panel05Order05Cart extends JPanel {
 			ImageIcon icon = style.imageSize80("./" + beanList.get(index).getFilename());
 			// 옵션값 변환하기
 			if (beanList.get(index).getHotice() == 0) {
-				strHotice = "H";
+				strHotice = "Hot";
 			} else {
-				strHotice = "I";
+				strHotice = "Ice";
 			}
 			
 			if (beanList.get(index).getSize() == 0) {
