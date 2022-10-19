@@ -118,7 +118,7 @@ public class DaoOrder {
 
 		ArrayList<DtoOrder> BeanList = new ArrayList<DtoOrder>();
 
-		String whereStatement = "select o.hotice, o.quantity, o.shot, o.syrup, o.size, o.indiprice, o.set_menu_name, s.photonow from setting s, noon.order o ";
+		String whereStatement = "select o.orderno, o.hotice, o.quantity, o.shot, o.syrup, o.size, o.indiprice, o.set_menu_name, s.photonow from setting s, noon.order o ";
 		String whereStatement2 = "where s.setno = o.set_setno and o.paytime is null and o.member_id = '"
 				+ Panel01Login.id + "' ";
 		String whereStatement3 = "and s.shop_shopcode = '" + Panel05Order01Shop.shopcode + "'";
@@ -134,26 +134,27 @@ public class DaoOrder {
 			int wkFilename = 0;
 			while (rs.next()) { // true값일때만 가져온다
 
-				int wkHotice = rs.getInt(1);
-				int wkQuantity = rs.getInt(2);
-				int wkShot = rs.getInt(3);
-				int wkSyrup = rs.getInt(4);
-				int wkSize = rs.getInt(5);
-				int wkPrice = rs.getInt(6);
-				String wkMenuName = rs.getString(7);
+				int wkOrderno = rs.getInt(1);
+				int wkHotice = rs.getInt(2);
+				int wkQuantity = rs.getInt(3);
+				int wkShot = rs.getInt(4);
+				int wkSyrup = rs.getInt(5);
+				int wkSize = rs.getInt(6);
+				int wkPrice = rs.getInt(7);
+				String wkMenuName = rs.getString(8);
 
 				// File
 				wkFilename = wkFilename + 1;
 				File file = new File("./" + wkFilename);
 
 				FileOutputStream output = new FileOutputStream(file);
-				InputStream input = rs.getBinaryStream(8);
+				InputStream input = rs.getBinaryStream(9);
 				byte[] buffer = new byte[1024];
 				while (input.read(buffer) > 0) {
 					output.write(buffer);
 				}
 
-				DtoOrder dtoOrder = new DtoOrder(wkHotice, wkQuantity, wkShot, wkSyrup, wkSize, wkPrice, wkMenuName,
+				DtoOrder dtoOrder = new DtoOrder(wkOrderno, wkHotice, wkQuantity, wkShot, wkSyrup, wkSize, wkPrice, wkMenuName,
 						wkFilename);
 				BeanList.add(dtoOrder);
 			}
@@ -167,31 +168,32 @@ public class DaoOrder {
 	}
 
 	// Table을 Click하였을 경우 해당 열의 orderno를 가져오기
-	public int tableClick() {
-		int i = 0;
-		String whereStatement = "select orderno from noon.order "; // 마지막 띄워주기
-		String whereStatement2 = "where set_menu_name = '" + set_menu_name + "' and member_id = '" + Panel01Login.id
-				+ "' and paytime is null";
-
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
-					DBConnect.pw_mysql);
-			Statement stmt_mysql = conn_mysql.createStatement();
-
-			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
-
-			if (rs.next()) { // true값일때만 가져온다
-				i = rs.getInt(1);
-			}
-			conn_mysql.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return i;
-
-	}
+	// 22.10.19 Remove
+//	public int tableClick() {
+//		int i = 0;
+//		String whereStatement = "select orderno from noon.order "; // 마지막 띄워주기
+//		String whereStatement2 = "where set_menu_name = '" + set_menu_name + "' and member_id = '" + Panel01Login.id
+//				+ "' and paytime is null";
+//
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection conn_mysql = DriverManager.getConnection(DBConnect.url_mysql, DBConnect.id_mysql,
+//					DBConnect.pw_mysql);
+//			Statement stmt_mysql = conn_mysql.createStatement();
+//
+//			ResultSet rs = stmt_mysql.executeQuery(whereStatement + whereStatement2);
+//
+//			if (rs.next()) { // true값일때만 가져온다
+//				i = rs.getInt(1);
+//			}
+//			conn_mysql.close();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return i;
+//
+//	}
 
 	// 장바구니 목록 삭제하기
 	public boolean deleteAction() {

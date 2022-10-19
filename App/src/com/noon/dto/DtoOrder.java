@@ -65,9 +65,10 @@ public class DtoOrder {
 		this.staff_id = staff_id;
 	}
 
-	public DtoOrder(int hotice, int quantity, int shot, int syrup, int size, int indiprice, String set_menu_name,
+	public DtoOrder(int orderno, int hotice, int quantity, int shot, int syrup, int size, int indiprice, String set_menu_name,
 			int filename) {
 		super();
+		this.orderno = orderno;
 		this.hotice = hotice;
 		this.quantity = quantity;
 		this.shot = shot;

@@ -397,14 +397,15 @@ public class Panel05Order05Cart extends JPanel {
 					return (column == 0) ? Icon.class : Object.class; // <--****************
 				}
 			};
-			InnerTable.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if (e.getButton() == 1) { // 좌측마우스 클릭 -> 1
-						tableClick();
-					}
-				}
-			});
+			// 22.10.19 Remove
+//			InnerTable.addMouseListener(new MouseAdapter() {
+//				@Override
+//				public void mouseClicked(MouseEvent e) {
+//					if (e.getButton() == 1) { // 좌측마우스 클릭 -> 1
+////						tableClick();
+//					}
+//				}
+//			});
 			InnerTable.setBackground(new Color(253, 242, 238));
 //			InnerTable.getTableHeader().setFont(new Font("San serif", Font.PLAIN, 16));
 			InnerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -422,6 +423,7 @@ public class Panel05Order05Cart extends JPanel {
 
 	// InitTable / 테이블 세팅 및 정리
 	private void tableInit() {
+//		OuterTable.addColumn("orderno"); // 1234
 		OuterTable.addColumn("사진"); // 1234
 		OuterTable.addColumn("상품");
 		OuterTable.addColumn("옵션");
@@ -439,6 +441,11 @@ public class Panel05Order05Cart extends JPanel {
 
 		InnerTable.setAutoResizeMode(InnerTable.AUTO_RESIZE_OFF); // 리사이즈 못하게 정의
 
+//		int vColIndex = 0;
+//		TableColumn col = InnerTable.getColumnModel().getColumn(vColIndex); // 0번부터
+//		int width = 30;
+//		col.setPreferredWidth(width);
+		
 		int vColIndex = 0;
 		TableColumn col = InnerTable.getColumnModel().getColumn(vColIndex); // 0번부터
 		int width = 80;
@@ -473,6 +480,7 @@ public class Panel05Order05Cart extends JPanel {
 		col = InnerTable.getColumnModel().getColumn(vColIndex);
 		width = 50;
 		col.setPreferredWidth(width);
+
 	}
 
 	// Cart 테이블 실행하기
@@ -519,7 +527,7 @@ public class Panel05Order05Cart extends JPanel {
 			int cartPrice = (beanList.get(index).getIndiprice() + optionPrice) * beanList.get(index).getQuantity();
 			// 배열로 쌓기
 			Object[] tempData = { icon, strMenuname, strHotice + "/" + strSize, beanList.get(index).getIndiprice(),
-					optionPrice, beanList.get(index).getQuantity(), cartPrice };
+					optionPrice, beanList.get(index).getQuantity(), cartPrice, beanList.get(index).getOrderno() };
 			// Row에 추가하기
 			OuterTable.addRow(tempData);
 			cartTotalPrice = cartTotalPrice + cartPrice;
@@ -559,16 +567,22 @@ public class Panel05Order05Cart extends JPanel {
 	}
 
 	// 테이블클릭시 작동
-	private void tableClick() {
-		int i = InnerTable.getSelectedRow();
-		String wkMenuname = (String) InnerTable.getValueAt(i, 1); // String type으로 바꿔준다
-		DaoOrder daoOrder = new DaoOrder(wkMenuname);
-		clickedOrderno = daoOrder.tableClick();
-	}
+	// 22.10.19 Remove
+//	private void tableClick() {
+//		int i = InnerTable.getSelectedRow();
+//		String wkMenuname = (String) InnerTable.getValueAt(i, 1); // String type으로 바꿔준다
+//		DaoOrder daoOrder = new DaoOrder(wkMenuname);
+//		clickedOrderno = daoOrder.tableClick();
+//	}
 
-	// 클릭한 테이블 리스트 삭제
+	// 클릭한 테이블의 상품 리스트 삭제
+	// 22.10.19 Update
 	private void deleteList() {
-		DaoOrder daoOrder = new DaoOrder(clickedOrderno);
+		int i = InnerTable.getSelectedRow();
+//		String wkOrderno = (String) InnerTable.getValueAt(i, 7); // String type으로 바꿔준다
+		int wkOrderno = beanList.get(i).getOrderno();
+		DaoOrder daoOrder = new DaoOrder(wkOrderno);
+//		DaoOrder daoOrder = new DaoOrder(clickedOrderno);
 		daoOrder.deleteAction();
 	}
 
