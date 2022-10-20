@@ -28,7 +28,7 @@ public class Panel05Order04Option extends JPanel {
 	private JButton lblBtnTabMypage;
 	private JLabel lblHomeIndicator;
 	private JButton lblBtnTabHome;
-	private JButton lblBtnTabGift;
+	private JButton lblBtnTabCart;
 	private JButton lblBtnSidebar;
 	private JButton lblBtnBack;
 	private JLabel lblNewLabel;
@@ -103,7 +103,7 @@ public class Panel05Order04Option extends JPanel {
 		add(getLblNewLabel_01());
 		add(getLblBtnTabHome());
 		add(getLblBtnTabOrder());
-		add(getLblBtnTabGift());
+		add(getLblBtnTabCart());
 		add(getLblBtnTabMypage());
 		add(getLblHomeIndicator());
 		add(getLblNewLabel());
@@ -197,19 +197,19 @@ public class Panel05Order04Option extends JPanel {
 		return lblBtnTabOrder;
 	}
 
-	private JButton getLblBtnTabGift() {
-		if (lblBtnTabGift == null) {
-			lblBtnTabGift = new JButton("");
-			lblBtnTabGift.addActionListener(new ActionListener() {
+	private JButton getLblBtnTabCart() {
+		if (lblBtnTabCart == null) {
+			lblBtnTabCart = new JButton("");
+			lblBtnTabCart.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					Main.frame.getContentPane().add(new Panel06Gift());
+					Main.frame.getContentPane().add(new Panel05Order05Cart());
 				}
 			});
-			lblBtnTabGift.setIcon(new ImageIcon("./src/com/noon/app/tabbar_gift.png"));
-			lblBtnTabGift.setBounds(187, 729, 94, 50);
+			lblBtnTabCart.setIcon(new ImageIcon(Panel03Home.class.getResource("/com/noon/app/tabbar_cart.png")));
+			lblBtnTabCart.setBounds(187, 729, 94, 50);
 		}
-		return lblBtnTabGift;
+		return lblBtnTabCart;
 	}
 
 	private JButton getLblBtnTabMypage() {
